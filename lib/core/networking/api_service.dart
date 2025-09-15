@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/networking/api_constants.dart';
-import 'package:foodapp/features/login/data/login_request_body.dart';
-import 'package:foodapp/features/login/data/login_response.dart';
+import 'package:foodapp/features/login/data/model/login_request_body.dart';
+import 'package:foodapp/features/login/data/model/login_response.dart';
 import 'package:retrofit/http.dart';
 
 part 'api_service.g.dart';
