@@ -24,7 +24,7 @@ class _FoodAppState extends State<FoodApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRouter.getRoute,
+      onGenerateRoute: widget.appRouter.getRoute,
     );
   }
 }
