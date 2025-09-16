@@ -7,9 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:foodapp/main.dart';
-import 'package:foodapp/presentation/resources/routes_manager.dart';
+import 'package:foodapp/core/routing/routes_manager.dart';
+import 'package:foodapp/food_app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

@@ -1,27 +1,24 @@
-import 'package:foodapp/core/networking/api_error_handler.dart';
-import 'package:foodapp/core/networking/api_result.dart';
-import 'package:foodapp/core/networking/api_service.dart';
-import 'package:foodapp/features/login/data/model/login_request_body.dart';
-import 'package:foodapp/features/login/data/model/login_response.dart';
+import 'package:foodapp/features/login/data/datasources/login_data_source.dart';
+import 'package:foodapp/features/login/domain/entities/login_request_body_entity.dart';
+import 'package:foodapp/features/login/domain/entities/login_response_entity.dart';
 
 abstract class LoginRepo {
-  Future<ApiResult<LoginResponse>> login(LoginRequestBody loginRequestBody);
+  Future<LoginResponseEntity> login(
+    LoginRequestBodyEntity loginRequestBodyEntity,
+  );
 }
 
 class LoginRepoImpl implements LoginRepo {
-  final ApiService _apiService;
+  final LoginRemoteDataSource _loginRemoteDataSource;
 
-  LoginRepoImpl(this._apiService);
+  LoginRepoImpl(this._loginRemoteDataSource);
 
   @override
-  Future<ApiResult<LoginResponse>> login(
-    LoginRequestBody loginRequestBody,
-  ) async {
-    try {
-      final response = await _apiService.login(loginRequestBody);
-      return ApiResult.success(response);
-    } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
-    }
+  Future<LoginResponseEntity> login(
+    LoginRequestBodyEntity loginRequestBodyEntity,
+  ) {
+    return _loginRemoteDataSource
+        .login(loginRequestBodyEntity.toModel())
+        .then((response) => LoginResponseEntity.fromModel(response));
   }
 }
