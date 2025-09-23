@@ -4,19 +4,26 @@ part 'signin_response.g.dart';
 part 'signin_response.freezed.dart';
 
 @freezed
-abstract class signinResponse with _$signinResponse {
-  const factory signinResponse({
-    required String accessToken,
-    required String refreshToken,
+abstract class SigninResponse with _$SigninResponse {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory SigninResponse({
     required int id,
     required String username,
     required String email,
     required String firstName,
     required String lastName,
-    required String gender,
-    required String image,
-  }) = _signinResponse;
+    String? gender,
+    String? image,
+    String? phone,
+    String? dateOfBirth,
+    required String role,
+    required bool isActive,
+    required bool emailVerified,
+    required bool phoneVerified,
+    required String createdAt,
+    required String updatedAt,
+  }) = _SigninResponse;
 
-  factory signinResponse.fromJson(Map<String, dynamic> json) =>
-      _$signinResponseFromJson(json);
+  factory SigninResponse.fromJson(Map<String, dynamic> json) =>
+      _$SigninResponseFromJson(json);
 }

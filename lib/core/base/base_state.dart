@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:foodapp/core/networking/api_error_handler.dart';
+// import 'package:foodapp/core/networking/api_error_handler.dart';
 import 'package:foodapp/core/networking/api_exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

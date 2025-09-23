@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_state.dart';
@@ -192,11 +192,7 @@ class _signinScreenState extends State<signinScreen> {
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           onPressed: () {},
-                          icon: Image.asset(
-                            'assets/google_icon.png',
-                            height: 24,
-                            width: 24,
-                          ),
+                          icon: const Icon(Icons.login, size: 24),
                           label: const Text(
                             'Continue with Google',
                             style: TextStyle(fontSize: 16),

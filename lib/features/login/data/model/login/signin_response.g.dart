@@ -6,28 +6,40 @@ part of 'signin_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_signinResponse _$signinResponseFromJson(Map<String, dynamic> json) =>
-    _signinResponse(
-      accessToken: json['accessToken'] as String,
-      refreshToken: json['refreshToken'] as String,
+_SigninResponse _$SigninResponseFromJson(Map<String, dynamic> json) =>
+    _SigninResponse(
       id: (json['id'] as num).toInt(),
       username: json['username'] as String,
       email: json['email'] as String,
-      firstName: json['firstName'] as String,
-      lastName: json['lastName'] as String,
-      gender: json['gender'] as String,
-      image: json['image'] as String,
+      firstName: json['first_name'] as String,
+      lastName: json['last_name'] as String,
+      gender: json['gender'] as String?,
+      image: json['image'] as String?,
+      phone: json['phone'] as String?,
+      dateOfBirth: json['date_of_birth'] as String?,
+      role: json['role'] as String,
+      isActive: json['is_active'] as bool,
+      emailVerified: json['email_verified'] as bool,
+      phoneVerified: json['phone_verified'] as bool,
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
     );
 
-Map<String, dynamic> _$signinResponseToJson(_signinResponse instance) =>
+Map<String, dynamic> _$SigninResponseToJson(_SigninResponse instance) =>
     <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
       'id': instance.id,
       'username': instance.username,
       'email': instance.email,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
       'gender': instance.gender,
       'image': instance.image,
+      'phone': instance.phone,
+      'date_of_birth': instance.dateOfBirth,
+      'role': instance.role,
+      'is_active': instance.isActive,
+      'email_verified': instance.emailVerified,
+      'phone_verified': instance.phoneVerified,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
     };

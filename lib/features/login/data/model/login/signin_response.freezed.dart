@@ -13,42 +13,42 @@ part of 'signin_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$signinResponse {
+mixin _$SigninResponse {
 
- String get accessToken; String get refreshToken; int get id; String get username; String get email; String get firstName; String get lastName; String get gender; String get image;
-/// Create a copy of signinResponse
+ int get id; String get username; String get email; String get firstName; String get lastName; String? get gender; String? get image; String? get phone; String? get dateOfBirth; String get role; bool get isActive; bool get emailVerified; bool get phoneVerified; String get createdAt; String get updatedAt;
+/// Create a copy of SigninResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$signinResponseCopyWith<signinResponse> get copyWith => _$signinResponseCopyWithImpl<signinResponse>(this as signinResponse, _$identity);
+$SigninResponseCopyWith<SigninResponse> get copyWith => _$SigninResponseCopyWithImpl<SigninResponse>(this as SigninResponse, _$identity);
 
-  /// Serializes this signinResponse to a JSON map.
+  /// Serializes this SigninResponse to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is signinResponse&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SigninResponse&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.role, role) || other.role == role)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,accessToken,refreshToken,id,username,email,firstName,lastName,gender,image);
+int get hashCode => Object.hash(runtimeType,id,username,email,firstName,lastName,gender,image,phone,dateOfBirth,role,isActive,emailVerified,phoneVerified,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'signinResponse(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
+  return 'SigninResponse(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image, phone: $phone, dateOfBirth: $dateOfBirth, role: $role, isActive: $isActive, emailVerified: $emailVerified, phoneVerified: $phoneVerified, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $signinResponseCopyWith<$Res>  {
-  factory $signinResponseCopyWith(signinResponse value, $Res Function(signinResponse) _then) = _$signinResponseCopyWithImpl;
+abstract mixin class $SigninResponseCopyWith<$Res>  {
+  factory $SigninResponseCopyWith(SigninResponse value, $Res Function(SigninResponse) _then) = _$SigninResponseCopyWithImpl;
 @useResult
 $Res call({
- String accessToken, String refreshToken, int id, String username, String email, String firstName, String lastName, String gender, String image
+ int id, String username, String email, String firstName, String lastName, String? gender, String? image, String? phone, String? dateOfBirth, String role, bool isActive, bool emailVerified, bool phoneVerified, String createdAt, String updatedAt
 });
 
 
@@ -56,26 +56,32 @@ $Res call({
 
 }
 /// @nodoc
-class _$signinResponseCopyWithImpl<$Res>
-    implements $signinResponseCopyWith<$Res> {
-  _$signinResponseCopyWithImpl(this._self, this._then);
+class _$SigninResponseCopyWithImpl<$Res>
+    implements $SigninResponseCopyWith<$Res> {
+  _$SigninResponseCopyWithImpl(this._self, this._then);
 
-  final signinResponse _self;
-  final $Res Function(signinResponse) _then;
+  final SigninResponse _self;
+  final $Res Function(SigninResponse) _then;
 
-/// Create a copy of signinResponse
+/// Create a copy of SigninResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = null,Object? refreshToken = null,Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = null,Object? image = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = freezed,Object? image = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,Object? role = null,Object? isActive = null,Object? emailVerified = null,Object? phoneVerified = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
-accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
-as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String?,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as bool,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
+as bool,phoneVerified: null == phoneVerified ? _self.phoneVerified : phoneVerified // ignore: cast_nullable_to_non_nullable
+as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -83,8 +89,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [signinResponse].
-extension signinResponsePatterns on signinResponse {
+/// Adds pattern-matching-related methods to [SigninResponse].
+extension SigninResponsePatterns on SigninResponse {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -97,10 +103,10 @@ extension signinResponsePatterns on signinResponse {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _signinResponse value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SigninResponse value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _signinResponse() when $default != null:
+case _SigninResponse() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -119,10 +125,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _signinResponse value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SigninResponse value)  $default,){
 final _that = this;
 switch (_that) {
-case _signinResponse():
+case _SigninResponse():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -140,10 +146,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _signinResponse value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SigninResponse value)?  $default,){
 final _that = this;
 switch (_that) {
-case _signinResponse() when $default != null:
+case _SigninResponse() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -161,10 +167,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String username,  String email,  String firstName,  String lastName,  String? gender,  String? image,  String? phone,  String? dateOfBirth,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String createdAt,  String updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _signinResponse() when $default != null:
-return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
+case _SigninResponse() when $default != null:
+return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image,_that.phone,_that.dateOfBirth,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -182,10 +188,10 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String username,  String email,  String firstName,  String lastName,  String? gender,  String? image,  String? phone,  String? dateOfBirth,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String createdAt,  String updatedAt)  $default,) {final _that = this;
 switch (_that) {
-case _signinResponse():
-return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
+case _SigninResponse():
+return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image,_that.phone,_that.dateOfBirth,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +208,10 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String username,  String email,  String firstName,  String lastName,  String? gender,  String? image,  String? phone,  String? dateOfBirth,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String createdAt,  String updatedAt)?  $default,) {final _that = this;
 switch (_that) {
-case _signinResponse() when $default != null:
-return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
+case _SigninResponse() when $default != null:
+return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image,_that.phone,_that.dateOfBirth,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -214,56 +220,62 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 }
 
 /// @nodoc
-@JsonSerializable()
 
-class _signinResponse implements signinResponse {
-  const _signinResponse({required this.accessToken, required this.refreshToken, required this.id, required this.username, required this.email, required this.firstName, required this.lastName, required this.gender, required this.image});
-  factory _signinResponse.fromJson(Map<String, dynamic> json) => _$signinResponseFromJson(json);
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _SigninResponse implements SigninResponse {
+  const _SigninResponse({required this.id, required this.username, required this.email, required this.firstName, required this.lastName, this.gender, this.image, this.phone, this.dateOfBirth, required this.role, required this.isActive, required this.emailVerified, required this.phoneVerified, required this.createdAt, required this.updatedAt});
+  factory _SigninResponse.fromJson(Map<String, dynamic> json) => _$SigninResponseFromJson(json);
 
-@override final  String accessToken;
-@override final  String refreshToken;
 @override final  int id;
 @override final  String username;
 @override final  String email;
 @override final  String firstName;
 @override final  String lastName;
-@override final  String gender;
-@override final  String image;
+@override final  String? gender;
+@override final  String? image;
+@override final  String? phone;
+@override final  String? dateOfBirth;
+@override final  String role;
+@override final  bool isActive;
+@override final  bool emailVerified;
+@override final  bool phoneVerified;
+@override final  String createdAt;
+@override final  String updatedAt;
 
-/// Create a copy of signinResponse
+/// Create a copy of SigninResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$signinResponseCopyWith<_signinResponse> get copyWith => __$signinResponseCopyWithImpl<_signinResponse>(this, _$identity);
+_$SigninResponseCopyWith<_SigninResponse> get copyWith => __$SigninResponseCopyWithImpl<_SigninResponse>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$signinResponseToJson(this, );
+  return _$SigninResponseToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _signinResponse&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SigninResponse&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.role, role) || other.role == role)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,accessToken,refreshToken,id,username,email,firstName,lastName,gender,image);
+int get hashCode => Object.hash(runtimeType,id,username,email,firstName,lastName,gender,image,phone,dateOfBirth,role,isActive,emailVerified,phoneVerified,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'signinResponse(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
+  return 'SigninResponse(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image, phone: $phone, dateOfBirth: $dateOfBirth, role: $role, isActive: $isActive, emailVerified: $emailVerified, phoneVerified: $phoneVerified, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$signinResponseCopyWith<$Res> implements $signinResponseCopyWith<$Res> {
-  factory _$signinResponseCopyWith(_signinResponse value, $Res Function(_signinResponse) _then) = __$signinResponseCopyWithImpl;
+abstract mixin class _$SigninResponseCopyWith<$Res> implements $SigninResponseCopyWith<$Res> {
+  factory _$SigninResponseCopyWith(_SigninResponse value, $Res Function(_SigninResponse) _then) = __$SigninResponseCopyWithImpl;
 @override @useResult
 $Res call({
- String accessToken, String refreshToken, int id, String username, String email, String firstName, String lastName, String gender, String image
+ int id, String username, String email, String firstName, String lastName, String? gender, String? image, String? phone, String? dateOfBirth, String role, bool isActive, bool emailVerified, bool phoneVerified, String createdAt, String updatedAt
 });
 
 
@@ -271,26 +283,32 @@ $Res call({
 
 }
 /// @nodoc
-class __$signinResponseCopyWithImpl<$Res>
-    implements _$signinResponseCopyWith<$Res> {
-  __$signinResponseCopyWithImpl(this._self, this._then);
+class __$SigninResponseCopyWithImpl<$Res>
+    implements _$SigninResponseCopyWith<$Res> {
+  __$SigninResponseCopyWithImpl(this._self, this._then);
 
-  final _signinResponse _self;
-  final $Res Function(_signinResponse) _then;
+  final _SigninResponse _self;
+  final $Res Function(_SigninResponse) _then;
 
-/// Create a copy of signinResponse
+/// Create a copy of SigninResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = null,Object? refreshToken = null,Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = null,Object? image = null,}) {
-  return _then(_signinResponse(
-accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
-as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = freezed,Object? image = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,Object? role = null,Object? isActive = null,Object? emailVerified = null,Object? phoneVerified = null,Object? createdAt = null,Object? updatedAt = null,}) {
+  return _then(_SigninResponse(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String?,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as bool,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
+as bool,phoneVerified: null == phoneVerified ? _self.phoneVerified : phoneVerified // ignore: cast_nullable_to_non_nullable
+as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

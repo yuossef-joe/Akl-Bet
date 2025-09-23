@@ -4,12 +4,12 @@ part 'signin_request_body.freezed.dart';
 part 'signin_request_body.g.dart';
 
 @freezed
-abstract class signinRequestBody with _$signinRequestBody {
-  const factory signinRequestBody({
+abstract class SigninRequestBody with _$SigninRequestBody {
+  const factory SigninRequestBody({
     required String username,
     required String password,
-  }) = _signinRequestBody;
+  }) = _SigninRequestBody;
 
-  factory signinRequestBody.fromJson(Map<String, dynamic> json) =>
-      _$signinRequestBodyFromJson(json);
+  factory SigninRequestBody.fromJson(Map<String, dynamic> json) =>
+      _$SigninRequestBodyFromJson(json);
 }

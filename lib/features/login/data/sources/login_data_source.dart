@@ -6,7 +6,7 @@ import 'package:foodapp/features/login/data/model/sign_up/sign_up_request_body.d
 import 'package:foodapp/features/login/data/model/sign_up/sign_up_response.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<signinResponse> signin(signinRequestBody signinRequestBody);
+  Future<SigninResponse> signin(SigninRequestBody signinRequestBody);
   Future<SignUpResponse> signUp(SignUpRequestBody signUpRequestBody);
 }
 
@@ -16,10 +16,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this._dio);
 
   @override
-  Future<signinResponse> signin(signinRequestBody signinRequestBody) {
+  Future<SigninResponse> signin(SigninRequestBody signinRequestBody) {
     return _dio
         .post(ApiConstants.signInEndPoint, data: signinRequestBody.toJson())
-        .then((response) => signinResponse.fromJson(response.data));
+        .then((response) => SigninResponse.fromJson(response.data));
   }
 
   @override
