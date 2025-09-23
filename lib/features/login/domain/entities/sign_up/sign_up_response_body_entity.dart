@@ -1,11 +1,11 @@
-import 'package:foodapp/features/login/data/model/login_response.dart';
+import 'package:foodapp/features/login/data/model/sign_up/sign_up_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'login_response_entity.freezed.dart';
+part 'sign_up_response_body_entity.freezed.dart';
 
 @freezed
-abstract class LoginResponseEntity with _$LoginResponseEntity {
-  const factory LoginResponseEntity({
+abstract class SignUpResponseBodyEntity with _$SignUpResponseBodyEntity {
+  const factory SignUpResponseBodyEntity({
     required String accessToken,
     required String refreshToken,
     required int id,
@@ -15,10 +15,10 @@ abstract class LoginResponseEntity with _$LoginResponseEntity {
     required String lastName,
     required String gender,
     required String image,
-  }) = _LoginResponseEntity;
+  }) = _SignUpResponseBodyEntity;
 
-  factory LoginResponseEntity.fromModel(LoginResponse model) {
-    return LoginResponseEntity(
+  factory SignUpResponseBodyEntity.fromModel(SignUpResponse model) {
+    return SignUpResponseBodyEntity(
       accessToken: model.accessToken,
       refreshToken: model.refreshToken,
       id: model.id,

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login_response_entity.dart';
+part of 'signin_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -11,38 +11,41 @@ part of 'login_response_entity.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
-mixin _$LoginResponseEntity {
+mixin _$signinResponse {
 
  String get accessToken; String get refreshToken; int get id; String get username; String get email; String get firstName; String get lastName; String get gender; String get image;
-/// Create a copy of LoginResponseEntity
+/// Create a copy of signinResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LoginResponseEntityCopyWith<LoginResponseEntity> get copyWith => _$LoginResponseEntityCopyWithImpl<LoginResponseEntity>(this as LoginResponseEntity, _$identity);
+$signinResponseCopyWith<signinResponse> get copyWith => _$signinResponseCopyWithImpl<signinResponse>(this as signinResponse, _$identity);
 
+  /// Serializes this signinResponse to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginResponseEntity&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is signinResponse&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,accessToken,refreshToken,id,username,email,firstName,lastName,gender,image);
 
 @override
 String toString() {
-  return 'LoginResponseEntity(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
+  return 'signinResponse(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LoginResponseEntityCopyWith<$Res>  {
-  factory $LoginResponseEntityCopyWith(LoginResponseEntity value, $Res Function(LoginResponseEntity) _then) = _$LoginResponseEntityCopyWithImpl;
+abstract mixin class $signinResponseCopyWith<$Res>  {
+  factory $signinResponseCopyWith(signinResponse value, $Res Function(signinResponse) _then) = _$signinResponseCopyWithImpl;
 @useResult
 $Res call({
  String accessToken, String refreshToken, int id, String username, String email, String firstName, String lastName, String gender, String image
@@ -53,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$LoginResponseEntityCopyWithImpl<$Res>
-    implements $LoginResponseEntityCopyWith<$Res> {
-  _$LoginResponseEntityCopyWithImpl(this._self, this._then);
+class _$signinResponseCopyWithImpl<$Res>
+    implements $signinResponseCopyWith<$Res> {
+  _$signinResponseCopyWithImpl(this._self, this._then);
 
-  final LoginResponseEntity _self;
-  final $Res Function(LoginResponseEntity) _then;
+  final signinResponse _self;
+  final $Res Function(signinResponse) _then;
 
-/// Create a copy of LoginResponseEntity
+/// Create a copy of signinResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? accessToken = null,Object? refreshToken = null,Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = null,Object? image = null,}) {
   return _then(_self.copyWith(
@@ -80,8 +83,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [LoginResponseEntity].
-extension LoginResponseEntityPatterns on LoginResponseEntity {
+/// Adds pattern-matching-related methods to [signinResponse].
+extension signinResponsePatterns on signinResponse {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -94,10 +97,10 @@ extension LoginResponseEntityPatterns on LoginResponseEntity {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LoginResponseEntity value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _signinResponse value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LoginResponseEntity() when $default != null:
+case _signinResponse() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -116,10 +119,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LoginResponseEntity value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _signinResponse value)  $default,){
 final _that = this;
 switch (_that) {
-case _LoginResponseEntity():
+case _signinResponse():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -137,10 +140,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LoginResponseEntity value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _signinResponse value)?  $default,){
 final _that = this;
 switch (_that) {
-case _LoginResponseEntity() when $default != null:
+case _signinResponse() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -160,7 +163,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LoginResponseEntity() when $default != null:
+case _signinResponse() when $default != null:
 return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
   return orElse();
 
@@ -181,7 +184,7 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)  $default,) {final _that = this;
 switch (_that) {
-case _LoginResponseEntity():
+case _signinResponse():
 return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
   throw StateError('Unexpected subclass');
 
@@ -201,7 +204,7 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)?  $default,) {final _that = this;
 switch (_that) {
-case _LoginResponseEntity() when $default != null:
+case _signinResponse() when $default != null:
 return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
   return null;
 
@@ -211,11 +214,11 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 }
 
 /// @nodoc
+@JsonSerializable()
 
-
-class _LoginResponseEntity implements LoginResponseEntity {
-  const _LoginResponseEntity({required this.accessToken, required this.refreshToken, required this.id, required this.username, required this.email, required this.firstName, required this.lastName, required this.gender, required this.image});
-  
+class _signinResponse implements signinResponse {
+  const _signinResponse({required this.accessToken, required this.refreshToken, required this.id, required this.username, required this.email, required this.firstName, required this.lastName, required this.gender, required this.image});
+  factory _signinResponse.fromJson(Map<String, dynamic> json) => _$signinResponseFromJson(json);
 
 @override final  String accessToken;
 @override final  String refreshToken;
@@ -227,34 +230,37 @@ class _LoginResponseEntity implements LoginResponseEntity {
 @override final  String gender;
 @override final  String image;
 
-/// Create a copy of LoginResponseEntity
+/// Create a copy of signinResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$LoginResponseEntityCopyWith<_LoginResponseEntity> get copyWith => __$LoginResponseEntityCopyWithImpl<_LoginResponseEntity>(this, _$identity);
+_$signinResponseCopyWith<_signinResponse> get copyWith => __$signinResponseCopyWithImpl<_signinResponse>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$signinResponseToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginResponseEntity&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _signinResponse&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,accessToken,refreshToken,id,username,email,firstName,lastName,gender,image);
 
 @override
 String toString() {
-  return 'LoginResponseEntity(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
+  return 'signinResponse(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LoginResponseEntityCopyWith<$Res> implements $LoginResponseEntityCopyWith<$Res> {
-  factory _$LoginResponseEntityCopyWith(_LoginResponseEntity value, $Res Function(_LoginResponseEntity) _then) = __$LoginResponseEntityCopyWithImpl;
+abstract mixin class _$signinResponseCopyWith<$Res> implements $signinResponseCopyWith<$Res> {
+  factory _$signinResponseCopyWith(_signinResponse value, $Res Function(_signinResponse) _then) = __$signinResponseCopyWithImpl;
 @override @useResult
 $Res call({
  String accessToken, String refreshToken, int id, String username, String email, String firstName, String lastName, String gender, String image
@@ -265,17 +271,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$LoginResponseEntityCopyWithImpl<$Res>
-    implements _$LoginResponseEntityCopyWith<$Res> {
-  __$LoginResponseEntityCopyWithImpl(this._self, this._then);
+class __$signinResponseCopyWithImpl<$Res>
+    implements _$signinResponseCopyWith<$Res> {
+  __$signinResponseCopyWithImpl(this._self, this._then);
 
-  final _LoginResponseEntity _self;
-  final $Res Function(_LoginResponseEntity) _then;
+  final _signinResponse _self;
+  final $Res Function(_signinResponse) _then;
 
-/// Create a copy of LoginResponseEntity
+/// Create a copy of signinResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? accessToken = null,Object? refreshToken = null,Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = null,Object? image = null,}) {
-  return _then(_LoginResponseEntity(
+  return _then(_signinResponse(
 accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable

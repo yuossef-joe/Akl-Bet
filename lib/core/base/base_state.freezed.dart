@@ -134,13 +134,13 @@ return empty(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( T data)?  success,TResult Function( ErrorHandler errorHandler)?  failure,TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( T data)?  success,TResult Function( ApiException error)?  failure,TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
 return success(_that.data);case Failure() when failure != null:
-return failure(_that.errorHandler);case Empty() when empty != null:
+return failure(_that.error);case Empty() when empty != null:
 return empty();case _:
   return orElse();
 
@@ -159,13 +159,13 @@ return empty();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( T data)  success,required TResult Function( ErrorHandler errorHandler)  failure,required TResult Function()  empty,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( T data)  success,required TResult Function( ApiException error)  failure,required TResult Function()  empty,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case Loading():
 return loading();case Success():
 return success(_that.data);case Failure():
-return failure(_that.errorHandler);case Empty():
+return failure(_that.error);case Empty():
 return empty();}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -180,13 +180,13 @@ return empty();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( T data)?  success,TResult? Function( ErrorHandler errorHandler)?  failure,TResult? Function()?  empty,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( T data)?  success,TResult? Function( ApiException error)?  failure,TResult? Function()?  empty,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
 return success(_that.data);case Failure() when failure != null:
-return failure(_that.errorHandler);case Empty() when empty != null:
+return failure(_that.error);case Empty() when empty != null:
 return empty();case _:
   return null;
 
@@ -347,10 +347,10 @@ as T,
 
 
 class Failure<T> with DiagnosticableTreeMixin implements BaseState<T> {
-  const Failure(this.errorHandler);
+  const Failure(this.error);
   
 
- final  ErrorHandler errorHandler;
+ final  ApiException error;
 
 /// Create a copy of BaseState
 /// with the given fields replaced by the non-null parameter values.
@@ -363,21 +363,21 @@ $FailureCopyWith<T, Failure<T>> get copyWith => _$FailureCopyWithImpl<T, Failure
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'BaseState<$T>.failure'))
-    ..add(DiagnosticsProperty('errorHandler', errorHandler));
+    ..add(DiagnosticsProperty('error', error));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure<T>&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure<T>&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,errorHandler);
+int get hashCode => Object.hash(runtimeType,error);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'BaseState<$T>.failure(errorHandler: $errorHandler)';
+  return 'BaseState<$T>.failure(error: $error)';
 }
 
 
@@ -388,7 +388,7 @@ abstract mixin class $FailureCopyWith<T,$Res> implements $BaseStateCopyWith<T, $
   factory $FailureCopyWith(Failure<T> value, $Res Function(Failure<T>) _then) = _$FailureCopyWithImpl;
 @useResult
 $Res call({
- ErrorHandler errorHandler
+ ApiException error
 });
 
 
@@ -405,10 +405,10 @@ class _$FailureCopyWithImpl<T,$Res>
 
 /// Create a copy of BaseState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
   return _then(Failure<T>(
-null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
-as ErrorHandler,
+null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as ApiException,
   ));
 }
 

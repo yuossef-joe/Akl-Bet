@@ -1,34 +1,38 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:foodapp/core/resources/constant.dart'; // لو فيه ApiConstants هنا
 
 class DioFactory {
-  /// private constructor as I don't want to allow creating an instance of this class
   DioFactory._();
 
-  static Dio? dio;
+  static Dio? _dio;
 
   static Dio getDio() {
-    Duration timeOut = const Duration(seconds: 30);
+    if (_dio == null) {
+      final timeOut = const Duration(seconds: 30);
 
-    if (dio == null) {
-      dio = Dio();
-      dio!
-        ..options.connectTimeout = timeOut
-        ..options.receiveTimeout = timeOut;
-      addDioInterceptor();
-      return dio!;
-    } else {
-      return dio!;
+      _dio = Dio(
+        BaseOptions(
+          baseUrl: ApiConstants.baseUrl,
+          connectTimeout: timeOut,
+          receiveTimeout: timeOut,
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ${ApiConstants.token}'
+          },
+        ),
+      );
+
+      _dio!.interceptors.add(
+        PrettyDioLogger(
+          requestBody: true,
+          requestHeader: true,
+          responseHeader: true,
+          responseBody: true,
+        ),
+      );
     }
-  }
 
-  static void addDioInterceptor() {
-    dio?.interceptors.add(
-      PrettyDioLogger(
-        requestBody: true,
-        requestHeader: true,
-        responseHeader: true,
-      ),
-    );
+    return _dio!;
   }
 }

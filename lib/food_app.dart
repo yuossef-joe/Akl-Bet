@@ -1,30 +1,22 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:foodapp/core/resources/language_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/routing/routes_manager.dart';
+import 'package:foodapp/features/login/presentation/bloc/signin_bloc.dart';
+import 'package:foodapp/injection_container.dart';
 
-class FoodApp extends StatefulWidget {
+class FoodApp extends StatelessWidget {
   final AppRouter appRouter;
 
   const FoodApp({super.key, required this.appRouter});
 
   @override
-  State<FoodApp> createState() => _FoodAppState();
-}
-
-class _FoodAppState extends State<FoodApp> {
-  @override
-  didChangeDependencies() {
-    // TODO : implement didChangeDependencies
-    context.setLocale(ENGLISH_LOCAL);
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: widget.appRouter.getRoute,
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (_) => sl<signinBloc>())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: appRouter.getRoute,
+      ),
     );
   }
 }
