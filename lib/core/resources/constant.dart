@@ -1,9 +1,10 @@
 final appName = "Food App";
 
 class ApiConstants {
-  static const String baseUrl = "http://localhost:8095/api/v1";
+  static const String baseUrl = "http://localhost:8095/api/v1/";
   static const String signUpEndPoint = "auth/signup";
   static const String signInEndPoint = "auth/signin";
+  static const String refreshEndPoint = "auth/refresh";
   static const int apiTimeOut = 60000;
   static const String token = "";
   static const String empty = "";

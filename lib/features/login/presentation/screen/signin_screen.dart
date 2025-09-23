@@ -20,7 +20,7 @@ class _signinScreenState extends State<signinScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<signinBloc, BaseState>(
+    return BlocConsumer<SigninBloc, BaseState>(
       listener: (context, state) {
         state.whenOrNull(
           success: (data) {
@@ -139,7 +139,7 @@ class _signinScreenState extends State<signinScreen> {
                               ? null
                               : () {
                                   if (_formKey.currentState!.validate()) {
-                                    context.read<signinBloc>().add(
+                                    context.read<SigninBloc>().add(
                                       BaseEvent<signinRequestBodyEntity>.fetch(
                                         params: signinRequestBodyEntity(
                                           username: _emailController.text
@@ -156,7 +156,7 @@ class _signinScreenState extends State<signinScreen> {
                             foregroundColor: Colors.white,
                             disabledBackgroundColor: const Color(
                               0xFF7C4DFF,
-                            ).withOpacity(0.5),
+                            ).withValues(alpha: 0.5),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),

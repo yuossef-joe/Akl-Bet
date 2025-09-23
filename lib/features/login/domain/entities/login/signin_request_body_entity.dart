@@ -13,6 +13,6 @@ abstract class signinRequestBodyEntity with _$signinRequestBodyEntity {
 
 extension signinRequestBodyEntityX on signinRequestBodyEntity {
   SigninRequestBody toModel() {
-    return SigninRequestBody(username: this.username, password: this.password);
+    return SigninRequestBody(username: username, password: password);
   }
 }

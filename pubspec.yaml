@@ -51,6 +51,7 @@ dependencies:
   retrofit: ^4.6.0
   retrofit_generator: 10.0.5
   pretty_dio_logger: ^1.4.0
+  shared_preferences: ^2.3.2
   # localization
   intl: ^0.20.2
   easy_localization: ^3.0.8

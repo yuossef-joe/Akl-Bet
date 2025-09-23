@@ -4,8 +4,8 @@ part 'signin_response.g.dart';
 part 'signin_response.freezed.dart';
 
 @freezed
+@JsonSerializable(fieldRename: FieldRename.none)
 abstract class SigninResponse with _$SigninResponse {
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SigninResponse({
     required int id,
     required String username,

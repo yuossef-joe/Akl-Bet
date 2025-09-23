@@ -220,8 +220,8 @@ return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastNa
 }
 
 /// @nodoc
+@JsonSerializable()
 
-@JsonSerializable(fieldRename: FieldRename.snake)
 class _SigninResponse implements SigninResponse {
   const _SigninResponse({required this.id, required this.username, required this.email, required this.firstName, required this.lastName, this.gender, this.image, this.phone, this.dateOfBirth, required this.role, required this.isActive, required this.emailVerified, required this.phoneVerified, required this.createdAt, required this.updatedAt});
   factory _SigninResponse.fromJson(Map<String, dynamic> json) => _$SigninResponseFromJson(json);

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SignUpRequestBody {
 
- String get username; String get email; String get password;
+ String get email; String get password; String get firstName; String get lastName; String get username; String? get gender; String? get phone; String? get dateOfBirth;
 /// Create a copy of SignUpRequestBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SignUpRequestBodyCopyWith<SignUpRequestBody> get copyWith => _$SignUpRequestBod
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpRequestBody&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpRequestBody&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.username, username) || other.username == username)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,username,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,firstName,lastName,username,gender,phone,dateOfBirth);
 
 @override
 String toString() {
-  return 'SignUpRequestBody(username: $username, email: $email, password: $password)';
+  return 'SignUpRequestBody(email: $email, password: $password, firstName: $firstName, lastName: $lastName, username: $username, gender: $gender, phone: $phone, dateOfBirth: $dateOfBirth)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SignUpRequestBodyCopyWith<$Res>  {
   factory $SignUpRequestBodyCopyWith(SignUpRequestBody value, $Res Function(SignUpRequestBody) _then) = _$SignUpRequestBodyCopyWithImpl;
 @useResult
 $Res call({
- String username, String email, String password
+ String email, String password, String firstName, String lastName, String username, String? gender, String? phone, String? dateOfBirth
 });
 
 
@@ -65,12 +65,17 @@ class _$SignUpRequestBodyCopyWithImpl<$Res>
 
 /// Create a copy of SignUpRequestBody
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? username = null,Object? email = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? firstName = null,Object? lastName = null,Object? username = null,Object? gender = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,}) {
   return _then(_self.copyWith(
-username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,
+as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
+as String,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -155,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String username,  String email,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password,  String firstName,  String lastName,  String username,  String? gender,  String? phone,  String? dateOfBirth)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignUpRequestBody() when $default != null:
-return $default(_that.username,_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.firstName,_that.lastName,_that.username,_that.gender,_that.phone,_that.dateOfBirth);case _:
   return orElse();
 
 }
@@ -176,10 +181,10 @@ return $default(_that.username,_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String username,  String email,  String password)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password,  String firstName,  String lastName,  String username,  String? gender,  String? phone,  String? dateOfBirth)  $default,) {final _that = this;
 switch (_that) {
 case _SignUpRequestBody():
-return $default(_that.username,_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.firstName,_that.lastName,_that.username,_that.gender,_that.phone,_that.dateOfBirth);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +201,10 @@ return $default(_that.username,_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String username,  String email,  String password)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password,  String firstName,  String lastName,  String username,  String? gender,  String? phone,  String? dateOfBirth)?  $default,) {final _that = this;
 switch (_that) {
 case _SignUpRequestBody() when $default != null:
-return $default(_that.username,_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.firstName,_that.lastName,_that.username,_that.gender,_that.phone,_that.dateOfBirth);case _:
   return null;
 
 }
@@ -211,12 +216,17 @@ return $default(_that.username,_that.email,_that.password);case _:
 @JsonSerializable()
 
 class _SignUpRequestBody implements SignUpRequestBody {
-  const _SignUpRequestBody({required this.username, required this.email, required this.password});
+  const _SignUpRequestBody({required this.email, required this.password, required this.firstName, required this.lastName, required this.username, this.gender, this.phone, this.dateOfBirth});
   factory _SignUpRequestBody.fromJson(Map<String, dynamic> json) => _$SignUpRequestBodyFromJson(json);
 
-@override final  String username;
 @override final  String email;
 @override final  String password;
+@override final  String firstName;
+@override final  String lastName;
+@override final  String username;
+@override final  String? gender;
+@override final  String? phone;
+@override final  String? dateOfBirth;
 
 /// Create a copy of SignUpRequestBody
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignUpRequestBody&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignUpRequestBody&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.username, username) || other.username == username)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,username,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,firstName,lastName,username,gender,phone,dateOfBirth);
 
 @override
 String toString() {
-  return 'SignUpRequestBody(username: $username, email: $email, password: $password)';
+  return 'SignUpRequestBody(email: $email, password: $password, firstName: $firstName, lastName: $lastName, username: $username, gender: $gender, phone: $phone, dateOfBirth: $dateOfBirth)';
 }
 
 
@@ -251,7 +261,7 @@ abstract mixin class _$SignUpRequestBodyCopyWith<$Res> implements $SignUpRequest
   factory _$SignUpRequestBodyCopyWith(_SignUpRequestBody value, $Res Function(_SignUpRequestBody) _then) = __$SignUpRequestBodyCopyWithImpl;
 @override @useResult
 $Res call({
- String username, String email, String password
+ String email, String password, String firstName, String lastName, String username, String? gender, String? phone, String? dateOfBirth
 });
 
 
@@ -268,12 +278,17 @@ class __$SignUpRequestBodyCopyWithImpl<$Res>
 
 /// Create a copy of SignUpRequestBody
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? username = null,Object? email = null,Object? password = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? firstName = null,Object? lastName = null,Object? username = null,Object? gender = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,}) {
   return _then(_SignUpRequestBody(
-username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,
+as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
+as String,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

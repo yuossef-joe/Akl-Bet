@@ -1,4 +1,4 @@
-import 'package:bloc/src/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
@@ -8,11 +8,11 @@ import 'package:foodapp/features/login/domain/entities/login/signin_request_body
 import 'package:foodapp/features/login/domain/entities/login/signin_response_entity.dart';
 import 'package:foodapp/features/login/domain/usecase/signin_usecase.dart';
 
-class signinBloc
+class SigninBloc
     extends BaseBloc<signinResponseEntity, signinRequestBodyEntity> {
-  signinBloc(this._signinUseCase) : super();
+  SigninBloc(this._signinUseCase) : super();
 
-  final signinUseCase _signinUseCase;
+  final SigninUseCase _signinUseCase;
 
   @override
   Future<void> baseRequest(

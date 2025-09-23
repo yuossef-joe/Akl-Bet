@@ -6,18 +6,28 @@ part 'sign_up_request_body_entity.freezed.dart';
 @freezed
 abstract class SignUpRequestBodyEntity with _$SignUpRequestBodyEntity {
   const factory SignUpRequestBodyEntity({
-    required String username,
     required String email,
     required String password,
+    required String firstName,
+    required String lastName,
+    required String username,
+    String? gender,
+    String? phone,
+    String? dateOfBirth,
   }) = _SignUpRequestBodyEntity;
 }
 
 extension SignUpRequestBodyEntityX on SignUpRequestBodyEntity {
   SignUpRequestBody toModel() {
     return SignUpRequestBody(
-      username: username,
       email: email,
       password: password,
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      gender: gender,
+      phone: phone,
+      dateOfBirth: dateOfBirth,
     );
   }
 }
