@@ -15,7 +15,8 @@ abstract class SigninResponse with _$SigninResponse {
     String? image,
     String? phone,
     String? dateOfBirth,
-    required String role, // currently backend returns string role; enum wrapper added separately
+    required String
+    role, // currently backend returns string role; enum wrapper added separately
     required bool isActive,
     required bool emailVerified,
     required bool phoneVerified,
@@ -24,5 +25,5 @@ abstract class SigninResponse with _$SigninResponse {
   }) = _SigninResponse;
 
   factory SigninResponse.fromJson(Map<String, dynamic> json) =>
-    _$SigninResponseFromJson(json);
+      _$SigninResponseFromJson(json);
 }
