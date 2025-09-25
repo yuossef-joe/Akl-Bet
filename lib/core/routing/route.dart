@@ -3,4 +3,5 @@ class Routes {
   static const String registerRoute = "/register";
   static const String forgotPasswordRoute = "/forgotPassword";
   static const String homeRoute = "/home";
+  static const String profileRoute = "/profile";
 }
