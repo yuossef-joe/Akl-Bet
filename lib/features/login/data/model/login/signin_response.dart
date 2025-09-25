@@ -4,7 +4,6 @@ part 'signin_response.g.dart';
 part 'signin_response.freezed.dart';
 
 @freezed
-@JsonSerializable(fieldRename: FieldRename.none)
 abstract class SigninResponse with _$SigninResponse {
   const factory SigninResponse({
     required int id,
@@ -16,7 +15,7 @@ abstract class SigninResponse with _$SigninResponse {
     String? image,
     String? phone,
     String? dateOfBirth,
-    required String role,
+    required String role, // currently backend returns string role; enum wrapper added separately
     required bool isActive,
     required bool emailVerified,
     required bool phoneVerified,
@@ -25,5 +24,5 @@ abstract class SigninResponse with _$SigninResponse {
   }) = _SigninResponse;
 
   factory SigninResponse.fromJson(Map<String, dynamic> json) =>
-      _$SigninResponseFromJson(json);
+    _$SigninResponseFromJson(json);
 }
