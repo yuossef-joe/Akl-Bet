@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
-import 'package:foodapp/features/login/domain/entities/login/signin_response_entity.dart';
+import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_entity.dart';
 import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
