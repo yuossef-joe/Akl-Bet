@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CategoryRequestBody {
 
- String get isActive;
+ String get parentCategoryId;
 /// Create a copy of CategoryRequestBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $CategoryRequestBodyCopyWith<CategoryRequestBody> get copyWith => _$CategoryRequ
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryRequestBody&&(identical(other.isActive, isActive) || other.isActive == isActive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryRequestBody&&(identical(other.parentCategoryId, parentCategoryId) || other.parentCategoryId == parentCategoryId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isActive);
+int get hashCode => Object.hash(runtimeType,parentCategoryId);
 
 @override
 String toString() {
-  return 'CategoryRequestBody(isActive: $isActive)';
+  return 'CategoryRequestBody(parentCategoryId: $parentCategoryId)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $CategoryRequestBodyCopyWith<$Res>  {
   factory $CategoryRequestBodyCopyWith(CategoryRequestBody value, $Res Function(CategoryRequestBody) _then) = _$CategoryRequestBodyCopyWithImpl;
 @useResult
 $Res call({
- String isActive
+ String parentCategoryId
 });
 
 
@@ -65,9 +65,9 @@ class _$CategoryRequestBodyCopyWithImpl<$Res>
 
 /// Create a copy of CategoryRequestBody
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isActive = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? parentCategoryId = null,}) {
   return _then(_self.copyWith(
-isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+parentCategoryId: null == parentCategoryId ? _self.parentCategoryId : parentCategoryId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -153,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String isActive)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String parentCategoryId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CategoryRequestBody() when $default != null:
-return $default(_that.isActive);case _:
+return $default(_that.parentCategoryId);case _:
   return orElse();
 
 }
@@ -174,10 +174,10 @@ return $default(_that.isActive);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String isActive)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String parentCategoryId)  $default,) {final _that = this;
 switch (_that) {
 case _CategoryRequestBody():
-return $default(_that.isActive);case _:
+return $default(_that.parentCategoryId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +194,10 @@ return $default(_that.isActive);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String isActive)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String parentCategoryId)?  $default,) {final _that = this;
 switch (_that) {
 case _CategoryRequestBody() when $default != null:
-return $default(_that.isActive);case _:
+return $default(_that.parentCategoryId);case _:
   return null;
 
 }
@@ -209,10 +209,10 @@ return $default(_that.isActive);case _:
 @JsonSerializable()
 
 class _CategoryRequestBody implements CategoryRequestBody {
-  const _CategoryRequestBody({required this.isActive});
+  const _CategoryRequestBody({required this.parentCategoryId});
   factory _CategoryRequestBody.fromJson(Map<String, dynamic> json) => _$CategoryRequestBodyFromJson(json);
 
-@override final  String isActive;
+@override final  String parentCategoryId;
 
 /// Create a copy of CategoryRequestBody
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +227,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryRequestBody&&(identical(other.isActive, isActive) || other.isActive == isActive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryRequestBody&&(identical(other.parentCategoryId, parentCategoryId) || other.parentCategoryId == parentCategoryId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isActive);
+int get hashCode => Object.hash(runtimeType,parentCategoryId);
 
 @override
 String toString() {
-  return 'CategoryRequestBody(isActive: $isActive)';
+  return 'CategoryRequestBody(parentCategoryId: $parentCategoryId)';
 }
 
 
@@ -247,7 +247,7 @@ abstract mixin class _$CategoryRequestBodyCopyWith<$Res> implements $CategoryReq
   factory _$CategoryRequestBodyCopyWith(_CategoryRequestBody value, $Res Function(_CategoryRequestBody) _then) = __$CategoryRequestBodyCopyWithImpl;
 @override @useResult
 $Res call({
- String isActive
+ String parentCategoryId
 });
 
 
@@ -264,9 +264,9 @@ class __$CategoryRequestBodyCopyWithImpl<$Res>
 
 /// Create a copy of CategoryRequestBody
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isActive = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? parentCategoryId = null,}) {
   return _then(_CategoryRequestBody(
-isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+parentCategoryId: null == parentCategoryId ? _self.parentCategoryId : parentCategoryId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

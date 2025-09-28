@@ -7,8 +7,8 @@ part of 'category_request_body.dart';
 // **************************************************************************
 
 _CategoryRequestBody _$CategoryRequestBodyFromJson(Map<String, dynamic> json) =>
-    _CategoryRequestBody(isActive: json['isActive'] as String);
+    _CategoryRequestBody(parentCategoryId: json['parentCategoryId'] as String);
 
 Map<String, dynamic> _$CategoryRequestBodyToJson(
   _CategoryRequestBody instance,
-) => <String, dynamic>{'isActive': instance.isActive};
+) => <String, dynamic>{'parentCategoryId': instance.parentCategoryId};

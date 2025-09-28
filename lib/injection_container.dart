@@ -9,10 +9,11 @@ import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/features/profile/domain/usecase/get_profile_usecase.dart';
 import 'package:foodapp/features/profile/domain/usecase/update_profile_usecase.dart';
 import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:foodapp/features/home/data/sources/category_remote_data_source.dart';
+import 'package:foodapp/features/home/data/sources/category/category_remote_data_source.dart';
 import 'package:foodapp/features/home/data/repo/category/categort_repo.dart';
-import 'package:foodapp/features/home/domain/usecase/get_categories_usecase.dart';
+import 'package:foodapp/features/home/domain/usecase/category/get_categories_usecase.dart';
 import 'package:foodapp/features/home/presentation/bloc/category_bloc.dart';
+import 'package:foodapp/features/home/domain/usecase/category/get_subcategories_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -43,6 +44,7 @@ Future<void> initialaizeDependencies() async {
   sl.registerSingleton<GetProfileUseCase>(GetProfileUseCase(sl()));
   sl.registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()));
   sl.registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase(sl()));
+  sl.registerSingleton<GetSubCategoriesUseCase>(GetSubCategoriesUseCase(sl()));
 
   // Blocs
   sl.registerFactory(() => SigninBloc(sl()));

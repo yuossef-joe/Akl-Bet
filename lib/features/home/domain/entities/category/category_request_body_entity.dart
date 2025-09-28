@@ -5,12 +5,12 @@ part 'category_request_body_entity.freezed.dart';
 
 @freezed
 abstract class CategoryRequestBodyEntity with _$CategoryRequestBodyEntity {
-  const factory CategoryRequestBodyEntity({required String isActive}) =
+  const factory CategoryRequestBodyEntity({required String parentCategoryId}) =
       _CategoryRequestBodyEntity;
 }
 
 extension CategoryRequestBodyEntityX on CategoryRequestBodyEntity {
   CategoryRequestBody toModel() {
-    return CategoryRequestBody(isActive: isActive);
+    return CategoryRequestBody(parentCategoryId: parentCategoryId);
   }
 }

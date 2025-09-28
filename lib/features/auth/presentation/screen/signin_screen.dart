@@ -5,6 +5,7 @@ import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_request_body_entity.dart';
 import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
+import 'package:foodapp/features/home/presentation/screens/category/categories_screen.dart';
 
 class signinScreen extends StatefulWidget {
   const signinScreen({super.key});
@@ -28,6 +29,11 @@ class _signinScreenState extends State<signinScreen> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(const SnackBar(content: Text('signin successful!')));
+            // Navigate to CategoriesScreen
+            Navigator.of(context).pushReplacement(
+              // Or use Navigator.push if you want back navigation
+              MaterialPageRoute(builder: (_) => const CategoriesScreen()),
+            );
           },
           failure: (error) {
             ScaffoldMessenger.of(

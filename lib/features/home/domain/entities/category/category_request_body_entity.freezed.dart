@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CategoryRequestBodyEntity {
 
- String get isActive;
+ String get parentCategoryId;
 /// Create a copy of CategoryRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CategoryRequestBodyEntityCopyWith<CategoryRequestBodyEntity> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryRequestBodyEntity&&(identical(other.isActive, isActive) || other.isActive == isActive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryRequestBodyEntity&&(identical(other.parentCategoryId, parentCategoryId) || other.parentCategoryId == parentCategoryId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isActive);
+int get hashCode => Object.hash(runtimeType,parentCategoryId);
 
 @override
 String toString() {
-  return 'CategoryRequestBodyEntity(isActive: $isActive)';
+  return 'CategoryRequestBodyEntity(parentCategoryId: $parentCategoryId)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CategoryRequestBodyEntityCopyWith<$Res>  {
   factory $CategoryRequestBodyEntityCopyWith(CategoryRequestBodyEntity value, $Res Function(CategoryRequestBodyEntity) _then) = _$CategoryRequestBodyEntityCopyWithImpl;
 @useResult
 $Res call({
- String isActive
+ String parentCategoryId
 });
 
 
@@ -62,9 +62,9 @@ class _$CategoryRequestBodyEntityCopyWithImpl<$Res>
 
 /// Create a copy of CategoryRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isActive = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? parentCategoryId = null,}) {
   return _then(_self.copyWith(
-isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+parentCategoryId: null == parentCategoryId ? _self.parentCategoryId : parentCategoryId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -150,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String isActive)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String parentCategoryId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CategoryRequestBodyEntity() when $default != null:
-return $default(_that.isActive);case _:
+return $default(_that.parentCategoryId);case _:
   return orElse();
 
 }
@@ -171,10 +171,10 @@ return $default(_that.isActive);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String isActive)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String parentCategoryId)  $default,) {final _that = this;
 switch (_that) {
 case _CategoryRequestBodyEntity():
-return $default(_that.isActive);case _:
+return $default(_that.parentCategoryId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +191,10 @@ return $default(_that.isActive);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String isActive)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String parentCategoryId)?  $default,) {final _that = this;
 switch (_that) {
 case _CategoryRequestBodyEntity() when $default != null:
-return $default(_that.isActive);case _:
+return $default(_that.parentCategoryId);case _:
   return null;
 
 }
@@ -206,10 +206,10 @@ return $default(_that.isActive);case _:
 
 
 class _CategoryRequestBodyEntity implements CategoryRequestBodyEntity {
-  const _CategoryRequestBodyEntity({required this.isActive});
+  const _CategoryRequestBodyEntity({required this.parentCategoryId});
   
 
-@override final  String isActive;
+@override final  String parentCategoryId;
 
 /// Create a copy of CategoryRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +221,16 @@ _$CategoryRequestBodyEntityCopyWith<_CategoryRequestBodyEntity> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryRequestBodyEntity&&(identical(other.isActive, isActive) || other.isActive == isActive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryRequestBodyEntity&&(identical(other.parentCategoryId, parentCategoryId) || other.parentCategoryId == parentCategoryId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isActive);
+int get hashCode => Object.hash(runtimeType,parentCategoryId);
 
 @override
 String toString() {
-  return 'CategoryRequestBodyEntity(isActive: $isActive)';
+  return 'CategoryRequestBodyEntity(parentCategoryId: $parentCategoryId)';
 }
 
 
@@ -241,7 +241,7 @@ abstract mixin class _$CategoryRequestBodyEntityCopyWith<$Res> implements $Categ
   factory _$CategoryRequestBodyEntityCopyWith(_CategoryRequestBodyEntity value, $Res Function(_CategoryRequestBodyEntity) _then) = __$CategoryRequestBodyEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String isActive
+ String parentCategoryId
 });
 
 
@@ -258,9 +258,9 @@ class __$CategoryRequestBodyEntityCopyWithImpl<$Res>
 
 /// Create a copy of CategoryRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isActive = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? parentCategoryId = null,}) {
   return _then(_CategoryRequestBodyEntity(
-isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+parentCategoryId: null == parentCategoryId ? _self.parentCategoryId : parentCategoryId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

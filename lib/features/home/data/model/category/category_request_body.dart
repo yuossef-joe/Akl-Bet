@@ -5,7 +5,7 @@ part 'category_request_body.freezed.dart';
 
 @freezed
 abstract class CategoryRequestBody with _$CategoryRequestBody {
-  const factory CategoryRequestBody({required String isActive}) =
+  const factory CategoryRequestBody({required String parentCategoryId}) =
       _CategoryRequestBody;
   factory CategoryRequestBody.fromJson(Map<String, dynamic> json) =>
       _$CategoryRequestBodyFromJson(json);
