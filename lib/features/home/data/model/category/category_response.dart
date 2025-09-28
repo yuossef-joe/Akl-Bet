@@ -1,5 +1,3 @@
-// lib/features/home/data/model/category/category_response.dart
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'category_response.freezed.dart';

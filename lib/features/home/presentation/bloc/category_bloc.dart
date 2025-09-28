@@ -4,13 +4,10 @@ import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/networking/api_error_handler.dart';
 import 'package:foodapp/features/home/domain/entities/category/category_response_entity.dart';
-import 'package:foodapp/features/home/domain/usecase/get_categories_usecase.dart';
+import 'package:foodapp/features/home/domain/usecase/category/get_categories_usecase.dart';
 
 // Params object for clarity (single bool could also be used directly)
-class CategoryParams {
-  final bool isActive;
-  CategoryParams(this.isActive);
-}
+class CategoryParams {}
 
 class CategoryBloc
     extends BaseBloc<List<CategoryResponseEntity>, CategoryParams> {
@@ -24,7 +21,7 @@ class CategoryBloc
   ) async {
     emit(const BaseState.loading());
     try {
-      final categories = await _getCategories(isActive: event.params.isActive);
+      final categories = await _getCategories();
       if (categories.isEmpty) {
         emit(const BaseState.empty());
       } else {

@@ -10,13 +10,20 @@ abstract class CategoryResponseEntity with _$CategoryResponseEntity {
     required String nameEn,
     required String nameAr,
     String? image,
+    @Default(<CategoryResponseEntity>[])
+    List<CategoryResponseEntity> subcategories,
   }) = _CategoryResponseEntity;
-  factory CategoryResponseEntity.fromModel(Category model) {
+  factory CategoryResponseEntity.fromModel(
+    Category model, {
+    List<CategoryResponseEntity> subcategories =
+        const <CategoryResponseEntity>[],
+  }) {
     return CategoryResponseEntity(
       id: model.id,
       nameEn: model.nameEn,
       nameAr: model.nameAr,
       image: model.image,
+      subcategories: subcategories,
     );
   }
 }
