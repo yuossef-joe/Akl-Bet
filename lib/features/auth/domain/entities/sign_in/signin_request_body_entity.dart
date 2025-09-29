@@ -4,14 +4,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'signin_request_body_entity.freezed.dart';
 
 @freezed
-abstract class signinRequestBodyEntity with _$signinRequestBodyEntity {
-  const factory signinRequestBodyEntity({
+abstract class SigninRequestBodyEntity with _$SigninRequestBodyEntity {
+  const factory SigninRequestBodyEntity({
     required String username,
     required String password,
-  }) = _signinRequestBodyEntity;
+  }) = _SigninRequestBodyEntity;
 }
 
-extension signinRequestBodyEntityX on signinRequestBodyEntity {
+extension SigninRequestBodyEntityX on SigninRequestBodyEntity {
   SigninRequestBody toModel() {
     return SigninRequestBody(username: username, password: password);
   }

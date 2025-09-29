@@ -9,8 +9,8 @@ abstract class CategoryRepo {
 }
 
 class CategoryRepoImpl implements CategoryRepo {
-  final CategoryRemoteDataSource _remote;
   CategoryRepoImpl(this._remote);
+  final CategoryRemoteDataSource _remote;
 
   @override
   Future<List<CategoryResponseEntity>> getMainCategories() async {
@@ -19,9 +19,7 @@ class CategoryRepoImpl implements CategoryRepo {
     final results = await Future.wait(
       models.map((m) async {
         final subs = await _remote.getSubCategories(parentId: m.id);
-        final subEntities = subs
-            .map((s) => CategoryResponseEntity.fromModel(s))
-            .toList();
+        final subEntities = subs.map(CategoryResponseEntity.fromModel).toList();
         return CategoryResponseEntity.fromModel(m, subcategories: subEntities);
       }),
     );

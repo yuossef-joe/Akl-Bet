@@ -12,20 +12,20 @@ part of 'signin_request_body_entity.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$signinRequestBodyEntity {
+mixin _$SigninRequestBodyEntity {
 
  String get username; String get password;
-/// Create a copy of signinRequestBodyEntity
+/// Create a copy of SigninRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$signinRequestBodyEntityCopyWith<signinRequestBodyEntity> get copyWith => _$signinRequestBodyEntityCopyWithImpl<signinRequestBodyEntity>(this as signinRequestBodyEntity, _$identity);
+$SigninRequestBodyEntityCopyWith<SigninRequestBodyEntity> get copyWith => _$SigninRequestBodyEntityCopyWithImpl<SigninRequestBodyEntity>(this as SigninRequestBodyEntity, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is signinRequestBodyEntity&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SigninRequestBodyEntity&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password));
 }
 
 
@@ -34,15 +34,15 @@ int get hashCode => Object.hash(runtimeType,username,password);
 
 @override
 String toString() {
-  return 'signinRequestBodyEntity(username: $username, password: $password)';
+  return 'SigninRequestBodyEntity(username: $username, password: $password)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $signinRequestBodyEntityCopyWith<$Res>  {
-  factory $signinRequestBodyEntityCopyWith(signinRequestBodyEntity value, $Res Function(signinRequestBodyEntity) _then) = _$signinRequestBodyEntityCopyWithImpl;
+abstract mixin class $SigninRequestBodyEntityCopyWith<$Res>  {
+  factory $SigninRequestBodyEntityCopyWith(SigninRequestBodyEntity value, $Res Function(SigninRequestBodyEntity) _then) = _$SigninRequestBodyEntityCopyWithImpl;
 @useResult
 $Res call({
  String username, String password
@@ -53,14 +53,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$signinRequestBodyEntityCopyWithImpl<$Res>
-    implements $signinRequestBodyEntityCopyWith<$Res> {
-  _$signinRequestBodyEntityCopyWithImpl(this._self, this._then);
+class _$SigninRequestBodyEntityCopyWithImpl<$Res>
+    implements $SigninRequestBodyEntityCopyWith<$Res> {
+  _$SigninRequestBodyEntityCopyWithImpl(this._self, this._then);
 
-  final signinRequestBodyEntity _self;
-  final $Res Function(signinRequestBodyEntity) _then;
+  final SigninRequestBodyEntity _self;
+  final $Res Function(SigninRequestBodyEntity) _then;
 
-/// Create a copy of signinRequestBodyEntity
+/// Create a copy of SigninRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? username = null,Object? password = null,}) {
   return _then(_self.copyWith(
@@ -73,8 +73,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [signinRequestBodyEntity].
-extension signinRequestBodyEntityPatterns on signinRequestBodyEntity {
+/// Adds pattern-matching-related methods to [SigninRequestBodyEntity].
+extension SigninRequestBodyEntityPatterns on SigninRequestBodyEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -87,10 +87,10 @@ extension signinRequestBodyEntityPatterns on signinRequestBodyEntity {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _signinRequestBodyEntity value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SigninRequestBodyEntity value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _signinRequestBodyEntity() when $default != null:
+case _SigninRequestBodyEntity() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -109,10 +109,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _signinRequestBodyEntity value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SigninRequestBodyEntity value)  $default,){
 final _that = this;
 switch (_that) {
-case _signinRequestBodyEntity():
+case _SigninRequestBodyEntity():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -130,10 +130,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _signinRequestBodyEntity value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SigninRequestBodyEntity value)?  $default,){
 final _that = this;
 switch (_that) {
-case _signinRequestBodyEntity() when $default != null:
+case _SigninRequestBodyEntity() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -153,7 +153,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String username,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _signinRequestBodyEntity() when $default != null:
+case _SigninRequestBodyEntity() when $default != null:
 return $default(_that.username,_that.password);case _:
   return orElse();
 
@@ -174,7 +174,7 @@ return $default(_that.username,_that.password);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String username,  String password)  $default,) {final _that = this;
 switch (_that) {
-case _signinRequestBodyEntity():
+case _SigninRequestBodyEntity():
 return $default(_that.username,_that.password);case _:
   throw StateError('Unexpected subclass');
 
@@ -194,7 +194,7 @@ return $default(_that.username,_that.password);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String username,  String password)?  $default,) {final _that = this;
 switch (_that) {
-case _signinRequestBodyEntity() when $default != null:
+case _SigninRequestBodyEntity() when $default != null:
 return $default(_that.username,_that.password);case _:
   return null;
 
@@ -206,24 +206,24 @@ return $default(_that.username,_that.password);case _:
 /// @nodoc
 
 
-class _signinRequestBodyEntity implements signinRequestBodyEntity {
-  const _signinRequestBodyEntity({required this.username, required this.password});
+class _SigninRequestBodyEntity implements SigninRequestBodyEntity {
+  const _SigninRequestBodyEntity({required this.username, required this.password});
   
 
 @override final  String username;
 @override final  String password;
 
-/// Create a copy of signinRequestBodyEntity
+/// Create a copy of SigninRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$signinRequestBodyEntityCopyWith<_signinRequestBodyEntity> get copyWith => __$signinRequestBodyEntityCopyWithImpl<_signinRequestBodyEntity>(this, _$identity);
+_$SigninRequestBodyEntityCopyWith<_SigninRequestBodyEntity> get copyWith => __$SigninRequestBodyEntityCopyWithImpl<_SigninRequestBodyEntity>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _signinRequestBodyEntity&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SigninRequestBodyEntity&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password));
 }
 
 
@@ -232,15 +232,15 @@ int get hashCode => Object.hash(runtimeType,username,password);
 
 @override
 String toString() {
-  return 'signinRequestBodyEntity(username: $username, password: $password)';
+  return 'SigninRequestBodyEntity(username: $username, password: $password)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$signinRequestBodyEntityCopyWith<$Res> implements $signinRequestBodyEntityCopyWith<$Res> {
-  factory _$signinRequestBodyEntityCopyWith(_signinRequestBodyEntity value, $Res Function(_signinRequestBodyEntity) _then) = __$signinRequestBodyEntityCopyWithImpl;
+abstract mixin class _$SigninRequestBodyEntityCopyWith<$Res> implements $SigninRequestBodyEntityCopyWith<$Res> {
+  factory _$SigninRequestBodyEntityCopyWith(_SigninRequestBodyEntity value, $Res Function(_SigninRequestBodyEntity) _then) = __$SigninRequestBodyEntityCopyWithImpl;
 @override @useResult
 $Res call({
  String username, String password
@@ -251,17 +251,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$signinRequestBodyEntityCopyWithImpl<$Res>
-    implements _$signinRequestBodyEntityCopyWith<$Res> {
-  __$signinRequestBodyEntityCopyWithImpl(this._self, this._then);
+class __$SigninRequestBodyEntityCopyWithImpl<$Res>
+    implements _$SigninRequestBodyEntityCopyWith<$Res> {
+  __$SigninRequestBodyEntityCopyWithImpl(this._self, this._then);
 
-  final _signinRequestBodyEntity _self;
-  final $Res Function(_signinRequestBodyEntity) _then;
+  final _SigninRequestBodyEntity _self;
+  final $Res Function(_SigninRequestBodyEntity) _then;
 
-/// Create a copy of signinRequestBodyEntity
+/// Create a copy of SigninRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? username = null,Object? password = null,}) {
-  return _then(_signinRequestBodyEntity(
+  return _then(_SigninRequestBodyEntity(
 username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,

@@ -3,13 +3,12 @@ import 'package:foodapp/features/auth/domain/entities/sign_in/signin_request_bod
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_entity.dart';
 
 class SigninUseCase {
+  SigninUseCase(this._authRepo);
   final AuthRepo _authRepo;
 
-  SigninUseCase(this._authRepo);
-
-  Future<signinResponseEntity> call(
-    signinRequestBodyEntity signinRequestBodyEntity,
+  Future<SigninResponseEntity> call(
+    SigninRequestBodyEntity signinRequestBodyEntity,
   ) async {
-    return await _authRepo.signin(signinRequestBodyEntity);
+    return _authRepo.signin(signinRequestBodyEntity);
   }
 }

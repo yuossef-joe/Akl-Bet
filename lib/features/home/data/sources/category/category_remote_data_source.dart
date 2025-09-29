@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:foodapp/core/resources/constant.dart';
 import 'package:foodapp/features/home/data/model/category/category_response.dart';
 
-/// Remote data source contract for categories
 abstract class CategoryRemoteDataSource {
   /// Get main categories (no parent) using `/categories/main`.
   Future<List<Category>> getMainCategories();
@@ -11,12 +11,12 @@ abstract class CategoryRemoteDataSource {
 }
 
 class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
-  final Dio _dio;
   CategoryRemoteDataSourceImpl(this._dio);
+  final Dio _dio;
 
   @override
   Future<List<Category>> getMainCategories() async {
-    final res = await _dio.get('/categories/main');
+    final res = await _dio.get<dynamic>(ApiConstants.categoriesEndPoint);
     final body = res.data;
     final data = body is Map<String, dynamic> ? body['data'] : body;
     final listJson = data is List ? data : <dynamic>[];
@@ -28,7 +28,7 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
 
   @override
   Future<List<Category>> getSubCategories({required int parentId}) async {
-    final res = await _dio.get('/categories/$parentId/subcategories');
+    final res = await _dio.get<dynamic>(ApiConstants.subCategories(parentId));
     final body = res.data;
     final data = body is Map<String, dynamic> ? body['data'] : body;
     final listJson = data is List ? data : <dynamic>[];

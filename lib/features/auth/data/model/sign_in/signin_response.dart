@@ -11,17 +11,17 @@ abstract class SigninResponse with _$SigninResponse {
     required String email,
     required String firstName,
     required String lastName,
-    String? gender,
-    String? image,
-    String? phone,
-    String? dateOfBirth,
-    required String
-    role, // currently backend returns string role; enum wrapper added separately
     required bool isActive,
     required bool emailVerified,
     required bool phoneVerified,
     required String createdAt,
     required String updatedAt,
+    required String
+    role, // currently backend returns string role; enum wrapper added separately
+    String? gender,
+    String? image,
+    String? phone,
+    String? dateOfBirth,
   }) = _SigninResponse;
 
   factory SigninResponse.fromJson(Map<String, dynamic> json) =>

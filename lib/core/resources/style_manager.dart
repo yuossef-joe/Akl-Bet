@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'font_manager.dart';
+import 'package:foodapp/core/resources/font_manager.dart';
 
 TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
   return TextStyle(
@@ -14,8 +14,8 @@ TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
 // regular style
 
 TextStyle getRegularStyle({
-  double fontSize = FontSize.s12,
   required Color color,
+  double fontSize = FontSize.s12,
 }) {
   return _getTextStyle(fontSize, FontWeightManager.regular, color);
 }
@@ -23,8 +23,8 @@ TextStyle getRegularStyle({
 // medium style
 
 TextStyle getMediumStyle({
-  double fontSize = FontSize.s12,
   required Color color,
+  double fontSize = FontSize.s12,
 }) {
   return _getTextStyle(fontSize, FontWeightManager.medium, color);
 }
@@ -32,23 +32,23 @@ TextStyle getMediumStyle({
 // medium style
 
 TextStyle getLightStyle({
-  double fontSize = FontSize.s12,
   required Color color,
+  double fontSize = FontSize.s12,
 }) {
   return _getTextStyle(fontSize, FontWeightManager.light, color);
 }
 
 // bold style
 
-TextStyle getBoldStyle({double fontSize = FontSize.s12, required Color color}) {
+TextStyle getBoldStyle({required Color color, double fontSize = FontSize.s12}) {
   return _getTextStyle(fontSize, FontWeightManager.bold, color);
 }
 
 // semibold style
 
 TextStyle getSemiBoldStyle({
-  double fontSize = FontSize.s12,
   required Color color,
+  double fontSize = FontSize.s12,
 }) {
   return _getTextStyle(fontSize, FontWeightManager.semiBold, color);
 }

@@ -14,10 +14,9 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  AuthRemoteDataSourceImpl(this._dio, this._tokenStorage);
   final Dio _dio;
   final TokenStorage _tokenStorage;
-
-  AuthRemoteDataSourceImpl(this._dio, this._tokenStorage);
 
   @override
   Future<SigninResponse> signin(SigninRequestBody signinRequestBody) async {
@@ -26,12 +25,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       'password': signinRequestBody.password,
     };
 
-    final response = await _dio.post(
+    final response = await _dio.post<Map<String, dynamic>>(
       ApiConstants.signInEndPoint,
       data: payload,
     );
 
-    final data = response.data['data'] as Map<String, dynamic>;
+    final data = response.data?['data'] as Map<String, dynamic>;
     final user = data['user'] as Map<String, dynamic>;
     final accessToken = data['accessToken'] as String?;
     final refreshToken = data['refreshToken'] as String?;
@@ -48,11 +47,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<SignUpResponse> signUp(SignUpRequestBody signUpRequestBody) async {
-    final response = await _dio.post(
+    final response = await _dio.post<Map<String, dynamic>>(
       ApiConstants.signUpEndPoint,
       data: signUpRequestBody.toJson(),
     );
-    final data = response.data['data'] as Map<String, dynamic>;
+    final data = response.data?['data'] as Map<String, dynamic>;
     final user = (data['user'] as Map<String, dynamic>?) ?? <String, dynamic>{};
     final accessToken = data['accessToken'] as String?;
     final refreshToken = data['refreshToken'] as String?;
@@ -73,15 +72,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<SigninResponse> getProfile() async {
-    final response = await _dio.get('auth/profile');
-    final data = response.data['data'] as Map<String, dynamic>;
+    final response = await _dio.get<Map<String, dynamic>>('auth/profile');
+    final data = response.data?['data'] as Map<String, dynamic>;
     return SigninResponse.fromJson(data);
   }
 
   @override
   Future<SigninResponse> updateProfile(Map<String, dynamic> body) async {
-    final response = await _dio.put('auth/profile', data: body);
-    final data = response.data['data'] as Map<String, dynamic>;
+    final response = await _dio.put<Map<String, dynamic>>(
+      'auth/profile',
+      data: body,
+    );
+    final data = response.data?['data'] as Map<String, dynamic>;
     return SigninResponse.fromJson(data);
   }
 }

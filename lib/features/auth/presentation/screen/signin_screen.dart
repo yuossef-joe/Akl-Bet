@@ -146,8 +146,8 @@ class _signinScreenState extends State<signinScreen> {
                               : () {
                                   if (_formKey.currentState!.validate()) {
                                     context.read<SigninBloc>().add(
-                                      BaseEvent<signinRequestBodyEntity>.fetch(
-                                        params: signinRequestBodyEntity(
+                                      BaseEvent<SigninRequestBodyEntity>.fetch(
+                                        params: SigninRequestBodyEntity(
                                           username: _emailController.text
                                               .trim(),
                                           password: _passwordController.text

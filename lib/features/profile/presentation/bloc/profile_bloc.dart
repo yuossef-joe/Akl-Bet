@@ -8,7 +8,7 @@ import 'package:foodapp/features/profile/domain/usecase/get_profile_usecase.dart
 import 'package:foodapp/features/profile/domain/usecase/update_profile_usecase.dart';
 
 class ProfileBloc
-    extends BaseBloc<signinResponseEntity, Map<String, dynamic>?> {
+    extends BaseBloc<SigninResponseEntity, Map<String, dynamic>?> {
   ProfileBloc(this._getProfile, this._updateProfile);
 
   final GetProfileUseCase _getProfile;
@@ -17,9 +17,9 @@ class ProfileBloc
   @override
   Future<void> baseRequest(
     BaseEvent<Map<String, dynamic>?> event,
-    Emitter<BaseState<signinResponseEntity>> emit,
+    Emitter<BaseState<SigninResponseEntity>> emit,
   ) async {
-    emit(BaseState.loading());
+    emit(const BaseState.loading());
     try {
       final body = event.params;
       final res = body == null
