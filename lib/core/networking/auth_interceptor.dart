@@ -10,7 +10,7 @@ class AuthInterceptor extends Interceptor {
   final List<Future<void> Function()> _pending = [];
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
@@ -22,7 +22,10 @@ class AuthInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     final response = err.response;
     final status = response?.statusCode;
     final data = response?.data;
@@ -82,7 +85,7 @@ class AuthInterceptor extends Interceptor {
     }
 
     final dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
-    final res = await dio.post(
+    final res = await dio.post<dynamic>(
       'auth/refresh',
       data: {'refreshToken': refreshToken},
     );

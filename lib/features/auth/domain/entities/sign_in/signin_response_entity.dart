@@ -4,27 +4,27 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'signin_response_entity.freezed.dart';
 
 @freezed
-abstract class signinResponseEntity with _$signinResponseEntity {
-  const factory signinResponseEntity({
+abstract class SigninResponseEntity with _$SigninResponseEntity {
+  const factory SigninResponseEntity({
     required int id,
     required String username,
     required String email,
     required String firstName,
     required String lastName,
-    String? gender,
-    String? image,
-    String? phone,
-    String? dateOfBirth,
     required String role,
     required bool isActive,
     required bool emailVerified,
     required bool phoneVerified,
     required String createdAt,
     required String updatedAt,
-  }) = _signinResponseEntity;
+    String? gender,
+    String? image,
+    String? phone,
+    String? dateOfBirth,
+  }) = _SigninResponseEntity;
 
-  factory signinResponseEntity.fromModel(SigninResponse model) {
-    return signinResponseEntity(
+  factory SigninResponseEntity.fromModel(SigninResponse model) {
+    return SigninResponseEntity(
       id: model.id,
       username: model.username,
       email: model.email,

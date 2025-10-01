@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/home/domain/entities/category/category_response_entity.dart';
-import 'package:foodapp/features/home/presentation/bloc/category_bloc.dart';
+import 'package:foodapp/features/home/presentation/bloc/categories/category_bloc.dart';
 import 'package:foodapp/injection_container.dart';
 
 /// Simple UI example that:
@@ -41,7 +42,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   void dispose() {
-    _bloc.close();
+    unawaited(_bloc.close());
     super.dispose();
   }
 
@@ -64,12 +65,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               debugPrint('[Categories] Loaded count=${categories.length}');
               for (final c in categories) {
                 debugPrint(
-                  ' - ${c.id}: ${c.nameEn} (${c.nameAr}) image=' +
-                      (c.image ?? '-'),
+                  ' - ${c.id}: ${c.nameEn} (${c.nameAr}) image=${c.image ?? '-'}',
                 );
               }
             } else if (state is Failure<List<CategoryResponseEntity>>) {
-              debugPrint('[Categories] Failed: ' + state.error.message);
+              debugPrint('[Categories] Failed: ${state.error.message}');
             }
           },
           child:
@@ -96,7 +96,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: ListView(
                         children: [
                           const SizedBox(height: 120),
-                          _CenteredText('Error: ' + e.message),
+                          _CenteredText('Error: ${e.message}'),
                           const SizedBox(height: 12),
                           Center(
                             child: FilledButton(
@@ -113,7 +113,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         physics: const AlwaysScrollableScrollPhysics(),
                         padding: const EdgeInsets.all(12),
                         itemCount: categories.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 8),
+                        separatorBuilder: (_, _) => const SizedBox(height: 8),
                         itemBuilder: (context, index) {
                           final c = categories[index];
                           return _CategoryTile(category: c);
@@ -131,8 +131,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 }
 
 class _CategoryTile extends StatelessWidget {
-  final CategoryResponseEntity category;
   const _CategoryTile({required this.category});
+  final CategoryResponseEntity category;
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +145,7 @@ class _CategoryTile extends StatelessWidget {
         subtitle: Text(category.nameAr),
         onTap: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Selected: ' + category.nameEn)),
+            SnackBar(content: Text('Selected: ${category.nameEn}')),
           );
         },
       ),
@@ -154,8 +154,8 @@ class _CategoryTile extends StatelessWidget {
 }
 
 class _CenteredText extends StatelessWidget {
-  final String text;
   const _CenteredText(this.text);
+  final String text;
   @override
   Widget build(BuildContext context) => Center(
     child: Text(

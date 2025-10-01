@@ -9,17 +9,17 @@ import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_en
 import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
 
 class SigninBloc
-    extends BaseBloc<signinResponseEntity, signinRequestBodyEntity> {
+    extends BaseBloc<SigninResponseEntity, SigninRequestBodyEntity> {
   SigninBloc(this._signinUseCase) : super();
 
   final SigninUseCase _signinUseCase;
 
   @override
   Future<void> baseRequest(
-    BaseEvent<signinRequestBodyEntity> event,
-    Emitter<BaseState<signinResponseEntity>> emit,
+    BaseEvent<SigninRequestBodyEntity> event,
+    Emitter<BaseState<SigninResponseEntity>> emit,
   ) async {
-    emit(BaseState.loading());
+    emit(const BaseState.loading());
 
     try {
       final result = await _signinUseCase.call(event.params);

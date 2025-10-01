@@ -11,8 +11,8 @@ class CategoryParams {}
 
 class CategoryBloc
     extends BaseBloc<List<CategoryResponseEntity>, CategoryParams> {
-  final GetCategoriesUseCase _getCategories;
   CategoryBloc(this._getCategories) : super();
+  final GetCategoriesUseCase _getCategories;
 
   @override
   Future<void> baseRequest(

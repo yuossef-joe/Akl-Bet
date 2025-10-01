@@ -21,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           sl<ProfileBloc>()..add(const BaseEvent.fetch(params: null)),
       child: Scaffold(
         appBar: AppBar(title: const Text('Profile')),
-        body: BlocBuilder<ProfileBloc, BaseState<signinResponseEntity>>(
+        body: BlocBuilder<ProfileBloc, BaseState<SigninResponseEntity>>(
           builder: (context, state) {
             return state.when(
               initial: () => const SizedBox.shrink(),

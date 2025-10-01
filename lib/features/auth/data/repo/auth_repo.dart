@@ -6,31 +6,30 @@ import 'package:foodapp/features/auth/domain/entities/sign_up/sign_up_request_bo
 import 'package:foodapp/features/auth/domain/entities/sign_up/sign_up_response_body_entity.dart';
 
 abstract class AuthRepo {
-  Future<signinResponseEntity> signin(
-    signinRequestBodyEntity signinRequestBodyEntity,
+  Future<SigninResponseEntity> signin(
+    SigninRequestBodyEntity signinRequestBodyEntity,
   );
   Future<void> logout();
   Future<bool> isLoggedIn();
   Future<SignUpResponseBodyEntity> signUp(
     SignUpRequestBodyEntity signUpRequestBodyEntity,
   );
-  Future<signinResponseEntity> getProfile();
-  Future<signinResponseEntity> updateProfile(Map<String, dynamic> body);
+  Future<SigninResponseEntity> getProfile();
+  Future<SigninResponseEntity> updateProfile(Map<String, dynamic> body);
 }
 
 class AuthRepoImpl implements AuthRepo {
+  AuthRepoImpl(this._authRemoteDataSource, this._tokenStorage);
   final AuthRemoteDataSource _authRemoteDataSource;
   final TokenStorage _tokenStorage;
 
-  AuthRepoImpl(this._authRemoteDataSource, this._tokenStorage);
-
   @override
-  Future<signinResponseEntity> signin(
-    signinRequestBodyEntity signinRequestBodyEntity,
+  Future<SigninResponseEntity> signin(
+    SigninRequestBodyEntity signinRequestBodyEntity,
   ) {
     return _authRemoteDataSource
         .signin(signinRequestBodyEntity.toModel())
-        .then((response) => signinResponseEntity.fromModel(response));
+        .then(SigninResponseEntity.fromModel);
   }
 
   @override
@@ -39,7 +38,7 @@ class AuthRepoImpl implements AuthRepo {
   ) {
     return _authRemoteDataSource
         .signUp(signUpRequestBodyEntity.toModel())
-        .then((response) => SignUpResponseBodyEntity.fromModel(response));
+        .then(SignUpResponseBodyEntity.fromModel);
   }
 
   @override
@@ -55,14 +54,14 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<signinResponseEntity> getProfile() async {
+  Future<SigninResponseEntity> getProfile() async {
     final res = await _authRemoteDataSource.getProfile();
-    return signinResponseEntity.fromModel(res);
+    return SigninResponseEntity.fromModel(res);
   }
 
   @override
-  Future<signinResponseEntity> updateProfile(Map<String, dynamic> body) async {
+  Future<SigninResponseEntity> updateProfile(Map<String, dynamic> body) async {
     final res = await _authRemoteDataSource.updateProfile(body);
-    return signinResponseEntity.fromModel(res);
+    return SigninResponseEntity.fromModel(res);
   }
 }

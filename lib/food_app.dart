@@ -5,9 +5,8 @@ import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/injection_container.dart';
 
 class FoodApp extends StatelessWidget {
+  const FoodApp({required this.appRouter, super.key});
   final AppRouter appRouter;
-
-  const FoodApp({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {

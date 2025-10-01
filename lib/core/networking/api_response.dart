@@ -1,8 +1,4 @@
 class ApiResponse<T> {
-  final bool success;
-  final Map<String, dynamic>? error;
-  final T? data;
-
   ApiResponse({required this.success, this.error, this.data});
 
   factory ApiResponse.fromJson(
@@ -10,11 +6,14 @@ class ApiResponse<T> {
     T? Function(dynamic)? fromJson,
   ) {
     return ApiResponse<T>(
-      success: json['success'] ?? false,
-      error: json['error'],
+      success: (json['success'] as bool?) ?? false,
+      error: json['error'] as Map<String, dynamic>?,
       data: fromJson != null && json['data'] != null
           ? fromJson(json['data'])
           : null,
     );
   }
+  final bool success;
+  final Map<String, dynamic>? error;
+  final T? data;
 }

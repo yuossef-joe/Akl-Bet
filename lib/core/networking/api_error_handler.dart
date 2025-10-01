@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'api_error_model.dart';
-import 'api_exception.dart';
+import 'package:foodapp/core/networking/api_error_model.dart';
+import 'package:foodapp/core/networking/api_exception.dart';
 
 class ApiErrorHandler {
   static ApiException handleError(Object error) {
