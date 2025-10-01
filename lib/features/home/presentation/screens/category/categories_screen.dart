@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/home/domain/entities/category/category_response_entity.dart';
-import 'package:foodapp/features/home/presentation/bloc/category_bloc.dart';
+import 'package:foodapp/features/home/presentation/bloc/categories/category_bloc.dart';
 import 'package:foodapp/injection_container.dart';
 
 /// Simple UI example that:

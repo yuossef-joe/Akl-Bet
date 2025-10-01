@@ -1,4 +1,4 @@
-final appName = 'Food App';
+const appName = 'Food App';
 
 class ApiConstants {
   static const String baseUrl = 'http://localhost:8095/api/v1/';
@@ -7,7 +7,8 @@ class ApiConstants {
   static const String refreshEndPoint = 'auth/refresh';
   static const String categoriesEndPoint = 'categories/main';
   static String subCategories(int id) => 'categories /$id/subcategories';
-  static const String suggestionEndPoint = 'vendors/nearby';
+  static const String suggestionEndPoint = 'vendors';
+  static const String nearbyEndPoint = 'vendors/nearby';
   static const int apiTimeOut = 60000;
   static const String token = '';
   static const String empty = '';

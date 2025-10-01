@@ -3,49 +3,57 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
-import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_response_entity.dart';
-import 'package:foodapp/features/home/presentation/bloc/suggestions_bloc.dart';
+import 'package:foodapp/features/home/data/model/nearby/nearby_request_body.dart';
+import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
+import 'package:foodapp/features/home/presentation/bloc/nearby/nearby_bloc.dart';
 import 'package:foodapp/injection_container.dart';
 import 'package:shimmer/shimmer.dart';
 
-class SuggestionsScreen extends StatelessWidget {
-  const SuggestionsScreen({super.key});
+class NearbyScreen extends StatelessWidget {
+  const NearbyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<SuggestionsBloc>()
-        ..add(BaseEvent.fetch(params: SuggestionsParams(limit: 20, page: 1))),
+      create: (_) => sl<NearbyBloc>()
+        ..add(
+          const BaseEvent.fetch(
+            params: NearbyParams(
+              body: NearbyRequestBody(
+                latitude: 30.0444,
+                longitude: 31.2357,
+                radius: 5,
+                limit: 10,
+              ),
+            ),
+          ),
+        ),
       child: Scaffold(
         appBar: AppBar(title: const Text('Nearby Vendors')),
-        body:
-            BlocBuilder<
-              SuggestionsBloc,
-              BaseState<List<SuggestionsResponseEntity>>
-            >(
-              builder: (context, state) {
-                return state.when(
-                  initial: () => const SizedBox.shrink(),
-                  loading: () => const _SuggestionsShimmerList(),
-                  empty: () => const Center(child: Text('No suggestions')),
-                  failure: (e) => Center(child: Text(e.message)),
-                  success: (items) => ListView.separated(
-                    itemCount: items.length,
-                    padding: const EdgeInsets.all(12),
-                    separatorBuilder: (_, _) => const SizedBox(height: 8),
-                    itemBuilder: (_, i) => _SuggestionTile(item: items[i]),
-                  ),
-                );
-              },
-            ),
+        body: BlocBuilder<NearbyBloc, BaseState<List<NearbyVendorEntity>>>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => const SizedBox.shrink(),
+              loading: () => const _NearbyShimmerList(),
+              empty: () => const Center(child: Text('No nearby vendors')),
+              failure: (e) => Center(child: Text(e.message)),
+              success: (items) => ListView.separated(
+                itemCount: items.length,
+                padding: const EdgeInsets.all(12),
+                separatorBuilder: (_, _) => const SizedBox(height: 8),
+                itemBuilder: (_, i) => _NearbyTile(item: items[i]),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
-class _SuggestionTile extends StatelessWidget {
-  const _SuggestionTile({required this.item});
-  final SuggestionsResponseEntity item;
+class _NearbyTile extends StatelessWidget {
+  const _NearbyTile({required this.item});
+  final NearbyVendorEntity item;
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +153,8 @@ class _SuggestionTile extends StatelessWidget {
   }
 }
 
-class _SuggestionsShimmerList extends StatelessWidget {
-  const _SuggestionsShimmerList();
+class _NearbyShimmerList extends StatelessWidget {
+  const _NearbyShimmerList();
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
