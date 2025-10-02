@@ -5,9 +5,14 @@ part 'api_error_model.g.dart';
 
 @freezed
 abstract class ApiErrorModel with _$ApiErrorModel {
+  /// Primary shape used across the API: { success: false, error: { code, message }, ... }
   const factory ApiErrorModel({
     required bool success,
     required ErrorDetails error,
+    String? message,
+    Map<String, dynamic>? details,
+    String? timestamp,
+    String? path,
   }) = _ApiErrorModel;
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>

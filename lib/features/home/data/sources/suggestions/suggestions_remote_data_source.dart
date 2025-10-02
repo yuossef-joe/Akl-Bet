@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/resources/constant.dart';
+import 'package:foodapp/features/home/data/mapper/suggestions/suggestions_mapper.dart';
 import 'package:foodapp/features/home/data/model/suggestions/suggestions_response.dart';
 
 abstract class SuggestionsRemoteDataSource {
@@ -29,7 +30,16 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
       cancelToken: cancelToken,
     );
     final body = res.data;
-    final data = body is Map<String, dynamic> ? body['data'] : body;
+    dynamic data = body is Map<String, dynamic> ? (body['data'] ?? body) : body;
+    if (data is Map) {
+      // /vendors returns { data: { vendors: [...], pagination: {...} } }
+      data =
+          data['vendors'] ??
+          data['items'] ??
+          data['results'] ??
+          data['data'] ??
+          <dynamic>[];
+    }
     final listJson = data is List ? data : <dynamic>[];
     return listJson
         .map(
@@ -40,6 +50,7 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
               : <String, dynamic>{},
         )
         .where((m) => m.isNotEmpty)
+        .map(SuggestionsMapper.normalize)
         .map(Suggestions.fromJson)
         .toList();
   }

@@ -6,9 +6,10 @@ class ApiConstants {
   static const String signInEndPoint = 'auth/signin';
   static const String refreshEndPoint = 'auth/refresh';
   static const String categoriesEndPoint = 'categories/main';
-  static String subCategories(int id) => 'categories /$id/subcategories';
+  static String subCategories(int id) => 'categories/$id/subcategories';
   static const String suggestionEndPoint = 'vendors';
   static const String nearbyEndPoint = 'vendors/nearby';
+  static const String ordersEndPoint = 'orders';
   static const int apiTimeOut = 60000;
   static const String token = '';
   static const String empty = '';

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/resources/constant.dart';
+import 'package:foodapp/features/home/data/mapper/nearby/nearby_vendor_mapper.dart';
 import 'package:foodapp/features/home/data/model/nearby/nearby_request_body.dart';
 import 'package:foodapp/features/home/data/model/nearby/nearby_response.dart';
 
@@ -20,22 +21,27 @@ class NearbyRemoteDataSourceImpl implements NearbyRemoteDataSource {
     CancelToken? cancelToken,
   }) async {
     final res = await _dio.get<dynamic>(
-      ApiConstants.suggestionEndPoint,
+      ApiConstants.nearbyEndPoint,
       queryParameters: body.toQuery(),
       cancelToken: cancelToken,
     );
+
     final raw = res.data;
-    final data = raw is Map<String, dynamic> ? raw['data'] : raw;
+    dynamic data = raw is Map<String, dynamic> ? (raw['data'] ?? raw) : raw;
+    if (data is Map) {
+      data =
+          data['vendors'] ??
+          data['items'] ??
+          data['results'] ??
+          data['data'] ??
+          [];
+    }
+
     final list = data is List ? data : <dynamic>[];
+
     return list
-        .map(
-          (e) => e is Map<String, dynamic>
-              ? e
-              : e is Map
-              ? Map<String, dynamic>.from(e)
-              : <String, dynamic>{},
-        )
-        .where((m) => m.isNotEmpty)
+        .map((e) => Map<String, dynamic>.from(e as Map))
+        .map(NearbyVendorMapper.normalize)
         .map(NearbyVendor.fromJson)
         .toList();
   }

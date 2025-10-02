@@ -20,9 +20,9 @@ class NearbyScreen extends StatelessWidget {
           const BaseEvent.fetch(
             params: NearbyParams(
               body: NearbyRequestBody(
-                latitude: 30.0444,
-                longitude: 31.2357,
-                radius: 5,
+                latitude: 15.600000,
+                longitude: 32.566000,
+                radius: 10,
                 limit: 10,
               ),
             ),

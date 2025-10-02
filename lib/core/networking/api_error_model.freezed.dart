@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ApiErrorModel {
 
- bool get success; ErrorDetails get error;
+ bool get success; ErrorDetails get error; String? get message; Map<String, dynamic>? get details; String? get timestamp; String? get path;
 /// Create a copy of ApiErrorModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ApiErrorModelCopyWith<ApiErrorModel> get copyWith => _$ApiErrorModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApiErrorModel&&(identical(other.success, success) || other.success == success)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApiErrorModel&&(identical(other.success, success) || other.success == success)&&(identical(other.error, error) || other.error == error)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.details, details)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.path, path) || other.path == path));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,success,error);
+int get hashCode => Object.hash(runtimeType,success,error,message,const DeepCollectionEquality().hash(details),timestamp,path);
 
 @override
 String toString() {
-  return 'ApiErrorModel(success: $success, error: $error)';
+  return 'ApiErrorModel(success: $success, error: $error, message: $message, details: $details, timestamp: $timestamp, path: $path)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ApiErrorModelCopyWith<$Res>  {
   factory $ApiErrorModelCopyWith(ApiErrorModel value, $Res Function(ApiErrorModel) _then) = _$ApiErrorModelCopyWithImpl;
 @useResult
 $Res call({
- bool success, ErrorDetails error
+ bool success, ErrorDetails error, String? message, Map<String, dynamic>? details, String? timestamp, String? path
 });
 
 
@@ -65,11 +65,15 @@ class _$ApiErrorModelCopyWithImpl<$Res>
 
 /// Create a copy of ApiErrorModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? success = null,Object? error = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? success = null,Object? error = null,Object? message = freezed,Object? details = freezed,Object? timestamp = freezed,Object? path = freezed,}) {
   return _then(_self.copyWith(
 success: null == success ? _self.success : success // ignore: cast_nullable_to_non_nullable
 as bool,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as ErrorDetails,
+as ErrorDetails,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,details: freezed == details ? _self.details : details // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,timestamp: freezed == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as String?,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 /// Create a copy of ApiErrorModel
@@ -163,10 +167,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool success,  ErrorDetails error)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool success,  ErrorDetails error,  String? message,  Map<String, dynamic>? details,  String? timestamp,  String? path)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ApiErrorModel() when $default != null:
-return $default(_that.success,_that.error);case _:
+return $default(_that.success,_that.error,_that.message,_that.details,_that.timestamp,_that.path);case _:
   return orElse();
 
 }
@@ -184,10 +188,10 @@ return $default(_that.success,_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool success,  ErrorDetails error)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool success,  ErrorDetails error,  String? message,  Map<String, dynamic>? details,  String? timestamp,  String? path)  $default,) {final _that = this;
 switch (_that) {
 case _ApiErrorModel():
-return $default(_that.success,_that.error);case _:
+return $default(_that.success,_that.error,_that.message,_that.details,_that.timestamp,_that.path);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +208,10 @@ return $default(_that.success,_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool success,  ErrorDetails error)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool success,  ErrorDetails error,  String? message,  Map<String, dynamic>? details,  String? timestamp,  String? path)?  $default,) {final _that = this;
 switch (_that) {
 case _ApiErrorModel() when $default != null:
-return $default(_that.success,_that.error);case _:
+return $default(_that.success,_that.error,_that.message,_that.details,_that.timestamp,_that.path);case _:
   return null;
 
 }
@@ -219,11 +223,23 @@ return $default(_that.success,_that.error);case _:
 @JsonSerializable()
 
 class _ApiErrorModel implements ApiErrorModel {
-  const _ApiErrorModel({required this.success, required this.error});
+  const _ApiErrorModel({required this.success, required this.error, this.message, final  Map<String, dynamic>? details, this.timestamp, this.path}): _details = details;
   factory _ApiErrorModel.fromJson(Map<String, dynamic> json) => _$ApiErrorModelFromJson(json);
 
 @override final  bool success;
 @override final  ErrorDetails error;
+@override final  String? message;
+ final  Map<String, dynamic>? _details;
+@override Map<String, dynamic>? get details {
+  final value = _details;
+  if (value == null) return null;
+  if (_details is EqualUnmodifiableMapView) return _details;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
+@override final  String? timestamp;
+@override final  String? path;
 
 /// Create a copy of ApiErrorModel
 /// with the given fields replaced by the non-null parameter values.
@@ -238,16 +254,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApiErrorModel&&(identical(other.success, success) || other.success == success)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApiErrorModel&&(identical(other.success, success) || other.success == success)&&(identical(other.error, error) || other.error == error)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._details, _details)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.path, path) || other.path == path));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,success,error);
+int get hashCode => Object.hash(runtimeType,success,error,message,const DeepCollectionEquality().hash(_details),timestamp,path);
 
 @override
 String toString() {
-  return 'ApiErrorModel(success: $success, error: $error)';
+  return 'ApiErrorModel(success: $success, error: $error, message: $message, details: $details, timestamp: $timestamp, path: $path)';
 }
 
 
@@ -258,7 +274,7 @@ abstract mixin class _$ApiErrorModelCopyWith<$Res> implements $ApiErrorModelCopy
   factory _$ApiErrorModelCopyWith(_ApiErrorModel value, $Res Function(_ApiErrorModel) _then) = __$ApiErrorModelCopyWithImpl;
 @override @useResult
 $Res call({
- bool success, ErrorDetails error
+ bool success, ErrorDetails error, String? message, Map<String, dynamic>? details, String? timestamp, String? path
 });
 
 
@@ -275,11 +291,15 @@ class __$ApiErrorModelCopyWithImpl<$Res>
 
 /// Create a copy of ApiErrorModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? success = null,Object? error = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? success = null,Object? error = null,Object? message = freezed,Object? details = freezed,Object? timestamp = freezed,Object? path = freezed,}) {
   return _then(_ApiErrorModel(
 success: null == success ? _self.success : success // ignore: cast_nullable_to_non_nullable
 as bool,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as ErrorDetails,
+as ErrorDetails,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,details: freezed == details ? _self._details : details // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,timestamp: freezed == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as String?,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

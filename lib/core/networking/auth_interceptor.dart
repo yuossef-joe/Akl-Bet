@@ -29,7 +29,16 @@ class AuthInterceptor extends Interceptor {
     final response = err.response;
     final status = response?.statusCode;
     final data = response?.data;
-    final code = data is Map<String, dynamic> ? data['error'] as String? : null;
+    String? code;
+    if (data is Map<String, dynamic>) {
+      // Backend error shape: { success: false, error: { code, message, ... } }
+      final errObj = data['error'];
+      if (errObj is Map<String, dynamic>) {
+        code = errObj['code'] as String?;
+      } else if (errObj is String) {
+        code = errObj;
+      }
+    }
 
     if (status == 401 && (code == 'TOKEN_EXPIRED' || code == 'UNAUTHORIZED')) {
       final requestOptions = err.requestOptions;
@@ -89,9 +98,11 @@ class AuthInterceptor extends Interceptor {
       'auth/refresh',
       data: {'refreshToken': refreshToken},
     );
-    final data = res.data['data'] as Map<String, dynamic>;
-    final newAccess = data['accessToken'] as String?;
-    final newRefresh = data['refreshToken'] as String? ?? refreshToken;
+    final body = res.data;
+    final data = body is Map<String, dynamic> ? body['data'] : null;
+    final tokens = data is Map<String, dynamic> ? data : <String, dynamic>{};
+    final newAccess = tokens['accessToken'] as String?;
+    final newRefresh = tokens['refreshToken'] as String? ?? refreshToken;
     if (newAccess == null || newAccess.isEmpty) {
       throw DioException(
         requestOptions: failedRequest,

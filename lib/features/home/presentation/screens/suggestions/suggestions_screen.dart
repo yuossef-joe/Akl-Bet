@@ -17,7 +17,7 @@ class SuggestionsScreen extends StatelessWidget {
       create: (_) => sl<SuggestionsBloc>()
         ..add(BaseEvent.fetch(params: SuggestionsParams(limit: 20, page: 1))),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Nearby Vendors')),
+        appBar: AppBar(title: const Text('Suggestions')),
         body:
             BlocBuilder<
               SuggestionsBloc,
