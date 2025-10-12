@@ -1,53 +1,32 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/networking/api_error_handler.dart';
-import 'package:foodapp/features/home/data/model/nearby/nearby_request_body.dart';
+import 'package:foodapp/features/home/domain/entities/nearby/nearby_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
 import 'package:foodapp/features/home/domain/usecase/nearby/get_nearby_usecase.dart';
 
-class NearbyParams {
-  const NearbyParams({required this.body});
-  final NearbyRequestBody body;
-}
-
-class NearbyBloc extends BaseBloc<List<NearbyVendorEntity>, NearbyParams> {
-  NearbyBloc(this._useCase) : super();
-  final GetNearbyUseCase _useCase;
-
-  CancelToken? _token;
+class NearbyBloc
+    extends BaseBloc<List<NearbyResponseEntity>, NearbyRequestBodyEntity> {
+  NearbyBloc(this._nearbyUseCase) : super();
+  final GetNearbyUseCase _nearbyUseCase;
 
   @override
   Future<void> baseRequest(
-    BaseEvent<NearbyParams> event,
-    Emitter<BaseState<List<NearbyVendorEntity>>> emit,
+    BaseEvent<NearbyRequestBodyEntity> event,
+    Emitter<BaseState<List<NearbyResponseEntity>>> emit,
   ) async {
-    // cancel in-flight
-    _token?.cancel('superseded');
-    _token = CancelToken();
-
     emit(const BaseState.loading());
     try {
-      final items = await _useCase(
-        body: event.params.body,
-        cancelToken: _token,
-      );
-      if (items.isEmpty) {
+      final response = await _nearbyUseCase(event.params);
+      if (response.isEmpty) {
         emit(const BaseState.empty());
       } else {
-        emit(BaseState.success(items));
+        emit(BaseState.success(response));
       }
-    } catch (e) {
-      if (e is DioException && CancelToken.isCancel(e)) return;
+    } on Exception catch (e) {
       emit(BaseState.failure(ApiErrorHandler.handleError(e)));
     }
-  }
-
-  @override
-  Future<void> close() {
-    _token?.cancel('dispose');
-    return super.close();
   }
 }

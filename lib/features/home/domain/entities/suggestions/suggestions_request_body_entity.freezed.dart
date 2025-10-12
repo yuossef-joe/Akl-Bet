@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SuggestionsRequestBodyEntity {
 
- int get limit;
+ int get limit; int get page;
 /// Create a copy of SuggestionsRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SuggestionsRequestBodyEntityCopyWith<SuggestionsRequestBodyEntity> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuggestionsRequestBodyEntity&&(identical(other.limit, limit) || other.limit == limit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuggestionsRequestBodyEntity&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.page, page) || other.page == page));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,limit);
+int get hashCode => Object.hash(runtimeType,limit,page);
 
 @override
 String toString() {
-  return 'SuggestionsRequestBodyEntity(limit: $limit)';
+  return 'SuggestionsRequestBodyEntity(limit: $limit, page: $page)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SuggestionsRequestBodyEntityCopyWith<$Res>  {
   factory $SuggestionsRequestBodyEntityCopyWith(SuggestionsRequestBodyEntity value, $Res Function(SuggestionsRequestBodyEntity) _then) = _$SuggestionsRequestBodyEntityCopyWithImpl;
 @useResult
 $Res call({
- int limit
+ int limit, int page
 });
 
 
@@ -62,9 +62,10 @@ class _$SuggestionsRequestBodyEntityCopyWithImpl<$Res>
 
 /// Create a copy of SuggestionsRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? limit = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? limit = null,Object? page = null,}) {
   return _then(_self.copyWith(
 limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -150,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int limit)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int limit,  int page)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SuggestionsRequestBodyEntity() when $default != null:
-return $default(_that.limit);case _:
+return $default(_that.limit,_that.page);case _:
   return orElse();
 
 }
@@ -171,10 +172,10 @@ return $default(_that.limit);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int limit)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int limit,  int page)  $default,) {final _that = this;
 switch (_that) {
 case _SuggestionsRequestBodyEntity():
-return $default(_that.limit);case _:
+return $default(_that.limit,_that.page);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +192,10 @@ return $default(_that.limit);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int limit)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int limit,  int page)?  $default,) {final _that = this;
 switch (_that) {
 case _SuggestionsRequestBodyEntity() when $default != null:
-return $default(_that.limit);case _:
+return $default(_that.limit,_that.page);case _:
   return null;
 
 }
@@ -206,10 +207,11 @@ return $default(_that.limit);case _:
 
 
 class _SuggestionsRequestBodyEntity implements SuggestionsRequestBodyEntity {
-  const _SuggestionsRequestBodyEntity({required this.limit});
+  const _SuggestionsRequestBodyEntity({required this.limit, required this.page});
   
 
 @override final  int limit;
+@override final  int page;
 
 /// Create a copy of SuggestionsRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +223,16 @@ _$SuggestionsRequestBodyEntityCopyWith<_SuggestionsRequestBodyEntity> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SuggestionsRequestBodyEntity&&(identical(other.limit, limit) || other.limit == limit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SuggestionsRequestBodyEntity&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.page, page) || other.page == page));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,limit);
+int get hashCode => Object.hash(runtimeType,limit,page);
 
 @override
 String toString() {
-  return 'SuggestionsRequestBodyEntity(limit: $limit)';
+  return 'SuggestionsRequestBodyEntity(limit: $limit, page: $page)';
 }
 
 
@@ -241,7 +243,7 @@ abstract mixin class _$SuggestionsRequestBodyEntityCopyWith<$Res> implements $Su
   factory _$SuggestionsRequestBodyEntityCopyWith(_SuggestionsRequestBodyEntity value, $Res Function(_SuggestionsRequestBodyEntity) _then) = __$SuggestionsRequestBodyEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int limit
+ int limit, int page
 });
 
 
@@ -258,9 +260,10 @@ class __$SuggestionsRequestBodyEntityCopyWithImpl<$Res>
 
 /// Create a copy of SuggestionsRequestBodyEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? limit = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? limit = null,Object? page = null,}) {
   return _then(_SuggestionsRequestBodyEntity(
 limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

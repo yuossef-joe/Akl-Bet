@@ -26,7 +26,7 @@ class ProfileBloc
           ? await _getProfile()
           : await _updateProfile(body);
       emit(BaseState.success(res));
-    } catch (e) {
+    } on Exception catch (e) {
       emit(BaseState.failure(ApiErrorHandler.handleError(e)));
     }
   }

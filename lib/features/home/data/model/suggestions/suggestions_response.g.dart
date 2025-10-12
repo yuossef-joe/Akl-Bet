@@ -6,72 +6,72 @@ part of 'suggestions_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SuggestionsResponse _$SuggestionsResponseFromJson(Map<String, dynamic> json) =>
-    _SuggestionsResponse(
-      success: json['success'] as bool,
-      message: json['message'] as String,
-      data: (json['data'] as List<dynamic>)
-          .map((e) => Suggestions.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+_SuggestionsResponse _$SuggestionsResponseFromJson(
+  Map<String, dynamic> json,
+) => _SuggestionsResponse(
+  id: const StringToIntConverter().fromJson(json['id']),
+  userId: const StringToIntConverter().fromJson(json['userId']),
+  businessName: json['businessName'] as String?,
+  businessNameAr: json['businessNameAr'] as String?,
+  descriptionEn: json['descriptionEn'] as String?,
+  descriptionAr: json['descriptionAr'] as String?,
+  logo: json['logo'] as String?,
+  coverImage: json['coverImage'] as String?,
+  phone: json['phone'] as String?,
+  email: json['email'] as String?,
+  address: json['address'] as String?,
+  latitude: const StringToDoubleConverter().fromJson(json['latitude']),
+  longitude: const StringToDoubleConverter().fromJson(json['longitude']),
+  openingTime: json['openingTime'] as String?,
+  closingTime: json['closingTime'] as String?,
+  deliveryFee: const StringToDoubleConverter().fromJson(json['deliveryFee']),
+  minimumOrder: const StringToDoubleConverter().fromJson(json['minimumOrder']),
+  deliveryTimeMinutes: const StringToIntConverter().fromJson(
+    json['deliveryTimeMinutes'],
+  ),
+  rating: const StringToDoubleConverter().fromJson(json['rating']),
+  totalReviews: const StringToIntConverter().fromJson(json['totalReviews']),
+  isActive: json['isActive'] as bool?,
+  isVerified: json['isVerified'] as bool?,
+  createdAt: json['createdAt'] as String?,
+  updatedAt: json['updatedAt'] as String?,
+  userName: json['userName'] as String?,
+  userEmail: json['userEmail'] as String?,
+  userFirstName: json['userFirstName'] as String?,
+  userLastName: json['userLastName'] as String?,
+);
 
 Map<String, dynamic> _$SuggestionsResponseToJson(
   _SuggestionsResponse instance,
 ) => <String, dynamic>{
-  'success': instance.success,
-  'message': instance.message,
-  'data': instance.data,
-};
-
-_Suggestions _$SuggestionsFromJson(Map<String, dynamic> json) => _Suggestions(
-  id: (json['id'] as num).toInt(),
-  nameEn: json['nameEn'] as String,
-  logo: json['logo'] as String,
-  rating: const DoubleConverter().fromJson(json['rating']),
-  reviewCount: (json['reviewCount'] as num).toInt(),
-  address: Address.fromJson(json['address'] as Map<String, dynamic>),
-  deliveryInfo: DeliveryInfo.fromJson(
-    json['deliveryInfo'] as Map<String, dynamic>,
+  'id': const StringToIntConverter().toJson(instance.id),
+  'userId': const StringToIntConverter().toJson(instance.userId),
+  'businessName': instance.businessName,
+  'businessNameAr': instance.businessNameAr,
+  'descriptionEn': instance.descriptionEn,
+  'descriptionAr': instance.descriptionAr,
+  'logo': instance.logo,
+  'coverImage': instance.coverImage,
+  'phone': instance.phone,
+  'email': instance.email,
+  'address': instance.address,
+  'latitude': const StringToDoubleConverter().toJson(instance.latitude),
+  'longitude': const StringToDoubleConverter().toJson(instance.longitude),
+  'openingTime': instance.openingTime,
+  'closingTime': instance.closingTime,
+  'deliveryFee': const StringToDoubleConverter().toJson(instance.deliveryFee),
+  'minimumOrder': const StringToDoubleConverter().toJson(instance.minimumOrder),
+  'deliveryTimeMinutes': const StringToIntConverter().toJson(
+    instance.deliveryTimeMinutes,
   ),
-  distance: const DoubleConverter().fromJson(json['distance']),
-  isOpen: json['isOpen'] as bool,
-);
-
-Map<String, dynamic> _$SuggestionsToJson(_Suggestions instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'nameEn': instance.nameEn,
-      'logo': instance.logo,
-      'rating': const DoubleConverter().toJson(instance.rating),
-      'reviewCount': instance.reviewCount,
-      'address': instance.address,
-      'deliveryInfo': instance.deliveryInfo,
-      'distance': const DoubleConverter().toJson(instance.distance),
-      'isOpen': instance.isOpen,
-    };
-
-_Address _$AddressFromJson(Map<String, dynamic> json) => _Address(
-  street: json['street'] as String,
-  city: json['city'] as String,
-  governorate: json['governorate'] as String,
-);
-
-Map<String, dynamic> _$AddressToJson(_Address instance) => <String, dynamic>{
-  'street': instance.street,
-  'city': instance.city,
-  'governorate': instance.governorate,
+  'rating': const StringToDoubleConverter().toJson(instance.rating),
+  'totalReviews': const StringToIntConverter().toJson(instance.totalReviews),
+  'isActive': instance.isActive,
+  'isVerified': instance.isVerified,
+  'createdAt': instance.createdAt,
+  'updatedAt': instance.updatedAt,
+  'userName': instance.userName,
+  'userEmail': instance.userEmail,
+  'userFirstName': instance.userFirstName,
+  'userLastName': instance.userLastName,
 };
-
-_DeliveryInfo _$DeliveryInfoFromJson(Map<String, dynamic> json) =>
-    _DeliveryInfo(
-      estimatedDeliveryTime: (json['estimatedDeliveryTime'] as num).toInt(),
-      deliveryFee: const DoubleConverter().fromJson(json['deliveryFee']),
-      minOrderAmount: const DoubleConverter().fromJson(json['minOrderAmount']),
-    );
-
-Map<String, dynamic> _$DeliveryInfoToJson(_DeliveryInfo instance) =>
-    <String, dynamic>{
-      'estimatedDeliveryTime': instance.estimatedDeliveryTime,
-      'deliveryFee': const DoubleConverter().toJson(instance.deliveryFee),
-      'minOrderAmount': const DoubleConverter().toJson(instance.minOrderAmount),
-    };

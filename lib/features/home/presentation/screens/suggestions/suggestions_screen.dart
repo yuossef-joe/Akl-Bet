@@ -1,12 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodapp/core/base/base_event.dart';
-import 'package:foodapp/core/base/base_state.dart';
+import 'package:foodapp/core/utils/pagination_child_builder.dart';
+import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_response_entity.dart';
-import 'package:foodapp/features/home/presentation/bloc/suggestions_bloc.dart';
+import 'package:foodapp/features/home/domain/usecase/suggestions/get_suggestions_usecase.dart';
+import 'package:foodapp/features/home/presentation/bloc/suggestions/suggestions_bloc.dart';
 import 'package:foodapp/injection_container.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class SuggestionsScreen extends StatelessWidget {
   const SuggestionsScreen({super.key});
@@ -14,174 +14,120 @@ class SuggestionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<SuggestionsBloc>()
-        ..add(BaseEvent.fetch(params: SuggestionsParams(limit: 20, page: 1))),
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Nearby Vendors')),
-        body:
-            BlocBuilder<
-              SuggestionsBloc,
-              BaseState<List<SuggestionsResponseEntity>>
-            >(
-              builder: (context, state) {
-                return state.when(
-                  initial: () => const SizedBox.shrink(),
-                  loading: () => const _SuggestionsShimmerList(),
-                  empty: () => const Center(child: Text('No suggestions')),
-                  failure: (e) => Center(child: Text(e.message)),
-                  success: (items) => ListView.separated(
-                    itemCount: items.length,
-                    padding: const EdgeInsets.all(12),
-                    separatorBuilder: (_, _) => const SizedBox(height: 8),
-                    itemBuilder: (_, i) => _SuggestionTile(item: items[i]),
-                  ),
-                );
-              },
+      create: (_) => sl<SuggestionsBloc>(),
+      child: const _SuggestionsView(),
+    );
+  }
+}
+
+class _SuggestionsView extends StatefulWidget {
+  const _SuggestionsView();
+
+  @override
+  State<_SuggestionsView> createState() => _SuggestionsViewState();
+}
+
+class _SuggestionsViewState extends State<_SuggestionsView> {
+  late final PagingController<int, SuggestionsResponseEntity> _pagingController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pagingController = PagingController<int, SuggestionsResponseEntity>(
+      getNextPageKey: (state) =>
+          state.lastPageIsEmpty ? null : state.nextIntPageKey,
+      fetchPage: (pageKey) async {
+        final usecase = sl<GetSuggestionsUseCase>();
+
+        try {
+          final response = await usecase(
+            suggestionsRequestBodyEntity: SuggestionsRequestBodyEntity(
+              page: pageKey,
+              limit: 10,
             ),
+          );
+
+          if (response.isEmpty) return [];
+
+          return response;
+        } catch (e, s) {
+          debugPrint('❌ Suggestions fetch error: $e\n$s');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to load suggestions: $e')),
+          );
+          rethrow;
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Suggestions'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            tooltip: 'Refresh',
+            onPressed: _pagingController.refresh,
+          ),
+        ],
+      ),
+      body: PagingListener(
+        controller: _pagingController,
+        builder: (context, state, fetchNextPage) {
+          return PagedListView<int, SuggestionsResponseEntity>(
+            state: state,
+            fetchNextPage: fetchNextPage,
+            builderDelegate: paginationChildBuilder<SuggestionsResponseEntity>(
+              context: context,
+              pagingController: _pagingController,
+              builderWidget: (item) => _SuggestionCard(item: item),
+            ),
+          );
+        },
       ),
     );
   }
 }
 
-class _SuggestionTile extends StatelessWidget {
-  const _SuggestionTile({required this.item});
+class _SuggestionCard extends StatelessWidget {
+  const _SuggestionCard({required this.item});
   final SuggestionsResponseEntity item;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(12),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: CachedNetworkImage(
-              imageUrl: item.logo,
-              width: 64,
-              height: 64,
-              fit: BoxFit.cover,
-              placeholder: (_, _) => Container(
-                color: Colors.grey.shade200,
-                width: 64,
-                height: 64,
-              ),
-              errorWidget: (_, _, _) => Container(
-                color: Colors.grey.shade300,
-                width: 64,
-                height: 64,
-                child: const Icon(Icons.image_not_supported),
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        item.nameEn,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.orange.shade100,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.star,
-                            size: 14,
-                            color: Colors.orange,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(item.rating.toStringAsFixed(1)),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '${item.address.city} • ${item.deliveryInfo.estimatedDeliveryTime} min • ${item.distance.toStringAsFixed(1)} km',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Delivery: ${item.deliveryInfo.deliveryFee.toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Colors.green.shade700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SuggestionsShimmerList extends StatelessWidget {
-  const _SuggestionsShimmerList();
-  @override
-  Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(12),
-      itemBuilder: (_, _) => Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
-        child: Row(
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: ListTile(
+        leading: Image.network(
+          item.logo ?? '',
+          width: 48,
+          height: 48,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => const Icon(Icons.image),
+        ),
+        title: Text(item.businessName ?? 'No Name'),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
+            Text('Rating: ${item.rating} (${item.totalReviews} reviews)'),
+            Text(
+              'Delivery: ${item.deliveryTimeMinutes} min · '
+              'Fee: ${item.deliveryFee}',
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(height: 14, width: 160, color: Colors.white),
-                  const SizedBox(height: 8),
-                  Container(height: 12, width: 220, color: Colors.white),
-                  const SizedBox(height: 8),
-                  Container(height: 12, width: 100, color: Colors.white),
-                ],
-              ),
-            ),
+            if (item.address != null) Text('Address: ${item.address}'),
           ],
         ),
       ),
-      separatorBuilder: (_, _) => const SizedBox(height: 8),
-      itemCount: 6,
     );
   }
 }

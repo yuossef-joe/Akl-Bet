@@ -11,7 +11,7 @@ ThemeData getApplicationTheme() {
     primaryColorLight: ColorManager.lightPrimary,
     primaryColorDark: ColorManager.darkPrimary,
     disabledColor: ColorManager.grey1,
-    splashColor: ColorManager.lightPrimary,
+    splashColor: ColorManager.darkPrimary,
     // ripple effect color
     // cardview theme
     cardTheme: CardThemeData(
@@ -77,11 +77,9 @@ ThemeData getApplicationTheme() {
       bodySmall: getRegularStyle(color: ColorManager.grey),
       bodyMedium: getRegularStyle(
         color: ColorManager.grey2,
-        fontSize: FontSize.s12,
       ),
       labelSmall: getBoldStyle(
         color: ColorManager.primary,
-        fontSize: FontSize.s12,
       ),
     ),
 

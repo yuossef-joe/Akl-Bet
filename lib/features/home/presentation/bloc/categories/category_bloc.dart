@@ -27,7 +27,7 @@ class CategoryBloc
       } else {
         emit(BaseState.success(categories));
       }
-    } catch (e) {
+    } on Exception catch (e) {
       emit(BaseState.failure(ApiErrorHandler.handleError(e)));
     }
   }

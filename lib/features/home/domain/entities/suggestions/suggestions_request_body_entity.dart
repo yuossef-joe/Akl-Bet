@@ -6,12 +6,14 @@ part 'suggestions_request_body_entity.freezed.dart';
 @freezed
 abstract class SuggestionsRequestBodyEntity
     with _$SuggestionsRequestBodyEntity {
-  const factory SuggestionsRequestBodyEntity({required int limit}) =
-      _SuggestionsRequestBodyEntity;
+  const factory SuggestionsRequestBodyEntity({
+    required int limit,
+    required int page,
+  }) = _SuggestionsRequestBodyEntity;
 }
 
 extension SuggestionsRequestBodyEntityX on SuggestionsRequestBodyEntity {
   SuggestionsRequestBody toModel() {
-    return SuggestionsRequestBody(limit: limit);
+    return SuggestionsRequestBody(limit: limit, page: page);
   }
 }

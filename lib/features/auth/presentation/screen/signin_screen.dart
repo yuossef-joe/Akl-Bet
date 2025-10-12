@@ -1,11 +1,12 @@
 // import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/base/base_event.dart';
+import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_request_body_entity.dart';
 import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
-import 'package:foodapp/features/home/presentation/screens/category/categories_screen.dart';
+import 'package:foodapp/features/home/presentation/screens/nearby/nearby_screen.dart';
+import 'package:foodapp/features/home/presentation/screens/suggestions/suggestions_screen.dart';
 
 class signinScreen extends StatefulWidget {
   const signinScreen({super.key});
@@ -32,7 +33,7 @@ class _signinScreenState extends State<signinScreen> {
             // Navigate to CategoriesScreen
             Navigator.of(context).pushReplacement(
               // Or use Navigator.push if you want back navigation
-              MaterialPageRoute(builder: (_) => const CategoriesScreen()),
+              MaterialPageRoute(builder: (_) => const NearbyScreen()),
             );
           },
           failure: (error) {
@@ -185,7 +186,7 @@ class _signinScreenState extends State<signinScreen> {
                       ),
                       const SizedBox(height: 24),
                       // Divider
-                      Row(
+                      const Row(
                         children: [
                           Expanded(
                             child: Divider(color: Colors.white24, thickness: 1),
