@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:foodapp/core/networking/auth_interceptor.dart';
 import 'package:foodapp/core/networking/dio_factory.dart';
 import 'package:foodapp/core/networking/token_storage.dart';
-import 'package:foodapp/features/auth/data/repo/auth_repo.dart';
-import 'package:foodapp/features/auth/data/sources/auth_data_source.dart';
+import 'package:foodapp/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:foodapp/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
 import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
@@ -56,7 +56,7 @@ Future<void> initialaizeDependencies() async {
       FoodRemoteDataSourceImpl(sl()),
     )
     // Repositories
-    ..registerSingleton<AuthRepo>(AuthRepoImpl(sl(), sl()))
+    ..registerSingleton<AuthRepo>(AuthRepositoryImpl(sl(), sl()))
     ..registerSingleton<CategoryRepo>(CategoryRepoImpl(sl()))
     ..registerSingleton<NearbyRepo>(NearbyRepoImpl(sl()))
     ..registerSingleton<SuggestionsRepo>(SuggestionsRepoImpl(sl()))

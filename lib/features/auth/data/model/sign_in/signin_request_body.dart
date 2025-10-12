@@ -6,7 +6,7 @@ part 'signin_request_body.g.dart';
 @freezed
 abstract class SigninRequestBody with _$SigninRequestBody {
   const factory SigninRequestBody({
-    required String username,
+    @JsonKey(name: 'emailOrUsername') required String username,
     required String password,
   }) = _SigninRequestBody;
 

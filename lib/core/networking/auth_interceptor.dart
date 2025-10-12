@@ -1,25 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:foodapp/core/networking/token_storage.dart';
 import 'package:foodapp/core/resources/constant.dart';
 
 class AuthInterceptor extends Interceptor {
-  AuthInterceptor(this._tokenStorage);
+  AuthInterceptor();
 
-  final TokenStorage _tokenStorage;
   bool _isRefreshing = false;
   final List<Future<void> Function()> _pending = [];
-
-  @override
-  Future<void> onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
-    final token = await _tokenStorage.getAccessToken();
-    if (token != null && token.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $token';
-    }
-    super.onRequest(options, handler);
-  }
 
   @override
   Future<void> onError(

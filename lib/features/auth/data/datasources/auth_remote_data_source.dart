@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:foodapp/core/networking/token_storage.dart';
 import 'package:foodapp/core/resources/constant.dart';
 import 'package:foodapp/features/auth/data/model/sign_in/signin_request_body.dart';
 import 'package:foodapp/features/auth/data/model/sign_in/signin_response.dart';
@@ -14,35 +13,21 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  AuthRemoteDataSourceImpl(this._dio, this._tokenStorage);
+  AuthRemoteDataSourceImpl(
+    this._dio,
+  );
   final Dio _dio;
-  final TokenStorage _tokenStorage;
 
   @override
   Future<SigninResponse> signin(SigninRequestBody signinRequestBody) async {
-    final payload = {
-      'emailOrUsername': signinRequestBody.username,
-      'password': signinRequestBody.password,
-    };
-
     final response = await _dio.post<Map<String, dynamic>>(
       ApiConstants.signInEndPoint,
-      data: payload,
+      data: signinRequestBody.toJson(),
     );
 
-    final data = response.data?['data'] as Map<String, dynamic>;
-    final user = data['user'] as Map<String, dynamic>;
-    final accessToken = data['accessToken'] as String?;
-    final refreshToken = data['refreshToken'] as String?;
+    final data = response.data?['data'];
 
-    if (accessToken != null && refreshToken != null) {
-      await _tokenStorage.saveTokens(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-      );
-    }
-
-    return SigninResponse.fromJson(user);
+    return SigninResponse.fromJson(data);
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:foodapp/features/auth/data/repo/auth_repo.dart';
+import 'package:foodapp/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_request_body_entity.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_entity.dart';
 
