@@ -1,13 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/resources/constant.dart';
-import 'package:foodapp/features/home/data/mapper/nearby/nearby_vendor_mapper.dart';
 import 'package:foodapp/features/home/data/model/nearby/nearby_request_body.dart';
 import 'package:foodapp/features/home/data/model/nearby/nearby_response.dart';
 
 abstract class NearbyRemoteDataSource {
-  Future<List<NearbyVendor>> getNearby({
-    required NearbyRequestBody body,
-    CancelToken? cancelToken,
+  Future<List<NearbyResponse>> getNearbyItems({
+    required NearbyRequestBody nearbyRequestBody,
   });
 }
 
@@ -16,33 +14,18 @@ class NearbyRemoteDataSourceImpl implements NearbyRemoteDataSource {
   final Dio _dio;
 
   @override
-  Future<List<NearbyVendor>> getNearby({
-    required NearbyRequestBody body,
-    CancelToken? cancelToken,
+  Future<List<NearbyResponse>> getNearbyItems({
+    required NearbyRequestBody nearbyRequestBody,
   }) async {
-    final res = await _dio.get<dynamic>(
+    final response = await _dio.get(
       ApiConstants.nearbyEndPoint,
-      queryParameters: body.toQuery(),
-      cancelToken: cancelToken,
+      queryParameters: nearbyRequestBody.toJson(),
     );
-
-    final raw = res.data;
-    dynamic data = raw is Map<String, dynamic> ? (raw['data'] ?? raw) : raw;
-    if (data is Map) {
-      data =
-          data['vendors'] ??
-          data['items'] ??
-          data['results'] ??
-          data['data'] ??
-          [];
-    }
-
-    final list = data is List ? data : <dynamic>[];
-
-    return list
-        .map((e) => Map<String, dynamic>.from(e as Map))
-        .map(NearbyVendorMapper.normalize)
-        .map(NearbyVendor.fromJson)
+    final vendors = response.data['data']?['vendors'] as List<dynamic>? ?? [];
+    return vendors
+        .map(
+          (json) => NearbyResponse.fromJson(json as Map<String, dynamic>),
+        )
         .toList();
   }
 }

@@ -22,7 +22,6 @@ class ApiErrorHandler {
       try {
         final data = response?.data;
         if (data is Map<String, dynamic>) {
-          // Primary path: { success: false, error: { code, message }, message?, details? }
           if (data['error'] is Map<String, dynamic>) {
             final errorModel = ApiErrorModel.fromJson(data);
             return ApiException(

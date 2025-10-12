@@ -62,7 +62,7 @@ class AuthInterceptor extends Interceptor {
         _pending.clear();
         final res = await _retry(requestOptions);
         return handler.resolve(res);
-      } catch (e) {
+      } on Exception {
         await _tokenStorage.clear();
         return handler.reject(err);
       } finally {

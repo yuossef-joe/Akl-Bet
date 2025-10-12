@@ -14,12 +14,3 @@ abstract class NearbyRequestBody with _$NearbyRequestBody {
   factory NearbyRequestBody.fromJson(Map<String, dynamic> json) =>
       _$NearbyRequestBodyFromJson(json);
 }
-
-extension NearbyRequestBodyX on NearbyRequestBody {
-  Map<String, dynamic> toQuery() => <String, dynamic>{
-    'latitude': latitude,
-    'longitude': longitude,
-    'radius': radius,
-    'limit': limit,
-  };
-}

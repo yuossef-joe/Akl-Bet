@@ -5,8 +5,10 @@ part 'suggestions_request_body.freezed.dart';
 
 @freezed
 abstract class SuggestionsRequestBody with _$SuggestionsRequestBody {
-  const factory SuggestionsRequestBody({required int limit}) =
-      _SuggestionsRequestBody;
+  const factory SuggestionsRequestBody({
+    required int limit,
+    required int page,
+  }) = _SuggestionsRequestBody;
   factory SuggestionsRequestBody.fromJson(Map<String, dynamic> json) =>
       _$SuggestionsRequestBodyFromJson(json);
 }

@@ -1,13 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:foodapp/features/home/data/sources/suggestions/suggestions_remote_data_source.dart';
+import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_response_entity.dart';
 
 abstract class SuggestionsRepo {
   /// Get suggestions.
   Future<List<SuggestionsResponseEntity>> getSuggestions({
-    required int limit,
-    int? page,
-    CancelToken? cancelToken,
+    required SuggestionsRequestBodyEntity suggestionsRequestBodyEntity,
   });
 }
 
@@ -17,14 +15,10 @@ class SuggestionsRepoImpl implements SuggestionsRepo {
 
   @override
   Future<List<SuggestionsResponseEntity>> getSuggestions({
-    required int limit,
-    int? page,
-    CancelToken? cancelToken,
+    required SuggestionsRequestBodyEntity suggestionsRequestBodyEntity,
   }) async {
     final models = await _remote.getSuggestions(
-      limit: limit,
-      page: page,
-      cancelToken: cancelToken,
+      suggestionsRequestBody: suggestionsRequestBodyEntity.toModel(),
     );
     return models.map(SuggestionsResponseEntity.fromModel).toList();
   }

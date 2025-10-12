@@ -1,14 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/resources/constant.dart';
-import 'package:foodapp/features/home/data/mapper/suggestions/suggestions_mapper.dart';
+import 'package:foodapp/features/home/data/model/suggestions/suggestions_request_body.dart';
 import 'package:foodapp/features/home/data/model/suggestions/suggestions_response.dart';
 
 abstract class SuggestionsRemoteDataSource {
-  /// Get suggestions using `/vendors/nearby`.
-  Future<List<Suggestions>> getSuggestions({
-    required int limit,
-    int? page,
-    CancelToken? cancelToken,
+  Future<List<SuggestionsResponse>> getSuggestions({
+    required SuggestionsRequestBody suggestionsRequestBody,
   });
 }
 
@@ -17,41 +14,16 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
   final Dio _dio;
 
   @override
-  Future<List<Suggestions>> getSuggestions({
-    required int limit,
-    int? page,
-    CancelToken? cancelToken,
+  Future<List<SuggestionsResponse>> getSuggestions({
+    required SuggestionsRequestBody suggestionsRequestBody,
   }) async {
-    final qp = <String, dynamic>{'limit': limit};
-    if (page != null) qp['page'] = page;
-    final res = await _dio.get<dynamic>(
-      ApiConstants.suggestionEndPoint,
-      queryParameters: qp,
-      cancelToken: cancelToken,
-    );
-    final body = res.data;
-    dynamic data = body is Map<String, dynamic> ? (body['data'] ?? body) : body;
-    if (data is Map) {
-      // /vendors returns { data: { vendors: [...], pagination: {...} } }
-      data =
-          data['vendors'] ??
-          data['items'] ??
-          data['results'] ??
-          data['data'] ??
-          <dynamic>[];
-    }
-    final listJson = data is List ? data : <dynamic>[];
-    return listJson
+    final res = await _dio.get(ApiConstants.suggestionEndPoint);
+    final vendors = res.data['data']?['vendors'] as List<dynamic>? ?? [];
+    return vendors
         .map(
-          (e) => e is Map<String, dynamic>
-              ? e
-              : e is Map
-              ? Map<String, dynamic>.from(e)
-              : <String, dynamic>{},
+          (vendor) =>
+              SuggestionsResponse.fromJson(vendor as Map<String, dynamic>),
         )
-        .where((m) => m.isNotEmpty)
-        .map(SuggestionsMapper.normalize)
-        .map(Suggestions.fromJson)
         .toList();
   }
 }

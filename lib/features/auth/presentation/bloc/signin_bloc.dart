@@ -24,7 +24,7 @@ class SigninBloc
     try {
       final result = await _signinUseCase.call(event.params);
       emit(BaseState.success(result));
-    } catch (e) {
+    } on Exception catch (e) {
       emit(BaseState.failure(ApiErrorHandler.handleError(e)));
     }
   }

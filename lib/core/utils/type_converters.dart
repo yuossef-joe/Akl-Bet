@@ -1,23 +1,32 @@
-double toDouble(Object? value) {
-  if (value == null) return 0;
-  if (value is num) return value.toDouble();
-  if (value is String) return double.tryParse(value) ?? 0.0;
-  return 0.0;
-}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-int toInt(Object? v) {
-  if (v == null) return 0;
-  if (v is num) return v.toInt();
-  if (v is String) return int.tryParse(v) ?? double.tryParse(v)?.toInt() ?? 0;
-  return 0;
-}
+class StringToDoubleConverter implements JsonConverter<double?, dynamic> {
+  const StringToDoubleConverter();
 
-bool toBool(Object? v) {
-  if (v is bool) return v;
-  if (v is num) return v != 0;
-  if (v is String) {
-    final s = v.toLowerCase();
-    return s == 'true' || s == '1' || s == 'yes';
+  @override
+  double? fromJson(dynamic json) {
+    if (json == null) return null;
+    if (json is num) return json.toDouble();
+    if (json is String) return double.tryParse(json);
+    return null;
   }
-  return false;
+
+  @override
+  dynamic toJson(double? object) => object;
+}
+
+class StringToIntConverter implements JsonConverter<int?, dynamic> {
+  const StringToIntConverter();
+
+  @override
+  int? fromJson(dynamic json) {
+    if (json == null) return null;
+    if (json is int) return json;
+    if (json is double) return json.toInt();
+    if (json is String) return int.tryParse(json);
+    return null;
+  }
+
+  @override
+  dynamic toJson(int? object) => object;
 }

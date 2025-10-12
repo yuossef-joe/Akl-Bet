@@ -11,7 +11,9 @@ class FoodApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => sl<SigninBloc>())],
+      providers: [
+        BlocProvider(create: (_) => sl<SigninBloc>()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: appRouter.getRoute,

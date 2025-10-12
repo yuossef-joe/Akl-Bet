@@ -17,24 +17,16 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
   @override
   Future<List<Category>> getMainCategories() async {
     final res = await _dio.get<dynamic>(ApiConstants.categoriesEndPoint);
-    final body = res.data;
-    final data = body is Map<String, dynamic> ? body['data'] : body;
-    final listJson = data is List ? data : <dynamic>[];
-    return listJson
-        .whereType<Map<String, dynamic>>()
-        .map(Category.fromJson)
+    return ((res.data as Map<String, dynamic>)['data'] as List)
+        .map((json) => Category.fromJson(json as Map<String, dynamic>))
         .toList();
   }
 
   @override
   Future<List<Category>> getSubCategories({required int parentId}) async {
     final res = await _dio.get<dynamic>(ApiConstants.subCategories(parentId));
-    final body = res.data;
-    final data = body is Map<String, dynamic> ? body['data'] : body;
-    final listJson = data is List ? data : <dynamic>[];
-    return listJson
-        .whereType<Map<String, dynamic>>()
-        .map(Category.fromJson)
+    return ((res.data as Map<String, dynamic>)['data'] as List)
+        .map((json) => Category.fromJson(json as Map<String, dynamic>))
         .toList();
   }
 }
