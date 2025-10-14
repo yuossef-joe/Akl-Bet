@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/routing/routes_manager.dart';
 import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/injection_container.dart';
+import 'package:foodapp/features/home/presentation/screens/home/home_screen.dart';
 
 class FoodApp extends StatelessWidget {
   const FoodApp({required this.appRouter, super.key});
@@ -16,6 +17,7 @@ class FoodApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        home: const HomeScreen(),
         onGenerateRoute: appRouter.getRoute,
       ),
     );
