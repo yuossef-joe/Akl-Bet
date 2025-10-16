@@ -9,7 +9,6 @@ import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
 import 'package:foodapp/features/food/domain/usecase/food_usecase.dart';
-import 'package:foodapp/features/food/presentaion/bloc/food_bloc.dart';
 import 'package:foodapp/features/home/data/repo/category/categort_repo.dart';
 import 'package:foodapp/features/home/data/repo/nearby/nearby_repo.dart';
 import 'package:foodapp/features/home/data/repo/suggestions/suggestions_repo.dart';
