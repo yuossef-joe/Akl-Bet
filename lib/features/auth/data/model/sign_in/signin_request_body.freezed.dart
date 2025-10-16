@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SigninRequestBody {
 
- String get username; String get password;
+@JsonKey(name: 'emailOrUsername') String get username; String get password;
 /// Create a copy of SigninRequestBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $SigninRequestBodyCopyWith<$Res>  {
   factory $SigninRequestBodyCopyWith(SigninRequestBody value, $Res Function(SigninRequestBody) _then) = _$SigninRequestBodyCopyWithImpl;
 @useResult
 $Res call({
- String username, String password
+@JsonKey(name: 'emailOrUsername') String username, String password
 });
 
 
@@ -154,7 +154,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String username,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'emailOrUsername')  String username,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SigninRequestBody() when $default != null:
 return $default(_that.username,_that.password);case _:
@@ -175,7 +175,7 @@ return $default(_that.username,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String username,  String password)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'emailOrUsername')  String username,  String password)  $default,) {final _that = this;
 switch (_that) {
 case _SigninRequestBody():
 return $default(_that.username,_that.password);case _:
@@ -195,7 +195,7 @@ return $default(_that.username,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String username,  String password)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'emailOrUsername')  String username,  String password)?  $default,) {final _that = this;
 switch (_that) {
 case _SigninRequestBody() when $default != null:
 return $default(_that.username,_that.password);case _:
@@ -210,10 +210,10 @@ return $default(_that.username,_that.password);case _:
 @JsonSerializable()
 
 class _SigninRequestBody implements SigninRequestBody {
-  const _SigninRequestBody({required this.username, required this.password});
+  const _SigninRequestBody({@JsonKey(name: 'emailOrUsername') required this.username, required this.password});
   factory _SigninRequestBody.fromJson(Map<String, dynamic> json) => _$SigninRequestBodyFromJson(json);
 
-@override final  String username;
+@override@JsonKey(name: 'emailOrUsername') final  String username;
 @override final  String password;
 
 /// Create a copy of SigninRequestBody
@@ -249,7 +249,7 @@ abstract mixin class _$SigninRequestBodyCopyWith<$Res> implements $SigninRequest
   factory _$SigninRequestBodyCopyWith(_SigninRequestBody value, $Res Function(_SigninRequestBody) _then) = __$SigninRequestBodyCopyWithImpl;
 @override @useResult
 $Res call({
- String username, String password
+@JsonKey(name: 'emailOrUsername') String username, String password
 });
 
 

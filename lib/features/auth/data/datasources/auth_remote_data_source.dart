@@ -24,10 +24,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       ApiConstants.signInEndPoint,
       data: signinRequestBody.toJson(),
     );
-
     final data = response.data?['data'];
-
-    return SigninResponse.fromJson(data);
+    return SigninResponse.fromJson(data as Map<String, dynamic>);
   }
 
   @override
@@ -40,13 +38,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final user = (data['user'] as Map<String, dynamic>?) ?? <String, dynamic>{};
     final accessToken = data['accessToken'] as String?;
     final refreshToken = data['refreshToken'] as String?;
-
-    if (accessToken != null && refreshToken != null) {
-      await _tokenStorage.saveTokens(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-      );
-    }
 
     return SignUpResponse.fromJson({
       'accessToken': accessToken ?? '',

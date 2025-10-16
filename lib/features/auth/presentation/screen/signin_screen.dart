@@ -6,16 +6,15 @@ import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_request_body_entity.dart';
 import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/features/home/presentation/screens/nearby/nearby_screen.dart';
-import 'package:foodapp/features/home/presentation/screens/suggestions/suggestions_screen.dart';
 
-class signinScreen extends StatefulWidget {
-  const signinScreen({super.key});
+class SigninScreen extends StatefulWidget {
+  const SigninScreen({super.key});
 
   @override
-  State<signinScreen> createState() => _signinScreenState();
+  State<SigninScreen> createState() => _SigninScreenState();
 }
 
-class _signinScreenState extends State<signinScreen> {
+class _SigninScreenState extends State<SigninScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
