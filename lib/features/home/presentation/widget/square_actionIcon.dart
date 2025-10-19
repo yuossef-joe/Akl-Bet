@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 
 class SquareActionIcon extends StatelessWidget {
+  const SquareActionIcon({required this.icon, this.showBadge = false});
   final IconData icon;
   final bool showBadge;
-  const SquareActionIcon({required this.icon, this.showBadge = false});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'category_response.dart';
+part of 'food_categories_response_entity.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -11,41 +11,38 @@ part of 'category_response.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
-mixin _$Category {
+mixin _$FoodCategoriesResponseEntity {
 
  int get id; String get name; String get imageUrl;
-/// Create a copy of Category
+/// Create a copy of FoodCategoriesResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$CategoryCopyWith<Category> get copyWith => _$CategoryCopyWithImpl<Category>(this as Category, _$identity);
+$FoodCategoriesResponseEntityCopyWith<FoodCategoriesResponseEntity> get copyWith => _$FoodCategoriesResponseEntityCopyWithImpl<FoodCategoriesResponseEntity>(this as FoodCategoriesResponseEntity, _$identity);
 
-  /// Serializes this Category to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Category&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodCategoriesResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,name,imageUrl);
 
 @override
 String toString() {
-  return 'Category(id: $id, name: $name, imageUrl: $imageUrl)';
+  return 'FoodCategoriesResponseEntity(id: $id, name: $name, imageUrl: $imageUrl)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $CategoryCopyWith<$Res>  {
-  factory $CategoryCopyWith(Category value, $Res Function(Category) _then) = _$CategoryCopyWithImpl;
+abstract mixin class $FoodCategoriesResponseEntityCopyWith<$Res>  {
+  factory $FoodCategoriesResponseEntityCopyWith(FoodCategoriesResponseEntity value, $Res Function(FoodCategoriesResponseEntity) _then) = _$FoodCategoriesResponseEntityCopyWithImpl;
 @useResult
 $Res call({
  int id, String name, String imageUrl
@@ -56,14 +53,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$CategoryCopyWithImpl<$Res>
-    implements $CategoryCopyWith<$Res> {
-  _$CategoryCopyWithImpl(this._self, this._then);
+class _$FoodCategoriesResponseEntityCopyWithImpl<$Res>
+    implements $FoodCategoriesResponseEntityCopyWith<$Res> {
+  _$FoodCategoriesResponseEntityCopyWithImpl(this._self, this._then);
 
-  final Category _self;
-  final $Res Function(Category) _then;
+  final FoodCategoriesResponseEntity _self;
+  final $Res Function(FoodCategoriesResponseEntity) _then;
 
-/// Create a copy of Category
+/// Create a copy of FoodCategoriesResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,}) {
   return _then(_self.copyWith(
@@ -77,8 +74,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [Category].
-extension CategoryPatterns on Category {
+/// Adds pattern-matching-related methods to [FoodCategoriesResponseEntity].
+extension FoodCategoriesResponseEntityPatterns on FoodCategoriesResponseEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -91,10 +88,10 @@ extension CategoryPatterns on Category {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Category value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _FoodCategoriesResponseEntity value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Category() when $default != null:
+case _FoodCategoriesResponseEntity() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -113,10 +110,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Category value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _FoodCategoriesResponseEntity value)  $default,){
 final _that = this;
 switch (_that) {
-case _Category():
+case _FoodCategoriesResponseEntity():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -134,10 +131,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Category value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _FoodCategoriesResponseEntity value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Category() when $default != null:
+case _FoodCategoriesResponseEntity() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -157,7 +154,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Category() when $default != null:
+case _FoodCategoriesResponseEntity() when $default != null:
 return $default(_that.id,_that.name,_that.imageUrl);case _:
   return orElse();
 
@@ -178,7 +175,7 @@ return $default(_that.id,_that.name,_that.imageUrl);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl)  $default,) {final _that = this;
 switch (_that) {
-case _Category():
+case _FoodCategoriesResponseEntity():
 return $default(_that.id,_that.name,_that.imageUrl);case _:
   throw StateError('Unexpected subclass');
 
@@ -198,7 +195,7 @@ return $default(_that.id,_that.name,_that.imageUrl);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String imageUrl)?  $default,) {final _that = this;
 switch (_that) {
-case _Category() when $default != null:
+case _FoodCategoriesResponseEntity() when $default != null:
 return $default(_that.id,_that.name,_that.imageUrl);case _:
   return null;
 
@@ -208,47 +205,44 @@ return $default(_that.id,_that.name,_that.imageUrl);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
 
-class _Category implements Category {
-  const _Category({required this.id, required this.name, required this.imageUrl});
-  factory _Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
+
+class _FoodCategoriesResponseEntity implements FoodCategoriesResponseEntity {
+  const _FoodCategoriesResponseEntity({required this.id, required this.name, required this.imageUrl});
+  
 
 @override final  int id;
 @override final  String name;
 @override final  String imageUrl;
 
-/// Create a copy of Category
+/// Create a copy of FoodCategoriesResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$CategoryCopyWith<_Category> get copyWith => __$CategoryCopyWithImpl<_Category>(this, _$identity);
+_$FoodCategoriesResponseEntityCopyWith<_FoodCategoriesResponseEntity> get copyWith => __$FoodCategoriesResponseEntityCopyWithImpl<_FoodCategoriesResponseEntity>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$CategoryToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Category&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodCategoriesResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,name,imageUrl);
 
 @override
 String toString() {
-  return 'Category(id: $id, name: $name, imageUrl: $imageUrl)';
+  return 'FoodCategoriesResponseEntity(id: $id, name: $name, imageUrl: $imageUrl)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
-  factory _$CategoryCopyWith(_Category value, $Res Function(_Category) _then) = __$CategoryCopyWithImpl;
+abstract mixin class _$FoodCategoriesResponseEntityCopyWith<$Res> implements $FoodCategoriesResponseEntityCopyWith<$Res> {
+  factory _$FoodCategoriesResponseEntityCopyWith(_FoodCategoriesResponseEntity value, $Res Function(_FoodCategoriesResponseEntity) _then) = __$FoodCategoriesResponseEntityCopyWithImpl;
 @override @useResult
 $Res call({
  int id, String name, String imageUrl
@@ -259,17 +253,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$CategoryCopyWithImpl<$Res>
-    implements _$CategoryCopyWith<$Res> {
-  __$CategoryCopyWithImpl(this._self, this._then);
+class __$FoodCategoriesResponseEntityCopyWithImpl<$Res>
+    implements _$FoodCategoriesResponseEntityCopyWith<$Res> {
+  __$FoodCategoriesResponseEntityCopyWithImpl(this._self, this._then);
 
-  final _Category _self;
-  final $Res Function(_Category) _then;
+  final _FoodCategoriesResponseEntity _self;
+  final $Res Function(_FoodCategoriesResponseEntity) _then;
 
-/// Create a copy of Category
+/// Create a copy of FoodCategoriesResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,}) {
-  return _then(_Category(
+  return _then(_FoodCategoriesResponseEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable

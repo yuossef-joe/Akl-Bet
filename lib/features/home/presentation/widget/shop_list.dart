@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 
 class ShopList extends StatelessWidget {
-  const ShopList();
+  const ShopList({super.key});
 
   @override
   Widget build(BuildContext context) {

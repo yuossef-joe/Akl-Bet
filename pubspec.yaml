@@ -54,7 +54,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/images/image200.png
   # - assets/translations/
 
   # fonts:

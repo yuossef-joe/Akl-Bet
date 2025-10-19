@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodapp/core/base/base_event.dart';
+import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
+import 'package:foodapp/features/home/domain/entities/nearby/nearby_request_body_entity.dart';
+import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
+import 'package:foodapp/features/home/presentation/bloc/nearby/nearby_bloc.dart';
+import 'package:foodapp/injection_container.dart';
 
 class PlaceholderRowHeader extends StatelessWidget {
   const PlaceholderRowHeader({super.key});
@@ -8,22 +15,58 @@ class PlaceholderRowHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 230,
-      child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        scrollDirection: Axis.horizontal,
-        itemCount: 6,
-        separatorBuilder: (_, __) => const SizedBox(width: 12),
-        itemBuilder: (_, index) => const _RestaurantCard(),
+      child: BlocProvider(
+        create: (_) => sl<NearbyBloc>()
+          ..add(
+            const BaseEvent<NearbyRequestBodyEntity>.fetch(
+              params: NearbyRequestBodyEntity(
+                limit: 10,
+                latitude: 40.7128,
+                longitude: -74.0060,
+                radius: 10,
+              ),
+            ),
+          ),
+        child: BlocBuilder<NearbyBloc, BaseState<List<NearbyResponseEntity>>>(
+          builder: (context, state) {
+            return state.when(
+              initial: _ShimmerRow.new,
+              loading: _ShimmerRow.new,
+              empty: () => const Center(child: Text('لا توجد مطاعم قريبة')),
+              failure: (e) => Center(
+                child: Text(
+                  'فشل التحميل',
+                  style: TextStyle(color: Colors.red.shade700),
+                ),
+              ),
+              success: (items) => ListView.separated(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                itemBuilder: (_, index) => _NearbyCard(item: items[index]),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
-class _RestaurantCard extends StatelessWidget {
-  const _RestaurantCard();
+class _NearbyCard extends StatelessWidget {
+  const _NearbyCard({required this.item});
+
+  final NearbyResponseEntity item;
 
   @override
   Widget build(BuildContext context) {
+    final name = item.businessName ?? 'بدون اسم';
+    final rating = (item.rating ?? 0).toStringAsFixed(1);
+    final time = item.deliveryTimeMinutes != null
+        ? '${item.deliveryTimeMinutes} دقيقة'
+        : 'غير متاح';
+
     return Container(
       width: 230,
       padding: const EdgeInsets.all(10),
@@ -50,15 +93,25 @@ class _RestaurantCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/images/image200.png',
-                  height: 64,
-                  fit: BoxFit.contain,
-                  errorBuilder: (_, __, ___) => const Icon(
-                    Icons.image_not_supported_outlined,
-                    color: Colors.grey,
-                  ),
-                ),
+                child: (item.logo != null && item.logo!.isNotEmpty)
+                    ? Image.network(
+                        item.logo!,
+                        height: 64,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, __, ___) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Colors.grey,
+                        ),
+                      )
+                    : Image.asset(
+                        'assets/images/image200.png',
+                        height: 64,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, __, ___) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
               ),
               PositionedDirectional(
                 top: 8,
@@ -79,14 +132,18 @@ class _RestaurantCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.star_rounded, color: Colors.amber, size: 16),
-                      SizedBox(width: 4),
+                      const Icon(
+                        Icons.star_rounded,
+                        color: Colors.amber,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 4),
                       Text(
-                        '8.3',
-                        style: TextStyle(
+                        rating,
+                        style: const TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.w700,
                           fontSize: 12,
@@ -123,11 +180,11 @@ class _RestaurantCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'ريد كاب',
+                  name,
                   textAlign: TextAlign.end,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
                     color: Colors.black87,
@@ -144,20 +201,17 @@ class _RestaurantCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           // Distance and time
-          const Row(
+          Row(
             children: [
-              Icon(Icons.access_time_rounded, size: 14, color: Colors.grey),
-              SizedBox(width: 4),
-              Text(
-                '45 دقيقة',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+              const Icon(
+                Icons.access_time_rounded,
+                size: 14,
+                color: Colors.grey,
               ),
-              SizedBox(width: 10),
-              Icon(Icons.place_outlined, size: 14, color: Colors.grey),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Text(
-                '3.5 كم',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                time,
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
               ),
             ],
           ),
@@ -190,9 +244,9 @@ class _RestaurantCard extends StatelessWidget {
                 size: 18,
               ),
               const SizedBox(width: 4),
-              const Text(
-                '7 ريال',
-                style: TextStyle(
+              Text(
+                item.deliveryFee != null ? '${item.deliveryFee} ريال' : 'مجاني',
+                style: const TextStyle(
                   color: Colors.green,
                   fontWeight: FontWeight.w700,
                 ),
@@ -200,6 +254,32 @@ class _RestaurantCard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ShimmerRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      scrollDirection: Axis.horizontal,
+      itemCount: 4,
+      separatorBuilder: (_, __) => const SizedBox(width: 12),
+      itemBuilder: (_, __) => Container(
+        width: 230,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x15000000),
+              blurRadius: 10,
+              offset: Offset(0, 6),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,29 +1,42 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodapp/core/base/base_builder.dart';
-import 'package:foodapp/core/base/base_listener.dart';
+import 'package:foodapp/core/base/base_bloc.dart';
+import 'package:foodapp/core/base/base_listener_function.dart';
+import 'package:foodapp/core/base/base_state.dart';
+import 'package:foodapp/core/base/base_state_widget.dart';
 
-class BlocBaseConsumer<B extends StateStreamable<S>, S extends Object>
-    extends StatelessWidget {
-  const BlocBaseConsumer({
-    required this.builder,
-    required this.listener,
-    this.bloc,
+class BaseConsumer<S, T> extends StatelessWidget {
+  const BaseConsumer({
+    required this.loadedWidget,
+    this.loading,
+    this.success,
+    this.failure,
+    this.empty,
+    this.initial,
     super.key,
   });
-
-  final BaseBuilder<B, S> builder;
-  final BaseListener<B, S> listener;
-  final B? bloc;
-
+  final void Function()? loading;
+  final void Function(S)? success;
+  final void Function(Exception)? failure;
+  final void Function()? empty;
+  final void Function()? initial;
+  final Widget Function(S v) loadedWidget;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<B, S>(
-      bloc: bloc,
-      listenWhen: listener.shouldListen,
-      listener: listener.onStateChange,
-      buildWhen: builder.shouldBuild,
-      builder: builder.build,
+    return BlocConsumer<BaseBloc<S, T>, BaseState<S>>(
+      listener: (_, state) => baseListenerFunction(
+        state: state,
+        initial: initial,
+        loading: loading,
+        success: success,
+        failure: failure,
+        empty: empty,
+      ),
+      builder: (_, state) => BaseStateWidget<S>(
+        state: state,
+        loadedWidget: loadedWidget,
+        retryPressed: () {},
+      ),
     );
   }
 }
