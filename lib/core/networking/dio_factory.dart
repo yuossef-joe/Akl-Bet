@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:foodapp/core/resources/constant.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:foodapp/core/resources/constant.dart'; // لو فيه ApiConstants هنا
 
 class DioFactory {
   DioFactory._();
@@ -9,17 +9,14 @@ class DioFactory {
 
   static Dio getDio() {
     if (_dio == null) {
-      final timeOut = const Duration(seconds: 30);
+      const timeOut = Duration(seconds: 30);
 
       _dio = Dio(
         BaseOptions(
           baseUrl: ApiConstants.baseUrl,
           connectTimeout: timeOut,
           receiveTimeout: timeOut,
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ${ApiConstants.token}'
-          },
+          headers: {'Content-Type': 'application/json'},
         ),
       );
 
@@ -28,7 +25,6 @@ class DioFactory {
           requestBody: true,
           requestHeader: true,
           responseHeader: true,
-          responseBody: true,
         ),
       );
     }

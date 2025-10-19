@@ -1,29 +1,36 @@
-final appName = "Food App";
+const appName = 'Food App';
 
 class ApiConstants {
-  static const String baseUrl = "http://localhost:8095/api/v1";
-  static const String signUpEndPoint = "auth/signup";
-  static const String signInEndPoint = "auth/signin";
+  static const String baseUrl = 'http://localhost:8095/api/v1/';
+  static const String signUpEndPoint = 'auth/signup';
+  static const String signInEndPoint = 'auth/signin';
+  static const String refreshEndPoint = 'auth/refresh';
+  static const String foodCategoriesEndPoint = 'categories/tag/main';
+  static const String categoriesEndPoint = 'categories/tag/secondry';
+  static const String suggestionEndPoint = 'vendors';
+  static const String nearbyEndPoint = 'vendors/nearby';
+  static const String ordersEndPoint = 'orders';
+  static const String foodItemsEndPoint = 'food-items';
   static const int apiTimeOut = 60000;
-  static const String token = "";
-  static const String empty = "";
+  static const String token = '';
+  static const String empty = '';
   static const int zero = 0;
 }
 
 class ApiErrors {
-  static const String badRequestError = "badRequestError";
-  static const String noContent = "noContent";
-  static const String forbiddenError = "forbiddenError";
-  static const String unauthorizedError = "unauthorizedError";
-  static const String notFoundError = "notFoundError";
-  static const String conflictError = "conflictError";
-  static const String internalServerError = "internalServerError";
-  static const String unknownError = "unknownError";
-  static const String timeoutError = "timeoutError";
-  static const String defaultError = "defaultError";
-  static const String cacheError = "cacheError";
-  static const String noInternetError = "noInternetError";
-  static const String loadingMessage = "loading_message";
-  static const String retryAgainMessage = "retry_again_message";
-  static const String ok = "Ok";
+  static const String badRequestError = 'badRequestError';
+  static const String noContent = 'noContent';
+  static const String forbiddenError = 'forbiddenError';
+  static const String unauthorizedError = 'unauthorizedError';
+  static const String notFoundError = 'notFoundError';
+  static const String conflictError = 'conflictError';
+  static const String internalServerError = 'internalServerError';
+  static const String unknownError = 'unknownError';
+  static const String timeoutError = 'timeoutError';
+  static const String defaultError = 'defaultError';
+  static const String cacheError = 'cacheError';
+  static const String noInternetError = 'noInternetError';
+  static const String loadingMessage = 'loading_message';
+  static const String retryAgainMessage = 'retry_again_message';
+  static const String ok = 'Ok';
 }
