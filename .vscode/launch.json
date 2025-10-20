@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "akl-bet",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "akl-bet profile",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--profile"
+            ]
+        },
+        {
+            "name": "akl-bet release",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--release"
+            ]
+        },
+    ]
+}
