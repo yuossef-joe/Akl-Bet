@@ -5,16 +5,16 @@ import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_request_body_entity.dart';
 import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
-import 'package:foodapp/features/home/presentation/screens/nearby/nearby_screen.dart';
+import 'package:foodapp/features/home/presentation/screens/home/home_screen.dart';
 
-class SigninScreen extends StatefulWidget {
-  const SigninScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<SigninScreen> createState() => _SigninScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SigninScreenState extends State<SigninScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -22,17 +22,14 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SigninBloc, BaseState>(
-      listener: (context, state) {
-        state.whenOrNull(
-          success: (data) {
-            // Navigate to home or show success message
+      listener: (context, state) async {
+        await state.whenOrNull(
+          success: (data) async {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(const SnackBar(content: Text('signin successful!')));
-            // Navigate to CategoriesScreen
-            Navigator.of(context).pushReplacement(
-              // Or use Navigator.push if you want back navigation
-              MaterialPageRoute(builder: (_) => const NearbyScreen()),
+            await Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const HomeScreen()),
             );
           },
           failure: (error) {

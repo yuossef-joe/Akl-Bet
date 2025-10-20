@@ -7,9 +7,6 @@ part 'category_response_entity.freezed.dart';
 abstract class CategoryResponseEntity with _$CategoryResponseEntity {
   const factory CategoryResponseEntity({
     required int id,
-    required String nameEn,
-    required String nameAr,
-    String? image,
     @Default(<CategoryResponseEntity>[])
     List<CategoryResponseEntity> subcategories,
   }) = _CategoryResponseEntity;
@@ -20,9 +17,6 @@ abstract class CategoryResponseEntity with _$CategoryResponseEntity {
   }) {
     return CategoryResponseEntity(
       id: model.id,
-      nameEn: model.nameEn,
-      nameAr: model.nameAr,
-      image: model.image,
       subcategories: subcategories,
     );
   }

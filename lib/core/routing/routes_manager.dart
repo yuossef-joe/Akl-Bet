@@ -11,7 +11,7 @@ class AppRouter {
   Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.signinRoute:
-        return MaterialPageRoute(builder: (_) => const signinScreen());
+        return MaterialPageRoute(builder: (_) => const SignInScreen());
       case Routes.profileRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(

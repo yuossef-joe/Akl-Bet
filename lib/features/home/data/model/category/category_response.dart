@@ -7,23 +7,10 @@ part 'category_response.g.dart';
 abstract class Category with _$Category {
   const factory Category({
     required int id,
-    required String nameEn,
-    required String nameAr,
-    String? image,
+    required String name,
+    required String imageUrl,
   }) = _Category;
 
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);
-}
-
-@freezed
-abstract class CreateCategoryData with _$CreateCategoryData {
-  const factory CreateCategoryData({
-    required String nameEn,
-    required String nameAr,
-    String? image,
-  }) = _CreateCategoryData;
-
-  factory CreateCategoryData.fromJson(Map<String, dynamic> json) =>
-      _$CreateCategoryDataFromJson(json);
 }

@@ -8,10 +8,10 @@ class NumToDoubleConverter implements JsonConverter<double, Object?> {
   const NumToDoubleConverter();
   @override
   double fromJson(Object? json) {
-    if (json == null) return 0.0;
+    if (json == null) return 0;
     if (json is num) return json.toDouble();
     if (json is String) return double.tryParse(json) ?? 0.0;
-    return 0.0;
+    return 0;
   }
 
   @override

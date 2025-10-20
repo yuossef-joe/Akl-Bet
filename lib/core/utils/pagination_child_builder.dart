@@ -16,15 +16,15 @@ PagedChildBuilderDelegate<T> paginationChildBuilder<T>({
     child: Center(child: CircularProgressIndicator()),
   ),
   firstPageErrorIndicatorBuilder: (context) => Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(8),
     child: Center(child: Text('Error: ${pagingController.error}')),
   ),
   newPageErrorIndicatorBuilder: (context) => Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(8),
     child: Center(child: Text('Error: ${pagingController.error}')),
   ),
   noItemsFoundIndicatorBuilder: (context) => const Padding(
-    padding: EdgeInsets.all(8.0),
+    padding: EdgeInsets.all(8),
     child: Center(child: Text('No items found')),
   ),
 );

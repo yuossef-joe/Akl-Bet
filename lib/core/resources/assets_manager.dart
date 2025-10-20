@@ -2,7 +2,7 @@ const String imagePath = 'assets/images';
 const String jsonPath = 'assets/json';
 
 class ImageAssets {
-  static const String hollowCircleIc = '$imagePath/hollow_circle_ic.svg';
+  static const String nearbyImage = '$imagePath/image200.png';
   static const String solidCircleIc = '$imagePath/solid_circle_ic.svg';
   static const String leftArrowIc = '$imagePath/left_arrow_ic.svg';
   static const String rightArrowIc = '$imagePath/right_arrow_ic.svg';
