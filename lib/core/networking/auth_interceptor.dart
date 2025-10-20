@@ -1,103 +1,159 @@
 import 'package:dio/dio.dart';
-import 'package:foodapp/core/resources/constant.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:foodapp/core/networking/exeptions.dart';
+import 'package:foodapp/features/auth/data/enums/secure_storage_keys.dart';
+import 'package:foodapp/injection_container.dart';
 
-class AuthInterceptor extends Interceptor {
-  AuthInterceptor();
-
-  bool _isRefreshing = false;
-  final List<Future<void> Function()> _pending = [];
+class AppInterceptor extends Interceptor {
+  const AppInterceptor(this._dio, this._flutterSecureStorage);
+  final Dio _dio;
+  final FlutterSecureStorage _flutterSecureStorage;
 
   @override
   Future<void> onError(
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    final response = err.response;
-    final status = response?.statusCode;
-    final data = response?.data;
-    String? code;
-    if (data is Map<String, dynamic>) {
-      // Backend error shape: { success: false, error: { code, message, ... } }
-      final errObj = data['error'];
-      if (errObj is Map<String, dynamic>) {
-        code = errObj['code'] as String?;
-      } else if (errObj is String) {
-        code = errObj;
-      }
-    }
+    late final DioException dioException;
+    switch (err.type) {
+      case DioExceptionType.connectionTimeout:
+        dioException = ConnectionTimeoutException(
+          err.requestOptions,
+          err.message,
+        );
+      case DioExceptionType.sendTimeout:
+        dioException = SendTimeoutException(
+          err.requestOptions,
+          err.message,
+        );
+      case DioExceptionType.receiveTimeout:
+        dioException = ReceiveTimeoutException(
+          err.requestOptions,
+          err.message,
+        );
+      case DioExceptionType.badCertificate:
+        dioException = BadCertificateException(
+          err.requestOptions,
+          err.message,
+        );
+      case DioExceptionType.badResponse:
+        switch (err.response?.statusCode) {
+          case 400:
+            dioException = BadRequestException(
+              err.requestOptions,
+              err.message,
+            );
+          case 401:
+            dioException = UnauthorizedException(
+              err.requestOptions,
+              err.message,
+            );
+            await _handleInvalidToken(err, handler);
+            return;
+          case 404:
+            dioException = NotFoundException(
+              err.requestOptions,
+              err.message,
+            );
 
-    if (status == 401 && (code == 'TOKEN_EXPIRED' || code == 'UNAUTHORIZED')) {
-      final requestOptions = err.requestOptions;
-      if (_isRefreshing) {
-        _pending.add(() async {
-          final token = await _tokenStorage.getAccessToken();
-          if (token != null && token.isNotEmpty) {
-            requestOptions.headers['Authorization'] = 'Bearer $token';
-          }
-        });
-        final res = await _retry(requestOptions);
-        return handler.resolve(res);
-      }
+          case 500:
+            dioException = InternalServerErrorException(
+              err.requestOptions,
+              err.message,
+            );
 
-      try {
-        _isRefreshing = true;
-        await _refreshToken(err.requestOptions);
-        for (final resume in _pending) {
-          await resume();
+          default:
+            dioException = BadResponseException(
+              err.requestOptions,
+              err.message,
+            );
         }
-        _pending.clear();
-        final res = await _retry(requestOptions);
-        return handler.resolve(res);
-      } on Exception {
-        await _tokenStorage.clear();
-        return handler.reject(err);
-      } finally {
-        _isRefreshing = false;
+
+      case DioExceptionType.cancel:
+        dioException = CancelException(
+          err.requestOptions,
+          err.message,
+        );
+      case DioExceptionType.connectionError:
+        dioException = ConnectionErrorException(
+          err.requestOptions,
+          err.message,
+        );
+      case DioExceptionType.unknown:
+        dioException = UnknownException(
+          err.requestOptions,
+          err.message,
+        );
+    }
+    return handler.next(dioException);
+  }
+
+  Future<void> _handleInvalidToken(
+    DioException error,
+    ErrorInterceptorHandler handler,
+  ) async {
+    if (error.response?.statusCode == 401) {
+      final options = error.response!.requestOptions;
+      final tokenResult = await sl<RefreshTokenUseCase>()(
+        _flutterSecureStorage.read(key: SecureStorageKeys.refreshToken.name),
+      );
+
+      if (tokenResult?.tokenStatus == TokenStatus.valid) {
+        return handler.next(error);
       }
-    }
+      if (tokenResult?.tokenStatus == TokenStatus.refreshable) {
+        options.headers['Authorization'] = 'Bearer ${tokenResult!.token}';
 
-    super.onError(err, handler);
+        final originResult = await _retry(options);
+        if (originResult.statusCode != null &&
+            originResult.statusCode! ~/ 100 == 2) {
+          return handler.resolve(originResult);
+        }
+      }
+
+      if (tokenResult?.tokenStatus == TokenStatus.expired) {
+        sl<SignoutUsecae>();
+      }
+      return handler.reject(DioException(requestOptions: options));
+    }
+    return handler.next(error);
   }
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
-    final dio =
-        requestOptions.cancelToken?.requestOptions?.extra['dio'] as Dio? ??
-        Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
-    final token = await _tokenStorage.getAccessToken();
-    if (token != null && token.isNotEmpty) {
-      requestOptions.headers['Authorization'] = 'Bearer $token';
-    }
-    return dio.fetch(requestOptions);
-  }
+  Future<Map<String, dynamic>> _handleBearerAuth() async => {
+    'Authorization': await getTokenType(),
+  };
 
-  Future<void> _refreshToken(RequestOptions failedRequest) async {
-    final refreshToken = await _tokenStorage.getRefreshToken();
-    if (refreshToken == null || refreshToken.isEmpty) {
-      throw DioException(
-        requestOptions: failedRequest,
-        error: 'No refresh token',
-      );
-    }
+  Future<String> getTokenType() async =>
+      'Bearer ${await _flutterSecureStorage.read(key: SecureStorageKeys.accessToken.name)}';
 
-    final dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
-    final res = await dio.post<dynamic>(
-      'auth/refresh',
-      data: {'refreshToken': refreshToken},
-    );
-    final body = res.data;
-    final data = body is Map<String, dynamic> ? body['data'] : null;
-    final tokens = data is Map<String, dynamic> ? data : <String, dynamic>{};
-    final newAccess = tokens['accessToken'] as String?;
-    final newRefresh = tokens['refreshToken'] as String? ?? refreshToken;
-    if (newAccess == null || newAccess.isEmpty) {
-      throw DioException(
-        requestOptions: failedRequest,
-        error: 'Refresh failed',
-      );
-    }
-    await _tokenStorage.saveTokens(
-      accessToken: newAccess,
-      refreshToken: newRefresh,
+  Future<Response<dynamic>> _retry(
+    RequestOptions requestOptions,
+  ) async {
+    return _dio.request(
+      requestOptions.path,
+      cancelToken: requestOptions.cancelToken,
+      data: requestOptions.data is FormData
+          ? (requestOptions.data as FormData).clone()
+          : requestOptions.data,
+      onReceiveProgress: requestOptions.onReceiveProgress,
+      onSendProgress: requestOptions.onSendProgress,
+      queryParameters: requestOptions.queryParameters,
+      options: Options(
+        method: requestOptions.method,
+        sendTimeout: requestOptions.sendTimeout,
+        receiveTimeout: requestOptions.receiveTimeout,
+        extra: requestOptions.extra,
+        headers: requestOptions.headers..addAll(await _handleBearerAuth()),
+        responseType: requestOptions.responseType,
+        contentType: requestOptions.contentType,
+        validateStatus: requestOptions.validateStatus,
+        receiveDataWhenStatusError: requestOptions.receiveDataWhenStatusError,
+        followRedirects: requestOptions.followRedirects,
+        maxRedirects: requestOptions.maxRedirects,
+        requestEncoder: requestOptions.requestEncoder,
+        responseDecoder: requestOptions.responseDecoder,
+        listFormat: requestOptions.listFormat,
+      ),
     );
   }
 }

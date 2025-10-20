@@ -1,4 +1,5 @@
 import 'package:foodapp/core/base/base_state.dart';
+import 'package:foodapp/core/networking/failures.dart';
 
 void baseListenerFunction<T>({
   required BaseState<T> state,
@@ -6,8 +7,7 @@ void baseListenerFunction<T>({
   void Function()? empty,
   void Function()? initial,
   void Function()? loading,
-  //TODO : implement our own exception
-  void Function(Exception)? error,
+  void Function(Failure)? error,
 }) => state.whenOrNull(
   success: loaded,
   empty: empty,

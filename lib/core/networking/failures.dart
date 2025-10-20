@@ -1,8 +1,8 @@
-abstract class Failure {
+abstract class Failure implements Exception {
   const Failure(
     this.message,
     this.stackTrace,
-  );
+  ) : super();
   final String message;
   final StackTrace stackTrace;
 }
@@ -13,6 +13,16 @@ class BadRequestFailure extends Failure {
     String? message,
   }) : super(
          message ?? 'Bad request',
+         stackTrace,
+       );
+}
+
+class BadCertificateFailure extends Failure {
+  const BadCertificateFailure({
+    required StackTrace stackTrace,
+    String? message,
+  }) : super(
+         message ?? 'Bad Certificate',
          stackTrace,
        );
 }

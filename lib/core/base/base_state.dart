@@ -6,9 +6,9 @@ part 'base_state.freezed.dart';
 
 @freezed
 sealed class BaseState<T> with _$BaseState<T> {
-  const factory BaseState.initial() = _Initial;
+  const factory BaseState.initial() = Initial;
   const factory BaseState.loading() = Loading;
   const factory BaseState.success(T data) = Success;
-  const factory BaseState.failure(AppFailure error) = Failure;
+  const factory BaseState.failure(Failure error) = Error;
   const factory BaseState.empty() = Empty;
 }

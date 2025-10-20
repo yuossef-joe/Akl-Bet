@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:foodapp/core/networking/auth_interceptor.dart';
 import 'package:foodapp/core/resources/constant.dart';
 import 'package:foodapp/features/auth/data/enums/secure_storage_keys.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -32,6 +33,7 @@ class DioFactory {
         responseHeader: true,
       ),
     );
+    dio.interceptors.add(AppInterceptor(dio, flutterSecureStorage));
     return dio;
   }
 }

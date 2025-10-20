@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_bloc.dart';
 import 'package:foodapp/core/base/base_listener_function.dart';
 import 'package:foodapp/core/base/base_state.dart';
+import 'package:foodapp/core/networking/failures.dart';
 
 class BaseListener<S, T> extends StatelessWidget {
   const BaseListener({
@@ -19,7 +20,7 @@ class BaseListener<S, T> extends StatelessWidget {
   final void Function()? empty;
   final void Function()? initial;
   final void Function()? loading;
-  final void Function(Exception)? error;
+  final void Function(Failure)? error;
 
   @override
   Widget build(BuildContext context) {

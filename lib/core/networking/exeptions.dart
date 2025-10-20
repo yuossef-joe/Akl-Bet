@@ -15,6 +15,11 @@ class UnauthorizedException extends DioException {
     : super(requestOptions: r, error: error);
 }
 
+class BadCertificateException extends DioException {
+  BadCertificateException(RequestOptions r, [String? error])
+    : super(requestOptions: r, error: error);
+}
+
 class NotFoundException extends DioException {
   NotFoundException(RequestOptions r, [String? error])
     : super(requestOptions: r, error: error);

@@ -61,13 +61,13 @@ extension BaseStatePatterns<T> on BaseState<T> {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial<T> value)?  initial,TResult Function( Loading<T> value)?  loading,TResult Function( Success<T> value)?  success,TResult Function( Failure<T> value)?  failure,TResult Function( Empty<T> value)?  empty,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial<T> value)?  initial,TResult Function( Loading<T> value)?  loading,TResult Function( Success<T> value)?  success,TResult Function( Error<T> value)?  failure,TResult Function( Empty<T> value)?  empty,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
+case Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Success() when success != null:
-return success(_that);case Failure() when failure != null:
+return success(_that);case Error() when failure != null:
 return failure(_that);case Empty() when empty != null:
 return empty(_that);case _:
   return orElse();
@@ -87,13 +87,13 @@ return empty(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial<T> value)  initial,required TResult Function( Loading<T> value)  loading,required TResult Function( Success<T> value)  success,required TResult Function( Failure<T> value)  failure,required TResult Function( Empty<T> value)  empty,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial<T> value)  initial,required TResult Function( Loading<T> value)  loading,required TResult Function( Success<T> value)  success,required TResult Function( Error<T> value)  failure,required TResult Function( Empty<T> value)  empty,}){
 final _that = this;
 switch (_that) {
-case _Initial():
+case Initial():
 return initial(_that);case Loading():
 return loading(_that);case Success():
-return success(_that);case Failure():
+return success(_that);case Error():
 return failure(_that);case Empty():
 return empty(_that);}
 }
@@ -109,13 +109,13 @@ return empty(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial<T> value)?  initial,TResult? Function( Loading<T> value)?  loading,TResult? Function( Success<T> value)?  success,TResult? Function( Failure<T> value)?  failure,TResult? Function( Empty<T> value)?  empty,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial<T> value)?  initial,TResult? Function( Loading<T> value)?  loading,TResult? Function( Success<T> value)?  success,TResult? Function( Error<T> value)?  failure,TResult? Function( Empty<T> value)?  empty,}){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
+case Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Success() when success != null:
-return success(_that);case Failure() when failure != null:
+return success(_that);case Error() when failure != null:
 return failure(_that);case Empty() when empty != null:
 return empty(_that);case _:
   return null;
@@ -134,12 +134,12 @@ return empty(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( T data)?  success,TResult Function( Exception error)?  failure,TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( T data)?  success,TResult Function( Failure error)?  failure,TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
+case Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
-return success(_that.data);case Failure() when failure != null:
+return success(_that.data);case Error() when failure != null:
 return failure(_that.error);case Empty() when empty != null:
 return empty();case _:
   return orElse();
@@ -159,12 +159,12 @@ return empty();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( T data)  success,required TResult Function( Exception error)  failure,required TResult Function()  empty,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( T data)  success,required TResult Function( Failure error)  failure,required TResult Function()  empty,}) {final _that = this;
 switch (_that) {
-case _Initial():
+case Initial():
 return initial();case Loading():
 return loading();case Success():
-return success(_that.data);case Failure():
+return success(_that.data);case Error():
 return failure(_that.error);case Empty():
 return empty();}
 }
@@ -180,12 +180,12 @@ return empty();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( T data)?  success,TResult? Function( Exception error)?  failure,TResult? Function()?  empty,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( T data)?  success,TResult? Function( Failure error)?  failure,TResult? Function()?  empty,}) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
+case Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
-return success(_that.data);case Failure() when failure != null:
+return success(_that.data);case Error() when failure != null:
 return failure(_that.error);case Empty() when empty != null:
 return empty();case _:
   return null;
@@ -198,8 +198,8 @@ return empty();case _:
 /// @nodoc
 
 
-class _Initial<T> with DiagnosticableTreeMixin implements BaseState<T> {
-  const _Initial();
+class Initial<T> with DiagnosticableTreeMixin implements BaseState<T> {
+  const Initial();
   
 
 
@@ -215,7 +215,7 @@ void debugFillProperties(DiagnosticPropertiesBuilder properties) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial<T>);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Initial<T>);
 }
 
 
@@ -346,17 +346,17 @@ as T,
 /// @nodoc
 
 
-class Failure<T> with DiagnosticableTreeMixin implements BaseState<T> {
-  const Failure(this.error);
+class Error<T> with DiagnosticableTreeMixin implements BaseState<T> {
+  const Error(this.error);
   
 
- final  Exception error;
+ final  Failure error;
 
 /// Create a copy of BaseState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$FailureCopyWith<T, Failure<T>> get copyWith => _$FailureCopyWithImpl<T, Failure<T>>(this, _$identity);
+$ErrorCopyWith<T, Error<T>> get copyWith => _$ErrorCopyWithImpl<T, Error<T>>(this, _$identity);
 
 
 @override
@@ -368,7 +368,7 @@ void debugFillProperties(DiagnosticPropertiesBuilder properties) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure<T>&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Error<T>&&(identical(other.error, error) || other.error == error));
 }
 
 
@@ -384,11 +384,11 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 }
 
 /// @nodoc
-abstract mixin class $FailureCopyWith<T,$Res> implements $BaseStateCopyWith<T, $Res> {
-  factory $FailureCopyWith(Failure<T> value, $Res Function(Failure<T>) _then) = _$FailureCopyWithImpl;
+abstract mixin class $ErrorCopyWith<T,$Res> implements $BaseStateCopyWith<T, $Res> {
+  factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) _then) = _$ErrorCopyWithImpl;
 @useResult
 $Res call({
- Exception error
+ Failure error
 });
 
 
@@ -396,19 +396,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$FailureCopyWithImpl<T,$Res>
-    implements $FailureCopyWith<T, $Res> {
-  _$FailureCopyWithImpl(this._self, this._then);
+class _$ErrorCopyWithImpl<T,$Res>
+    implements $ErrorCopyWith<T, $Res> {
+  _$ErrorCopyWithImpl(this._self, this._then);
 
-  final Failure<T> _self;
-  final $Res Function(Failure<T>) _then;
+  final Error<T> _self;
+  final $Res Function(Error<T>) _then;
 
 /// Create a copy of BaseState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
-  return _then(Failure<T>(
+  return _then(Error<T>(
 null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as Exception,
+as Failure,
   ));
 }
 

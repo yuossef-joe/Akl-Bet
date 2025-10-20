@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:foodapp/core/networking/auth_interceptor.dart';
 import 'package:foodapp/core/networking/dio_factory.dart';
 import 'package:foodapp/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:foodapp/features/auth/data/repositories/auth_repository_impl.dart';
@@ -31,10 +30,10 @@ Future<void> _core() async {
     encryptedSharedPreferences: true,
   );
   final storage = FlutterSecureStorage(aOptions: getAndroidOptions());
-  sl.registerLazySingleton<FlutterSecureStorage>(() => storage);
-  // Dio
-  final dio = await DioFactory.getDio();
-  dio.interceptors.add(AuthInterceptor());
+  sl
+    ..registerLazySingleton<FlutterSecureStorage>(() => storage)
+    ..registerFactory(() => DioFactory(flutterSecureStorage: sl()));
+  final dio = await sl<DioFactory>().getDio();
   sl.registerLazySingleton<Dio>(() => dio);
 }
 

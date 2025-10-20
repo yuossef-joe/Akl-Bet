@@ -15,12 +15,22 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  //Don't Intialize inside the class, do it in the initState like this
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  late final GlobalKey<FormState> _formKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _formKey = GlobalKey<FormState>();
+  }
 
   @override
   Widget build(BuildContext context) {
+    //TODO switch to base consumer
     return BlocConsumer<SigninBloc, BaseState>(
       listener: (context, state) async {
         await state.whenOrNull(
@@ -219,5 +229,13 @@ class _SignInScreenState extends State<SignInScreen> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _formKey.currentState?.dispose();
+    super.dispose();
   }
 }
