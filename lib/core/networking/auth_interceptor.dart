@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:foodapp/core/networking/exeptions.dart';
 import 'package:foodapp/features/auth/data/enums/secure_storage_keys.dart';
+import 'package:foodapp/features/auth/data/enums/token_status.dart';
+import 'package:foodapp/features/auth/domain/usecase/refresh_token_usecase.dart';
+import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:foodapp/injection_container.dart';
 
 class AppInterceptor extends Interceptor {
@@ -94,9 +97,7 @@ class AppInterceptor extends Interceptor {
   ) async {
     if (error.response?.statusCode == 401) {
       final options = error.response!.requestOptions;
-      final tokenResult = await sl<RefreshTokenUseCase>()(
-        _flutterSecureStorage.read(key: SecureStorageKeys.refreshToken.name),
-      );
+      final tokenResult = await sl<RefreshTokenUseCase>()();
 
       if (tokenResult?.tokenStatus == TokenStatus.valid) {
         return handler.next(error);
@@ -112,7 +113,7 @@ class AppInterceptor extends Interceptor {
       }
 
       if (tokenResult?.tokenStatus == TokenStatus.expired) {
-        sl<SignoutUsecae>();
+        await sl<SignoutUseCase>()();
       }
       return handler.reject(DioException(requestOptions: options));
     }

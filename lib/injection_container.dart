@@ -4,7 +4,9 @@ import 'package:foodapp/core/networking/dio_factory.dart';
 import 'package:foodapp/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:foodapp/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:foodapp/features/auth/domain/repositories/auth_repositories.dart';
+import 'package:foodapp/features/auth/domain/usecase/refresh_token_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
+import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
 import 'package:foodapp/features/food/domain/usecase/food_usecase.dart';
@@ -74,6 +76,8 @@ Future<void> initialaizeDependencies() async {
     ..registerSingleton<FoodRepo>(FoodRepoImpl(sl()))
     // Usecases
     ..registerSingleton<SigninUseCase>(SigninUseCase(sl()))
+    ..registerSingleton<RefreshTokenUseCase>(RefreshTokenUseCase(sl()))
+    ..registerSingleton<SignoutUseCase>(SignoutUseCase(sl()))
     ..registerSingleton<GetProfileUseCase>(GetProfileUseCase(sl()))
     ..registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()))
     ..registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase(sl()))

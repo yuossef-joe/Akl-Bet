@@ -5,6 +5,7 @@ class ApiConstants {
   static const String signUpEndPoint = 'auth/signup';
   static const String signInEndPoint = 'auth/signin';
   static const String refreshEndPoint = 'auth/refresh';
+  static const String profileEndPoint = 'auth/profile';
   static const String foodCategoriesEndPoint = 'categories/tag/main';
   static const String categoriesEndPoint = 'categories/tag/secondry';
   static const String suggestionEndPoint = 'vendors';

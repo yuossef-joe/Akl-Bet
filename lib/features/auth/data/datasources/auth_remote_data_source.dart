@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/resources/constant.dart';
+import 'package:foodapp/features/auth/data/model/refresh_token/refresh_token_response.dart';
 import 'package:foodapp/features/auth/data/model/sign_in/signin_request_body.dart';
 import 'package:foodapp/features/auth/data/model/sign_in/signin_response.dart';
 import 'package:foodapp/features/auth/data/model/sign_up/sign_up_request_body.dart';
@@ -10,6 +11,7 @@ abstract class AuthRemoteDataSource {
   Future<SignUpResponse> signUp(SignUpRequestBody signUpRequestBody);
   Future<SigninResponse> getProfile();
   Future<SigninResponse> updateProfile(Map<String, dynamic> body);
+  Future<RefreshTokenResponse> refreshToken(String refreshToken);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -47,8 +49,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
+  Future<RefreshTokenResponse> refreshToken(String refreshToken) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      ApiConstants.refreshEndPoint,
+      data: {'refresh_token': refreshToken},
+    );
+    final data = response.data?['data'] as Map<String, dynamic>;
+    return RefreshTokenResponse.fromJson(data);
+  }
+
+  @override
   Future<SigninResponse> getProfile() async {
-    final response = await _dio.get<Map<String, dynamic>>('auth/profile');
+    final response = await _dio.get<Map<String, dynamic>>(
+      ApiConstants.profileEndPoint,
+    );
     final data = response.data?['data'] as Map<String, dynamic>;
     return SigninResponse.fromJson(data);
   }

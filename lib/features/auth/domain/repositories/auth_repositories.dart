@@ -14,4 +14,5 @@ abstract class AuthRepository {
   );
   Future<SigninResponseEntity> getProfile();
   Future<SigninResponseEntity> updateProfile(Map<String, dynamic> body);
+  Future<void> refreshToken();
 }
