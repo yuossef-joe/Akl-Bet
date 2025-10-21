@@ -3,7 +3,7 @@ import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_en
 
 class UpdateProfileUseCase {
   UpdateProfileUseCase(this._repo);
-  final AuthRepo _repo;
+  final AuthRepositoryImpl _repo;
   Future<SigninResponseEntity> call(Map<String, dynamic> body) =>
       _repo.updateProfile(body);
 }

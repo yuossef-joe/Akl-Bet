@@ -1,4 +1,4 @@
-import 'package:foodapp/features/home/data/repo/nearby/nearby_repo.dart';
+import 'package:foodapp/features/home/data/repositories/nearby/nearby_repo.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
 

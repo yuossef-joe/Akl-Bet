@@ -10,14 +10,17 @@ import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
 import 'package:foodapp/features/food/domain/usecase/food_usecase.dart';
-import 'package:foodapp/features/home/data/repo/category/categort_repo.dart';
-import 'package:foodapp/features/home/data/repo/foodcategories/food_categories_repositry.dart';
-import 'package:foodapp/features/home/data/repo/nearby/nearby_repo.dart';
-import 'package:foodapp/features/home/data/repo/suggestions/suggestions_repo.dart';
+import 'package:foodapp/features/home/data/repositories/address/addaddress/addaddress_repositories.dart';
+import 'package:foodapp/features/home/data/repositories/category/categort_repo.dart';
+import 'package:foodapp/features/home/data/repositories/foodcategories/food_categories_repositry.dart';
+import 'package:foodapp/features/home/data/repositories/nearby/nearby_repo.dart';
+import 'package:foodapp/features/home/data/repositories/suggestions/suggestions_repo.dart';
+import 'package:foodapp/features/home/data/sources/address/addaddress/addaddress_reomte_data_source.dart';
 import 'package:foodapp/features/home/data/sources/category/category_remote_data_source.dart';
 import 'package:foodapp/features/home/data/sources/foodcategories/food_categories_remote_data_source.dart';
 import 'package:foodapp/features/home/data/sources/nearby/nearby_remote_data_source.dart';
 import 'package:foodapp/features/home/data/sources/suggestions/suggestions_remote_data_source.dart';
+import 'package:foodapp/features/home/domain/usecase/address/addaddress/add_address_usecase.dart';
 import 'package:foodapp/features/home/domain/usecase/category/get_categories_usecase.dart';
 import 'package:foodapp/features/home/domain/usecase/foodcategories/get_food_categories_usecase.dart';
 import 'package:foodapp/features/home/domain/usecase/nearby/get_nearby_usecase.dart';
@@ -50,6 +53,9 @@ Future<void> initialaizeDependencies() async {
         sl(),
       ),
     )
+    ..registerSingleton<AddaddressRemoteDataSource>(
+      AddaddressRemoteDataSourceImpl(sl()),
+    )
     ..registerSingleton<CategoryRemoteDataSource>(
       CategoryRemoteDataSourceImpl(sl()),
     )
@@ -67,6 +73,9 @@ Future<void> initialaizeDependencies() async {
     )
     // Repositories
     ..registerSingleton<AuthRepository>(AuthRepositoryImpl(sl(), sl()))
+    ..registerSingleton<AddAddressRepositories>(
+      AddAddressRepositoriesImpl(sl()),
+    )
     ..registerSingleton<CategoryRepo>(CategoryRepoImpl(sl()))
     ..registerSingleton<NearbyRepo>(NearbyRepoImpl(sl()))
     ..registerSingleton<FoodCategoriesRepository>(
@@ -79,6 +88,7 @@ Future<void> initialaizeDependencies() async {
     ..registerSingleton<RefreshTokenUseCase>(RefreshTokenUseCase(sl()))
     ..registerSingleton<SignoutUseCase>(SignoutUseCase(sl()))
     ..registerSingleton<GetProfileUseCase>(GetProfileUseCase(sl()))
+    ..registerSingleton<GetAddAddressUseCase>(GetAddAddressUseCase(sl()))
     ..registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()))
     ..registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase(sl()))
     ..registerSingleton<GetNearbyUseCase>(GetNearbyUseCase(sl()))

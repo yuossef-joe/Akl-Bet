@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:foodapp/core/handler/api_error_handler.dart';
 import 'package:foodapp/core/resources/constant.dart';
 import 'package:foodapp/features/home/data/model/suggestions/suggestions_request_body.dart';
 import 'package:foodapp/features/home/data/model/suggestions/suggestions_response.dart';
@@ -17,13 +18,15 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
   Future<List<SuggestionsResponse>> getSuggestions({
     required SuggestionsRequestBody suggestionsRequestBody,
   }) async {
-    final res = await _dio.get(ApiConstants.suggestionEndPoint);
-    final vendors = res.data['data']?['vendors'] as List<dynamic>? ?? [];
-    return vendors
-        .map(
-          (vendor) =>
-              SuggestionsResponse.fromJson(vendor as Map<String, dynamic>),
-        )
-        .toList();
+    return guard(() async {
+      final res = await _dio.get<dynamic>(ApiConstants.suggestionEndPoint);
+      final vendors = res.data['data']?['vendors'] as List<dynamic>? ?? [];
+      return vendors
+          .map(
+            (vendor) =>
+                SuggestionsResponse.fromJson(vendor as Map<String, dynamic>),
+          )
+          .toList();
+    });
   }
 }

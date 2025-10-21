@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:foodapp/core/handler/api_error_handler.dart';
 import 'package:foodapp/core/resources/constant.dart';
 import 'package:foodapp/features/home/data/model/category/category_response.dart';
 
@@ -12,9 +13,11 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
 
   @override
   Future<List<Category>> getMainCategories() async {
-    final res = await _dio.get<dynamic>(ApiConstants.categoriesEndPoint);
-    return ((res.data as Map<String, dynamic>)['data'] as List)
-        .map((json) => Category.fromJson(json as Map<String, dynamic>))
-        .toList();
+    return await guard(() async {
+      final res = await _dio.get<dynamic>(ApiConstants.categoriesEndPoint);
+      return ((res.data as Map<String, dynamic>)['data'] as List)
+          .map((json) => Category.fromJson(json as Map<String, dynamic>))
+          .toList();
+    });
   }
 }

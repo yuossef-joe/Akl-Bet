@@ -1,4 +1,4 @@
-import 'package:foodapp/features/home/data/repo/suggestions/suggestions_repo.dart';
+import 'package:foodapp/features/home/data/repositories/suggestions/suggestions_repo.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_response_entity.dart';
 

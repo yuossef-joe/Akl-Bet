@@ -1,4 +1,4 @@
-import 'package:foodapp/features/home/data/repo/foodcategories/food_categories_repositry.dart';
+import 'package:foodapp/features/home/data/repositories/foodcategories/food_categories_repositry.dart';
 import 'package:foodapp/features/home/domain/entities/foodcategories/food_categories_response_entity.dart';
 
 class GetFoodCategoriesUseCase {

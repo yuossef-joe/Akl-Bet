@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
-import 'package:foodapp/core/networking/api_error_handler.dart';
+import 'package:foodapp/core/handler/fetch_handler.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_entity.dart';
 import 'package:foodapp/features/profile/domain/usecase/get_profile_usecase.dart';
 import 'package:foodapp/features/profile/domain/usecase/update_profile_usecase.dart';
@@ -20,14 +20,17 @@ class ProfileBloc
     Emitter<BaseState<SigninResponseEntity>> emit,
   ) async {
     emit(const BaseState.loading());
-    try {
-      final body = event.params;
-      final res = body == null
-          ? await _getProfile()
-          : await _updateProfile(body);
-      emit(BaseState.success(res));
-    } on Exception catch (e) {
-      emit(BaseState.failure(ApiErrorHandler.handleError(e)));
+
+    final response = await fetchHandler<SigninResponseEntity>(
+      body: () async {
+        final body = event.params;
+        return body == null ? await _getProfile() : await _updateProfile(body);
+      },
+      onException: (error) => emit(BaseState.failure(error)),
+    );
+
+    if (response != null) {
+      emit(BaseState.success(response));
     }
   }
 }

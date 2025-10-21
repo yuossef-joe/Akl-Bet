@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
-import 'package:foodapp/core/networking/api_error_handler.dart';
+import 'package:foodapp/core/handler/fetch_handler.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_response_entity.dart';
 import 'package:foodapp/features/home/domain/usecase/suggestions/get_suggestions_usecase.dart';
@@ -22,17 +22,20 @@ class SuggestionsBloc
     Emitter<BaseState<List<SuggestionsResponseEntity>>> emit,
   ) async {
     emit(const BaseState.loading());
-    try {
-      final items = await suggestionsUseCase(
+
+    final response = await fetchHandler<List<SuggestionsResponseEntity>>(
+      body: () async => await suggestionsUseCase(
         suggestionsRequestBodyEntity: event.params,
-      );
-      if (items.isEmpty) {
+      ),
+      onException: (error) => emit(BaseState.failure(error)),
+    );
+
+    if (response != null) {
+      if (response.isEmpty) {
         emit(const BaseState.empty());
       } else {
-        emit(BaseState.success(items));
+        emit(BaseState.success(response));
       }
-    } on Exception catch (e) {
-      emit(BaseState.failure(ApiErrorHandler.handleError(e)));
     }
   }
 }
