@@ -1,16 +1,10 @@
 import 'package:foodapp/features/home/data/sources/suggestions/suggestions_remote_data_source.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/suggestions/suggestions_response_entity.dart';
+import 'package:foodapp/features/home/domain/repositories/suggestions/suggestions_repositories.dart';
 
-abstract class SuggestionsRepo {
-  /// Get suggestions.
-  Future<List<SuggestionsResponseEntity>> getSuggestions({
-    required SuggestionsRequestBodyEntity suggestionsRequestBodyEntity,
-  });
-}
-
-class SuggestionsRepoImpl implements SuggestionsRepo {
-  SuggestionsRepoImpl(this._remote);
+class SuggestionsRepositoriesImpl implements SuggestionsRepositories {
+  SuggestionsRepositoriesImpl(this._remote);
   final SuggestionsRemoteDataSource _remote;
 
   @override

@@ -3,9 +3,11 @@ import 'package:foodapp/features/home/data/model/address/addadress/add_address_r
 import 'package:dio/dio.dart';
 import 'package:foodapp/features/home/data/model/address/addadress/add_address_response.dart';
 import 'package:foodapp/core/handler/api_error_handler.dart';
+import 'package:foodapp/features/home/data/model/address/getaddress/get_address_response.dart';
 
 abstract class AddaddressRemoteDataSource {
   Future<AddAddressResponse> addAddress(AddAddressRequest addAddressRequest);
+  Future<GetAddressResponse> getAddressItems();
 }
 
 class AddaddressRemoteDataSourceImpl implements AddaddressRemoteDataSource {
@@ -16,11 +18,22 @@ class AddaddressRemoteDataSourceImpl implements AddaddressRemoteDataSource {
   Future<AddAddressResponse> addAddress(AddAddressRequest addAddressRequest) {
     return guard(() async {
       final response = await dio.post<Map<String, dynamic>>(
-        ApiConstants.addAddressEndPoint,
+        ApiConstants.addressEndPoint,
         data: addAddressRequest.toJson(),
       );
       final data = response.data?['data'];
       return AddAddressResponse.fromJson(data as Map<String, dynamic>);
+    });
+  }
+
+  @override
+  Future<GetAddressResponse> getAddressItems() {
+    return guard(() async {
+      final response = await dio.get<Map<String, dynamic>>(
+        ApiConstants.addressEndPoint,
+      );
+      final data = response.data?['data'];
+      return GetAddressResponse.fromJson(data as Map<String, dynamic>);
     });
   }
 }
