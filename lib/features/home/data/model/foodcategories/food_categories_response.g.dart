@@ -11,7 +11,7 @@ _FoodCategoriesResponse _$FoodCategoriesResponseFromJson(
 ) => _FoodCategoriesResponse(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
-  imageUrl: json['imageUrl'] as String,
+  imageUrl: json['image'] as String,
 );
 
 Map<String, dynamic> _$FoodCategoriesResponseToJson(
@@ -19,5 +19,5 @@ Map<String, dynamic> _$FoodCategoriesResponseToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
-  'imageUrl': instance.imageUrl,
+  'image': instance.imageUrl,
 };

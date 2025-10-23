@@ -18,9 +18,9 @@ class FoodCategoriesRemoteDataSourceImpl
       final response = await _dio.get<Map<String, dynamic>>(
         ApiConstants.foodCategoriesEndPoint,
       );
-      final foodCategories =
-          response.data?['data']?['categories'] as List<dynamic>? ?? [];
-      return foodCategories
+      final data = response.data?['data'] as List<dynamic>? ?? [];
+
+      return data
           .map(
             (json) =>
                 FoodCategoriesResponse.fromJson(json as Map<String, dynamic>),

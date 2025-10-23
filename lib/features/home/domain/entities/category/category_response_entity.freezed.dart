@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CategoryResponseEntity {
 
- int get id; List<CategoryResponseEntity> get subcategories;
+ int get id; String get name; String get imageUrl;
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CategoryResponseEntityCopyWith<CategoryResponseEntity> get copyWith => _$Catego
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.subcategories, subcategories));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(subcategories));
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl);
 
 @override
 String toString() {
-  return 'CategoryResponseEntity(id: $id, subcategories: $subcategories)';
+  return 'CategoryResponseEntity(id: $id, name: $name, imageUrl: $imageUrl)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CategoryResponseEntityCopyWith<$Res>  {
   factory $CategoryResponseEntityCopyWith(CategoryResponseEntity value, $Res Function(CategoryResponseEntity) _then) = _$CategoryResponseEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, List<CategoryResponseEntity> subcategories
+ int id, String name, String imageUrl
 });
 
 
@@ -62,11 +62,12 @@ class _$CategoryResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? subcategories = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,subcategories: null == subcategories ? _self.subcategories : subcategories // ignore: cast_nullable_to_non_nullable
-as List<CategoryResponseEntity>,
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  List<CategoryResponseEntity> subcategories)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CategoryResponseEntity() when $default != null:
-return $default(_that.id,_that.subcategories);case _:
+return $default(_that.id,_that.name,_that.imageUrl);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.id,_that.subcategories);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  List<CategoryResponseEntity> subcategories)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl)  $default,) {final _that = this;
 switch (_that) {
 case _CategoryResponseEntity():
-return $default(_that.id,_that.subcategories);case _:
+return $default(_that.id,_that.name,_that.imageUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.id,_that.subcategories);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  List<CategoryResponseEntity> subcategories)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String imageUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _CategoryResponseEntity() when $default != null:
-return $default(_that.id,_that.subcategories);case _:
+return $default(_that.id,_that.name,_that.imageUrl);case _:
   return null;
 
 }
@@ -207,17 +208,12 @@ return $default(_that.id,_that.subcategories);case _:
 
 
 class _CategoryResponseEntity implements CategoryResponseEntity {
-  const _CategoryResponseEntity({required this.id, final  List<CategoryResponseEntity> subcategories = const <CategoryResponseEntity>[]}): _subcategories = subcategories;
+  const _CategoryResponseEntity({required this.id, required this.name, required this.imageUrl});
   
 
 @override final  int id;
- final  List<CategoryResponseEntity> _subcategories;
-@override@JsonKey() List<CategoryResponseEntity> get subcategories {
-  if (_subcategories is EqualUnmodifiableListView) return _subcategories;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_subcategories);
-}
-
+@override final  String name;
+@override final  String imageUrl;
 
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +225,16 @@ _$CategoryResponseEntityCopyWith<_CategoryResponseEntity> get copyWith => __$Cat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._subcategories, _subcategories));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_subcategories));
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl);
 
 @override
 String toString() {
-  return 'CategoryResponseEntity(id: $id, subcategories: $subcategories)';
+  return 'CategoryResponseEntity(id: $id, name: $name, imageUrl: $imageUrl)';
 }
 
 
@@ -249,7 +245,7 @@ abstract mixin class _$CategoryResponseEntityCopyWith<$Res> implements $Category
   factory _$CategoryResponseEntityCopyWith(_CategoryResponseEntity value, $Res Function(_CategoryResponseEntity) _then) = __$CategoryResponseEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, List<CategoryResponseEntity> subcategories
+ int id, String name, String imageUrl
 });
 
 
@@ -266,11 +262,12 @@ class __$CategoryResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? subcategories = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,}) {
   return _then(_CategoryResponseEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,subcategories: null == subcategories ? _self._subcategories : subcategories // ignore: cast_nullable_to_non_nullable
-as List<CategoryResponseEntity>,
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

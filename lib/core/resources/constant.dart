@@ -8,7 +8,7 @@ class ApiConstants {
   static const String profileEndPoint = 'auth/profile';
   static const String addressEndPoint = 'addresses';
   static const String foodCategoriesEndPoint = 'categories/tag/main';
-  static const String categoriesEndPoint = 'categories/tag/secondry';
+  static const String categoriesEndPoint = 'categories/tag/secondary';
   static const String suggestionEndPoint = 'vendors';
   static const String nearbyEndPoint = 'vendors/nearby';
   static const String ordersEndPoint = 'orders';

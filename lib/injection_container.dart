@@ -7,6 +7,7 @@ import 'package:foodapp/features/auth/domain/repositories/auth_repositories.dart
 import 'package:foodapp/features/auth/domain/usecase/refresh_token_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
+import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
 import 'package:foodapp/features/food/domain/usecase/food_usecase.dart';
@@ -30,11 +31,19 @@ import 'package:foodapp/features/home/domain/usecase/category/get_categories_use
 import 'package:foodapp/features/home/domain/usecase/foodcategories/get_food_categories_usecase.dart';
 import 'package:foodapp/features/home/domain/usecase/nearby/get_nearby_usecase.dart';
 import 'package:foodapp/features/home/domain/usecase/suggestions/get_suggestions_usecase.dart';
+import 'package:foodapp/features/home/presentation/bloc/address/addaddress/add_address_bloc.dart';
+import 'package:foodapp/features/home/presentation/bloc/address/getaddress/get_address_bloc.dart';
+import 'package:foodapp/features/home/presentation/bloc/categories/category_bloc.dart';
+import 'package:foodapp/features/home/presentation/bloc/foodcategories/food_categories_bloc.dart';
+import 'package:foodapp/features/home/presentation/bloc/nearby/nearby_bloc.dart';
+import 'package:foodapp/features/home/presentation/bloc/suggestions/suggestions_bloc.dart';
 import 'package:foodapp/features/orders/data/datasources/orders_remote_data_sources.dart';
 import 'package:foodapp/features/orders/data/repositories/order_repositories.dart';
 import 'package:foodapp/features/orders/domain/repositories/orders_repositories_impl.dart';
 import 'package:foodapp/features/orders/domain/usecase/orders_usecase.dart';
+import 'package:foodapp/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:foodapp/features/profile/domain/usecase/get_profile_usecase.dart';
+import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:foodapp/features/profile/domain/usecase/update_profile_usecase.dart';
 import 'package:get_it/get_it.dart';
 
@@ -52,66 +61,78 @@ Future<void> _core() async {
 }
 
 Future<void> initialaizeDependencies() async {
-  // Token storage (shared_preferences on all platforms)
   await _core();
+
   sl
-    ..registerSingleton<Dio>(sl())
     // Data sources
-    ..registerSingleton<AuthRemoteDataSource>(
-      AuthRemoteDataSourceImpl(
-        sl(),
-      ),
+    ..registerLazySingleton<AuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(sl()),
     )
-    ..registerSingleton<AddaddressRemoteDataSource>(
-      AddaddressRemoteDataSourceImpl(sl()),
+    ..registerLazySingleton<AddaddressRemoteDataSource>(
+      () => AddaddressRemoteDataSourceImpl(sl()),
     )
-    ..registerSingleton<CategoryRemoteDataSource>(
-      CategoryRemoteDataSourceImpl(sl()),
+    ..registerLazySingleton<CategoryRemoteDataSource>(
+      () => CategoryRemoteDataSourceImpl(sl()),
     )
-    ..registerSingleton<NearbyRemoteDataSource>(
-      NearbyRemoteDataSourceImpl(sl()),
+    ..registerLazySingleton<NearbyRemoteDataSource>(
+      () => NearbyRemoteDataSourceImpl(sl()),
     )
-    ..registerSingleton<SuggestionsRemoteDataSource>(
-      SuggestionsRemoteDataSourceImpl(sl()),
+    ..registerLazySingleton<SuggestionsRemoteDataSource>(
+      () => SuggestionsRemoteDataSourceImpl(sl()),
     )
-    ..registerSingleton<FoodCategoriesRemoteDataSource>(
-      FoodCategoriesRemoteDataSourceImpl(sl()),
+    ..registerLazySingleton<FoodCategoriesRemoteDataSource>(
+      () => FoodCategoriesRemoteDataSourceImpl(sl()),
     )
-    ..registerSingleton<FoodRemoteDataSource>(
-      FoodRemoteDataSourceImpl(sl()),
+    ..registerLazySingleton<FoodRemoteDataSource>(
+      () => FoodRemoteDataSourceImpl(sl()),
     )
-    ..registerSingleton<OrdersRemoteDataSource>(
-      OrdersRemoteDataSourceImpl(sl()),
+    ..registerLazySingleton<OrdersRemoteDataSource>(
+      () => OrdersRemoteDataSourceImpl(sl()),
     )
     // Repositories
-    ..registerSingleton<AuthRepository>(AuthRepositoryImpl(sl(), sl()))
-    ..registerSingleton<AddressRepositories>(
-      AddressRepositoriesImpl(sl()),
+    ..registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(sl(), sl()),
     )
-    ..registerSingleton<CategoryRepositories>(CategoryRepositoriesImpl(sl()))
-    ..registerSingleton<NearbyRepositories>(NearbyRepositoriesImpl(sl()))
-    ..registerSingleton<FoodCategoriesRepository>(
-      FoodCategoriesRepositoryImpl(sl()),
+    ..registerLazySingleton<AddressRepositories>(
+      () => AddressRepositoriesImpl(sl()),
     )
-    ..registerSingleton<OrdersRepositories>(OrdersRepositoriesImpl(sl()))
-    ..registerSingleton<SuggestionsRepositories>(
-      SuggestionsRepositoriesImpl(sl()),
+    ..registerLazySingleton<CategoryRepositories>(
+      () => CategoryRepositoriesImpl(sl()),
     )
-    ..registerSingleton<FoodRepo>(FoodRepoImpl(sl()))
+    ..registerLazySingleton<NearbyRepositories>(
+      () => NearbyRepositoriesImpl(sl()),
+    )
+    ..registerLazySingleton<FoodCategoriesRepository>(
+      () => FoodCategoriesRepositoryImpl(sl()),
+    )
+    ..registerLazySingleton<OrdersRepositories>(
+      () => OrdersRepositoriesImpl(sl()),
+    )
+    ..registerLazySingleton<SuggestionsRepositories>(
+      () => SuggestionsRepositoriesImpl(sl()),
+    )
+    ..registerLazySingleton<FoodRepo>(() => FoodRepoImpl(sl()))
     // Usecases
-    ..registerSingleton<SigninUseCase>(SigninUseCase(sl()))
-    ..registerSingleton<RefreshTokenUseCase>(RefreshTokenUseCase(sl()))
-    ..registerSingleton<SignoutUseCase>(SignoutUseCase(sl()))
-    ..registerSingleton<GetProfileUseCase>(GetProfileUseCase(sl()))
-    ..registerSingleton<GetAddAddressUseCase>(GetAddAddressUseCase(sl()))
-    ..registerSingleton<GetAddAddressUseCase>(GetAddAddressUseCase(sl()))
-    ..registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()))
-    ..registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase(sl()))
-    ..registerSingleton<GetOrdersUseCase>(GetOrdersUseCase(sl()))
-    ..registerSingleton<GetNearbyUseCase>(GetNearbyUseCase(sl()))
-    ..registerSingleton<GetFoodCategoriesUseCase>(
-      GetFoodCategoriesUseCase(sl()),
-    )
-    ..registerSingleton<GetSuggestionsUseCase>(GetSuggestionsUseCase(sl()))
-    ..registerSingleton<GetFoodUseCase>(GetFoodUseCase(sl()));
+    ..registerFactory(() => SigninUseCase(sl()))
+    ..registerFactory(() => RefreshTokenUseCase(sl()))
+    ..registerFactory(() => SignoutUseCase(sl()))
+    ..registerFactory(() => GetProfileUseCase(sl()))
+    ..registerFactory(() => GetAddAddressUseCase(sl()))
+    ..registerFactory(() => UpdateProfileUseCase(sl()))
+    ..registerFactory(() => GetCategoriesUseCase(sl()))
+    ..registerFactory(() => GetOrdersUseCase(sl()))
+    ..registerFactory(() => GetNearbyUseCase(sl()))
+    ..registerFactory(() => GetFoodCategoriesUseCase(sl()))
+    ..registerFactory(() => GetSuggestionsUseCase(sl()))
+    ..registerFactory(() => GetFoodUseCase(sl()))
+    // Blocs
+    ..registerLazySingleton<SigninBloc>(() => SigninBloc(sl()))
+    ..registerLazySingleton<AddAddressBloc>(() => AddAddressBloc(sl()))
+    ..registerLazySingleton<GetAddressBloc>(() => GetAddressBloc(sl()))
+    ..registerLazySingleton<CategoryBloc>(() => CategoryBloc(sl()))
+    ..registerLazySingleton<NearbyBloc>(() => NearbyBloc(sl()))
+    ..registerLazySingleton<SuggestionsBloc>(() => SuggestionsBloc(sl()))
+    ..registerLazySingleton<FoodCategoriesBloc>(() => FoodCategoriesBloc(sl()))
+    ..registerLazySingleton<OrdersBloc>(() => OrdersBloc(sl()))
+    ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()));
 }

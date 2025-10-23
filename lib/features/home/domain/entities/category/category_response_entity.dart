@@ -7,17 +7,14 @@ part 'category_response_entity.freezed.dart';
 abstract class CategoryResponseEntity with _$CategoryResponseEntity {
   const factory CategoryResponseEntity({
     required int id,
-    @Default(<CategoryResponseEntity>[])
-    List<CategoryResponseEntity> subcategories,
+    required String name,
+    required String imageUrl,
   }) = _CategoryResponseEntity;
   factory CategoryResponseEntity.fromModel(
-    Category model, {
-    List<CategoryResponseEntity> subcategories =
-        const <CategoryResponseEntity>[],
-  }) {
-    return CategoryResponseEntity(
-      id: model.id,
-      subcategories: subcategories,
-    );
-  }
+    Category model,
+  ) => CategoryResponseEntity(
+    id: model.id,
+    name: model.name,
+    imageUrl: model.imageUrl,
+  );
 }

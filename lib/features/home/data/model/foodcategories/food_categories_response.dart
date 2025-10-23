@@ -8,7 +8,7 @@ abstract class FoodCategoriesResponse with _$FoodCategoriesResponse {
   const factory FoodCategoriesResponse({
     required int id,
     required String name,
-    required String imageUrl,
+    @JsonKey(name: 'image') required String imageUrl,
   }) = _FoodCategoriesResponse;
 
   factory FoodCategoriesResponse.fromJson(Map<String, dynamic> json) =>
