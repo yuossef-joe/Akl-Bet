@@ -8,7 +8,7 @@ abstract class Category with _$Category {
   const factory Category({
     required int id,
     required String name,
-    required String imageUrl,
+    required String image,
   }) = _Category;
 
   factory Category.fromJson(Map<String, dynamic> json) =>

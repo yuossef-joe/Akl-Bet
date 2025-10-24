@@ -142,7 +142,7 @@ class _CategoryCard extends StatelessWidget {
   }
 
   Widget _buildImage() {
-    final imageUrl = category.imageUrl.trim();
+    final imageUrl = category.image.trim();
 
     if (imageUrl.isEmpty) {
       return Container(

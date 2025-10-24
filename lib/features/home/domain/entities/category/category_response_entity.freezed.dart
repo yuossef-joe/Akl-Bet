@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CategoryResponseEntity {
 
- int get id; String get name; String get imageUrl;
+ int get id; String get name; String get image;
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CategoryResponseEntityCopyWith<CategoryResponseEntity> get copyWith => _$Catego
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl);
+int get hashCode => Object.hash(runtimeType,id,name,image);
 
 @override
 String toString() {
-  return 'CategoryResponseEntity(id: $id, name: $name, imageUrl: $imageUrl)';
+  return 'CategoryResponseEntity(id: $id, name: $name, image: $image)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CategoryResponseEntityCopyWith<$Res>  {
   factory $CategoryResponseEntityCopyWith(CategoryResponseEntity value, $Res Function(CategoryResponseEntity) _then) = _$CategoryResponseEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String imageUrl
+ int id, String name, String image
 });
 
 
@@ -62,11 +62,11 @@ class _$CategoryResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? image = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -152,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String image)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CategoryResponseEntity() when $default != null:
-return $default(_that.id,_that.name,_that.imageUrl);case _:
+return $default(_that.id,_that.name,_that.image);case _:
   return orElse();
 
 }
@@ -173,10 +173,10 @@ return $default(_that.id,_that.name,_that.imageUrl);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String image)  $default,) {final _that = this;
 switch (_that) {
 case _CategoryResponseEntity():
-return $default(_that.id,_that.name,_that.imageUrl);case _:
+return $default(_that.id,_that.name,_that.image);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +193,10 @@ return $default(_that.id,_that.name,_that.imageUrl);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String imageUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String image)?  $default,) {final _that = this;
 switch (_that) {
 case _CategoryResponseEntity() when $default != null:
-return $default(_that.id,_that.name,_that.imageUrl);case _:
+return $default(_that.id,_that.name,_that.image);case _:
   return null;
 
 }
@@ -208,12 +208,12 @@ return $default(_that.id,_that.name,_that.imageUrl);case _:
 
 
 class _CategoryResponseEntity implements CategoryResponseEntity {
-  const _CategoryResponseEntity({required this.id, required this.name, required this.imageUrl});
+  const _CategoryResponseEntity({required this.id, required this.name, required this.image});
   
 
 @override final  int id;
 @override final  String name;
-@override final  String imageUrl;
+@override final  String image;
 
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +225,16 @@ _$CategoryResponseEntityCopyWith<_CategoryResponseEntity> get copyWith => __$Cat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl);
+int get hashCode => Object.hash(runtimeType,id,name,image);
 
 @override
 String toString() {
-  return 'CategoryResponseEntity(id: $id, name: $name, imageUrl: $imageUrl)';
+  return 'CategoryResponseEntity(id: $id, name: $name, image: $image)';
 }
 
 
@@ -245,7 +245,7 @@ abstract mixin class _$CategoryResponseEntityCopyWith<$Res> implements $Category
   factory _$CategoryResponseEntityCopyWith(_CategoryResponseEntity value, $Res Function(_CategoryResponseEntity) _then) = __$CategoryResponseEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String imageUrl
+ int id, String name, String image
 });
 
 
@@ -262,11 +262,11 @@ class __$CategoryResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of CategoryResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? image = null,}) {
   return _then(_CategoryResponseEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

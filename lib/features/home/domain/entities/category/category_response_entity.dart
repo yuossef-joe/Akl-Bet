@@ -8,13 +8,13 @@ abstract class CategoryResponseEntity with _$CategoryResponseEntity {
   const factory CategoryResponseEntity({
     required int id,
     required String name,
-    required String imageUrl,
+    required String image,
   }) = _CategoryResponseEntity;
   factory CategoryResponseEntity.fromModel(
     Category model,
   ) => CategoryResponseEntity(
     id: model.id,
     name: model.name,
-    imageUrl: model.imageUrl,
+    image: model.image,
   );
 }
