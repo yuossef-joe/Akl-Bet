@@ -18,6 +18,6 @@ class NearbyBloc
     Emitter<BaseState<List<NearbyResponseEntity>>> emit,
   ) => basicFetchHandler<List<NearbyResponseEntity>>(
     emit,
-    _nearbyUseCase.call(event.params!),
+    _nearbyUseCase.call(event.params),
   );
 }

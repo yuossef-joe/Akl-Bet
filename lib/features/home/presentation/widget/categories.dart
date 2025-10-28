@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
+import 'package:foodapp/core/widget/place_holder_icon.dart';
 import 'package:foodapp/features/home/domain/entities/category/category_response_entity.dart';
 import 'package:foodapp/features/home/presentation/bloc/categories/category_bloc.dart';
 import 'package:foodapp/injection_container.dart';
@@ -14,7 +15,7 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          CategoryBloc(sl())..add(BaseEvent.fetch(params: CategoryParams())),
+          CategoryBloc(sl())..add(const BaseEvent<void>.fetch(params: null)),
       child: BlocBuilder<CategoryBloc, BaseState<List<CategoryResponseEntity>>>(
         builder: (context, state) {
           return state.when(
@@ -44,19 +45,16 @@ class Categories extends StatelessWidget {
                 ),
               ),
             ),
-            success: (categories) => GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.8,
+            success: (categories) => SizedBox(
+              height: 130,
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                itemBuilder: (_, index) =>
+                    _CategoryCard(category: categories[index]),
               ),
-              itemCount: categories.length,
-              itemBuilder: (_, index) =>
-                  _CategoryCard(category: categories[index]),
             ),
           );
         },
@@ -121,19 +119,17 @@ class _CategoryCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        Expanded(
-          child: SizedBox(
-            width: _cardSize,
-            child: Text(
-              category.name,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: ColorManager.darkGrey,
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-              ),
+        SizedBox(
+          width: _cardSize,
+          child: Text(
+            category.name,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: ColorManager.darkGrey,
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -145,27 +141,11 @@ class _CategoryCard extends StatelessWidget {
     final imageUrl = category.image.trim();
 
     if (imageUrl.isEmpty) {
-      return Container(
-        color: const Color(0xFFF0ECFF),
-        child: Center(
-          child: Text(
-            _getEmojiForCategory(category.id),
-            style: const TextStyle(fontSize: 32),
-          ),
-        ),
-      );
+      return const PlaceholderIcon();
     }
 
     if (!_isValidUrl(imageUrl)) {
-      return Container(
-        color: const Color(0xFFF0ECFF),
-        child: Center(
-          child: Text(
-            _getEmojiForCategory(category.id),
-            style: const TextStyle(fontSize: 32),
-          ),
-        ),
-      );
+      return const PlaceholderIcon();
     }
 
     return Image.network(
@@ -181,25 +161,12 @@ class _CategoryCard extends StatelessWidget {
                 child: CircularProgressIndicator(strokeWidth: 2),
               ),
             ),
-      errorBuilder: (_, __, ___) => Container(
-        color: const Color(0xFFF0ECFF),
-        child: Center(
-          child: Text(
-            _getEmojiForCategory(category.id),
-            style: const TextStyle(fontSize: 32),
-          ),
-        ),
-      ),
+      errorBuilder: (_, __, ___) => const PlaceholderIcon(),
     );
   }
 
   static bool _isValidUrl(String url) =>
       url.startsWith('http://') || url.startsWith('https://');
-
-  static String _getEmojiForCategory(int id) {
-    final emojis = ['🆕', '💎', '🍼', '🔥', '❤️'];
-    return emojis[id % emojis.length];
-  }
 }
 
 class _ShimmerCategories extends StatelessWidget {

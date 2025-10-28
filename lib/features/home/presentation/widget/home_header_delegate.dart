@@ -1,12 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
+import 'package:foodapp/core/utils/get_current_location.dart';
 import 'package:foodapp/features/home/presentation/widget/more_button.dart';
 import 'package:foodapp/features/home/presentation/widget/place_holder_row_header.dart';
 import 'package:foodapp/features/home/presentation/widget/section_title.dart';
 import 'package:foodapp/features/home/presentation/widget/square_actionIcon.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
+
+  @override
+  State<HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends State<HomeHeader> {
+  String _addressText = 'المملكة العربية السعودية';
+  bool _isLoadingAddress = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeLocation();
+  }
+
+  Future<void> _initializeLocation() async {
+    await _fetchAndDisplayAddress();
+  }
+
+  Future<void> _fetchAndDisplayAddress() async {
+    if (_isLoadingAddress) return;
+
+    setState(() => _isLoadingAddress = true);
+    try {
+      final position = await getCurrentLocation();
+      final placemarks = await geo.placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+
+      if (placemarks.isNotEmpty && mounted) {
+        final place = placemarks.first;
+        final address = _buildAddressString(place);
+        setState(() {
+          _addressText = address;
+        });
+      }
+    } on Exception catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('خطأ في جلب الموقع: $e'),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoadingAddress = false);
+      }
+    }
+  }
+
+  String _buildAddressString(geo.Placemark place) {
+    final parts = <String>[];
+
+    if (place.locality?.isNotEmpty ?? false) {
+      parts.add(place.locality!);
+    }
+    if (place.administrativeArea?.isNotEmpty ?? false) {
+      parts.add(place.administrativeArea!);
+    }
+    if (place.country?.isNotEmpty ?? false) {
+      parts.add(place.country!);
+    }
+
+    return parts.isNotEmpty ? parts.join(', ') : 'المملكة العربية السعودية';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +131,7 @@ class HomeHeader extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: _fetchAndDisplayAddress,
                       borderRadius: BorderRadius.circular(12),
                       child: Container(
                         height: 50,
@@ -70,44 +140,59 @@ class HomeHeader extends StatelessWidget {
                           color: Colors.purple.withOpacity(0.28),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(
-                          Icons.place_outlined,
-                          color: Colors.white,
-                          size: 24,
-                        ),
+                        child: _isLoadingAddress
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.white,
+                                  ),
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Icon(
+                                Icons.place_outlined,
+                                color: Colors.white,
+                                size: 24,
+                              ),
                       ),
                     ),
                     const SizedBox(width: 6),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'الموقع الحالي ',
-                              style: TextStyle(
-                                color: ColorManager.white,
-                                fontSize: 12,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'الموقع الحالي ',
+                                style: TextStyle(
+                                  color: ColorManager.white,
+                                  fontSize: 12,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 6),
-                            const Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'المملكة العربية السعودية',
-                          style: TextStyle(
-                            color: ColorManager.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                              const SizedBox(width: 6),
+                              const Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 4),
+                          Text(
+                            _addressText,
+                            style: TextStyle(
+                              color: ColorManager.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -193,7 +278,7 @@ class HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return const HomeHeader();
+    return HomeHeader(key: UniqueKey());
   }
 
   @override

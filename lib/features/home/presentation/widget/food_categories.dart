@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
+import 'package:foodapp/core/widget/place_holder_icon.dart';
 import 'package:foodapp/features/home/domain/entities/foodcategories/food_categories_response_entity.dart';
 import 'package:foodapp/features/home/presentation/bloc/foodcategories/food_categories_bloc.dart';
 import 'package:foodapp/injection_container.dart';
@@ -63,7 +64,7 @@ class FoodCategories extends StatelessWidget {
                     itemCount: categories.length,
                     separatorBuilder: (_, __) => const SizedBox(width: 12),
                     itemBuilder: (_, index) =>
-                        _CategoryCard(category: categories[index]),
+                        _FoodCard(category: categories[index]),
                   ),
                 ),
               );
@@ -73,8 +74,8 @@ class FoodCategories extends StatelessWidget {
   }
 }
 
-class _CategoryCard extends StatelessWidget {
-  const _CategoryCard({required this.category});
+class _FoodCard extends StatelessWidget {
+  const _FoodCard({required this.category});
 
   final FoodCategoriesResponseEntity category;
 
@@ -88,24 +89,28 @@ class _CategoryCard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          width: _cardSize,
-          height: _cardSize,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(_borderRadius),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x15000000),
-                blurRadius: 8,
-                offset: Offset(0, 4),
+        Stack(
+          children: [
+            Container(
+              width: _cardSize,
+              height: _cardSize,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(_borderRadius),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x15000000),
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(_borderRadius),
-            child: _buildImage(),
-          ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(_borderRadius),
+                child: _buildImage(),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 8),
         SizedBox(
@@ -130,11 +135,11 @@ class _CategoryCard extends StatelessWidget {
     final imageUrl = category.imageUrl.trim();
 
     if (imageUrl.isEmpty) {
-      return const _PlaceholderIcon();
+      return const PlaceholderIcon();
     }
 
     if (!_isValidUrl(imageUrl)) {
-      return const _PlaceholderIcon();
+      return const PlaceholderIcon();
     }
 
     return Image.network(
@@ -150,25 +155,12 @@ class _CategoryCard extends StatelessWidget {
                 child: CircularProgressIndicator(strokeWidth: 2),
               ),
             ),
-      errorBuilder: (_, __, ___) => const _PlaceholderIcon(),
+      errorBuilder: (_, __, ___) => const PlaceholderIcon(),
     );
   }
 
   static bool _isValidUrl(String url) =>
       url.startsWith(_httpPrefix) || url.startsWith(_httpsPrefix);
-}
-
-class _PlaceholderIcon extends StatelessWidget {
-  const _PlaceholderIcon();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Icon(
-      Icons.category_outlined,
-      color: Colors.grey,
-      size: 40,
-    );
-  }
 }
 
 class _ShimmerCategories extends StatelessWidget {
