@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodapp/core/utils/pagination_child_builder.dart';
+import 'package:foodapp/core/helpers/pagination_child_builder.dart';
 import 'package:foodapp/features/orders/domain/entities/orders_response_entity.dart';
 import 'package:foodapp/features/orders/domain/usecase/orders_usecase.dart';
 import 'package:foodapp/features/orders/presentation/bloc/orders_bloc.dart';

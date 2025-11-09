@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:foodapp/core/networking/dio_factory.dart';
+import 'package:foodapp/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:foodapp/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:foodapp/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:foodapp/features/auth/domain/repositories/auth_repositories.dart';
 import 'package:foodapp/features/auth/domain/usecase/refresh_token_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
+import 'package:foodapp/features/auth/domain/usecase/sign_up_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
-import 'package:foodapp/features/auth/presentation/bloc/signin_bloc.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
 import 'package:foodapp/features/food/domain/usecase/food_usecase.dart';
@@ -43,8 +44,8 @@ import 'package:foodapp/features/orders/domain/repositories/orders_repositories_
 import 'package:foodapp/features/orders/domain/usecase/orders_usecase.dart';
 import 'package:foodapp/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:foodapp/features/profile/domain/usecase/get_profile_usecase.dart';
-import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:foodapp/features/profile/domain/usecase/update_profile_usecase.dart';
+import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt sl = GetIt.instance;
@@ -67,6 +68,9 @@ Future<void> initialaizeDependencies() async {
     // Data sources
     ..registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(sl()),
+    )
+    ..registerLazySingleton<AuthLocalDataSource>(
+      () => AuthLocalDataSourceImpl(flutterSecureStorage: sl()),
     )
     ..registerLazySingleton<AddaddressRemoteDataSource>(
       () => AddaddressRemoteDataSourceImpl(sl()),
@@ -114,6 +118,7 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<FoodRepo>(() => FoodRepoImpl(sl()))
     // Usecases
     ..registerFactory(() => SigninUseCase(sl()))
+    ..registerFactory(() => SignUpUseCase(sl()))
     ..registerFactory(() => RefreshTokenUseCase(sl()))
     ..registerFactory(() => SignoutUseCase(sl()))
     ..registerFactory(() => GetProfileUseCase(sl()))
@@ -126,7 +131,6 @@ Future<void> initialaizeDependencies() async {
     ..registerFactory(() => GetSuggestionsUseCase(sl()))
     ..registerFactory(() => GetFoodUseCase(sl()))
     // Blocs
-    ..registerLazySingleton<SigninBloc>(() => SigninBloc(sl()))
     ..registerLazySingleton<AddAddressBloc>(() => AddAddressBloc(sl()))
     ..registerLazySingleton<GetAddressBloc>(() => GetAddressBloc(sl()))
     ..registerLazySingleton<CategoryBloc>(() => CategoryBloc(sl()))

@@ -1,4 +1,4 @@
-import 'package:foodapp/core/utils/type_converters.dart';
+import 'package:foodapp/core/helpers/type_converters.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'nearby_response.freezed.dart';

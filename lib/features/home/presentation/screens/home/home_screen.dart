@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: ShopList(),
+                child: ShopListWidget(),
               ),
               const SizedBox(height: 120),
             ],

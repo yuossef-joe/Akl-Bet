@@ -14,8 +14,6 @@ abstract class SigninResponse with _$SigninResponse {
     required bool isActive,
     required bool emailVerified,
     required bool phoneVerified,
-    required String createdAt,
-    required String updatedAt,
     required String
     role, // currently backend returns string role; enum wrapper added separately
     String? gender,

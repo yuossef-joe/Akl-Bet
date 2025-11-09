@@ -47,9 +47,10 @@ class AuthRepositoryImpl implements AuthRepository {
     return SigninResponseEntity.fromModel(res);
   }
 
+  @override
   Future<void> refreshToken() async {
     final refreshToken = await _authLocalDataSource.getRefreshToken();
-    if (refreshToken == null) throw Exception("No refresh token saved");
+    if (refreshToken == null) throw Exception('No refresh token saved');
     final response = await _authRemoteDataSource.refreshToken(refreshToken);
     await _authLocalDataSource.saveTokens(
       accessToken: response.accessToken,

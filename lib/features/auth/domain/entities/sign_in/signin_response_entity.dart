@@ -15,8 +15,6 @@ abstract class SigninResponseEntity with _$SigninResponseEntity {
     required bool isActive,
     required bool emailVerified,
     required bool phoneVerified,
-    required String createdAt,
-    required String updatedAt,
     String? gender,
     String? image,
     String? phone,
@@ -34,8 +32,6 @@ abstract class SigninResponseEntity with _$SigninResponseEntity {
       isActive: model.isActive,
       emailVerified: model.emailVerified,
       phoneVerified: model.phoneVerified,
-      createdAt: model.createdAt,
-      updatedAt: model.updatedAt,
     );
   }
 }

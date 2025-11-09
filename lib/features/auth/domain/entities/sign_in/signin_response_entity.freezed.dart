@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SigninResponseEntity {
 
- int get id; String get username; String get email; String get firstName; String get lastName; String get role; bool get isActive; bool get emailVerified; bool get phoneVerified; String get createdAt; String get updatedAt; String? get gender; String? get image; String? get phone; String? get dateOfBirth;
+ int get id; String get username; String get email; String get firstName; String get lastName; String get role; bool get isActive; bool get emailVerified; bool get phoneVerified; String? get gender; String? get image; String? get phone; String? get dateOfBirth;
 /// Create a copy of SigninResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SigninResponseEntityCopyWith<SigninResponseEntity> get copyWith => _$SigninResp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SigninResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.role, role) || other.role == role)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SigninResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.role, role) || other.role == role)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,username,email,firstName,lastName,role,isActive,emailVerified,phoneVerified,createdAt,updatedAt,gender,image,phone,dateOfBirth);
+int get hashCode => Object.hash(runtimeType,id,username,email,firstName,lastName,role,isActive,emailVerified,phoneVerified,gender,image,phone,dateOfBirth);
 
 @override
 String toString() {
-  return 'SigninResponseEntity(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, isActive: $isActive, emailVerified: $emailVerified, phoneVerified: $phoneVerified, createdAt: $createdAt, updatedAt: $updatedAt, gender: $gender, image: $image, phone: $phone, dateOfBirth: $dateOfBirth)';
+  return 'SigninResponseEntity(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, isActive: $isActive, emailVerified: $emailVerified, phoneVerified: $phoneVerified, gender: $gender, image: $image, phone: $phone, dateOfBirth: $dateOfBirth)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SigninResponseEntityCopyWith<$Res>  {
   factory $SigninResponseEntityCopyWith(SigninResponseEntity value, $Res Function(SigninResponseEntity) _then) = _$SigninResponseEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String username, String email, String firstName, String lastName, String role, bool isActive, bool emailVerified, bool phoneVerified, String createdAt, String updatedAt, String? gender, String? image, String? phone, String? dateOfBirth
+ int id, String username, String email, String firstName, String lastName, String role, bool isActive, bool emailVerified, bool phoneVerified, String? gender, String? image, String? phone, String? dateOfBirth
 });
 
 
@@ -62,7 +62,7 @@ class _$SigninResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of SigninResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? role = null,Object? isActive = null,Object? emailVerified = null,Object? phoneVerified = null,Object? createdAt = null,Object? updatedAt = null,Object? gender = freezed,Object? image = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? role = null,Object? isActive = null,Object? emailVerified = null,Object? phoneVerified = null,Object? gender = freezed,Object? image = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
@@ -73,9 +73,7 @@ as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non
 as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
 as bool,phoneVerified: null == phoneVerified ? _self.phoneVerified : phoneVerified // ignore: cast_nullable_to_non_nullable
-as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as String,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as bool,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -164,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String username,  String email,  String firstName,  String lastName,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String createdAt,  String updatedAt,  String? gender,  String? image,  String? phone,  String? dateOfBirth)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String username,  String email,  String firstName,  String lastName,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String? gender,  String? image,  String? phone,  String? dateOfBirth)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SigninResponseEntity() when $default != null:
-return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.createdAt,_that.updatedAt,_that.gender,_that.image,_that.phone,_that.dateOfBirth);case _:
+return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.gender,_that.image,_that.phone,_that.dateOfBirth);case _:
   return orElse();
 
 }
@@ -185,10 +183,10 @@ return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastNa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String username,  String email,  String firstName,  String lastName,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String createdAt,  String updatedAt,  String? gender,  String? image,  String? phone,  String? dateOfBirth)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String username,  String email,  String firstName,  String lastName,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String? gender,  String? image,  String? phone,  String? dateOfBirth)  $default,) {final _that = this;
 switch (_that) {
 case _SigninResponseEntity():
-return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.createdAt,_that.updatedAt,_that.gender,_that.image,_that.phone,_that.dateOfBirth);case _:
+return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.gender,_that.image,_that.phone,_that.dateOfBirth);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +203,10 @@ return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastNa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String username,  String email,  String firstName,  String lastName,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String createdAt,  String updatedAt,  String? gender,  String? image,  String? phone,  String? dateOfBirth)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String username,  String email,  String firstName,  String lastName,  String role,  bool isActive,  bool emailVerified,  bool phoneVerified,  String? gender,  String? image,  String? phone,  String? dateOfBirth)?  $default,) {final _that = this;
 switch (_that) {
 case _SigninResponseEntity() when $default != null:
-return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.createdAt,_that.updatedAt,_that.gender,_that.image,_that.phone,_that.dateOfBirth);case _:
+return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.role,_that.isActive,_that.emailVerified,_that.phoneVerified,_that.gender,_that.image,_that.phone,_that.dateOfBirth);case _:
   return null;
 
 }
@@ -220,7 +218,7 @@ return $default(_that.id,_that.username,_that.email,_that.firstName,_that.lastNa
 
 
 class _SigninResponseEntity implements SigninResponseEntity {
-  const _SigninResponseEntity({required this.id, required this.username, required this.email, required this.firstName, required this.lastName, required this.role, required this.isActive, required this.emailVerified, required this.phoneVerified, required this.createdAt, required this.updatedAt, this.gender, this.image, this.phone, this.dateOfBirth});
+  const _SigninResponseEntity({required this.id, required this.username, required this.email, required this.firstName, required this.lastName, required this.role, required this.isActive, required this.emailVerified, required this.phoneVerified, this.gender, this.image, this.phone, this.dateOfBirth});
   
 
 @override final  int id;
@@ -232,8 +230,6 @@ class _SigninResponseEntity implements SigninResponseEntity {
 @override final  bool isActive;
 @override final  bool emailVerified;
 @override final  bool phoneVerified;
-@override final  String createdAt;
-@override final  String updatedAt;
 @override final  String? gender;
 @override final  String? image;
 @override final  String? phone;
@@ -249,16 +245,16 @@ _$SigninResponseEntityCopyWith<_SigninResponseEntity> get copyWith => __$SigninR
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SigninResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.role, role) || other.role == role)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SigninResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.role, role) || other.role == role)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,username,email,firstName,lastName,role,isActive,emailVerified,phoneVerified,createdAt,updatedAt,gender,image,phone,dateOfBirth);
+int get hashCode => Object.hash(runtimeType,id,username,email,firstName,lastName,role,isActive,emailVerified,phoneVerified,gender,image,phone,dateOfBirth);
 
 @override
 String toString() {
-  return 'SigninResponseEntity(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, isActive: $isActive, emailVerified: $emailVerified, phoneVerified: $phoneVerified, createdAt: $createdAt, updatedAt: $updatedAt, gender: $gender, image: $image, phone: $phone, dateOfBirth: $dateOfBirth)';
+  return 'SigninResponseEntity(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, isActive: $isActive, emailVerified: $emailVerified, phoneVerified: $phoneVerified, gender: $gender, image: $image, phone: $phone, dateOfBirth: $dateOfBirth)';
 }
 
 
@@ -269,7 +265,7 @@ abstract mixin class _$SigninResponseEntityCopyWith<$Res> implements $SigninResp
   factory _$SigninResponseEntityCopyWith(_SigninResponseEntity value, $Res Function(_SigninResponseEntity) _then) = __$SigninResponseEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String username, String email, String firstName, String lastName, String role, bool isActive, bool emailVerified, bool phoneVerified, String createdAt, String updatedAt, String? gender, String? image, String? phone, String? dateOfBirth
+ int id, String username, String email, String firstName, String lastName, String role, bool isActive, bool emailVerified, bool phoneVerified, String? gender, String? image, String? phone, String? dateOfBirth
 });
 
 
@@ -286,7 +282,7 @@ class __$SigninResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of SigninResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? role = null,Object? isActive = null,Object? emailVerified = null,Object? phoneVerified = null,Object? createdAt = null,Object? updatedAt = null,Object? gender = freezed,Object? image = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? role = null,Object? isActive = null,Object? emailVerified = null,Object? phoneVerified = null,Object? gender = freezed,Object? image = freezed,Object? phone = freezed,Object? dateOfBirth = freezed,}) {
   return _then(_SigninResponseEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
@@ -297,9 +293,7 @@ as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non
 as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
 as bool,phoneVerified: null == phoneVerified ? _self.phoneVerified : phoneVerified // ignore: cast_nullable_to_non_nullable
-as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as String,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as bool,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable

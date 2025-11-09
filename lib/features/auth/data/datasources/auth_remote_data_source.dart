@@ -23,19 +23,28 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<SigninResponse> signin(SigninRequestBody signinRequestBody) async {
-    return await guard(() async {
+    return guard(() async {
       final response = await _dio.post<Map<String, dynamic>>(
         ApiConstants.signInEndPoint,
         data: signinRequestBody.toJson(),
       );
-      final data = response.data?['data'];
-      return SigninResponse.fromJson(data as Map<String, dynamic>);
+      final data = response.data?['data'] as Map<String, dynamic>;
+      final user =
+          (data['user'] as Map<String, dynamic>?) ?? <String, dynamic>{};
+      final accessToken = data['accessToken'] as String?;
+      final refreshToken = data['refreshToken'] as String?;
+
+      return SigninResponse.fromJson({
+        'accessToken': accessToken ?? '',
+        'refreshToken': refreshToken ?? '',
+        ...user,
+      });
     });
   }
 
   @override
   Future<SignUpResponse> signUp(SignUpRequestBody signUpRequestBody) async {
-    return await guard(() async {
+    return guard(() async {
       final response = await _dio.post<Map<String, dynamic>>(
         ApiConstants.signUpEndPoint,
         data: signUpRequestBody.toJson(),
@@ -68,18 +77,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<SigninResponse> getProfile() async {
-    return await guard(() async {
+    return guard(() async {
       final response = await _dio.get<Map<String, dynamic>>(
         ApiConstants.profileEndPoint,
       );
       final data = response.data?['data'] as Map<String, dynamic>;
-      return SigninResponse.fromJson(data);
+      final user =
+          (data['user'] as Map<String, dynamic>?) ?? <String, dynamic>{};
+      return SigninResponse.fromJson(user);
     });
   }
 
   @override
   Future<SigninResponse> updateProfile(Map<String, dynamic> body) async {
-    return await guard(() async {
+    return guard(() async {
       final response = await _dio.put<Map<String, dynamic>>(
         'auth/profile',
         data: body,
