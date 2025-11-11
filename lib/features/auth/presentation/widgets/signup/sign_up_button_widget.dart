@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SignUpButtonWidget extends StatelessWidget {
-  final bool isLoading;
-  final VoidCallback onPressed;
-
   const SignUpButtonWidget({
-    super.key,
     required this.isLoading,
     required this.onPressed,
+    super.key,
   });
+  final bool isLoading;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

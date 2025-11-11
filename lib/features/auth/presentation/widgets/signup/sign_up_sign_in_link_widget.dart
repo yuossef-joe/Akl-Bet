@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SignUpSignInLinkWidget extends StatelessWidget {
-  final VoidCallback onSignInTap;
-
   const SignUpSignInLinkWidget({
-    super.key,
     required this.onSignInTap,
+    super.key,
   });
+  final VoidCallback onSignInTap;
 
   @override
   Widget build(BuildContext context) {

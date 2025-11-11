@@ -5,6 +5,7 @@ import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_en
 import 'package:foodapp/features/auth/domain/entities/sign_up/sign_up_request_body_entity.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_up/sign_up_response_body_entity.dart';
 import 'package:foodapp/features/auth/domain/repositories/auth_repositories.dart';
+import 'package:foodapp/features/profile/domain/entity/profile_response_entity.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._authRemoteDataSource, this._authLocalDataSource);
@@ -14,9 +15,17 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<SigninResponseEntity> signin(
     SigninRequestBodyEntity signinRequestBodyEntity,
-  ) => _authRemoteDataSource
-      .signin(signinRequestBodyEntity.toModel())
-      .then(SigninResponseEntity.fromModel);
+  ) async {
+    final response = await _authRemoteDataSource.signin(
+      signinRequestBodyEntity.toModel(),
+    );
+    await _authLocalDataSource.saveTokens(
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    );
+
+    return SigninResponseEntity.fromModel(response);
+  }
 
   @override
   Future<SignUpResponseBodyEntity> signUp(
@@ -42,9 +51,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> logout() => _authLocalDataSource.clear();
 
   @override
-  Future<SigninResponseEntity> getProfile() async {
+  Future<ProfileResponseEntity> getProfile() async {
     final res = await _authRemoteDataSource.getProfile();
-    return SigninResponseEntity.fromModel(res);
+    return ProfileResponseEntity.fromModel(res);
   }
 
   @override
@@ -59,8 +68,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<SigninResponseEntity> updateProfile(Map<String, dynamic> body) async {
+  Future<ProfileResponseEntity> updateProfile(Map<String, dynamic> body) async {
     final res = await _authRemoteDataSource.updateProfile(body);
-    return SigninResponseEntity.fromModel(res);
+    return ProfileResponseEntity.fromModel(res);
   }
 }

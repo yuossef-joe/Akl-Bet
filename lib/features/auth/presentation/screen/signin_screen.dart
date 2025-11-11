@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/core/routing/route.dart';
 import 'package:foodapp/features/auth/presentation/viewmodel/signin_viewmodel.dart';
 import 'package:foodapp/features/auth/presentation/widgets/widgets.dart';
 
@@ -67,6 +68,34 @@ class _SignInScreenState extends State<SignInScreen> {
                       // Google Button
                       GoogleSignInButtonWidget(
                         onPressed: () => _viewModel.signInWithGoogle(context),
+                      ),
+                      const SizedBox(height: 16),
+                      // Sign Up Button
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(Routes.signupRoute);
+                          },
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(
+                              color: Colors.white54,
+                              width: 1,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            'Create Account',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),

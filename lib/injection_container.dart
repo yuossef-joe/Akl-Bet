@@ -67,7 +67,7 @@ Future<void> initialaizeDependencies() async {
   sl
     // Data sources
     ..registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceImpl(sl()),
+      () => AuthRemoteDataSourceImpl(sl(), sl()),
     )
     ..registerLazySingleton<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(flutterSecureStorage: sl()),

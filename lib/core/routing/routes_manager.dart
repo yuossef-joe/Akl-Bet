@@ -4,6 +4,7 @@ import 'package:foodapp/core/resources/string_manager.dart';
 import 'package:foodapp/core/routing/route.dart';
 import 'package:foodapp/core/widget/main_scaffold.dart';
 import 'package:foodapp/features/auth/presentation/screen/signin_screen.dart';
+import 'package:foodapp/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:foodapp/features/home/presentation/screens/home/home_screen.dart';
 import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:foodapp/features/profile/presentation/screen/profile_screen.dart';
@@ -15,6 +16,10 @@ class AppRouter {
       case Routes.signinRoute:
         return MaterialPageRoute(
           builder: (_) => const SignInScreen(),
+        );
+      case Routes.signupRoute:
+        return MaterialPageRoute(
+          builder: (_) => const SignUpScreen(),
         );
       case Routes.mainShellRoute:
         final index = settings.arguments is int ? settings.arguments as int : 0;

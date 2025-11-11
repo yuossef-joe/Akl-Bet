@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SignUpResponseBodyEntity {
 
- String get accessToken; String get refreshToken; int get id; String get username; String get email; String get firstName; String get lastName; String get gender; String get image;
+ String get accessToken; String get refreshToken;
 /// Create a copy of SignUpResponseBodyEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SignUpResponseBodyEntityCopyWith<SignUpResponseBodyEntity> get copyWith => _$Si
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpResponseBodyEntity&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpResponseBodyEntity&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accessToken,refreshToken,id,username,email,firstName,lastName,gender,image);
+int get hashCode => Object.hash(runtimeType,accessToken,refreshToken);
 
 @override
 String toString() {
-  return 'SignUpResponseBodyEntity(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
+  return 'SignUpResponseBodyEntity(accessToken: $accessToken, refreshToken: $refreshToken)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SignUpResponseBodyEntityCopyWith<$Res>  {
   factory $SignUpResponseBodyEntityCopyWith(SignUpResponseBodyEntity value, $Res Function(SignUpResponseBodyEntity) _then) = _$SignUpResponseBodyEntityCopyWithImpl;
 @useResult
 $Res call({
- String accessToken, String refreshToken, int id, String username, String email, String firstName, String lastName, String gender, String image
+ String accessToken, String refreshToken
 });
 
 
@@ -62,17 +62,10 @@ class _$SignUpResponseBodyEntityCopyWithImpl<$Res>
 
 /// Create a copy of SignUpResponseBodyEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = null,Object? refreshToken = null,Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = null,Object? image = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = null,Object? refreshToken = null,}) {
   return _then(_self.copyWith(
 accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -158,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignUpResponseBodyEntity() when $default != null:
-return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
+return $default(_that.accessToken,_that.refreshToken);case _:
   return orElse();
 
 }
@@ -179,10 +172,10 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken)  $default,) {final _that = this;
 switch (_that) {
 case _SignUpResponseBodyEntity():
-return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
+return $default(_that.accessToken,_that.refreshToken);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +192,10 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accessToken,  String refreshToken,  int id,  String username,  String email,  String firstName,  String lastName,  String gender,  String image)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accessToken,  String refreshToken)?  $default,) {final _that = this;
 switch (_that) {
 case _SignUpResponseBodyEntity() when $default != null:
-return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_that.email,_that.firstName,_that.lastName,_that.gender,_that.image);case _:
+return $default(_that.accessToken,_that.refreshToken);case _:
   return null;
 
 }
@@ -214,18 +207,11 @@ return $default(_that.accessToken,_that.refreshToken,_that.id,_that.username,_th
 
 
 class _SignUpResponseBodyEntity implements SignUpResponseBodyEntity {
-  const _SignUpResponseBodyEntity({required this.accessToken, required this.refreshToken, required this.id, required this.username, required this.email, required this.firstName, required this.lastName, required this.gender, required this.image});
+  const _SignUpResponseBodyEntity({required this.accessToken, required this.refreshToken});
   
 
 @override final  String accessToken;
 @override final  String refreshToken;
-@override final  int id;
-@override final  String username;
-@override final  String email;
-@override final  String firstName;
-@override final  String lastName;
-@override final  String gender;
-@override final  String image;
 
 /// Create a copy of SignUpResponseBodyEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -237,16 +223,16 @@ _$SignUpResponseBodyEntityCopyWith<_SignUpResponseBodyEntity> get copyWith => __
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignUpResponseBodyEntity&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignUpResponseBodyEntity&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accessToken,refreshToken,id,username,email,firstName,lastName,gender,image);
+int get hashCode => Object.hash(runtimeType,accessToken,refreshToken);
 
 @override
 String toString() {
-  return 'SignUpResponseBodyEntity(accessToken: $accessToken, refreshToken: $refreshToken, id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
+  return 'SignUpResponseBodyEntity(accessToken: $accessToken, refreshToken: $refreshToken)';
 }
 
 
@@ -257,7 +243,7 @@ abstract mixin class _$SignUpResponseBodyEntityCopyWith<$Res> implements $SignUp
   factory _$SignUpResponseBodyEntityCopyWith(_SignUpResponseBodyEntity value, $Res Function(_SignUpResponseBodyEntity) _then) = __$SignUpResponseBodyEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String accessToken, String refreshToken, int id, String username, String email, String firstName, String lastName, String gender, String image
+ String accessToken, String refreshToken
 });
 
 
@@ -274,17 +260,10 @@ class __$SignUpResponseBodyEntityCopyWithImpl<$Res>
 
 /// Create a copy of SignUpResponseBodyEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = null,Object? refreshToken = null,Object? id = null,Object? username = null,Object? email = null,Object? firstName = null,Object? lastName = null,Object? gender = null,Object? image = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = null,Object? refreshToken = null,}) {
   return _then(_SignUpResponseBodyEntity(
 accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

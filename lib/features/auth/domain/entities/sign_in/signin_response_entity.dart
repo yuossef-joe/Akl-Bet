@@ -6,32 +6,14 @@ part 'signin_response_entity.freezed.dart';
 @freezed
 abstract class SigninResponseEntity with _$SigninResponseEntity {
   const factory SigninResponseEntity({
-    required int id,
-    required String username,
-    required String email,
-    required String firstName,
-    required String lastName,
-    required String role,
-    required bool isActive,
-    required bool emailVerified,
-    required bool phoneVerified,
-    String? gender,
-    String? image,
-    String? phone,
-    String? dateOfBirth,
+    required String accessToken,
+    required String refreshToken,
   }) = _SigninResponseEntity;
 
   factory SigninResponseEntity.fromModel(SigninResponse model) {
     return SigninResponseEntity(
-      id: model.id,
-      username: model.username,
-      email: model.email,
-      firstName: model.firstName,
-      lastName: model.lastName,
-      role: model.role,
-      isActive: model.isActive,
-      emailVerified: model.emailVerified,
-      phoneVerified: model.phoneVerified,
+      accessToken: model.accessToken,
+      refreshToken: model.refreshToken,
     );
   }
 }

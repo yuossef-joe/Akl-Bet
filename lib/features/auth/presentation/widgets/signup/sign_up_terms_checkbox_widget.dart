@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SignUpTermsCheckboxWidget extends StatelessWidget {
-  final bool agreed;
-  final ValueChanged<bool> onChanged;
-
   const SignUpTermsCheckboxWidget({
-    super.key,
     required this.agreed,
     required this.onChanged,
+    super.key,
   });
+  final bool agreed;
+  final ValueChanged<bool> onChanged;
 
   @override
   Widget build(BuildContext context) {
