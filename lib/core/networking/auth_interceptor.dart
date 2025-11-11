@@ -12,20 +12,19 @@ class AppInterceptor extends Interceptor {
   final Dio _dio;
   final FlutterSecureStorage _flutterSecureStorage;
 
-  @override
-  Future<void> onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
-    final token = await _flutterSecureStorage.read(
-      key: SecureStorageKeys.accessToken.name,
-    );
-    if (token != null && token.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $token';
-    }
-    print('🟢 Sending token: $token');
-    return handler.next(options);
-  }
+  // @override
+  // Future<void> onRequest(
+  //   RequestOptions options,
+  //   RequestInterceptorHandler handler,
+  // ) async {
+  //   final token = await _flutterSecureStorage.read(
+  //     key: SecureStorageKeys.accessToken.name,
+  //   );
+  //   if (token != null && token.isNotEmpty) {
+  //     options.headers['Authorization'] = 'Bearer $token';
+  //   }
+  //   print('🟢 Sending token: $token');
+  // }
 
   @override
   Future<void> onError(

@@ -6,8 +6,8 @@ import 'package:foodapp/features/auth/data/datasources/auth_remote_data_source.d
 import 'package:foodapp/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:foodapp/features/auth/domain/repositories/auth_repositories.dart';
 import 'package:foodapp/features/auth/domain/usecase/refresh_token_usecase.dart';
-import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/sign_up_usecase.dart';
+import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
@@ -43,6 +43,9 @@ import 'package:foodapp/features/orders/data/repositories/order_repositories.dar
 import 'package:foodapp/features/orders/domain/repositories/orders_repositories_impl.dart';
 import 'package:foodapp/features/orders/domain/usecase/orders_usecase.dart';
 import 'package:foodapp/features/orders/presentation/bloc/orders_bloc.dart';
+import 'package:foodapp/features/profile/data/datasources/profile_remote_data_sources.dart';
+import 'package:foodapp/features/profile/data/repositories/profile_repositories_impl.dart';
+import 'package:foodapp/features/profile/domain/repositories/profile_repositories.dart';
 import 'package:foodapp/features/profile/domain/usecase/get_profile_usecase.dart';
 import 'package:foodapp/features/profile/domain/usecase/update_profile_usecase.dart';
 import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
@@ -67,10 +70,13 @@ Future<void> initialaizeDependencies() async {
   sl
     // Data sources
     ..registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceImpl(sl(), sl()),
+      () => AuthRemoteDataSourceImpl(sl()),
     )
     ..registerLazySingleton<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(flutterSecureStorage: sl()),
+    )
+    ..registerLazySingleton<ProfileRemoteDataSources>(
+      () => ProfileRemoteDataSourcesImpl(sl()),
     )
     ..registerLazySingleton<AddaddressRemoteDataSource>(
       () => AddaddressRemoteDataSourceImpl(sl()),
@@ -96,6 +102,9 @@ Future<void> initialaizeDependencies() async {
     // Repositories
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sl(), sl()),
+    )
+    ..registerLazySingleton<ProfileRepositories>(
+      () => ProfileRepositoryImpl(sl()),
     )
     ..registerLazySingleton<AddressRepositories>(
       () => AddressRepositoriesImpl(sl()),

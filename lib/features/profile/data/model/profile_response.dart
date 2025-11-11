@@ -6,11 +6,11 @@ part 'profile_response.g.dart';
 @freezed
 abstract class ProfileResponse with _$ProfileResponse {
   const factory ProfileResponse({
-    required String id,
+    required int id,
     required String firstName,
     required String lastName,
     required String email,
-    required String phoneNumber,
+    required String phone,
     String? image,
   }) = _ProfileResponse;
 

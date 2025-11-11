@@ -83,7 +83,6 @@ class SignInViewModel extends ChangeNotifier {
     _setError(null);
   }
 
-  // Sign in method using submitHandler for better error handling
   Future<void> signIn(BuildContext context) async {
     if (!validateForm()) return;
 
@@ -112,7 +111,7 @@ class SignInViewModel extends ChangeNotifier {
     if (response != null) {
       await _handleSignInSuccess(context);
     }
-  } // Handle successful sign in
+  }
 
   Future<void> _handleSignInSuccess(
     BuildContext context,
@@ -127,15 +126,13 @@ class SignInViewModel extends ChangeNotifier {
       ),
     );
 
-    // Navigate to main shell (post-auth screens) starting at Home tab
     await Navigator.pushReplacementNamed(
       context,
       Routes.mainShellRoute,
-      arguments: 0, // Start at Home tab
+      arguments: 0,
     );
   }
 
-  // Handle sign in error
   void _handleSignInError(BuildContext context, String errorMessage) {
     if (!context.mounted) return;
 

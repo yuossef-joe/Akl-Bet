@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileResponseEntity {
 
- String get id; String get firstName; String get lastName; String get email; String get phoneNumber; String? get image;
+ int get id; String get firstName; String get lastName; String get email; String get phone; String? get image;
 /// Create a copy of ProfileResponseEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ProfileResponseEntityCopyWith<ProfileResponseEntity> get copyWith => _$ProfileR
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.image, image) || other.image == image));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,phoneNumber,image);
+int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,phone,image);
 
 @override
 String toString() {
-  return 'ProfileResponseEntity(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, image: $image)';
+  return 'ProfileResponseEntity(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, image: $image)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ProfileResponseEntityCopyWith<$Res>  {
   factory $ProfileResponseEntityCopyWith(ProfileResponseEntity value, $Res Function(ProfileResponseEntity) _then) = _$ProfileResponseEntityCopyWithImpl;
 @useResult
 $Res call({
- String id, String firstName, String lastName, String email, String phoneNumber, String? image
+ int id, String firstName, String lastName, String email, String phone, String? image
 });
 
 
@@ -62,13 +62,13 @@ class _$ProfileResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? phoneNumber = null,Object? image = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? phone = null,Object? image = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -155,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String firstName,  String lastName,  String email,  String phoneNumber,  String? image)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName,  String email,  String phone,  String? image)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileResponseEntity() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phoneNumber,_that.image);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phone,_that.image);case _:
   return orElse();
 
 }
@@ -176,10 +176,10 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phoneN
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String firstName,  String lastName,  String email,  String phoneNumber,  String? image)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName,  String email,  String phone,  String? image)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileResponseEntity():
-return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phoneNumber,_that.image);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phone,_that.image);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +196,10 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phoneN
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String firstName,  String lastName,  String email,  String phoneNumber,  String? image)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName,  String email,  String phone,  String? image)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileResponseEntity() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phoneNumber,_that.image);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phone,_that.image);case _:
   return null;
 
 }
@@ -211,14 +211,14 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.phoneN
 
 
 class _ProfileResponseEntity implements ProfileResponseEntity {
-  const _ProfileResponseEntity({required this.id, required this.firstName, required this.lastName, required this.email, required this.phoneNumber, this.image});
+  const _ProfileResponseEntity({required this.id, required this.firstName, required this.lastName, required this.email, required this.phone, this.image});
   
 
-@override final  String id;
+@override final  int id;
 @override final  String firstName;
 @override final  String lastName;
 @override final  String email;
-@override final  String phoneNumber;
+@override final  String phone;
 @override final  String? image;
 
 /// Create a copy of ProfileResponseEntity
@@ -231,16 +231,16 @@ _$ProfileResponseEntityCopyWith<_ProfileResponseEntity> get copyWith => __$Profi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileResponseEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.image, image) || other.image == image));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,phoneNumber,image);
+int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,phone,image);
 
 @override
 String toString() {
-  return 'ProfileResponseEntity(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, image: $image)';
+  return 'ProfileResponseEntity(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, image: $image)';
 }
 
 
@@ -251,7 +251,7 @@ abstract mixin class _$ProfileResponseEntityCopyWith<$Res> implements $ProfileRe
   factory _$ProfileResponseEntityCopyWith(_ProfileResponseEntity value, $Res Function(_ProfileResponseEntity) _then) = __$ProfileResponseEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String firstName, String lastName, String email, String phoneNumber, String? image
+ int id, String firstName, String lastName, String email, String phone, String? image
 });
 
 
@@ -268,13 +268,13 @@ class __$ProfileResponseEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileResponseEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? phoneNumber = null,Object? image = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? phone = null,Object? image = freezed,}) {
   return _then(_ProfileResponseEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

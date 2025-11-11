@@ -5,7 +5,6 @@ import 'package:foodapp/features/auth/domain/entities/sign_in/signin_response_en
 import 'package:foodapp/features/auth/domain/entities/sign_up/sign_up_request_body_entity.dart';
 import 'package:foodapp/features/auth/domain/entities/sign_up/sign_up_response_body_entity.dart';
 import 'package:foodapp/features/auth/domain/repositories/auth_repositories.dart';
-import 'package:foodapp/features/profile/domain/entity/profile_response_entity.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._authRemoteDataSource, this._authLocalDataSource);
@@ -51,12 +50,6 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> logout() => _authLocalDataSource.clear();
 
   @override
-  Future<ProfileResponseEntity> getProfile() async {
-    final res = await _authRemoteDataSource.getProfile();
-    return ProfileResponseEntity.fromModel(res);
-  }
-
-  @override
   Future<void> refreshToken() async {
     final refreshToken = await _authLocalDataSource.getRefreshToken();
     if (refreshToken == null) throw Exception('No refresh token saved');
@@ -65,11 +58,5 @@ class AuthRepositoryImpl implements AuthRepository {
       accessToken: response.accessToken,
       refreshToken: response.refreshToken,
     );
-  }
-
-  @override
-  Future<ProfileResponseEntity> updateProfile(Map<String, dynamic> body) async {
-    final res = await _authRemoteDataSource.updateProfile(body);
-    return ProfileResponseEntity.fromModel(res);
   }
 }

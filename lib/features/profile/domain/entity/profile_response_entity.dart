@@ -6,11 +6,11 @@ part 'profile_response_entity.freezed.dart';
 @freezed
 abstract class ProfileResponseEntity with _$ProfileResponseEntity {
   const factory ProfileResponseEntity({
-    required String id,
+    required int id,
     required String firstName,
     required String lastName,
     required String email,
-    required String phoneNumber,
+    required String phone,
     String? image,
   }) = _ProfileResponseEntity;
   factory ProfileResponseEntity.fromModel(ProfileResponse model) {
@@ -19,7 +19,7 @@ abstract class ProfileResponseEntity with _$ProfileResponseEntity {
       firstName: model.firstName,
       lastName: model.lastName,
       email: model.email,
-      phoneNumber: model.phoneNumber,
+      phone: model.phone,
       image: model.image,
     );
   }

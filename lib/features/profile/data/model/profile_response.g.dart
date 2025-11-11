@@ -8,11 +8,11 @@ part of 'profile_response.dart';
 
 _ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
     _ProfileResponse(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       email: json['email'] as String,
-      phoneNumber: json['phoneNumber'] as String,
+      phone: json['phone'] as String,
       image: json['image'] as String?,
     );
 
@@ -22,6 +22,6 @@ Map<String, dynamic> _$ProfileResponseToJson(_ProfileResponse instance) =>
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'email': instance.email,
-      'phoneNumber': instance.phoneNumber,
+      'phone': instance.phone,
       'image': instance.image,
     };
