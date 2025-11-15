@@ -20,10 +20,6 @@ _OrdersResponse _$OrdersResponseFromJson(Map<String, dynamic> json) =>
       paymentStatus: json['paymentStatus'] as String,
       vendor: VendorData.fromJson(json['vendor'] as Map<String, dynamic>),
       specialInstructions: json['specialInstructions'] as String?,
-      estimatedDeliveryTime:
-          json['estimatedDeliveryTime'] as Map<String, dynamic>?,
-      actualDeliveryTime: json['actualDeliveryTime'] as String?,
-      cancellationReason: json['cancellationReason'] as String?,
     );
 
 Map<String, dynamic> _$OrdersResponseToJson(_OrdersResponse instance) =>
@@ -40,9 +36,6 @@ Map<String, dynamic> _$OrdersResponseToJson(_OrdersResponse instance) =>
       'paymentStatus': instance.paymentStatus,
       'vendor': instance.vendor,
       'specialInstructions': instance.specialInstructions,
-      'estimatedDeliveryTime': instance.estimatedDeliveryTime,
-      'actualDeliveryTime': instance.actualDeliveryTime,
-      'cancellationReason': instance.cancellationReason,
     };
 
 _VendorData _$VendorDataFromJson(Map<String, dynamic> json) => _VendorData(

@@ -1,4 +1,3 @@
-import 'package:foodapp/features/home/data/model/foodcategories/food_categories_response.dart';
 import 'package:foodapp/features/home/data/sources/foodcategories/food_categories_remote_data_source.dart';
 import 'package:foodapp/features/home/domain/entities/foodcategories/food_categories_response_entity.dart';
 import 'package:foodapp/features/home/domain/repositories/foodcategories/food_categories_repositories.dart';

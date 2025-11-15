@@ -18,9 +18,6 @@ abstract class OrdersResponseEntity with _$OrdersResponseEntity {
     required String paymentStatus,
     required VendorDataEntity vendor,
     String? specialInstructions,
-    Map<String, dynamic>? estimatedDeliveryTime,
-    String? actualDeliveryTime,
-    String? cancellationReason,
   }) = _OrdersResponseEntity;
 
   factory OrdersResponseEntity.fromModel(OrdersResponse model) {
@@ -37,9 +34,6 @@ abstract class OrdersResponseEntity with _$OrdersResponseEntity {
       paymentStatus: model.paymentStatus,
       vendor: VendorDataEntity.fromModel(model.vendor),
       specialInstructions: model.specialInstructions,
-      estimatedDeliveryTime: model.estimatedDeliveryTime,
-      actualDeliveryTime: model.actualDeliveryTime,
-      cancellationReason: model.cancellationReason,
     );
   }
 }

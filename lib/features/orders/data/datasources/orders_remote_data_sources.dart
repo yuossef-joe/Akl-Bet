@@ -17,7 +17,7 @@ class OrdersRemoteDataSourceImpl implements OrdersRemoteDataSource {
       final response = await _dio.get<Map<String, dynamic>>(
         ApiConstants.ordersEndPoint,
       );
-      final data = response.data?['data'] as List<dynamic>? ?? [];
+      final data = response.data?['data'] as List<dynamic>;
       return data
           .map(
             (json) => OrdersResponse.fromJson(json as Map<String, dynamic>),

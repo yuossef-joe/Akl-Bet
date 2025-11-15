@@ -23,8 +23,7 @@ class NearbyRemoteDataSourceImpl implements NearbyRemoteDataSource {
         ApiConstants.nearbyEndPoint,
         queryParameters: nearbyRequestBody.toJson(),
       );
-      final vendors =
-          response.data?['data']?['vendors'] as List<dynamic>? ?? [];
+      final vendors = response.data?['data']?['vendors'] as List<dynamic>;
       return vendors
           .map(
             (json) => NearbyResponse.fromJson(json as Map<String, dynamic>),

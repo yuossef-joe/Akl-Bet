@@ -9,6 +9,7 @@ import 'package:foodapp/features/auth/domain/usecase/refresh_token_usecase.dart'
 import 'package:foodapp/features/auth/domain/usecase/sign_up_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
+
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
 import 'package:foodapp/features/food/domain/usecase/food_usecase.dart';
@@ -49,6 +50,11 @@ import 'package:foodapp/features/profile/domain/repositories/profile_repositorie
 import 'package:foodapp/features/profile/domain/usecase/get_profile_usecase.dart';
 import 'package:foodapp/features/profile/domain/usecase/update_profile_usecase.dart';
 import 'package:foodapp/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:foodapp/features/vendor_category/data/datasource/vendor_category_data_source.dart';
+import 'package:foodapp/features/vendor_category/data/repositories/vendor_category_repositories_impl.dart';
+import 'package:foodapp/features/vendor_category/domain/repositories/vendor_category_repositories.dart';
+import 'package:foodapp/features/vendor_category/domain/usecase/vendor_category_usecase.dart';
+import 'package:foodapp/features/vendor_category/presentation/bloc/vendor_category_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt sl = GetIt.instance;
@@ -99,6 +105,9 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<OrdersRemoteDataSource>(
       () => OrdersRemoteDataSourceImpl(sl()),
     )
+    ..registerLazySingleton<VendorCategoryDataSource>(
+      () => VendorCategoryDataSourceImpl(sl()),
+    )
     // Repositories
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sl(), sl()),
@@ -124,6 +133,9 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<SuggestionsRepositories>(
       () => SuggestionsRepositoriesImpl(sl()),
     )
+    ..registerLazySingleton<VendorCategoryRepositories>(
+      () => VendorCategoryRepositoriesImpl(sl()),
+    )
     ..registerLazySingleton<FoodRepo>(() => FoodRepoImpl(sl()))
     // Usecases
     ..registerFactory(() => SigninUseCase(sl()))
@@ -139,6 +151,7 @@ Future<void> initialaizeDependencies() async {
     ..registerFactory(() => GetFoodCategoriesUseCase(sl()))
     ..registerFactory(() => GetSuggestionsUseCase(sl()))
     ..registerFactory(() => GetFoodUseCase(sl()))
+    ..registerFactory(() => GetVendorCategoryUseCase(sl()))
     // Blocs
     ..registerLazySingleton<AddAddressBloc>(() => AddAddressBloc(sl()))
     ..registerLazySingleton<GetAddressBloc>(() => GetAddressBloc(sl()))
@@ -147,5 +160,6 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<SuggestionsBloc>(() => SuggestionsBloc(sl()))
     ..registerLazySingleton<FoodCategoriesBloc>(() => FoodCategoriesBloc(sl()))
     ..registerLazySingleton<OrdersBloc>(() => OrdersBloc(sl()))
+    ..registerLazySingleton<VendorCategoryBloc>(() => VendorCategoryBloc(sl()))
     ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()));
 }

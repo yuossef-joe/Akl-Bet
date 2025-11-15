@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Shared bottom navigation bar for post-auth screens.
-///
-/// Renders four tabs: Home, Explore, Cart, Profile.
-/// Should only be used within MainScaffold or similar container.
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
     required this.currentIndex,
@@ -24,7 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Explore'),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+        BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Orders'),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );

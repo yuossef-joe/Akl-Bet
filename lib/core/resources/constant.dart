@@ -13,7 +13,7 @@ class ApiConstants {
   static const String nearbyEndPoint = 'vendors/nearby';
   static const String ordersEndPoint = 'orders';
   static const String foodItemsEndPoint = 'food-items';
-  static const String cartEndPoint = 'cart';
+  static String vendorCategoryEndPoint(String id) => 'vendors/category/$id';
   static const int apiTimeOut = 60000;
   static const String token = '';
   static const String empty = '';

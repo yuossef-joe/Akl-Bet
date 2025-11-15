@@ -26,10 +26,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         ApiConstants.signInEndPoint,
         data: body.toJson(),
       );
-      final data = response.data?['data'] as Map<String, dynamic>;
-      final tokens = data['tokens'] as Map<String, dynamic>;
+      final data =
+          (response.data?['data'] as Map)['tokens'] as Map<String, dynamic>;
 
-      return SigninResponse.fromJson(tokens);
+      return SigninResponse.fromJson(data);
     });
   }
 

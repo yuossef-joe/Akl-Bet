@@ -17,7 +17,7 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
       final response = await _dio.get<Map<String, dynamic>>(
         ApiConstants.categoriesEndPoint,
       );
-      final data = response.data?['data'] as List<dynamic>? ?? [];
+      final data = response.data?['data'] as List<dynamic>;
       return data
           .map(
             (json) => Category.fromJson(json as Map<String, dynamic>),

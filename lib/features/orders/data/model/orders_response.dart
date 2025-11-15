@@ -18,9 +18,6 @@ abstract class OrdersResponse with _$OrdersResponse {
     required String paymentStatus,
     required VendorData vendor,
     String? specialInstructions,
-    Map<String, dynamic>? estimatedDeliveryTime,
-    String? actualDeliveryTime,
-    String? cancellationReason,
   }) = _OrdersResponse;
 
   factory OrdersResponse.fromJson(Map<String, dynamic> json) =>
