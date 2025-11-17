@@ -55,6 +55,11 @@ import 'package:foodapp/features/vendor_category/data/repositories/vendor_catego
 import 'package:foodapp/features/vendor_category/domain/repositories/vendor_category_repositories.dart';
 import 'package:foodapp/features/vendor_category/domain/usecase/vendor_category_usecase.dart';
 import 'package:foodapp/features/vendor_category/presentation/bloc/vendor_category_bloc.dart';
+import 'package:foodapp/features/vendors/data/datasource/vendor_remote_data_source.dart';
+import 'package:foodapp/features/vendors/data/repositories/vendor_repositories_impl.dart';
+import 'package:foodapp/features/vendors/domain/repositories/vendor_repositories.dart';
+import 'package:foodapp/features/vendors/domain/usecase/vendor_usecase.dart';
+import 'package:foodapp/features/vendors/presentation/bloc/vendor_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt sl = GetIt.instance;
@@ -108,6 +113,9 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<VendorCategoryDataSource>(
       () => VendorCategoryDataSourceImpl(sl()),
     )
+    ..registerLazySingleton<VendorRemoteDataSource>(
+      () => VendorRemoteDataSourceImpl(sl()),
+    )
     // Repositories
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sl(), sl()),
@@ -136,6 +144,9 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<VendorCategoryRepositories>(
       () => VendorCategoryRepositoriesImpl(sl()),
     )
+    ..registerLazySingleton<VendorRepositories>(
+      () => VendorRepositoriesImpl(sl()),
+    )
     ..registerLazySingleton<FoodRepo>(() => FoodRepoImpl(sl()))
     // Usecases
     ..registerFactory(() => SigninUseCase(sl()))
@@ -152,6 +163,7 @@ Future<void> initialaizeDependencies() async {
     ..registerFactory(() => GetSuggestionsUseCase(sl()))
     ..registerFactory(() => GetFoodUseCase(sl()))
     ..registerFactory(() => GetVendorCategoryUseCase(sl()))
+    ..registerFactory(() => GetVendorUseCase(sl()))
     // Blocs
     ..registerLazySingleton<AddAddressBloc>(() => AddAddressBloc(sl()))
     ..registerLazySingleton<GetAddressBloc>(() => GetAddressBloc(sl()))
@@ -160,6 +172,7 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<SuggestionsBloc>(() => SuggestionsBloc(sl()))
     ..registerLazySingleton<FoodCategoriesBloc>(() => FoodCategoriesBloc(sl()))
     ..registerLazySingleton<OrdersBloc>(() => OrdersBloc(sl()))
-    ..registerLazySingleton<VendorCategoryBloc>(() => VendorCategoryBloc(sl()))
-    ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()));
+    ..registerFactory<VendorCategoryBloc>(() => VendorCategoryBloc(sl()))
+    ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()))
+    ..registerFactory<VendorBloc>(() => VendorBloc(sl()));
 }

@@ -21,13 +21,19 @@ ThemeData getApplicationTheme() {
     ),
     // app bar theme
     appBarTheme: AppBarTheme(
-      centerTitle: true,
+      centerTitle: false,
       backgroundColor: ColorManager.primary,
-      elevation: AppSize.s4,
-      shadowColor: ColorManager.lightPrimary,
+      elevation: 0,
+      shadowColor: ColorManager.primary,
       titleTextStyle: getRegularStyle(
         fontSize: FontSize.s16,
         color: ColorManager.white,
+      ),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
+      actionsIconTheme: const IconThemeData(
+        color: Colors.white,
       ),
     ),
     // button theme

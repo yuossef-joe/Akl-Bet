@@ -1,72 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodapp/core/base/base_event.dart';
+import 'package:foodapp/core/base/base_state.dart';
+import 'package:foodapp/features/home/presentation/widget/shoplist/shop_error.dart';
+import 'package:foodapp/features/home/presentation/widget/shoplist/shop_shimmer.dart';
 import 'package:foodapp/features/vendor_category/domain/entity/vendor_category_request_entity.dart';
 import 'package:foodapp/features/vendor_category/domain/entity/vendor_category_response_entity.dart';
-import 'package:foodapp/features/vendor_category/domain/usecase/vendor_category_usecase.dart';
 import 'package:foodapp/features/vendor_category/presentation/bloc/vendor_category_bloc.dart';
+import 'package:foodapp/features/vendor_category/presentation/viewmodel/vendor_category_viewmodel.dart';
+import 'package:foodapp/features/vendor_category/presentation/widget/vendor_category_container.dart';
 import 'package:foodapp/injection_container.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class VendorCategoryScreen extends StatelessWidget {
-  const VendorCategoryScreen({super.key});
+class VendorCategoryScreen extends StatefulWidget {
+  const VendorCategoryScreen({required this.categoryId, super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<VendorCategoryBloc>(),
-      child: const _VendorCategoryView(),
-    );
-  }
-}
-
-class _VendorCategoryView extends StatefulWidget {
-  const _VendorCategoryView();
+  final String categoryId;
 
   @override
-  State<_VendorCategoryView> createState() => __VendorCategoryViewState();
+  State<VendorCategoryScreen> createState() => _VendorCategoryScreenState();
 }
 
-class __VendorCategoryViewState extends State<_VendorCategoryView> {
-  late final PagingController<int, VendorCategoryResponseEntity>
-  _pagingController;
+class _VendorCategoryScreenState extends State<VendorCategoryScreen> {
+  late VendorCategoryBloc _bloc;
+
   @override
   void initState() {
     super.initState();
-    _pagingController = PagingController<int, VendorCategoryResponseEntity>(
-      getNextPageKey: (state) =>
-          state.lastPageIsEmpty ? null : state.nextIntPageKey,
-      fetchPage: (pageKey) async {
-        final usecase = sl<GetVendorCategoryUseCase>();
-        try {
-          final response = await usecase(
-            vendorCategoryRequestEntity: VendorCategoryRequestEntity(
-              page: pageKey,
-            ),
-          );
-          if (response.isEmpty) return [];
-
-          return response;
-        } catch (e, s) {
-          debugPrint('❌ Vendor Category fetch error: $e\n$s');
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to load vendor categories: $e')),
-          );
-          rethrow;
-        }
-      },
+    _bloc = sl<VendorCategoryBloc>();
+    _bloc.add(
+      BaseEvent<VendorCategoryRequestEntity>.fetch(
+        params: VendorCategoryRequestEntity(
+          categoryId: widget.categoryId,
+        ),
+      ),
     );
   }
 
   @override
   void dispose() {
-    _pagingController.dispose();
+    _bloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        title: VendorCategoryViewModel.buildAppBarTitle('المقابل'),
+        leading: VendorCategoryViewModel.buildAppBarBackButton(
+          () => Navigator.pop(context),
+        ),
+      ),
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: BlocProvider<VendorCategoryBloc>.value(
+          value: _bloc,
+          child:
+              BlocBuilder<
+                VendorCategoryBloc,
+                BaseState<List<VendorCategoryResponseEntity>>
+              >(
+                builder: (context, state) {
+                  return state.when(
+                    initial: () => const Center(child: ShopShimmer()),
+                    loading: () => const Center(child: ShopShimmer()),
+                    empty: () => const Center(child: Text('No vendors found.')),
+                    failure: (_) => ShopError(
+                      onRetry: () {
+                        _bloc.add(
+                          BaseEvent.fetch(
+                            params: VendorCategoryRequestEntity(
+                              categoryId: widget.categoryId,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    success: (vendors) => VendorCategoryContainer(
+                      vendors: vendors,
+                      onVendorTap: (vendor) async {
+                        await Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (_) => VendorCategoryScreen(
+                              categoryId: vendor.id.toString(),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+        ),
+      ),
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/home/domain/entities/foodcategories/food_categories_response_entity.dart';
 import 'package:foodapp/features/home/presentation/bloc/foodcategories/food_categories_bloc.dart';
 import 'package:foodapp/features/home/presentation/widget/widgets.dart';
+import 'package:foodapp/features/vendor_category/presentation/screen/vendor_category_screen.dart';
 import 'package:foodapp/injection_container.dart';
 
 class FoodCategories extends StatelessWidget {
@@ -50,7 +51,16 @@ class FoodCategories extends StatelessWidget {
                 ),
                 success: (categories) => FoodCategoriesList(
                   categories: categories,
-                  onCategoryTap: onCategoryTap,
+                  onCategoryTap: (category) async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => VendorCategoryScreen(
+                          categoryId: category.id.toString(),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               );
             },

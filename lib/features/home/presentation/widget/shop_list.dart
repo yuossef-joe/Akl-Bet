@@ -6,6 +6,7 @@ import 'package:foodapp/features/home/domain/entities/nearby/nearby_request_body
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
 import 'package:foodapp/features/home/presentation/bloc/nearby/nearby_bloc.dart';
 import 'package:foodapp/features/home/presentation/widget/widgets.dart';
+import 'package:foodapp/features/vendors/presentation/screen/vendor_screen.dart';
 import 'package:foodapp/injection_container.dart';
 
 class ShopListWidget extends StatefulWidget {
@@ -63,7 +64,7 @@ class _ShopListWidgetState extends State<ShopListWidget> {
           return state.when(
             initial: () => const ShopShimmer(),
             loading: () => const ShopShimmer(),
-            empty: () => const ShopEmpty(),
+            empty: () => const Center(child: Text('No vendors found.')),
             failure: (_) => ShopError(
               onRetry: () {
                 if (_nearbyParams != null) {
@@ -75,7 +76,16 @@ class _ShopListWidgetState extends State<ShopListWidget> {
             ),
             success: (shops) => ShopListContainer(
               shops: shops,
-              onShopTap: widget.onShopTap,
+              onShopTap: (onShopTap) async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => VendorScreen(
+                      vendorId: onShopTap.id.toString(),
+                    ),
+                  ),
+                );
+              },
             ),
           );
         },
