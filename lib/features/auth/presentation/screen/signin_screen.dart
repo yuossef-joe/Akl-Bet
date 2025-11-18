@@ -75,13 +75,14 @@ class _SignInScreenState extends State<SignInScreen> {
                         width: double.infinity,
                         height: 50,
                         child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(Routes.signupRoute);
+                          onPressed: () async {
+                            await Navigator.of(
+                              context,
+                            ).pushNamed(Routes.signupRoute);
                           },
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(
                               color: Colors.white54,
-                              width: 1,
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),

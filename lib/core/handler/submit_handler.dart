@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/networking/failures.dart';
-import 'package:foodapp/injection_container.dart';
 
 Future<T?> submitHandler<T>(
   BuildContext context, {

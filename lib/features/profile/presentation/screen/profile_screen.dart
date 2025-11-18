@@ -55,10 +55,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               icon: Icons.email_outlined,
                             ),
                             // Phone
-                            if (data.phone != null && data.phone!.isNotEmpty)
+                            if (data.phone.isNotEmpty)
                               ProfileInfoCardWidget(
                                 label: 'رقم التليفون',
-                                value: data.phone!,
+                                value: data.phone,
                                 icon: Icons.phone_outlined,
                               ),
                             // Address (using username as placeholder)

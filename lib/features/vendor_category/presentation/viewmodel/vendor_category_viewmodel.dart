@@ -218,7 +218,6 @@ class VendorCategoryViewModel {
 
   static Widget buildAppBarBackButton(VoidCallback onPressed) {
     return Align(
-      alignment: Alignment.center,
       child: IconButton(
         icon: const Icon(Icons.arrow_back_ios_rounded),
         onPressed: onPressed,

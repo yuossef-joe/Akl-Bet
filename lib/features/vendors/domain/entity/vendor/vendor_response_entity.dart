@@ -1,4 +1,4 @@
-import 'package:foodapp/features/vendors/data/model/vendor_response.dart';
+import 'package:foodapp/features/vendors/data/model/vendor/vendor_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vendor_response_entity.freezed.dart';

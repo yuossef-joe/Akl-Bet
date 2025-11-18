@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodapp/features/vendors/domain/entity/vendor_response_entity.dart';
+import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
+import 'package:foodapp/features/vendors/presentation/viewmodel/vendor_viewmodel.dart';
 
 class VendorContainer extends StatelessWidget {
   const VendorContainer({
@@ -28,88 +29,21 @@ class VendorContainer extends StatelessWidget {
       child: Column(
         children: [
           // Logo Icon
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: const Color(0xFF0057B8),
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: const Icon(
-              Icons.restaurant_menu,
-              color: Colors.amber,
-              size: 36,
-            ),
-          ),
+          VendorViewModel.buildVendorIcon(),
           const SizedBox(height: 16),
 
           // Business Name
-          Text(
-            vendor.businessName ?? 'مطعم',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
+          VendorViewModel.buildVendorName(vendor),
           const SizedBox(height: 8),
 
           // Description
-          Text(
-            vendor.description ?? 'وجبات سريعة',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
-          ),
+          VendorViewModel.buildVendorDescription(vendor),
           const SizedBox(height: 24),
 
           // Stats Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildStatBlock(
-                label: 'الحد الأدنى للطلب',
-                value: '${vendor.minimumOrder?.toStringAsFixed(2) ?? '0'} ر.س',
-              ),
-              _buildStatBlock(
-                label: 'المسافة',
-                value: '${vendor.deliveryTimeMinutes ?? 30} دقيقة',
-              ),
-              _buildStatBlock(
-                label: 'يغلق عند',
-                value: vendor.closingTime ?? 'AM 4:00',
-              ),
-            ],
-          ),
+          VendorViewModel.buildStatsRow(vendor),
         ],
       ),
-    );
-  }
-
-  Widget _buildStatBlock({required String label, required String value}) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey[600],
-          ),
-        ),
-      ],
     );
   }
 }

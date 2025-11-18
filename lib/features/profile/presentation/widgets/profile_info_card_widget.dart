@@ -21,7 +21,6 @@ class ProfileInfoCardWidget extends StatelessWidget {
         color: Colors.white,
         border: Border.all(
           color: const Color(0xFFE0E0E0),
-          width: 1,
         ),
         borderRadius: BorderRadius.circular(12),
       ),

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/handler/api_error_handler.dart';
 import 'package:foodapp/core/resources/constant.dart';
-import 'package:foodapp/features/vendors/data/model/vendor_request.dart';
-import 'package:foodapp/features/vendors/data/model/vendor_response.dart';
+import 'package:foodapp/features/vendors/data/model/vendor/vendor_request.dart';
+import 'package:foodapp/features/vendors/data/model/vendor/vendor_response.dart';
 
 abstract class VendorRemoteDataSource {
   Future<VendorResponse> getVendorById({

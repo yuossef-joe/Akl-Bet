@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
@@ -38,8 +37,8 @@ class _VendorCategoryScreenState extends State<VendorCategoryScreen> {
   }
 
   @override
-  void dispose() {
-    _bloc.close();
+  Future<void> dispose() async {
+    await _bloc.close();
     super.dispose();
   }
 

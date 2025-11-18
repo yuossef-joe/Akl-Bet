@@ -50,8 +50,8 @@ class _ShopListWidgetState extends State<ShopListWidget> {
   }
 
   @override
-  void dispose() {
-    _nearbyBloc.close();
+  Future<void> dispose() async {
+    await _nearbyBloc.close();
     super.dispose();
   }
 

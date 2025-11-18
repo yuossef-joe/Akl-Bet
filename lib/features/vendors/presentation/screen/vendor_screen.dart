@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
-import 'package:foodapp/features/vendors/domain/entity/vendor_request_entity.dart';
-import 'package:foodapp/features/vendors/domain/entity/vendor_response_entity.dart';
-import 'package:foodapp/features/vendors/presentation/bloc/vendor_bloc.dart';
+import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_request_entity.dart';
+import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
+import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_container.dart';
 import 'package:foodapp/injection_container.dart';
 
@@ -34,8 +34,8 @@ class _VendorScreenState extends State<VendorScreen> {
   }
 
   @override
-  void dispose() {
-    _bloc.close();
+  Future<void> dispose() async {
+    await _bloc.close();
     super.dispose();
   }
 

@@ -23,7 +23,7 @@ class SuggestionsBloc
   ) => basicFetchHandler<List<SuggestionsResponseEntity>>(
     emit,
     suggestionsUseCase.call(
-      suggestionsRequestBodyEntity: event.params!,
+      suggestionsRequestBodyEntity: event.params,
     ),
   );
 }

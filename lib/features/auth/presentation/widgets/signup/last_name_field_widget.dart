@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LastNameFieldWidget extends StatelessWidget {
-  final TextEditingController controller;
-  final String? Function(String?)? validator;
-
   const LastNameFieldWidget({
-    super.key,
     required this.controller,
+    super.key,
     this.validator,
   });
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {

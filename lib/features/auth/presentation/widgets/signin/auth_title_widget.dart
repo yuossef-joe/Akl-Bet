@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AuthTitleWidget extends StatelessWidget {
-  final String title;
-  final String subtitle;
-
   const AuthTitleWidget({
-    super.key,
     required this.title,
     required this.subtitle,
+    super.key,
   });
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {

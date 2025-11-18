@@ -55,11 +55,11 @@ import 'package:foodapp/features/vendor_category/data/repositories/vendor_catego
 import 'package:foodapp/features/vendor_category/domain/repositories/vendor_category_repositories.dart';
 import 'package:foodapp/features/vendor_category/domain/usecase/vendor_category_usecase.dart';
 import 'package:foodapp/features/vendor_category/presentation/bloc/vendor_category_bloc.dart';
-import 'package:foodapp/features/vendors/data/datasource/vendor_remote_data_source.dart';
-import 'package:foodapp/features/vendors/data/repositories/vendor_repositories_impl.dart';
-import 'package:foodapp/features/vendors/domain/repositories/vendor_repositories.dart';
-import 'package:foodapp/features/vendors/domain/usecase/vendor_usecase.dart';
-import 'package:foodapp/features/vendors/presentation/bloc/vendor_bloc.dart';
+import 'package:foodapp/features/vendors/data/datasource/vendor/vendor_remote_data_source.dart';
+import 'package:foodapp/features/vendors/data/repositories/vendor/vendor_repositories_impl.dart';
+import 'package:foodapp/features/vendors/domain/repositories/vendor/vendor_repositories.dart';
+import 'package:foodapp/features/vendors/domain/usecase/vendor/vendor_usecase.dart';
+import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt sl = GetIt.instance;

@@ -14,7 +14,7 @@ class FoodRemoteDataSourceImpl implements FoodRemoteDataSource {
 
   @override
   Future<FoodResponse> getFoodItems(FoodRequestBody foodRequestBody) async {
-    return await guard(() async {
+    return guard(() async {
       final response = await _dio.get<Map<String, dynamic>>(
         ApiConstants.foodItemsEndPoint,
         queryParameters: foodRequestBody.toJson(),

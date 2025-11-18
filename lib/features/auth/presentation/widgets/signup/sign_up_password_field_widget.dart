@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SignUpPasswordFieldWidget extends StatelessWidget {
-  final TextEditingController controller;
-  final String? Function(String?)? validator;
-
   const SignUpPasswordFieldWidget({
-    super.key,
     required this.controller,
+    super.key,
     this.validator,
   });
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
