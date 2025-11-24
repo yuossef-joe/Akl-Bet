@@ -13,6 +13,7 @@ class ApiConstants {
   static const String nearbyEndPoint = 'vendors/nearby';
   static const String ordersEndPoint = 'orders';
   static const String foodItemsEndPoint = 'food-items';
+  static String foodItemsByIdEndPoint(String id) => 'food-items/$id';
   static String vendorFoodItemsEndPoint(String vendorId) =>
       'food-items/vendor/$vendorId';
   static String vendorCategoryEndPoint(String id) => 'vendors/category/$id';

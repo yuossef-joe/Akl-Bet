@@ -5,6 +5,8 @@ import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_request_entity.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
 import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
+import 'package:foodapp/features/vendors/presentation/bloc/vendor_items/vendor_items_bloc.dart';
+import 'package:foodapp/features/vendors/presentation/screen/vendor_sections.dart';
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_container.dart';
 import 'package:foodapp/injection_container.dart';
 
@@ -73,6 +75,12 @@ class _VendorScreenState extends State<VendorScreen> {
                   child: Column(
                     children: [
                       VendorContainer(vendor: vendor),
+                      BlocProvider<VendorItemsBloc>(
+                        create: (_) => VendorItemsBloc(sl()),
+                        child: VendorSections(
+                          vendorId: widget.vendorId,
+                        ),
+                      ),
                     ],
                   ),
                 ),

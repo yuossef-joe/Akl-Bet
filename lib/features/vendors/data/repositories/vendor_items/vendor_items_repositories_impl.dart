@@ -8,7 +8,7 @@ class VendorItemsRepositoriesImpl implements VendorItemsRepositories {
   final VendorItemsRemoteDataSource vendorItemsRemoteDataSource;
 
   @override
-  Future<List<VendorItemsEntity>> getVendorIFoodtems({
+  Future<VendorItemsEntity> getVendorIFoodtems({
     required VendorItemsRequestEntity vendorItemsRequestEntity,
     required String vendorId,
   }) async {
@@ -16,10 +16,6 @@ class VendorItemsRepositoriesImpl implements VendorItemsRepositories {
       vendorItemsRequest: vendorItemsRequestEntity.toModel(),
       vendorId: vendorId,
     );
-    return vendorItemsModels
-        .map(
-          VendorItemsEntity.fromModel,
-        )
-        .toList();
+    return VendorItemsEntity.fromModel(vendorItemsModels);
   }
 }

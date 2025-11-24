@@ -13,6 +13,11 @@ import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
 import 'package:foodapp/features/food/domain/usecase/food_usecase.dart';
+import 'package:foodapp/features/food_item/data/datasource/food_item_remote_data_source.dart';
+import 'package:foodapp/features/food_item/data/repositories/food_item_repositories_impl.dart';
+import 'package:foodapp/features/food_item/domain/repositories/food_item_repositories.dart';
+import 'package:foodapp/features/food_item/domain/usecase/food_item_usecase.dart';
+import 'package:foodapp/features/food_item/presentation/bloc/food_item_bloc.dart';
 import 'package:foodapp/features/home/data/repositories/address/address_repositories_impl.dart';
 import 'package:foodapp/features/home/data/repositories/category/categort_repositories_impl.dart';
 import 'package:foodapp/features/home/data/repositories/foodcategories/food_categories_repositry_impl.dart';
@@ -56,9 +61,13 @@ import 'package:foodapp/features/vendor_category/domain/repositories/vendor_cate
 import 'package:foodapp/features/vendor_category/domain/usecase/vendor_category_usecase.dart';
 import 'package:foodapp/features/vendor_category/presentation/bloc/vendor_category_bloc.dart';
 import 'package:foodapp/features/vendors/data/datasource/vendor/vendor_remote_data_source.dart';
+import 'package:foodapp/features/vendors/data/datasource/vendor_items/vendor_items_remote_data_source.dart';
 import 'package:foodapp/features/vendors/data/repositories/vendor/vendor_repositories_impl.dart';
+import 'package:foodapp/features/vendors/data/repositories/vendor_items/vendor_items_repositories_impl.dart';
 import 'package:foodapp/features/vendors/domain/repositories/vendor/vendor_repositories.dart';
+import 'package:foodapp/features/vendors/domain/repositories/vendor_items/vendor_items_repositories.dart';
 import 'package:foodapp/features/vendors/domain/usecase/vendor/vendor_usecase.dart';
+import 'package:foodapp/features/vendors/domain/usecase/vendor_items/vendor_items_use_case.dart';
 import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -116,6 +125,12 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<VendorRemoteDataSource>(
       () => VendorRemoteDataSourceImpl(sl()),
     )
+    ..registerLazySingleton<VendorItemsRemoteDataSource>(
+      () => VendorItemsRemoteDataSourceImpl(sl()),
+    )
+    ..registerLazySingleton<FoodItemRemoteDataSource>(
+      () => FoodItemRemoteDataSourceImpl(sl()),
+    )
     // Repositories
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sl(), sl()),
@@ -147,6 +162,12 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<VendorRepositories>(
       () => VendorRepositoriesImpl(sl()),
     )
+    ..registerLazySingleton<VendorItemsRepositories>(
+      () => VendorItemsRepositoriesImpl(sl()),
+    )
+    ..registerLazySingleton<FoodItemRepositories>(
+      () => FoodItemRepositoriesImpl(sl()),
+    )
     ..registerLazySingleton<FoodRepo>(() => FoodRepoImpl(sl()))
     // Usecases
     ..registerFactory(() => SigninUseCase(sl()))
@@ -164,6 +185,8 @@ Future<void> initialaizeDependencies() async {
     ..registerFactory(() => GetFoodUseCase(sl()))
     ..registerFactory(() => GetVendorCategoryUseCase(sl()))
     ..registerFactory(() => GetVendorUseCase(sl()))
+    ..registerFactory(() => GetVendorItemsUseCase(sl()))
+    ..registerFactory(() => GetFoodItemUseCase(sl()))
     // Blocs
     ..registerLazySingleton<AddAddressBloc>(() => AddAddressBloc(sl()))
     ..registerLazySingleton<GetAddressBloc>(() => GetAddressBloc(sl()))
@@ -174,5 +197,6 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<OrdersBloc>(() => OrdersBloc(sl()))
     ..registerFactory<VendorCategoryBloc>(() => VendorCategoryBloc(sl()))
     ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()))
+    ..registerFactory<FoodItemBloc>(() => FoodItemBloc(sl()))
     ..registerFactory<VendorBloc>(() => VendorBloc(sl()));
 }

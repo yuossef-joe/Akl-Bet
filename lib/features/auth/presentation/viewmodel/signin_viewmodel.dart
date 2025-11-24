@@ -94,16 +94,10 @@ class SignInViewModel extends ChangeNotifier {
       password: passwordController.text.trim(),
     );
 
-    final useCase = sl<SigninUseCase>();
-
     final response = await submitHandler<SigninResponseEntity>(
       context,
-      body: () => useCase.call(signinRequest),
-      onException: (failure) {
-        _setLoading(false);
-        _setError(failure.message);
-        _handleSignInError(context, failure.message);
-      },
+      body: () => sl<SigninUseCase>()(signinRequest),
+      snackbarColor: Colors.red,
     );
 
     _setLoading(false);
@@ -133,17 +127,6 @@ class SignInViewModel extends ChangeNotifier {
     );
   }
 
-  void _handleSignInError(BuildContext context, String errorMessage) {
-    if (!context.mounted) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('خطأ في تسجيل الدخول: $errorMessage'),
-        backgroundColor: Colors.red,
-      ),
-    );
-  }
-
   // Google sign in (placeholder)
   void signInWithGoogle(BuildContext context) {
     // TODO: Implement Google sign in
@@ -169,3 +152,70 @@ class SignInViewModel extends ChangeNotifier {
     super.dispose();
   }
 }
+
+// class SigninViewmodel {
+//   SigninViewmodel();
+// }
+
+// void inti() => isButtonEnabledNotifier = ValueNotifier(false);
+
+// ({bool email, bool password}) _isEmailAndPasswordEmpty = (
+//   email: false,
+//   password: false,
+// );
+
+// bool get isEmailAndPasswordEmpty =>
+//     _isEmailAndPasswordEmpty.email && _isEmailAndPasswordEmpty.password;
+// late final ValueNotifier<bool> isButtonEnabledNotifier;
+
+// SigninRequestBodyEntity signInRequestBodyEntity = const SigninRequestBodyEntity(
+//   username: '',
+//   password: '',
+// );
+
+// void updateEmail(String email) {
+//   signInRequestBodyEntity = signInRequestBodyEntity.copyWith(username: email);
+//   return _checkEmailInput(email);
+// }
+
+// void updatePassword(String password) {
+//   signInRequestBodyEntity = signInRequestBodyEntity.copyWith(
+//     password: password,
+//   );
+//   return _checkPasswordInput(password);
+// }
+
+// Future<void> SinginWithEnail({
+//   required BuildContext context,
+//   required GlobalKey<FormState> formKey,
+// }) async {
+//   if (!formKey.currentState!.validate()) return;
+//   final response = await submitHandler<SigninResponseEntity>(
+//     context,
+//     body: () => sl<SigninUseCase>()(signInRequestBodyEntity),
+//   );
+//   if (response == null || !context.mounted) return;
+//   await Navigator.of(context).pushReplacementNamed(
+//     Routes.mainShellRoute,
+//     arguments: 0,
+//   );
+// }
+
+// void _checkEmailInput(String email) {
+//   final isEmailEmpty = email.isEmpty;
+//   _isEmailAndPasswordEmpty = (
+//     email: isEmailEmpty,
+//     password: _isEmailAndPasswordEmpty.password,
+//   );
+// }
+
+// void _checkPasswordInput(String password) {
+//   final isPasswordEmpty = password.isEmpty;
+//   _isEmailAndPasswordEmpty = (
+//     email: _isEmailAndPasswordEmpty.email,
+//     password: isPasswordEmpty,
+//   );
+//   isButtonEnabledNotifier.value = !isEmailAndPasswordEmpty;
+// }
+
+// void dispose() => isButtonEnabledNotifier.dispose();

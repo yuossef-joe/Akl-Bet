@@ -2,7 +2,7 @@ import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items
 import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items_response_entity.dart';
 
 abstract class VendorItemsRepositories {
-  Future<List<VendorItemsEntity>> getVendorIFoodtems({
+  Future<VendorItemsEntity> getVendorIFoodtems({
     required VendorItemsRequestEntity vendorItemsRequestEntity,
     required String vendorId,
   });

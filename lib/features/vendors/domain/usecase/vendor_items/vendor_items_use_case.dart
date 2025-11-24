@@ -6,7 +6,7 @@ class GetVendorItemsUseCase {
   GetVendorItemsUseCase(this._vendorItemsRepository);
   final VendorItemsRepositories _vendorItemsRepository;
 
-  Future<List<VendorItemsEntity>> call({
+  Future<VendorItemsEntity> call({
     required VendorItemsRequestEntity vendorItemsRequestEntity,
     required String vendorId,
   }) {

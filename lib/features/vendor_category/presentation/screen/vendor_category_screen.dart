@@ -9,6 +9,7 @@ import 'package:foodapp/features/vendor_category/domain/entity/vendor_category_r
 import 'package:foodapp/features/vendor_category/presentation/bloc/vendor_category_bloc.dart';
 import 'package:foodapp/features/vendor_category/presentation/viewmodel/vendor_category_viewmodel.dart';
 import 'package:foodapp/features/vendor_category/presentation/widget/vendor_category_container.dart';
+import 'package:foodapp/features/vendors/presentation/screen/vendor_screen.dart';
 import 'package:foodapp/injection_container.dart';
 
 class VendorCategoryScreen extends StatefulWidget {
@@ -85,8 +86,8 @@ class _VendorCategoryScreenState extends State<VendorCategoryScreen> {
                         await Navigator.push<void>(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (_) => VendorCategoryScreen(
-                              categoryId: vendor.id.toString(),
+                            builder: (_) => VendorScreen(
+                              vendorId: vendor.id.toString(),
                             ),
                           ),
                         );

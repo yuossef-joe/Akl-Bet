@@ -8,25 +8,24 @@ import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items
 import 'package:foodapp/features/vendors/domain/usecase/vendor_items/vendor_items_use_case.dart';
 
 typedef VendorItemsParams = ({
-  VendorItemsRequestEntity vendorRequestEntity,
-  String vendorId,
+  VendorItemsRequestEntity vendorRequest,
+  String id,
 });
 
-class VendorItemsBloc
-    extends BaseBloc<List<VendorItemsEntity>, VendorItemsParams> {
+class VendorItemsBloc extends BaseBloc<VendorItemsEntity, VendorItemsParams> {
   VendorItemsBloc(this._vendorItemsUseCase) : super();
   final GetVendorItemsUseCase _vendorItemsUseCase;
 
   @override
   Future<void> baseRequest(
     BaseEvent<VendorItemsParams> event,
-    Emitter<BaseState<List<VendorItemsEntity>>> emit,
+    Emitter<BaseState<VendorItemsEntity>> emit,
   ) async {
-    await basicFetchHandler<List<VendorItemsEntity>>(
+    await basicFetchHandler<VendorItemsEntity>(
       emit,
       _vendorItemsUseCase.call(
-        vendorItemsRequestEntity: event.params.vendorRequestEntity,
-        vendorId: event.params.vendorId,
+        vendorItemsRequestEntity: event.params.vendorRequest,
+        vendorId: event.params.id,
       ),
     );
   }

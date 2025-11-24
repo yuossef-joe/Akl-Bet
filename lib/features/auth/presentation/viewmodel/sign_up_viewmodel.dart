@@ -163,16 +163,10 @@ class SignUpViewModel extends ChangeNotifier {
       email: usernameController.text.trim(), // Using username as email for now
     );
 
-    final useCase = sl<SignUpUseCase>();
-
     final response = await submitHandler<SignUpResponseBodyEntity>(
       context,
-      body: () => useCase.call(signUpRequest),
-      onException: (failure) {
-        _setLoading(false);
-        _setError(failure.message);
-        _handleSignUpError(context, failure.message);
-      },
+      body: () => sl<SignUpUseCase>()(signUpRequest),
+      snackbarColor: Colors.red,
     );
 
     _setLoading(false);
@@ -199,18 +193,6 @@ class SignUpViewModel extends ChangeNotifier {
       context,
       Routes.mainShellRoute,
       arguments: 0, // Start at Home tab
-    );
-  }
-
-  // Handle sign up error
-  void _handleSignUpError(BuildContext context, String errorMessage) {
-    if (!context.mounted) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('خطأ في التسجيل: $errorMessage'),
-        backgroundColor: Colors.red,
-      ),
     );
   }
 

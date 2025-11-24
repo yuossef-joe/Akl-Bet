@@ -11,9 +11,6 @@ class DioFactory {
 
   Future<Dio> getDio() async {
     const timeOut = Duration(seconds: 30);
-    final token = await flutterSecureStorage.read(
-      key: SecureStorageKeys.accessToken.name,
-    );
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,
@@ -21,7 +18,20 @@ class DioFactory {
         receiveTimeout: timeOut,
         headers: {
           'Content-Type': 'application/json',
-          if (token != null) 'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final token = await flutterSecureStorage.read(
+            key: SecureStorageKeys.accessToken.name,
+          );
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          return handler.next(options);
         },
       ),
     );
