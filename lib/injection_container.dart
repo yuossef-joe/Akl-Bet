@@ -17,7 +17,6 @@ import 'package:foodapp/features/food_item/data/datasource/food_item_remote_data
 import 'package:foodapp/features/food_item/data/repositories/food_item_repositories_impl.dart';
 import 'package:foodapp/features/food_item/domain/repositories/food_item_repositories.dart';
 import 'package:foodapp/features/food_item/domain/usecase/food_item_usecase.dart';
-import 'package:foodapp/features/food_item/presentation/bloc/food_item_bloc.dart';
 import 'package:foodapp/features/home/data/repositories/address/address_repositories_impl.dart';
 import 'package:foodapp/features/home/data/repositories/category/categort_repositories_impl.dart';
 import 'package:foodapp/features/home/data/repositories/foodcategories/food_categories_repositry_impl.dart';
@@ -68,7 +67,6 @@ import 'package:foodapp/features/vendors/domain/repositories/vendor/vendor_repos
 import 'package:foodapp/features/vendors/domain/repositories/vendor_items/vendor_items_repositories.dart';
 import 'package:foodapp/features/vendors/domain/usecase/vendor/vendor_usecase.dart';
 import 'package:foodapp/features/vendors/domain/usecase/vendor_items/vendor_items_use_case.dart';
-import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt sl = GetIt.instance;
@@ -196,7 +194,5 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<FoodCategoriesBloc>(() => FoodCategoriesBloc(sl()))
     ..registerLazySingleton<OrdersBloc>(() => OrdersBloc(sl()))
     ..registerFactory<VendorCategoryBloc>(() => VendorCategoryBloc(sl()))
-    ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()))
-    ..registerFactory<FoodItemBloc>(() => FoodItemBloc(sl()))
-    ..registerFactory<VendorBloc>(() => VendorBloc(sl()));
+    ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()));
 }

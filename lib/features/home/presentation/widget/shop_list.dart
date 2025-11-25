@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/base/base_event.dart';
 import 'package:foodapp/core/base/base_state.dart';
+import 'package:foodapp/core/handler/submit_handler.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_request_body_entity.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
 import 'package:foodapp/features/home/presentation/bloc/nearby/nearby_bloc.dart';
 import 'package:foodapp/features/home/presentation/widget/widgets.dart';
+import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_request_entity.dart';
+import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
+import 'package:foodapp/features/vendors/domain/usecase/vendor/vendor_usecase.dart';
 import 'package:foodapp/features/vendors/presentation/screen/vendor_screen.dart';
 import 'package:foodapp/injection_container.dart';
 
@@ -50,8 +54,8 @@ class _ShopListWidgetState extends State<ShopListWidget> {
   }
 
   @override
-  Future<void> dispose() async {
-    await _nearbyBloc.close();
+  void dispose() {
+    _nearbyBloc.close();
     super.dispose();
   }
 
@@ -76,15 +80,26 @@ class _ShopListWidgetState extends State<ShopListWidget> {
             ),
             success: (shops) => ShopListContainer(
               shops: shops,
-              onShopTap: (onShopTap) async {
-                await Navigator.push(
+              onShopTap: (shop) async {
+                final result = await submitHandler<VendorResponseEntity>(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => VendorScreen(
-                      vendorId: onShopTap.id.toString(),
+                  body: () => sl<GetVendorUseCase>().call(
+                    vendorRequestEntity: VendorRequestEntity(
+                      vendorId: shop.id.toString(),
                     ),
                   ),
                 );
+
+                if (result != null && mounted) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => VendorScreen(
+                        vendorId: shop.id.toString(),
+                      ),
+                    ),
+                  );
+                }
               },
             ),
           );

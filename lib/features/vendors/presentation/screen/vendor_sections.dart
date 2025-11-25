@@ -9,6 +9,7 @@ import 'package:foodapp/core/resources/values_manager.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items_request_entity.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items_response_entity.dart';
 import 'package:foodapp/features/vendors/presentation/bloc/vendor_items/vendor_items_bloc.dart';
+import 'package:foodapp/features/vendors/presentation/viewmodel/vendor_items/vendor_items_viewmodel.dart';
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_sections_container.dart';
 
 class VendorSections extends StatefulWidget {
@@ -26,27 +27,38 @@ class VendorSections extends StatefulWidget {
 }
 
 class _VendorSectionsState extends State<VendorSections> {
+  late VendorItemsViewModel _viewModel;
   VendorItemsRequestEntity? _vendorItemsParams;
 
   @override
   void initState() {
     super.initState();
+    _viewModel = VendorItemsViewModel();
     if (widget.vendorId != null) {
-      final bloc = context.read<VendorItemsBloc>();
-      _vendorItemsParams = const VendorItemsRequestEntity(
-        page: '1',
-        limit: '20',
-        groupBySection: 'true',
-      );
-      bloc.add(
-        BaseEvent<VendorItemsParams>.fetch(
-          params: (
-            vendorRequest: _vendorItemsParams!,
-            id: widget.vendorId!,
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final bloc = context.read<VendorItemsBloc>();
+        _vendorItemsParams = const VendorItemsRequestEntity(
+          page: '1',
+          limit: '20',
+          groupBySection: 'true',
+        );
+        bloc.add(
+          BaseEvent<VendorItemsParams>.fetch(
+            params: (
+              vendorItemsRequest: _vendorItemsParams!,
+              id: widget.vendorId!,
+            ),
           ),
-        ),
-      );
+        );
+      });
     }
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,68 +69,6 @@ class _VendorSectionsState extends State<VendorSections> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header with title and view options
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p16,
-              vertical: AppPadding.p12,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'المنتجات',
-                  style: getBoldStyle(
-                    color: ColorManager.darkGrey,
-                    fontSize: FontSize.s16,
-                  ),
-                ),
-                Row(
-                  children: [
-                    // List view icon
-                    GestureDetector(
-                      onTap: () => setState(() {}),
-                      child: Container(
-                        padding: const EdgeInsets.all(AppPadding.p8),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorManager.primary,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(AppSize.s8),
-                        ),
-                        child: Icon(
-                          Icons.menu,
-                          size: AppSize.s20,
-                          color: ColorManager.primary,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: AppSize.s12),
-                    // Grid view icon
-                    GestureDetector(
-                      onTap: () => setState(() {}),
-                      child: Container(
-                        padding: const EdgeInsets.all(AppPadding.p8),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorManager.grey,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(AppSize.s8),
-                        ),
-                        child: Icon(
-                          Icons.dashboard_outlined,
-                          size: AppSize.s20,
-                          color: ColorManager.grey,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
           const SizedBox(height: AppSize.s16),
           // Section and Items List
           Expanded(
@@ -149,7 +99,10 @@ class _VendorSectionsState extends State<VendorSections> {
                         ),
                       );
                     }
-                    return VendorSectionsContainer(sections: data.data);
+                    return VendorSectionsContainer(
+                      sections: data.data,
+                      viewModel: _viewModel,
+                    );
                   },
                   failure: (error) => Center(
                     child: Text(
@@ -176,10 +129,5 @@ class _VendorSectionsState extends State<VendorSections> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

@@ -23,7 +23,8 @@ class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
         ApiConstants.vendorEndpoint(vendorRequest.vendorId),
         queryParameters: vendorRequest.toJson(),
       );
-      final vendorJson = response.data?['data'] as Map<String, dynamic>;
+      final vendorJson =
+          response.data?['data']?['vendor'] as Map<String, dynamic>;
       return VendorResponse.fromJson(vendorJson);
     });
   }

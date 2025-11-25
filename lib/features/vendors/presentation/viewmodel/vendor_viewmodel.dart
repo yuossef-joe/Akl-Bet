@@ -19,7 +19,7 @@ class VendorViewModel {
   }
 
   static String getClosingTimeText(VendorResponseEntity vendor) {
-    return vendor.closingTime ?? 'AM 4:00';
+    return vendor.closingTime ?? 'AM 00:00';
   }
 
   static Widget buildVendorIcon() {

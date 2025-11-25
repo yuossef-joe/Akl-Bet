@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/core/resources/font_manager.dart';
 import 'package:foodapp/core/resources/style_manager.dart';
 import 'package:foodapp/core/resources/values_manager.dart';
-import 'package:foodapp/features/food_item/presentation/bloc/food_item_bloc.dart';
 import 'package:foodapp/features/food_item/presentation/screen/food_item_screen.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items_response_entity.dart';
-import 'package:foodapp/injection_container.dart';
 
 class GridItemCard extends StatelessWidget {
   const GridItemCard({
@@ -23,10 +20,7 @@ class GridItemCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push<void>(
           MaterialPageRoute<void>(
-            builder: (context) => BlocProvider<FoodItemBloc>(
-              create: (context) => sl<FoodItemBloc>(),
-              child: FoodItemScreen(foodItemId: item.id.toString()),
-            ),
+            builder: (_) => FoodItemScreen(foodItemId: item.id.toString()),
           ),
         );
       },

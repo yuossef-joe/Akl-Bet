@@ -99,11 +99,11 @@ class AppInterceptor extends Interceptor {
       final options = error.response!.requestOptions;
       final tokenResult = await sl<RefreshTokenUseCase>()();
 
-      if (tokenResult?.tokenStatus == TokenStatus.valid) {
+      if (tokenResult.tokenStatus == TokenStatus.valid) {
         return handler.next(error);
       }
-      if (tokenResult?.tokenStatus == TokenStatus.refreshable) {
-        options.headers['Authorization'] = 'Bearer ${tokenResult!.token}';
+      if (tokenResult.tokenStatus == TokenStatus.refreshable) {
+        options.headers['Authorization'] = 'Bearer ${tokenResult.token}';
 
         final originResult = await _retry(options);
         if (originResult.statusCode != null &&
@@ -112,7 +112,7 @@ class AppInterceptor extends Interceptor {
         }
       }
 
-      if (tokenResult?.tokenStatus == TokenStatus.expired) {
+      if (tokenResult.tokenStatus == TokenStatus.expired) {
         await sl<SignoutUseCase>()();
       }
       return handler.reject(DioException(requestOptions: options));

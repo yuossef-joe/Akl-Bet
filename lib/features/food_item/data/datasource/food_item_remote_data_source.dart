@@ -21,7 +21,6 @@ class FoodItemRemoteDataSourceImpl implements FoodItemRemoteDataSource {
     return guard(() async {
       final response = await _dio.get<Map<String, dynamic>>(
         ApiConstants.foodItemsByIdEndPoint(foodItemRequest.foodItemId),
-        queryParameters: foodItemRequest.toJson(),
       );
       final foodItemJson = response.data?['data'] as Map<String, dynamic>;
       return FoodItemResponse.fromJson(foodItemJson);

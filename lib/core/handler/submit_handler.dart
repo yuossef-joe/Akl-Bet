@@ -21,7 +21,7 @@ Future<T?> submitHandler<T>(
   } on Failure catch (e) {
     dismissDialog(context);
     showSnackbarError(context, e.toString(), snackbarColor);
-  } catch (e, stackTrace) {
+  } catch (e) {
     dismissDialog(context);
     showSnackbarError(context, e.toString(), snackbarColor);
   }

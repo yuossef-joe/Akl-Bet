@@ -15,7 +15,7 @@ _FoodItemResponse _$FoodItemResponseFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       description: json['description'] as String,
       price: json['price'] as String,
-      originalPrice: json['originalPrice'] as String,
+      originalPrice: json['originalPrice'] as String?,
       image: json['image'] as String,
       ingredients: (json['ingredients'] as List<dynamic>)
           .map((e) => e as String)

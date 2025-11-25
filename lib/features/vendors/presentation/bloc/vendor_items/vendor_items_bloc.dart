@@ -8,7 +8,7 @@ import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items
 import 'package:foodapp/features/vendors/domain/usecase/vendor_items/vendor_items_use_case.dart';
 
 typedef VendorItemsParams = ({
-  VendorItemsRequestEntity vendorRequest,
+  VendorItemsRequestEntity vendorItemsRequest,
   String id,
 });
 
@@ -24,7 +24,7 @@ class VendorItemsBloc extends BaseBloc<VendorItemsEntity, VendorItemsParams> {
     await basicFetchHandler<VendorItemsEntity>(
       emit,
       _vendorItemsUseCase.call(
-        vendorItemsRequestEntity: event.params.vendorRequest,
+        vendorItemsRequestEntity: event.params.vendorItemsRequest,
         vendorId: event.params.id,
       ),
     );

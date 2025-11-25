@@ -4,6 +4,7 @@ import 'package:foodapp/core/resources/font_manager.dart';
 import 'package:foodapp/core/resources/style_manager.dart';
 import 'package:foodapp/core/resources/values_manager.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items_response_entity.dart';
+import 'package:foodapp/features/vendors/presentation/viewmodel/vendor_items/vendor_items_viewmodel.dart';
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_sections/grid_item_card.dart';
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_sections/list_item_card.dart';
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_sections/section_tabs.dart';
@@ -11,10 +12,12 @@ import 'package:foodapp/features/vendors/presentation/widgets/vendor_sections/se
 class VendorSectionsContainer extends StatefulWidget {
   const VendorSectionsContainer({
     required this.sections,
+    required this.viewModel,
     super.key,
   });
 
   final List<VendorItemsSectionEntity> sections;
+  final VendorItemsViewModel viewModel;
 
   @override
   State<VendorSectionsContainer> createState() =>
@@ -22,8 +25,10 @@ class VendorSectionsContainer extends StatefulWidget {
 }
 
 class _VendorSectionsContainerState extends State<VendorSectionsContainer> {
-  int _selectedViewIndex = 0;
-  int _selectedSectionIndex = 0;
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,64 +38,112 @@ class _VendorSectionsContainerState extends State<VendorSectionsContainer> {
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppPadding.p16,
-            vertical: AppPadding.p8,
+            vertical: AppPadding.p12,
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                onTap: () => setState(() => _selectedViewIndex = 1),
-                child: Container(
-                  padding: const EdgeInsets.all(AppPadding.p8),
-                  decoration: BoxDecoration(
-                    color: _selectedViewIndex == 1
-                        ? ColorManager.primary
-                        : ColorManager.grayBackground,
-                    borderRadius: BorderRadius.circular(AppSize.s8),
-                  ),
-                  child: Icon(
-                    Icons.dashboard,
-                    color: _selectedViewIndex == 1
-                        ? ColorManager.white
-                        : ColorManager.grey,
-                    size: AppSize.s20,
-                  ),
+              Text(
+                'المنتجات',
+                style: getBoldStyle(
+                  color: ColorManager.darkGrey,
+                  fontSize: FontSize.s16,
                 ),
               ),
-              const SizedBox(width: AppSize.s8),
-              GestureDetector(
-                onTap: () => setState(() => _selectedViewIndex = 0),
-                child: Container(
-                  padding: const EdgeInsets.all(AppPadding.p8),
-                  decoration: BoxDecoration(
-                    color: _selectedViewIndex == 0
-                        ? ColorManager.primary
-                        : ColorManager.grayBackground,
-                    borderRadius: BorderRadius.circular(AppSize.s8),
+              Row(
+                children: [
+                  // Grid view icon
+                  ValueListenableBuilder<int>(
+                    valueListenable: widget.viewModel.selectedViewIndexNotifier,
+                    builder: (context, selectedView, _) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () => widget.viewModel.setSelectedViewIndex(
+                              context,
+                              1,
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(AppPadding.p8),
+                              decoration: BoxDecoration(
+                                color: selectedView == 1
+                                    ? ColorManager.primary
+                                    : ColorManager.grayBackground,
+                                borderRadius: BorderRadius.circular(AppSize.s8),
+                              ),
+                              child: Icon(
+                                Icons.dashboard,
+                                color: selectedView == 1
+                                    ? ColorManager.white
+                                    : ColorManager.grey,
+                                size: AppSize.s20,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: AppSize.s8),
+                          GestureDetector(
+                            onTap: () => widget.viewModel.setSelectedViewIndex(
+                              context,
+                              0,
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(AppPadding.p8),
+                              decoration: BoxDecoration(
+                                color: selectedView == 0
+                                    ? ColorManager.primary
+                                    : ColorManager.grayBackground,
+                                borderRadius: BorderRadius.circular(AppSize.s8),
+                              ),
+                              child: Icon(
+                                Icons.list,
+                                color: selectedView == 0
+                                    ? ColorManager.white
+                                    : ColorManager.grey,
+                                size: AppSize.s20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                  child: Icon(
-                    Icons.list,
-                    color: _selectedViewIndex == 0
-                        ? ColorManager.white
-                        : ColorManager.grey,
-                    size: AppSize.s20,
-                  ),
-                ),
+                ],
               ),
             ],
           ),
         ),
-        // SectionTabs(
-        //   sections: widget.sections,
-        //   selectedIndex: _selectedSectionIndex,
-        //   onTabChanged: (index) =>
-        //       setState(() => _selectedSectionIndex = index),
-        // ),
+        ValueListenableBuilder<int>(
+          valueListenable: widget.viewModel.selectedSectionIndexNotifier,
+          builder: (context, selectedSection, _) {
+            return SectionTabs(
+              sections: widget.sections,
+              selectedIndex: selectedSection,
+              onTabChanged: (index) {
+                widget.viewModel.setSelectedSectionIndex(context, index);
+              },
+            );
+          },
+        ),
         const SizedBox(height: AppSize.s12),
         Expanded(
-          child: _selectedViewIndex == 0
-              ? _buildListView([widget.sections[_selectedSectionIndex]])
-              : _buildGridView([widget.sections[_selectedSectionIndex]]),
+          child: ValueListenableBuilder<int>(
+            valueListenable: widget.viewModel.selectedSectionIndexNotifier,
+            builder: (context, selectedSection, _) {
+              return ValueListenableBuilder<int>(
+                valueListenable: widget.viewModel.selectedViewIndexNotifier,
+                builder: (context, selectedView, _) {
+                  return selectedView == 0
+                      ? _buildListView([
+                          widget.sections[selectedSection],
+                        ])
+                      : _buildGridView([
+                          widget.sections[selectedSection],
+                        ]);
+                },
+              );
+            },
+          ),
         ),
       ],
     );

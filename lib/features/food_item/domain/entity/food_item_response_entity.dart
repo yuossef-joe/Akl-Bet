@@ -13,7 +13,7 @@ abstract class FoodItemResponseEntity with _$FoodItemResponseEntity {
     required String name,
     required String description,
     required String price,
-    required String originalPrice,
+    String? originalPrice,
     required String image,
     required List<String> ingredients,
     required List<String> allergens,

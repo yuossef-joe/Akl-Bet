@@ -5,10 +5,8 @@ import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_request_entity.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
 import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
-import 'package:foodapp/features/vendors/presentation/bloc/vendor_items/vendor_items_bloc.dart';
 import 'package:foodapp/features/vendors/presentation/screen/vendor_sections.dart';
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_container.dart';
-import 'package:foodapp/injection_container.dart';
 
 class VendorScreen extends StatefulWidget {
   const VendorScreen({required this.vendorId, super.key});
@@ -20,24 +18,23 @@ class VendorScreen extends StatefulWidget {
 }
 
 class _VendorScreenState extends State<VendorScreen> {
-  late VendorBloc _bloc;
-
   @override
   void initState() {
     super.initState();
-    _bloc = sl<VendorBloc>();
-    _bloc.add(
-      BaseEvent<VendorRequestEntity>.fetch(
-        params: VendorRequestEntity(
-          vendorId: widget.vendorId,
+
+    final vendorRequestEntity = VendorRequestEntity(vendorId: widget.vendorId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<VendorBloc>().add(
+        BaseEvent<VendorRequestEntity>.fetch(
+          params: vendorRequestEntity,
         ),
-      ),
-    );
+      );
+    });
   }
 
   @override
-  Future<void> dispose() async {
-    await _bloc.close();
+  void dispose() {
     super.dispose();
   }
 
@@ -56,37 +53,31 @@ class _VendorScreenState extends State<VendorScreen> {
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
-        child: BlocProvider<VendorBloc>.value(
-          value: _bloc,
-          child: BlocBuilder<VendorBloc, BaseState<VendorResponseEntity>>(
-            builder: (context, state) {
-              return state.when(
-                initial: () => const SizedBox.shrink(),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
+        child: BlocBuilder<VendorBloc, BaseState<VendorResponseEntity>>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => const SizedBox.shrink(),
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              empty: () => const Center(
+                child: Text('No vendor data found.'),
+              ),
+              failure: (_) => const Center(
+                child: Text('Failed to load vendor data.'),
+              ),
+              success: (vendor) => SingleChildScrollView(
+                child: Column(
+                  children: [
+                    VendorContainer(vendor: vendor),
+                    VendorSections(
+                      vendorId: widget.vendorId,
+                    ),
+                  ],
                 ),
-                empty: () => const Center(
-                  child: Text('No vendor data found.'),
-                ),
-                failure: (_) => const Center(
-                  child: Text('Failed to load vendor data.'),
-                ),
-                success: (vendor) => SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      VendorContainer(vendor: vendor),
-                      BlocProvider<VendorItemsBloc>(
-                        create: (_) => VendorItemsBloc(sl()),
-                        child: VendorSections(
-                          vendorId: widget.vendorId,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

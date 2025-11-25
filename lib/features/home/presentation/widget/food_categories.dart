@@ -54,7 +54,7 @@ class FoodCategories extends StatelessWidget {
                   onCategoryTap: (category) async {
                     await Navigator.push(
                       context,
-                      MaterialPageRoute(
+                      MaterialPageRoute<void>(
                         builder: (_) => VendorCategoryScreen(
                           categoryId: category.id.toString(),
                         ),
