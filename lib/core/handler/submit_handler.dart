@@ -13,7 +13,7 @@ Future<T?> submitHandler<T>(
   Color? snackbarColor,
 }) async {
   try {
-    showLoadingDialog(context);
+    // showLoadingDialog(context);
     final result = await body();
     if (!context.mounted) return null;
     if (isDismissible) dismissDialog(context);

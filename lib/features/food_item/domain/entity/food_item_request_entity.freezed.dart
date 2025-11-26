@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FoodItemRequestEntity {
 
- String get foodItemId;
+ String get foodItemId; String get includeVariants;
 /// Create a copy of FoodItemRequestEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $FoodItemRequestEntityCopyWith<FoodItemRequestEntity> get copyWith => _$FoodItem
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodItemRequestEntity&&(identical(other.foodItemId, foodItemId) || other.foodItemId == foodItemId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodItemRequestEntity&&(identical(other.foodItemId, foodItemId) || other.foodItemId == foodItemId)&&(identical(other.includeVariants, includeVariants) || other.includeVariants == includeVariants));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,foodItemId);
+int get hashCode => Object.hash(runtimeType,foodItemId,includeVariants);
 
 @override
 String toString() {
-  return 'FoodItemRequestEntity(foodItemId: $foodItemId)';
+  return 'FoodItemRequestEntity(foodItemId: $foodItemId, includeVariants: $includeVariants)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $FoodItemRequestEntityCopyWith<$Res>  {
   factory $FoodItemRequestEntityCopyWith(FoodItemRequestEntity value, $Res Function(FoodItemRequestEntity) _then) = _$FoodItemRequestEntityCopyWithImpl;
 @useResult
 $Res call({
- String foodItemId
+ String foodItemId, String includeVariants
 });
 
 
@@ -62,9 +62,10 @@ class _$FoodItemRequestEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodItemRequestEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? foodItemId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? foodItemId = null,Object? includeVariants = null,}) {
   return _then(_self.copyWith(
 foodItemId: null == foodItemId ? _self.foodItemId : foodItemId // ignore: cast_nullable_to_non_nullable
+as String,includeVariants: null == includeVariants ? _self.includeVariants : includeVariants // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -150,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String foodItemId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String foodItemId,  String includeVariants)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FoodItemRequestEntity() when $default != null:
-return $default(_that.foodItemId);case _:
+return $default(_that.foodItemId,_that.includeVariants);case _:
   return orElse();
 
 }
@@ -171,10 +172,10 @@ return $default(_that.foodItemId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String foodItemId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String foodItemId,  String includeVariants)  $default,) {final _that = this;
 switch (_that) {
 case _FoodItemRequestEntity():
-return $default(_that.foodItemId);case _:
+return $default(_that.foodItemId,_that.includeVariants);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +192,10 @@ return $default(_that.foodItemId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String foodItemId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String foodItemId,  String includeVariants)?  $default,) {final _that = this;
 switch (_that) {
 case _FoodItemRequestEntity() when $default != null:
-return $default(_that.foodItemId);case _:
+return $default(_that.foodItemId,_that.includeVariants);case _:
   return null;
 
 }
@@ -206,10 +207,11 @@ return $default(_that.foodItemId);case _:
 
 
 class _FoodItemRequestEntity implements FoodItemRequestEntity {
-  const _FoodItemRequestEntity({required this.foodItemId});
+  const _FoodItemRequestEntity({required this.foodItemId, required this.includeVariants});
   
 
 @override final  String foodItemId;
+@override final  String includeVariants;
 
 /// Create a copy of FoodItemRequestEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +223,16 @@ _$FoodItemRequestEntityCopyWith<_FoodItemRequestEntity> get copyWith => __$FoodI
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodItemRequestEntity&&(identical(other.foodItemId, foodItemId) || other.foodItemId == foodItemId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodItemRequestEntity&&(identical(other.foodItemId, foodItemId) || other.foodItemId == foodItemId)&&(identical(other.includeVariants, includeVariants) || other.includeVariants == includeVariants));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,foodItemId);
+int get hashCode => Object.hash(runtimeType,foodItemId,includeVariants);
 
 @override
 String toString() {
-  return 'FoodItemRequestEntity(foodItemId: $foodItemId)';
+  return 'FoodItemRequestEntity(foodItemId: $foodItemId, includeVariants: $includeVariants)';
 }
 
 
@@ -241,7 +243,7 @@ abstract mixin class _$FoodItemRequestEntityCopyWith<$Res> implements $FoodItemR
   factory _$FoodItemRequestEntityCopyWith(_FoodItemRequestEntity value, $Res Function(_FoodItemRequestEntity) _then) = __$FoodItemRequestEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String foodItemId
+ String foodItemId, String includeVariants
 });
 
 
@@ -258,9 +260,10 @@ class __$FoodItemRequestEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodItemRequestEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? foodItemId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? foodItemId = null,Object? includeVariants = null,}) {
   return _then(_FoodItemRequestEntity(
 foodItemId: null == foodItemId ? _self.foodItemId : foodItemId // ignore: cast_nullable_to_non_nullable
+as String,includeVariants: null == includeVariants ? _self.includeVariants : includeVariants // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

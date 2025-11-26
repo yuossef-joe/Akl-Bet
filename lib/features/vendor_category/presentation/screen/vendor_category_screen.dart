@@ -23,24 +23,23 @@ class VendorCategoryScreen extends StatefulWidget {
 }
 
 class _VendorCategoryScreenState extends State<VendorCategoryScreen> {
-  late VendorCategoryBloc _bloc;
-
   @override
   void initState() {
     super.initState();
-    _bloc = sl<VendorCategoryBloc>();
-    _bloc.add(
-      BaseEvent<VendorCategoryRequestEntity>.fetch(
-        params: VendorCategoryRequestEntity(
-          categoryId: widget.categoryId,
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<VendorCategoryBloc>().add(
+        BaseEvent<VendorCategoryRequestEntity>.fetch(
+          params: VendorCategoryRequestEntity(
+            categoryId: widget.categoryId,
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   @override
-  Future<void> dispose() async {
-    await _bloc.close();
+  void dispose() {
     super.dispose();
   }
 
@@ -58,49 +57,43 @@ class _VendorCategoryScreenState extends State<VendorCategoryScreen> {
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
-        child: BlocProvider<VendorCategoryBloc>.value(
-          value: _bloc,
-          child:
-              BlocBuilder<
-                VendorCategoryBloc,
-                BaseState<List<VendorCategoryResponseEntity>>
-              >(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () => const Center(child: ShopShimmer()),
-                    loading: () => const Center(child: ShopShimmer()),
-                    empty: () => const Center(child: Text('No vendors found.')),
-                    failure: (_) => ShopError(
-                      onRetry: () {
-                        _bloc.add(
-                          BaseEvent.fetch(
-                            params: VendorCategoryRequestEntity(
-                              categoryId: widget.categoryId,
-                            ),
+        child:
+            BlocBuilder<
+              VendorCategoryBloc,
+              BaseState<List<VendorCategoryResponseEntity>>
+            >(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const Center(child: ShopShimmer()),
+                  loading: () => const Center(child: ShopShimmer()),
+                  empty: () => const Center(child: Text('No vendors found.')),
+                  failure: (_) => ShopError(
+                    onRetry: () {
+                      context.read<VendorCategoryBloc>().add(
+                        BaseEvent.fetch(
+                          params: VendorCategoryRequestEntity(
+                            categoryId: widget.categoryId,
                           ),
-                        );
-                      },
-                    ),
-                    success: (vendors) => VendorCategoryContainer(
-                      vendors: vendors,
-                      onVendorTap: (vendor) async {
-                        await Navigator.push<void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (_) => BlocProvider<VendorBloc>(
-                              create: (_) => VendorBloc(sl()),
-                              child: VendorScreen(
-                                vendorId: vendor.id.toString(),
-                              ),
-                            ),
+                        ),
+                      );
+                    },
+                  ),
+                  success: (vendors) => VendorCategoryContainer(
+                    vendors: vendors,
+                    onVendorTap: (vendor) async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VendorScreen(
+                            vendorId: vendor.id.toString(),
                           ),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-        ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
       ),
     );
   }

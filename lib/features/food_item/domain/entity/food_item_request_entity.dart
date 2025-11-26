@@ -7,6 +7,7 @@ part 'food_item_request_entity.freezed.dart';
 abstract class FoodItemRequestEntity with _$FoodItemRequestEntity {
   const factory FoodItemRequestEntity({
     required String foodItemId,
+    required String includeVariants,
   }) = _FoodItemRequestEntity;
 }
 
@@ -14,6 +15,7 @@ extension FoodItemRequestEntityX on FoodItemRequestEntity {
   FoodItemRequest toModel() {
     return FoodItemRequest(
       foodItemId: foodItemId,
+      includeVariants: includeVariants,
     );
   }
 }

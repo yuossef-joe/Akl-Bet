@@ -30,6 +30,7 @@ abstract class FoodItemResponse with _$FoodItemResponse {
     required VendorData vendor,
     required CategoryData category,
     required SectionData section,
+    @Default([]) List<VariantData> variants,
   }) = _FoodItemResponse;
 
   factory FoodItemResponse.fromJson(Map<String, dynamic> json) =>
@@ -69,4 +70,19 @@ abstract class SectionData with _$SectionData {
 
   factory SectionData.fromJson(Map<String, dynamic> json) =>
       _$SectionDataFromJson(json);
+}
+
+@freezed
+abstract class VariantData with _$VariantData {
+  const factory VariantData({
+    required int id,
+    required int foodItemId,
+    required String name,
+    required String priceAdjustment,
+    required bool isDefault,
+    required bool isAvailable,
+  }) = _VariantData;
+
+  factory VariantData.fromJson(Map<String, dynamic> json) =>
+      _$VariantDataFromJson(json);
 }

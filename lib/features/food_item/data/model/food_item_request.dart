@@ -7,6 +7,7 @@ part 'food_item_request.freezed.dart';
 abstract class FoodItemRequest with _$FoodItemRequest {
   const factory FoodItemRequest({
     required String foodItemId,
+    required String includeVariants,
   }) = _FoodItemRequest;
   factory FoodItemRequest.fromJson(Map<String, dynamic> json) =>
       _$FoodItemRequestFromJson(json);

@@ -22,7 +22,7 @@ class FoodCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          sl<FoodCategoriesBloc>()
+          FoodCategoriesBloc(sl())
             ..add(const BaseEvent<void>.fetch(params: null)),
       child:
           BlocBuilder<

@@ -30,6 +30,7 @@ abstract class FoodItemResponseEntity with _$FoodItemResponseEntity {
     required VendorEntity vendor,
     required CategoryEntity category,
     required SectionEntity section,
+    @Default([]) List<VariantEntity> variants,
   }) = _FoodItemResponseEntity;
   factory FoodItemResponseEntity.fromModel(FoodItemResponse model) =>
       FoodItemResponseEntity(
@@ -57,6 +58,9 @@ abstract class FoodItemResponseEntity with _$FoodItemResponseEntity {
         vendor: VendorEntity.fromModel(model.vendor),
         category: CategoryEntity.fromModel(model.category),
         section: SectionEntity.fromModel(model.section),
+        variants: model.variants
+            .map((variant) => VariantEntity.fromModel(variant))
+            .toList(),
       );
 }
 
@@ -100,5 +104,26 @@ abstract class SectionEntity with _$SectionEntity {
   factory SectionEntity.fromModel(SectionData model) => SectionEntity(
     id: model.id,
     title: model.title,
+  );
+}
+
+@freezed
+abstract class VariantEntity with _$VariantEntity {
+  const factory VariantEntity({
+    required int id,
+    required int foodItemId,
+    required String name,
+    required String priceAdjustment,
+    required bool isDefault,
+    required bool isAvailable,
+  }) = _VariantEntity;
+
+  factory VariantEntity.fromModel(VariantData model) => VariantEntity(
+    id: model.id,
+    foodItemId: model.foodItemId,
+    name: model.name,
+    priceAdjustment: model.priceAdjustment,
+    isDefault: model.isDefault,
+    isAvailable: model.isAvailable,
   );
 }

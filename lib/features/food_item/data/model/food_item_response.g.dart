@@ -36,6 +36,11 @@ _FoodItemResponse _$FoodItemResponseFromJson(Map<String, dynamic> json) =>
       vendor: VendorData.fromJson(json['vendor'] as Map<String, dynamic>),
       category: CategoryData.fromJson(json['category'] as Map<String, dynamic>),
       section: SectionData.fromJson(json['section'] as Map<String, dynamic>),
+      variants:
+          (json['variants'] as List<dynamic>?)
+              ?.map((e) => VariantData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$FoodItemResponseToJson(_FoodItemResponse instance) =>
@@ -64,6 +69,7 @@ Map<String, dynamic> _$FoodItemResponseToJson(_FoodItemResponse instance) =>
       'vendor': instance.vendor,
       'category': instance.category,
       'section': instance.section,
+      'variants': instance.variants,
     };
 
 _VendorData _$VendorDataFromJson(Map<String, dynamic> json) => _VendorData(
@@ -97,3 +103,22 @@ _SectionData _$SectionDataFromJson(Map<String, dynamic> json) => _SectionData(
 
 Map<String, dynamic> _$SectionDataToJson(_SectionData instance) =>
     <String, dynamic>{'id': instance.id, 'title': instance.title};
+
+_VariantData _$VariantDataFromJson(Map<String, dynamic> json) => _VariantData(
+  id: (json['id'] as num).toInt(),
+  foodItemId: (json['foodItemId'] as num).toInt(),
+  name: json['name'] as String,
+  priceAdjustment: json['priceAdjustment'] as String,
+  isDefault: json['isDefault'] as bool,
+  isAvailable: json['isAvailable'] as bool,
+);
+
+Map<String, dynamic> _$VariantDataToJson(_VariantData instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'foodItemId': instance.foodItemId,
+      'name': instance.name,
+      'priceAdjustment': instance.priceAdjustment,
+      'isDefault': instance.isDefault,
+      'isAvailable': instance.isAvailable,
+    };

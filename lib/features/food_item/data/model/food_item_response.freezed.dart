@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FoodItemResponse {
 
- int get id; int get vendorId; int get categoryId; int get sectionId; String get name; String get description; String get price; String? get originalPrice; String get image; List<String> get ingredients; List<String> get allergens; int get calories; int get preparationTimeMinutes; bool get isSpicy; int get spiceLevel; bool get isAvailable; bool get isFeatured; int get sortOrder; String get rating; int get totalReviews; int get totalOrders; VendorData get vendor; CategoryData get category; SectionData get section;
+ int get id; int get vendorId; int get categoryId; int get sectionId; String get name; String get description; String get price; String? get originalPrice; String get image; List<String> get ingredients; List<String> get allergens; int get calories; int get preparationTimeMinutes; bool get isSpicy; int get spiceLevel; bool get isAvailable; bool get isFeatured; int get sortOrder; String get rating; int get totalReviews; int get totalOrders; VendorData get vendor; CategoryData get category; SectionData get section; List<VariantData> get variants;
 /// Create a copy of FoodItemResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $FoodItemResponseCopyWith<FoodItemResponse> get copyWith => _$FoodItemResponseCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodItemResponse&&(identical(other.id, id) || other.id == id)&&(identical(other.vendorId, vendorId) || other.vendorId == vendorId)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.sectionId, sectionId) || other.sectionId == sectionId)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.price, price) || other.price == price)&&(identical(other.originalPrice, originalPrice) || other.originalPrice == originalPrice)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.ingredients, ingredients)&&const DeepCollectionEquality().equals(other.allergens, allergens)&&(identical(other.calories, calories) || other.calories == calories)&&(identical(other.preparationTimeMinutes, preparationTimeMinutes) || other.preparationTimeMinutes == preparationTimeMinutes)&&(identical(other.isSpicy, isSpicy) || other.isSpicy == isSpicy)&&(identical(other.spiceLevel, spiceLevel) || other.spiceLevel == spiceLevel)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.isFeatured, isFeatured) || other.isFeatured == isFeatured)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.totalReviews, totalReviews) || other.totalReviews == totalReviews)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.vendor, vendor) || other.vendor == vendor)&&(identical(other.category, category) || other.category == category)&&(identical(other.section, section) || other.section == section));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodItemResponse&&(identical(other.id, id) || other.id == id)&&(identical(other.vendorId, vendorId) || other.vendorId == vendorId)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.sectionId, sectionId) || other.sectionId == sectionId)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.price, price) || other.price == price)&&(identical(other.originalPrice, originalPrice) || other.originalPrice == originalPrice)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.ingredients, ingredients)&&const DeepCollectionEquality().equals(other.allergens, allergens)&&(identical(other.calories, calories) || other.calories == calories)&&(identical(other.preparationTimeMinutes, preparationTimeMinutes) || other.preparationTimeMinutes == preparationTimeMinutes)&&(identical(other.isSpicy, isSpicy) || other.isSpicy == isSpicy)&&(identical(other.spiceLevel, spiceLevel) || other.spiceLevel == spiceLevel)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.isFeatured, isFeatured) || other.isFeatured == isFeatured)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.totalReviews, totalReviews) || other.totalReviews == totalReviews)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.vendor, vendor) || other.vendor == vendor)&&(identical(other.category, category) || other.category == category)&&(identical(other.section, section) || other.section == section)&&const DeepCollectionEquality().equals(other.variants, variants));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,vendorId,categoryId,sectionId,name,description,price,originalPrice,image,const DeepCollectionEquality().hash(ingredients),const DeepCollectionEquality().hash(allergens),calories,preparationTimeMinutes,isSpicy,spiceLevel,isAvailable,isFeatured,sortOrder,rating,totalReviews,totalOrders,vendor,category,section]);
+int get hashCode => Object.hashAll([runtimeType,id,vendorId,categoryId,sectionId,name,description,price,originalPrice,image,const DeepCollectionEquality().hash(ingredients),const DeepCollectionEquality().hash(allergens),calories,preparationTimeMinutes,isSpicy,spiceLevel,isAvailable,isFeatured,sortOrder,rating,totalReviews,totalOrders,vendor,category,section,const DeepCollectionEquality().hash(variants)]);
 
 @override
 String toString() {
-  return 'FoodItemResponse(id: $id, vendorId: $vendorId, categoryId: $categoryId, sectionId: $sectionId, name: $name, description: $description, price: $price, originalPrice: $originalPrice, image: $image, ingredients: $ingredients, allergens: $allergens, calories: $calories, preparationTimeMinutes: $preparationTimeMinutes, isSpicy: $isSpicy, spiceLevel: $spiceLevel, isAvailable: $isAvailable, isFeatured: $isFeatured, sortOrder: $sortOrder, rating: $rating, totalReviews: $totalReviews, totalOrders: $totalOrders, vendor: $vendor, category: $category, section: $section)';
+  return 'FoodItemResponse(id: $id, vendorId: $vendorId, categoryId: $categoryId, sectionId: $sectionId, name: $name, description: $description, price: $price, originalPrice: $originalPrice, image: $image, ingredients: $ingredients, allergens: $allergens, calories: $calories, preparationTimeMinutes: $preparationTimeMinutes, isSpicy: $isSpicy, spiceLevel: $spiceLevel, isAvailable: $isAvailable, isFeatured: $isFeatured, sortOrder: $sortOrder, rating: $rating, totalReviews: $totalReviews, totalOrders: $totalOrders, vendor: $vendor, category: $category, section: $section, variants: $variants)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $FoodItemResponseCopyWith<$Res>  {
   factory $FoodItemResponseCopyWith(FoodItemResponse value, $Res Function(FoodItemResponse) _then) = _$FoodItemResponseCopyWithImpl;
 @useResult
 $Res call({
- int id, int vendorId, int categoryId, int sectionId, String name, String description, String price, String? originalPrice, String image, List<String> ingredients, List<String> allergens, int calories, int preparationTimeMinutes, bool isSpicy, int spiceLevel, bool isAvailable, bool isFeatured, int sortOrder, String rating, int totalReviews, int totalOrders, VendorData vendor, CategoryData category, SectionData section
+ int id, int vendorId, int categoryId, int sectionId, String name, String description, String price, String? originalPrice, String image, List<String> ingredients, List<String> allergens, int calories, int preparationTimeMinutes, bool isSpicy, int spiceLevel, bool isAvailable, bool isFeatured, int sortOrder, String rating, int totalReviews, int totalOrders, VendorData vendor, CategoryData category, SectionData section, List<VariantData> variants
 });
 
 
@@ -65,7 +65,7 @@ class _$FoodItemResponseCopyWithImpl<$Res>
 
 /// Create a copy of FoodItemResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? vendorId = null,Object? categoryId = null,Object? sectionId = null,Object? name = null,Object? description = null,Object? price = null,Object? originalPrice = freezed,Object? image = null,Object? ingredients = null,Object? allergens = null,Object? calories = null,Object? preparationTimeMinutes = null,Object? isSpicy = null,Object? spiceLevel = null,Object? isAvailable = null,Object? isFeatured = null,Object? sortOrder = null,Object? rating = null,Object? totalReviews = null,Object? totalOrders = null,Object? vendor = null,Object? category = null,Object? section = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? vendorId = null,Object? categoryId = null,Object? sectionId = null,Object? name = null,Object? description = null,Object? price = null,Object? originalPrice = freezed,Object? image = null,Object? ingredients = null,Object? allergens = null,Object? calories = null,Object? preparationTimeMinutes = null,Object? isSpicy = null,Object? spiceLevel = null,Object? isAvailable = null,Object? isFeatured = null,Object? sortOrder = null,Object? rating = null,Object? totalReviews = null,Object? totalOrders = null,Object? vendor = null,Object? category = null,Object? section = null,Object? variants = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,vendorId: null == vendorId ? _self.vendorId : vendorId // ignore: cast_nullable_to_non_nullable
@@ -91,7 +91,8 @@ as int,totalOrders: null == totalOrders ? _self.totalOrders : totalOrders // ign
 as int,vendor: null == vendor ? _self.vendor : vendor // ignore: cast_nullable_to_non_nullable
 as VendorData,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as CategoryData,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
-as SectionData,
+as SectionData,variants: null == variants ? _self.variants : variants // ignore: cast_nullable_to_non_nullable
+as List<VariantData>,
   ));
 }
 /// Create a copy of FoodItemResponse
@@ -203,10 +204,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int vendorId,  int categoryId,  int sectionId,  String name,  String description,  String price,  String? originalPrice,  String image,  List<String> ingredients,  List<String> allergens,  int calories,  int preparationTimeMinutes,  bool isSpicy,  int spiceLevel,  bool isAvailable,  bool isFeatured,  int sortOrder,  String rating,  int totalReviews,  int totalOrders,  VendorData vendor,  CategoryData category,  SectionData section)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int vendorId,  int categoryId,  int sectionId,  String name,  String description,  String price,  String? originalPrice,  String image,  List<String> ingredients,  List<String> allergens,  int calories,  int preparationTimeMinutes,  bool isSpicy,  int spiceLevel,  bool isAvailable,  bool isFeatured,  int sortOrder,  String rating,  int totalReviews,  int totalOrders,  VendorData vendor,  CategoryData category,  SectionData section,  List<VariantData> variants)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FoodItemResponse() when $default != null:
-return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.name,_that.description,_that.price,_that.originalPrice,_that.image,_that.ingredients,_that.allergens,_that.calories,_that.preparationTimeMinutes,_that.isSpicy,_that.spiceLevel,_that.isAvailable,_that.isFeatured,_that.sortOrder,_that.rating,_that.totalReviews,_that.totalOrders,_that.vendor,_that.category,_that.section);case _:
+return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.name,_that.description,_that.price,_that.originalPrice,_that.image,_that.ingredients,_that.allergens,_that.calories,_that.preparationTimeMinutes,_that.isSpicy,_that.spiceLevel,_that.isAvailable,_that.isFeatured,_that.sortOrder,_that.rating,_that.totalReviews,_that.totalOrders,_that.vendor,_that.category,_that.section,_that.variants);case _:
   return orElse();
 
 }
@@ -224,10 +225,10 @@ return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.n
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int vendorId,  int categoryId,  int sectionId,  String name,  String description,  String price,  String? originalPrice,  String image,  List<String> ingredients,  List<String> allergens,  int calories,  int preparationTimeMinutes,  bool isSpicy,  int spiceLevel,  bool isAvailable,  bool isFeatured,  int sortOrder,  String rating,  int totalReviews,  int totalOrders,  VendorData vendor,  CategoryData category,  SectionData section)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int vendorId,  int categoryId,  int sectionId,  String name,  String description,  String price,  String? originalPrice,  String image,  List<String> ingredients,  List<String> allergens,  int calories,  int preparationTimeMinutes,  bool isSpicy,  int spiceLevel,  bool isAvailable,  bool isFeatured,  int sortOrder,  String rating,  int totalReviews,  int totalOrders,  VendorData vendor,  CategoryData category,  SectionData section,  List<VariantData> variants)  $default,) {final _that = this;
 switch (_that) {
 case _FoodItemResponse():
-return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.name,_that.description,_that.price,_that.originalPrice,_that.image,_that.ingredients,_that.allergens,_that.calories,_that.preparationTimeMinutes,_that.isSpicy,_that.spiceLevel,_that.isAvailable,_that.isFeatured,_that.sortOrder,_that.rating,_that.totalReviews,_that.totalOrders,_that.vendor,_that.category,_that.section);case _:
+return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.name,_that.description,_that.price,_that.originalPrice,_that.image,_that.ingredients,_that.allergens,_that.calories,_that.preparationTimeMinutes,_that.isSpicy,_that.spiceLevel,_that.isAvailable,_that.isFeatured,_that.sortOrder,_that.rating,_that.totalReviews,_that.totalOrders,_that.vendor,_that.category,_that.section,_that.variants);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -244,10 +245,10 @@ return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.n
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int vendorId,  int categoryId,  int sectionId,  String name,  String description,  String price,  String? originalPrice,  String image,  List<String> ingredients,  List<String> allergens,  int calories,  int preparationTimeMinutes,  bool isSpicy,  int spiceLevel,  bool isAvailable,  bool isFeatured,  int sortOrder,  String rating,  int totalReviews,  int totalOrders,  VendorData vendor,  CategoryData category,  SectionData section)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int vendorId,  int categoryId,  int sectionId,  String name,  String description,  String price,  String? originalPrice,  String image,  List<String> ingredients,  List<String> allergens,  int calories,  int preparationTimeMinutes,  bool isSpicy,  int spiceLevel,  bool isAvailable,  bool isFeatured,  int sortOrder,  String rating,  int totalReviews,  int totalOrders,  VendorData vendor,  CategoryData category,  SectionData section,  List<VariantData> variants)?  $default,) {final _that = this;
 switch (_that) {
 case _FoodItemResponse() when $default != null:
-return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.name,_that.description,_that.price,_that.originalPrice,_that.image,_that.ingredients,_that.allergens,_that.calories,_that.preparationTimeMinutes,_that.isSpicy,_that.spiceLevel,_that.isAvailable,_that.isFeatured,_that.sortOrder,_that.rating,_that.totalReviews,_that.totalOrders,_that.vendor,_that.category,_that.section);case _:
+return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.name,_that.description,_that.price,_that.originalPrice,_that.image,_that.ingredients,_that.allergens,_that.calories,_that.preparationTimeMinutes,_that.isSpicy,_that.spiceLevel,_that.isAvailable,_that.isFeatured,_that.sortOrder,_that.rating,_that.totalReviews,_that.totalOrders,_that.vendor,_that.category,_that.section,_that.variants);case _:
   return null;
 
 }
@@ -259,7 +260,7 @@ return $default(_that.id,_that.vendorId,_that.categoryId,_that.sectionId,_that.n
 @JsonSerializable()
 
 class _FoodItemResponse implements FoodItemResponse {
-  const _FoodItemResponse({required this.id, required this.vendorId, required this.categoryId, required this.sectionId, required this.name, required this.description, required this.price, this.originalPrice, required this.image, required final  List<String> ingredients, required final  List<String> allergens, required this.calories, required this.preparationTimeMinutes, required this.isSpicy, required this.spiceLevel, required this.isAvailable, required this.isFeatured, required this.sortOrder, required this.rating, required this.totalReviews, required this.totalOrders, required this.vendor, required this.category, required this.section}): _ingredients = ingredients,_allergens = allergens;
+  const _FoodItemResponse({required this.id, required this.vendorId, required this.categoryId, required this.sectionId, required this.name, required this.description, required this.price, this.originalPrice, required this.image, required final  List<String> ingredients, required final  List<String> allergens, required this.calories, required this.preparationTimeMinutes, required this.isSpicy, required this.spiceLevel, required this.isAvailable, required this.isFeatured, required this.sortOrder, required this.rating, required this.totalReviews, required this.totalOrders, required this.vendor, required this.category, required this.section, final  List<VariantData> variants = const []}): _ingredients = ingredients,_allergens = allergens,_variants = variants;
   factory _FoodItemResponse.fromJson(Map<String, dynamic> json) => _$FoodItemResponseFromJson(json);
 
 @override final  int id;
@@ -298,6 +299,13 @@ class _FoodItemResponse implements FoodItemResponse {
 @override final  VendorData vendor;
 @override final  CategoryData category;
 @override final  SectionData section;
+ final  List<VariantData> _variants;
+@override@JsonKey() List<VariantData> get variants {
+  if (_variants is EqualUnmodifiableListView) return _variants;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_variants);
+}
+
 
 /// Create a copy of FoodItemResponse
 /// with the given fields replaced by the non-null parameter values.
@@ -312,16 +320,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodItemResponse&&(identical(other.id, id) || other.id == id)&&(identical(other.vendorId, vendorId) || other.vendorId == vendorId)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.sectionId, sectionId) || other.sectionId == sectionId)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.price, price) || other.price == price)&&(identical(other.originalPrice, originalPrice) || other.originalPrice == originalPrice)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other._ingredients, _ingredients)&&const DeepCollectionEquality().equals(other._allergens, _allergens)&&(identical(other.calories, calories) || other.calories == calories)&&(identical(other.preparationTimeMinutes, preparationTimeMinutes) || other.preparationTimeMinutes == preparationTimeMinutes)&&(identical(other.isSpicy, isSpicy) || other.isSpicy == isSpicy)&&(identical(other.spiceLevel, spiceLevel) || other.spiceLevel == spiceLevel)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.isFeatured, isFeatured) || other.isFeatured == isFeatured)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.totalReviews, totalReviews) || other.totalReviews == totalReviews)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.vendor, vendor) || other.vendor == vendor)&&(identical(other.category, category) || other.category == category)&&(identical(other.section, section) || other.section == section));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodItemResponse&&(identical(other.id, id) || other.id == id)&&(identical(other.vendorId, vendorId) || other.vendorId == vendorId)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.sectionId, sectionId) || other.sectionId == sectionId)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.price, price) || other.price == price)&&(identical(other.originalPrice, originalPrice) || other.originalPrice == originalPrice)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other._ingredients, _ingredients)&&const DeepCollectionEquality().equals(other._allergens, _allergens)&&(identical(other.calories, calories) || other.calories == calories)&&(identical(other.preparationTimeMinutes, preparationTimeMinutes) || other.preparationTimeMinutes == preparationTimeMinutes)&&(identical(other.isSpicy, isSpicy) || other.isSpicy == isSpicy)&&(identical(other.spiceLevel, spiceLevel) || other.spiceLevel == spiceLevel)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.isFeatured, isFeatured) || other.isFeatured == isFeatured)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.totalReviews, totalReviews) || other.totalReviews == totalReviews)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.vendor, vendor) || other.vendor == vendor)&&(identical(other.category, category) || other.category == category)&&(identical(other.section, section) || other.section == section)&&const DeepCollectionEquality().equals(other._variants, _variants));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,vendorId,categoryId,sectionId,name,description,price,originalPrice,image,const DeepCollectionEquality().hash(_ingredients),const DeepCollectionEquality().hash(_allergens),calories,preparationTimeMinutes,isSpicy,spiceLevel,isAvailable,isFeatured,sortOrder,rating,totalReviews,totalOrders,vendor,category,section]);
+int get hashCode => Object.hashAll([runtimeType,id,vendorId,categoryId,sectionId,name,description,price,originalPrice,image,const DeepCollectionEquality().hash(_ingredients),const DeepCollectionEquality().hash(_allergens),calories,preparationTimeMinutes,isSpicy,spiceLevel,isAvailable,isFeatured,sortOrder,rating,totalReviews,totalOrders,vendor,category,section,const DeepCollectionEquality().hash(_variants)]);
 
 @override
 String toString() {
-  return 'FoodItemResponse(id: $id, vendorId: $vendorId, categoryId: $categoryId, sectionId: $sectionId, name: $name, description: $description, price: $price, originalPrice: $originalPrice, image: $image, ingredients: $ingredients, allergens: $allergens, calories: $calories, preparationTimeMinutes: $preparationTimeMinutes, isSpicy: $isSpicy, spiceLevel: $spiceLevel, isAvailable: $isAvailable, isFeatured: $isFeatured, sortOrder: $sortOrder, rating: $rating, totalReviews: $totalReviews, totalOrders: $totalOrders, vendor: $vendor, category: $category, section: $section)';
+  return 'FoodItemResponse(id: $id, vendorId: $vendorId, categoryId: $categoryId, sectionId: $sectionId, name: $name, description: $description, price: $price, originalPrice: $originalPrice, image: $image, ingredients: $ingredients, allergens: $allergens, calories: $calories, preparationTimeMinutes: $preparationTimeMinutes, isSpicy: $isSpicy, spiceLevel: $spiceLevel, isAvailable: $isAvailable, isFeatured: $isFeatured, sortOrder: $sortOrder, rating: $rating, totalReviews: $totalReviews, totalOrders: $totalOrders, vendor: $vendor, category: $category, section: $section, variants: $variants)';
 }
 
 
@@ -332,7 +340,7 @@ abstract mixin class _$FoodItemResponseCopyWith<$Res> implements $FoodItemRespon
   factory _$FoodItemResponseCopyWith(_FoodItemResponse value, $Res Function(_FoodItemResponse) _then) = __$FoodItemResponseCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int vendorId, int categoryId, int sectionId, String name, String description, String price, String? originalPrice, String image, List<String> ingredients, List<String> allergens, int calories, int preparationTimeMinutes, bool isSpicy, int spiceLevel, bool isAvailable, bool isFeatured, int sortOrder, String rating, int totalReviews, int totalOrders, VendorData vendor, CategoryData category, SectionData section
+ int id, int vendorId, int categoryId, int sectionId, String name, String description, String price, String? originalPrice, String image, List<String> ingredients, List<String> allergens, int calories, int preparationTimeMinutes, bool isSpicy, int spiceLevel, bool isAvailable, bool isFeatured, int sortOrder, String rating, int totalReviews, int totalOrders, VendorData vendor, CategoryData category, SectionData section, List<VariantData> variants
 });
 
 
@@ -349,7 +357,7 @@ class __$FoodItemResponseCopyWithImpl<$Res>
 
 /// Create a copy of FoodItemResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? vendorId = null,Object? categoryId = null,Object? sectionId = null,Object? name = null,Object? description = null,Object? price = null,Object? originalPrice = freezed,Object? image = null,Object? ingredients = null,Object? allergens = null,Object? calories = null,Object? preparationTimeMinutes = null,Object? isSpicy = null,Object? spiceLevel = null,Object? isAvailable = null,Object? isFeatured = null,Object? sortOrder = null,Object? rating = null,Object? totalReviews = null,Object? totalOrders = null,Object? vendor = null,Object? category = null,Object? section = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? vendorId = null,Object? categoryId = null,Object? sectionId = null,Object? name = null,Object? description = null,Object? price = null,Object? originalPrice = freezed,Object? image = null,Object? ingredients = null,Object? allergens = null,Object? calories = null,Object? preparationTimeMinutes = null,Object? isSpicy = null,Object? spiceLevel = null,Object? isAvailable = null,Object? isFeatured = null,Object? sortOrder = null,Object? rating = null,Object? totalReviews = null,Object? totalOrders = null,Object? vendor = null,Object? category = null,Object? section = null,Object? variants = null,}) {
   return _then(_FoodItemResponse(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,vendorId: null == vendorId ? _self.vendorId : vendorId // ignore: cast_nullable_to_non_nullable
@@ -375,7 +383,8 @@ as int,totalOrders: null == totalOrders ? _self.totalOrders : totalOrders // ign
 as int,vendor: null == vendor ? _self.vendor : vendor // ignore: cast_nullable_to_non_nullable
 as VendorData,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as CategoryData,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
-as SectionData,
+as SectionData,variants: null == variants ? _self._variants : variants // ignore: cast_nullable_to_non_nullable
+as List<VariantData>,
   ));
 }
 
@@ -1207,6 +1216,284 @@ class __$SectionDataCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$VariantData {
+
+ int get id; int get foodItemId; String get name; String get priceAdjustment; bool get isDefault; bool get isAvailable;
+/// Create a copy of VariantData
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$VariantDataCopyWith<VariantData> get copyWith => _$VariantDataCopyWithImpl<VariantData>(this as VariantData, _$identity);
+
+  /// Serializes this VariantData to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VariantData&&(identical(other.id, id) || other.id == id)&&(identical(other.foodItemId, foodItemId) || other.foodItemId == foodItemId)&&(identical(other.name, name) || other.name == name)&&(identical(other.priceAdjustment, priceAdjustment) || other.priceAdjustment == priceAdjustment)&&(identical(other.isDefault, isDefault) || other.isDefault == isDefault)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,foodItemId,name,priceAdjustment,isDefault,isAvailable);
+
+@override
+String toString() {
+  return 'VariantData(id: $id, foodItemId: $foodItemId, name: $name, priceAdjustment: $priceAdjustment, isDefault: $isDefault, isAvailable: $isAvailable)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $VariantDataCopyWith<$Res>  {
+  factory $VariantDataCopyWith(VariantData value, $Res Function(VariantData) _then) = _$VariantDataCopyWithImpl;
+@useResult
+$Res call({
+ int id, int foodItemId, String name, String priceAdjustment, bool isDefault, bool isAvailable
+});
+
+
+
+
+}
+/// @nodoc
+class _$VariantDataCopyWithImpl<$Res>
+    implements $VariantDataCopyWith<$Res> {
+  _$VariantDataCopyWithImpl(this._self, this._then);
+
+  final VariantData _self;
+  final $Res Function(VariantData) _then;
+
+/// Create a copy of VariantData
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? foodItemId = null,Object? name = null,Object? priceAdjustment = null,Object? isDefault = null,Object? isAvailable = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,foodItemId: null == foodItemId ? _self.foodItemId : foodItemId // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,priceAdjustment: null == priceAdjustment ? _self.priceAdjustment : priceAdjustment // ignore: cast_nullable_to_non_nullable
+as String,isDefault: null == isDefault ? _self.isDefault : isDefault // ignore: cast_nullable_to_non_nullable
+as bool,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [VariantData].
+extension VariantDataPatterns on VariantData {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _VariantData value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _VariantData() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _VariantData value)  $default,){
+final _that = this;
+switch (_that) {
+case _VariantData():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _VariantData value)?  $default,){
+final _that = this;
+switch (_that) {
+case _VariantData() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int foodItemId,  String name,  String priceAdjustment,  bool isDefault,  bool isAvailable)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _VariantData() when $default != null:
+return $default(_that.id,_that.foodItemId,_that.name,_that.priceAdjustment,_that.isDefault,_that.isAvailable);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int foodItemId,  String name,  String priceAdjustment,  bool isDefault,  bool isAvailable)  $default,) {final _that = this;
+switch (_that) {
+case _VariantData():
+return $default(_that.id,_that.foodItemId,_that.name,_that.priceAdjustment,_that.isDefault,_that.isAvailable);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int foodItemId,  String name,  String priceAdjustment,  bool isDefault,  bool isAvailable)?  $default,) {final _that = this;
+switch (_that) {
+case _VariantData() when $default != null:
+return $default(_that.id,_that.foodItemId,_that.name,_that.priceAdjustment,_that.isDefault,_that.isAvailable);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _VariantData implements VariantData {
+  const _VariantData({required this.id, required this.foodItemId, required this.name, required this.priceAdjustment, required this.isDefault, required this.isAvailable});
+  factory _VariantData.fromJson(Map<String, dynamic> json) => _$VariantDataFromJson(json);
+
+@override final  int id;
+@override final  int foodItemId;
+@override final  String name;
+@override final  String priceAdjustment;
+@override final  bool isDefault;
+@override final  bool isAvailable;
+
+/// Create a copy of VariantData
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$VariantDataCopyWith<_VariantData> get copyWith => __$VariantDataCopyWithImpl<_VariantData>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$VariantDataToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VariantData&&(identical(other.id, id) || other.id == id)&&(identical(other.foodItemId, foodItemId) || other.foodItemId == foodItemId)&&(identical(other.name, name) || other.name == name)&&(identical(other.priceAdjustment, priceAdjustment) || other.priceAdjustment == priceAdjustment)&&(identical(other.isDefault, isDefault) || other.isDefault == isDefault)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,foodItemId,name,priceAdjustment,isDefault,isAvailable);
+
+@override
+String toString() {
+  return 'VariantData(id: $id, foodItemId: $foodItemId, name: $name, priceAdjustment: $priceAdjustment, isDefault: $isDefault, isAvailable: $isAvailable)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$VariantDataCopyWith<$Res> implements $VariantDataCopyWith<$Res> {
+  factory _$VariantDataCopyWith(_VariantData value, $Res Function(_VariantData) _then) = __$VariantDataCopyWithImpl;
+@override @useResult
+$Res call({
+ int id, int foodItemId, String name, String priceAdjustment, bool isDefault, bool isAvailable
+});
+
+
+
+
+}
+/// @nodoc
+class __$VariantDataCopyWithImpl<$Res>
+    implements _$VariantDataCopyWith<$Res> {
+  __$VariantDataCopyWithImpl(this._self, this._then);
+
+  final _VariantData _self;
+  final $Res Function(_VariantData) _then;
+
+/// Create a copy of VariantData
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? foodItemId = null,Object? name = null,Object? priceAdjustment = null,Object? isDefault = null,Object? isAvailable = null,}) {
+  return _then(_VariantData(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,foodItemId: null == foodItemId ? _self.foodItemId : foodItemId // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,priceAdjustment: null == priceAdjustment ? _self.priceAdjustment : priceAdjustment // ignore: cast_nullable_to_non_nullable
+as String,isDefault: null == isDefault ? _self.isDefault : isDefault // ignore: cast_nullable_to_non_nullable
+as bool,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

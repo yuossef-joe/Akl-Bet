@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/handler/submit_handler.dart';
+import 'package:foodapp/features/cart/presentation/screen/cart_screen.dart';
+import 'package:foodapp/features/food_item/domain/entity/food_item_response_entity.dart';
+import 'package:foodapp/features/home/domain/entities/address/getaddress/get_address_response_entity.dart';
+import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
 
 class FoodItemViewModel extends ChangeNotifier {
   int _selectedSizeIndex = 0;
@@ -38,11 +42,33 @@ class FoodItemViewModel extends ChangeNotifier {
   }
 
   // Add to cart with BLoC and submitHandler
-  Future<void> addToCart(BuildContext context) async {
+  Future<void> addToCart(
+    BuildContext context, {
+    required FoodItemResponseEntity foodItem,
+    required AddressItemEntity address,
+    required VendorResponseEntity vendor,
+  }) async {
     await submitHandler<void>(
       context,
       body: () async {
-        await Future<void>.delayed(const Duration(milliseconds: 500));
+        // Create CartItem
+        final cartItem = CartItem(
+          foodItem: foodItem,
+          selectedVariantIndex: _selectedSizeIndex,
+        );
+
+        // Navigate to CartScreen
+        if (context.mounted) {
+          await Navigator.of(context).push<void>(
+            MaterialPageRoute<void>(
+              builder: (context) => CartScreen(
+                cartItems: [cartItem],
+                address: address,
+                vendor: vendor,
+              ),
+            ),
+          );
+        }
       },
     );
   }

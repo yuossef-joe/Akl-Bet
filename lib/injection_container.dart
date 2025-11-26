@@ -191,8 +191,6 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<CategoryBloc>(() => CategoryBloc(sl()))
     ..registerLazySingleton<NearbyBloc>(() => NearbyBloc(sl()))
     ..registerLazySingleton<SuggestionsBloc>(() => SuggestionsBloc(sl()))
-    ..registerLazySingleton<FoodCategoriesBloc>(() => FoodCategoriesBloc(sl()))
     ..registerLazySingleton<OrdersBloc>(() => OrdersBloc(sl()))
-    ..registerFactory<VendorCategoryBloc>(() => VendorCategoryBloc(sl()))
     ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()));
 }

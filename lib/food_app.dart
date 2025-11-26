@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodapp/core/helpers/bloc_factory.dart';
 import 'package:foodapp/core/resources/theme_manager.dart';
 import 'package:foodapp/core/routing/route.dart';
 import 'package:foodapp/core/routing/routes_manager.dart';
-import 'package:foodapp/features/food_item/presentation/bloc/food_item_bloc.dart';
-import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
-import 'package:foodapp/features/vendors/presentation/bloc/vendor_items/vendor_items_bloc.dart';
-import 'package:foodapp/injection_container.dart';
 
 class FoodApp extends StatelessWidget {
   const FoodApp({required this.appRouter, super.key});
@@ -15,13 +12,7 @@ class FoodApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<VendorBloc>(create: (context) => VendorBloc(sl())),
-        BlocProvider<VendorItemsBloc>(
-          create: (context) => VendorItemsBloc(sl()),
-        ),
-        BlocProvider<FoodItemBloc>(create: (context) => FoodItemBloc(sl())),
-      ],
+      providers: BlocFactory.build(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: getApplicationTheme(),
