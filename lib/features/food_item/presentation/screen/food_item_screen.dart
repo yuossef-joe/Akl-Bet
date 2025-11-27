@@ -6,6 +6,8 @@ import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/core/resources/font_manager.dart';
 import 'package:foodapp/core/resources/style_manager.dart';
 import 'package:foodapp/core/resources/values_manager.dart';
+import 'package:foodapp/features/cart/domain/entity/cart_entity.dart';
+import 'package:foodapp/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:foodapp/features/food_item/domain/entity/food_item_request_entity.dart';
 import 'package:foodapp/features/food_item/domain/entity/food_item_response_entity.dart';
 import 'package:foodapp/features/food_item/presentation/bloc/food_item_bloc.dart';
@@ -18,9 +20,7 @@ import 'package:foodapp/features/food_item/presentation/widget/food_item_info.da
 import 'package:foodapp/features/food_item/presentation/widget/ingredients_section.dart';
 import 'package:foodapp/features/food_item/presentation/widget/notes_section.dart';
 import 'package:foodapp/features/food_item/presentation/widget/size_selection_section.dart';
-import 'package:foodapp/features/home/presentation/bloc/address/getaddress/get_address_bloc.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
-import 'package:foodapp/features/vendors/presentation/bloc/vendor/vendor_bloc.dart';
 import 'package:foodapp/injection_container.dart';
 
 class FoodItemScreen extends StatefulWidget {
@@ -37,11 +37,14 @@ class FoodItemScreen extends StatefulWidget {
 
 class _FoodItemScreenState extends State<FoodItemScreen> {
   late FoodItemViewModel _viewModel;
+  late TextEditingController _addressController;
 
   @override
   void initState() {
     super.initState();
     _viewModel = FoodItemViewModel();
+    _addressController = TextEditingController();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       context.read<FoodItemBloc>().add(
@@ -58,6 +61,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
   @override
   void dispose() {
     _viewModel.dispose();
+    _addressController.dispose();
     super.dispose();
   }
 
@@ -65,11 +69,11 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<GetAddressBloc>.value(
-          value: sl<GetAddressBloc>(),
+        BlocProvider<FoodItemBloc>.value(
+          value: sl<FoodItemBloc>(),
         ),
-        BlocProvider<VendorBloc>.value(
-          value: sl<VendorBloc>(),
+        BlocProvider<CartBloc>.value(
+          value: sl<CartBloc>(),
         ),
       ],
       child: Scaffold(
@@ -137,7 +141,10 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
     );
   }
 
-  Widget _buildContent(FoodItemResponseEntity item) {
+  Widget _buildContent(
+    FoodItemResponseEntity item,
+    VendorResponseEntity vendor,
+  ) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,94 +177,57 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
           ),
           const SizedBox(height: AppPadding.p20),
           // Add to Cart Button
-          AddToCartButton(
-            onPressed: () {
-              try {
-                // 1. Get address from GetAddressBloc
-                final addressState = context.read<GetAddressBloc>().state;
-                final selectedAddress = addressState.when(
-                  success: (addressResponse) {
-                    // Get the first default address or first address in list
-                    return addressResponse.data.isNotEmpty
-                        ? addressResponse.data.firstWhere(
-                            (addr) => addr.isDefault,
-                            orElse: () => addressResponse.data.first,
-                          )
-                        : null;
-                  },
-                  loading: () => null,
-                  initial: () => null,
-                  failure: (_) => null,
-                  empty: () => null,
-                );
-
-                // 2. Get vendor info from VendorBloc
-                final vendorState = context.read<VendorBloc>().state;
-                final vendor = vendorState.when(
-                  success: (vendorData) => vendorData,
-                  loading: () => VendorResponseEntity(
-                    id: item.vendorId,
-                    businessName: item.vendor.businessName,
-                  ),
-                  initial: () => VendorResponseEntity(
-                    id: item.vendorId,
-                    businessName: item.vendor.businessName,
-                  ),
-                  failure: (_) => VendorResponseEntity(
-                    id: item.vendorId,
-                    businessName: item.vendor.businessName,
-                  ),
-                  empty: () => VendorResponseEntity(
-                    id: item.vendorId,
-                    businessName: item.vendor.businessName,
-                  ),
-                );
-
-                // 3. Validate address is available
-                if (selectedAddress == null) {
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text('يرجى تحديد عنوان التوصيل'),
-                        backgroundColor: ColorManager.error,
-                      ),
-                    );
-                  }
-                  return;
-                }
-
-                // 4. Call addToCart with dynamic data
-                _viewModel
-                    .addToCart(
-                      context,
-                      foodItem: item,
-                      address: selectedAddress,
-                      vendor: vendor,
-                    )
-                    .then((_) {
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('تم إضافة المنتج إلى السلة'),
-                          ),
-                        );
-                      }
-                    });
-              } catch (e) {
-                // Handle error - show snackbar
-                if (mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('خطأ: ${e.toString()}'),
-                      backgroundColor: ColorManager.error,
-                    ),
-                  );
-                }
-              }
+          BlocListener<CartBloc, BaseState<List<CartEntity>>>(
+            listener: (context, state) {
+              state.when(
+                initial: () {},
+                loading: () {},
+                success: (items) {
+                  _showSnackBar('تمت إضافة المنتج للكارت بنجاح');
+                },
+                failure: (error) {
+                  _showSnackBar('خطأ: ${error.message}', isError: true);
+                },
+                empty: () {},
+              );
             },
+            child: AddToCartButton(
+              onPressed: () {
+                final selectedVariant =
+                    item.variants[_viewModel.selectedSizeIndex];
+
+                final cartItem = CartEntity(
+                  id: item.id,
+                  foodItemId: item.id,
+                  foodItemName: item.name,
+                  quantity: 1,
+                  price: selectedVariant.priceAdjustment,
+                  totalPrice: selectedVariant.priceAdjustment,
+                  variantName: selectedVariant.name,
+                  deliveryFees: vendor.deliveryFee,
+                  image: item.image,
+                );
+
+                context.read<CartBloc>().add(
+                  BaseEvent<CartEntity>.fetch(params: cartItem),
+                );
+              },
+            ),
           ),
+
           const SizedBox(height: AppPadding.p20),
         ],
+      ),
+    );
+  }
+
+  void _showSnackBar(String message, {bool isError = false}) {
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+        backgroundColor: isError ? Colors.red : Colors.green,
       ),
     );
   }

@@ -11,6 +11,7 @@ class BlocFactory {
       BlocProvider<VendorItemsBloc>(
         create: (context) => VendorItemsBloc(sl()),
       ),
+
       BlocProvider<FoodItemBloc>(create: (context) => FoodItemBloc(sl())),
     ];
   }
