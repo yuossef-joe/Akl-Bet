@@ -5,7 +5,7 @@ import 'package:foodapp/core/base/base_listener_function.dart';
 import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/networking/failures.dart';
 
-class BaseListener<S, T> extends StatelessWidget {
+class BaseListener<S, T, B extends BaseBloc<S, T>> extends StatelessWidget {
   const BaseListener({
     super.key,
     this.child,
@@ -24,7 +24,7 @@ class BaseListener<S, T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BaseBloc<S, T>, BaseState<S>>(
+    return BlocListener<B, BaseState<S>>(
       listener: (_, state) => baseListenerFunction(
         state: state,
         loaded: loaded,

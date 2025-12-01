@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/base/base_state.dart';
+import 'package:foodapp/core/widget/retry_failure.dart';
 
 class BaseStateWidget<T> extends StatelessWidget {
   const BaseStateWidget({
@@ -25,7 +26,7 @@ class BaseStateWidget<T> extends StatelessWidget {
       loading: () => loading ?? const CircularProgressIndicator(),
       empty: () => empty ?? const SizedBox.shrink(),
       success: loadedWidget,
-      failure: (_) => const SizedBox.shrink(),
+      failure: (_) => RetryFailure(retryPressed: retryPressed),
     );
   }
 }

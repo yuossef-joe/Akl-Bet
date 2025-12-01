@@ -10,10 +10,13 @@ import 'package:foodapp/features/auth/domain/usecase/sign_up_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signin_usecase.dart';
 import 'package:foodapp/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:foodapp/features/cart/data/datasource/cart_local_data_source.dart';
+import 'package:foodapp/features/cart/data/model/cart_hive.dart';
+import 'package:foodapp/features/cart/data/model/cart_hive_type_adapter.dart';
 import 'package:foodapp/features/cart/data/repository/cart_repositories_impl.dart';
 import 'package:foodapp/features/cart/domain/repositories/cart_repositories.dart';
 import 'package:foodapp/features/cart/domain/usecases/add_cart_usecase.dart';
 import 'package:foodapp/features/cart/domain/usecases/get_cart_usecase.dart';
+import 'package:foodapp/features/cart/domain/usecases/remove_from_cart_usecase.dart';
 import 'package:foodapp/features/cart/presentation/bloc/cart_bloc.dart';
 
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
@@ -74,6 +77,7 @@ import 'package:foodapp/features/vendors/domain/repositories/vendor_items/vendor
 import 'package:foodapp/features/vendors/domain/usecase/vendor/vendor_usecase.dart';
 import 'package:foodapp/features/vendors/domain/usecase/vendor_items/vendor_items_use_case.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/adapters.dart';
 
 final GetIt sl = GetIt.instance;
 Future<void> _core() async {
@@ -86,6 +90,17 @@ Future<void> _core() async {
     ..registerFactory(() => DioFactory(flutterSecureStorage: sl()));
   final dio = await sl<DioFactory>().getDio();
   sl.registerLazySingleton<Dio>(() => dio);
+
+  // Initialize Hive for Cart
+  await Hive.initFlutter();
+
+  // Register the CartHive adapter
+  if (!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter<CartHive>(CartHiveAdapter());
+  }
+
+  final cartBox = await Hive.openBox<CartHive>('cartBox');
+  sl.registerLazySingleton<Box<CartHive>>(() => cartBox);
 }
 
 Future<void> initialaizeDependencies() async {
@@ -200,6 +215,7 @@ Future<void> initialaizeDependencies() async {
     ..registerFactory(() => GetFoodItemUseCase(sl()))
     ..registerFactory(() => AddCartUsecase(sl()))
     ..registerFactory(() => GetCartUsecase(sl()))
+    ..registerFactory(() => RemoveFromCartUsecase(sl()))
     // Blocs
     ..registerLazySingleton<AddAddressBloc>(() => AddAddressBloc(sl()))
     ..registerLazySingleton<GetAddressBloc>(() => GetAddressBloc(sl()))
@@ -207,11 +223,5 @@ Future<void> initialaizeDependencies() async {
     ..registerLazySingleton<NearbyBloc>(() => NearbyBloc(sl()))
     ..registerLazySingleton<SuggestionsBloc>(() => SuggestionsBloc(sl()))
     ..registerLazySingleton<OrdersBloc>(() => OrdersBloc(sl()))
-    ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()))
-    ..registerLazySingleton<CartBloc>(
-      () => CartBloc(
-        addCartUsecase: sl(),
-        getCartUsecase: sl(),
-      ),
-    );
+    ..registerLazySingleton<ProfileBloc>(() => ProfileBloc(sl(), sl()));
 }

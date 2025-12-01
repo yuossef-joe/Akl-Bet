@@ -4,14 +4,18 @@ import 'package:foodapp/core/resources/font_manager.dart';
 import 'package:foodapp/core/resources/style_manager.dart';
 import 'package:foodapp/core/resources/values_manager.dart';
 import 'package:foodapp/features/food_item/domain/entity/food_item_response_entity.dart';
+import 'package:foodapp/features/food_item/presentation/viewmodel/food_item_viewmodel.dart';
+import 'package:foodapp/features/food_item/presentation/widget/quantity_counter.dart';
 
 class FoodItemInfo extends StatelessWidget {
   const FoodItemInfo({
     required this.item,
+    required this.viewModel,
     super.key,
   });
 
   final FoodItemResponseEntity item;
+  final FoodItemViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +24,30 @@ class FoodItemInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          // Price
-          Text(
-            '\$${item.price}',
-            style: getBoldStyle(
-              color: ColorManager.primary,
-              fontSize: FontSize.s18,
-            ),
+          // Price and Counter Row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Counter
+              ValueListenableBuilder<int>(
+                valueListenable: viewModel.quantityNotifier,
+                builder: (context, quantity, _) {
+                  return QuantityCounter(
+                    quantity: quantity,
+                    onIncrement: viewModel.incrementQuantity,
+                    onDecrement: viewModel.decrementQuantity,
+                  );
+                },
+              ),
+              // Price
+              Text(
+                '\$${item.price}',
+                style: getBoldStyle(
+                  color: ColorManager.primary,
+                  fontSize: FontSize.s18,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: AppSize.s8),
           // Item name
