@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -7,58 +8,62 @@ class BottomNavBar extends StatelessWidget {
     required this.onTap,
     super.key,
   });
+
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  Widget _activeCircle(IconData icon) => Container(
-    width: 40,
-    height: 40,
-    decoration: BoxDecoration(
-      color: ColorManager.darkPrimary,
-      shape: BoxShape.circle,
-    ),
-    child: Icon(icon, color: Colors.white, size: 22),
-  );
-
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      elevation: 8,
-      selectedItemColor: ColorManager.darkPrimary,
-      unselectedItemColor: Colors.grey,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
+    return StylishBottomBar(
+      option: AnimatedBarOptions(
+        iconSize: 32,
+        barAnimation: BarAnimation.liquid,
+        iconStyle: IconStyle.animated,
+        opacity: 0.3,
+      ),
       items: [
-        BottomNavigationBarItem(
-          label: 'الرئيسية',
+        BottomBarItem(
           icon: const Icon(Icons.home_outlined),
-          activeIcon: _activeCircle(Icons.home),
+          selectedIcon: const Icon(Icons.home),
+          selectedColor: ColorManager.darkPrimary,
+          unSelectedColor: Colors.grey,
+          backgroundColor: Colors.transparent,
+          title: const Text('الرئيسية'),
         ),
-        BottomNavigationBarItem(
-          label: 'اكسبلور',
+        BottomBarItem(
           icon: const Icon(Icons.near_me_outlined),
-          activeIcon: _activeCircle(Icons.near_me),
+          selectedIcon: const Icon(Icons.near_me),
+          selectedColor: ColorManager.darkPrimary,
+          unSelectedColor: Colors.grey,
+          backgroundColor: Colors.transparent,
+          title: const Text('اكسبلور'),
         ),
-        BottomNavigationBarItem(
-          label: 'طلباتي',
+        BottomBarItem(
           icon: const Icon(Icons.shopping_basket_outlined),
-          activeIcon: _activeCircle(Icons.shopping_basket),
+          selectedIcon: const Icon(Icons.shopping_basket),
+          selectedColor: ColorManager.darkPrimary,
+          unSelectedColor: Colors.grey,
+          backgroundColor: Colors.transparent,
+          title: const Text('طلباتي'),
         ),
-        BottomNavigationBarItem(
-          label: 'فواصل',
+        BottomBarItem(
           icon: const Icon(Icons.search_outlined),
-          activeIcon: _activeCircle(Icons.search),
+          selectedIcon: const Icon(Icons.search),
+          selectedColor: ColorManager.darkPrimary,
+          unSelectedColor: Colors.grey,
+          backgroundColor: Colors.transparent,
+          title: const Text('فواصل'),
         ),
-        BottomNavigationBarItem(
-          label: 'صفحتي',
+        BottomBarItem(
           icon: const Icon(Icons.person_outline),
-          activeIcon: _activeCircle(Icons.person),
+          selectedIcon: const Icon(Icons.person),
+          selectedColor: ColorManager.darkPrimary,
+          unSelectedColor: Colors.grey,
+          backgroundColor: Colors.transparent,
+          title: const Text('صفحتي'),
         ),
       ],
+      currentIndex: currentIndex,
       onTap: onTap,
     );
   }

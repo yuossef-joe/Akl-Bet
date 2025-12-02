@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scalify/flutter_scalify.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/core/widget/place_holder_icon.dart';
 import 'package:foodapp/features/home/domain/entities/category/category_response_entity.dart';
@@ -8,15 +9,11 @@ class CategoryCard extends StatelessWidget {
     required this.category,
     super.key,
     this.onTap,
-    this.cardSize = 80,
-    this.borderRadius = 16,
     this.showNewBadge = true,
   });
 
   final CategoryResponseEntity category;
   final VoidCallback? onTap;
-  final double cardSize;
-  final double borderRadius;
   final bool showNewBadge;
 
   @override
@@ -29,11 +26,11 @@ class CategoryCard extends StatelessWidget {
           Stack(
             children: [
               Container(
-                width: cardSize,
-                height: cardSize,
+                width: 180.w,
+                height: 80.h,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderRadius: 16.br,
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x15000000),
@@ -43,7 +40,7 @@ class CategoryCard extends StatelessWidget {
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderRadius: 16.br,
                   child: _buildImage(),
                 ),
               ),
@@ -58,7 +55,7 @@ class CategoryCard extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF7B59D0),
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: 4.br,
                     ),
                     child: const Text(
                       'NEW',
@@ -74,7 +71,7 @@ class CategoryCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           SizedBox(
-            width: cardSize,
+            width: 80.w,
             child: Text(
               category.name,
               textAlign: TextAlign.center,

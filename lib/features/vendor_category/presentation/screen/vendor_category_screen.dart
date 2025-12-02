@@ -67,8 +67,8 @@ class _VendorCategoryScreenState extends State<VendorCategoryScreen> {
               >(
                 builder: (context, state) {
                   return state.when(
-                    initial: () => const Center(child: ShopShimmer()),
-                    loading: () => const Center(child: ShopShimmer()),
+                    initial: () => Center(child: ShopShimmer()),
+                    loading: () => Center(child: ShopShimmer()),
                     empty: () => const Center(child: Text('No vendors found.')),
                     failure: (_) => ShopError(
                       onRetry: () {

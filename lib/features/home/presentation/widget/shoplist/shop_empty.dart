@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/features/home/presentation/viewmodel/shoplist_viewmodel.dart';
 
 class ShopEmpty extends StatelessWidget {
-  const ShopEmpty({
+  ShopEmpty({
     super.key,
-    this.message = 'لا توجد متاجر قريبة',
     this.height = 200,
-  });
+  }) : _viewModel = ShopListViewModel();
 
-  final String message;
   final double height;
+  final ShopListViewModel _viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ShopEmpty extends StatelessWidget {
 
               // Empty State Message
               Text(
-                message,
+                _viewModel.getEmptyStateMessage(),
                 style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 16,
@@ -44,7 +44,7 @@ class ShopEmpty extends StatelessWidget {
 
               // Helpful Subtitle
               Text(
-                'جرب البحث في منطقة أخرى',
+                _viewModel.getEmptyStateSubtitle(),
                 style: TextStyle(
                   color: Colors.grey.shade500,
                   fontSize: 12,

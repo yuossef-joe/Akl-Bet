@@ -15,14 +15,20 @@ class SignInViewModel extends ChangeNotifier {
   // Controllers
   TextEditingController? _emailController;
   TextEditingController? _passwordController;
+  TextEditingController? _phoneController;
   GlobalKey<FormState>? _formKey;
+  GlobalKey<FormState>? _phoneFormKey;
 
   // Getters for controllers
   TextEditingController get emailController =>
       _emailController ??= TextEditingController();
   TextEditingController get passwordController =>
       _passwordController ??= TextEditingController();
+  TextEditingController get phoneController =>
+      _phoneController ??= TextEditingController();
   GlobalKey<FormState> get formKey => _formKey ??= GlobalKey<FormState>();
+  GlobalKey<FormState> get phoneFormKey =>
+      _phoneFormKey ??= GlobalKey<FormState>();
 
   // Private state
   bool _isLoading = false;
@@ -36,7 +42,9 @@ class SignInViewModel extends ChangeNotifier {
   void _initializeControllers() {
     _emailController ??= TextEditingController();
     _passwordController ??= TextEditingController();
+    _phoneController ??= TextEditingController();
     _formKey ??= GlobalKey<FormState>();
+    _phoneFormKey ??= GlobalKey<FormState>();
   }
 
   // Email validation
@@ -61,9 +69,26 @@ class SignInViewModel extends ChangeNotifier {
     return null;
   }
 
+  // Phone number validation
+  String? validatePhoneNumber(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Please enter your phone number';
+    }
+    final digitsOnly = value.replaceAll(RegExp(r'[^\d]'), '');
+    if (!validator.isLength(digitsOnly, 9, 15)) {
+      return 'Please enter a valid phone number (9-15 digits)';
+    }
+    return null;
+  }
+
   // Form validation
   bool validateForm() {
     return formKey.currentState?.validate() ?? false;
+  }
+
+  // Phone form validation
+  bool validatePhoneForm() {
+    return phoneFormKey.currentState?.validate() ?? false;
   }
 
   // Set loading state
@@ -137,10 +162,53 @@ class SignInViewModel extends ChangeNotifier {
     );
   }
 
+  // Sign in with phone number
+  Future<void> signInWithPhoneNumber(BuildContext context) async {
+    if (!validatePhoneForm()) return;
+
+    clearError();
+    _setLoading(true);
+
+    try {
+      // TODO: Implement phone sign-in with actual usecase
+      // For now, just simulate the delay
+      await Future<void>.delayed(const Duration(seconds: 1));
+
+      if (context.mounted) {
+        await _handlePhoneSignInSuccess(context);
+      }
+    } catch (e) {
+      _setError('Failed to sign in with phone number');
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  Future<void> _handlePhoneSignInSuccess(
+    BuildContext context,
+  ) async {
+    if (!context.mounted) return;
+
+    // Show success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('تم تسجيل الدخول بنجاح'),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    await Navigator.pushReplacementNamed(
+      context,
+      Routes.mainShellRoute,
+      arguments: 0,
+    );
+  }
+
   // Clear form
   void clearForm() {
     emailController.clear();
     passwordController.clear();
+    phoneController.clear();
     clearError();
   }
 
@@ -149,6 +217,7 @@ class SignInViewModel extends ChangeNotifier {
   void dispose() {
     _emailController?.dispose();
     _passwordController?.dispose();
+    _phoneController?.dispose();
     super.dispose();
   }
 }

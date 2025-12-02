@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
+import 'package:foodapp/features/home/presentation/viewmodel/shoplist_viewmodel.dart';
 
 class ShopCard extends StatelessWidget {
-  const ShopCard({
+  ShopCard({
     super.key,
     required this.shop,
     this.onTap,
     this.margin = const EdgeInsets.only(bottom: 12),
     this.padding = const EdgeInsets.all(12),
-  });
+  }) : _viewModel = ShopListViewModel();
 
   final NearbyResponseEntity shop;
   final VoidCallback? onTap;
   final EdgeInsets margin;
   final EdgeInsets padding;
+  final ShopListViewModel _viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,6 @@ class ShopCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       child: Container(
         margin: margin,
-        padding: padding,
         decoration: BoxDecoration(
           color: ColorManager.white,
           borderRadius: BorderRadius.circular(14),
@@ -37,62 +38,74 @@ class ShopCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Shop Logo Container
+            // Left Side: Shop Information and Rating
+            Expanded(
+              child: Padding(
+                padding: padding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Shop Name
+                    Text(
+                      _viewModel.getShopName(shop),
+                      style: TextStyle(
+                        color: ColorManager.darkGrey,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    const SizedBox(height: 4),
+
+                    // Delivery Information
+                    Text(
+                      _viewModel.getDeliveryInfo(shop),
+                      style: TextStyle(
+                        color: Colors.grey.shade600,
+                        fontSize: 12,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    // Rating Section
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.star_rounded,
+                          color: Colors.amber,
+                          size: 18,
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          _viewModel.getRatingText(shop),
+                          style: TextStyle(
+                            color: Colors.grey.shade800,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Right Side: Shop Logo Container
             Container(
-              height: 48,
-              width: 48,
+              height: 100,
+              width: 100,
+              margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: const Color(0xFFF0ECFF),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: _buildShopImage(),
-            ),
-
-            const SizedBox(width: 12),
-
-            // Shop Information
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // Shop Name
-                  Text(
-                    _getShopName(),
-                    style: TextStyle(
-                      color: ColorManager.darkGrey,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-
-                  const SizedBox(height: 4),
-
-                  // Delivery Information
-                  Text(
-                    _getDeliveryInfo(),
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 12,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-
-            // Rating Section
-            const Icon(Icons.star_rounded, color: Colors.amber, size: 18),
-            const SizedBox(width: 2),
-            Text(
-              _getRatingText(),
-              style: TextStyle(
-                color: Colors.grey.shade800,
-                fontWeight: FontWeight.w700,
-                fontSize: 12,
-              ),
             ),
           ],
         ),
@@ -117,8 +130,6 @@ class ShopCard extends StatelessWidget {
       child: Image.network(
         shop.logo!,
         fit: BoxFit.cover,
-        width: 48,
-        height: 48,
         errorBuilder: (_, __, ___) => Center(
           child: Icon(
             Icons.store_mall_directory_outlined,
@@ -139,22 +150,5 @@ class ShopCard extends StatelessWidget {
         },
       ),
     );
-  }
-
-  /// Gets the shop name with fallback
-  String _getShopName() {
-    return shop.businessNameAr ?? shop.businessName ?? 'متجر';
-  }
-
-  /// Gets formatted delivery information
-  String _getDeliveryInfo() {
-    final deliveryTime = shop.deliveryTimeMinutes ?? 30;
-    final deliveryFee = shop.deliveryFee?.toStringAsFixed(0) ?? '0';
-    return 'توصيل خلال $deliveryTime دقيقة • $deliveryFee ريال';
-  }
-
-  /// Gets formatted rating text
-  String _getRatingText() {
-    return (shop.rating ?? 0.0).toStringAsFixed(1);
   }
 }

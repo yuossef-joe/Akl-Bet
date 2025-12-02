@@ -363,6 +363,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flutter_scalify:
+    dependency: "direct main"
+    description:
+      name: flutter_scalify
+      sha256: bd0bc56031db1dfe9694d9d28b11410fa8bb3ac109b66f242324de8302f74050
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -1202,6 +1210,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
+  stylish_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: stylish_bottom_bar
+      sha256: "8bd394d51e3c1d93a3013fd35e7f77ca29f820df204d0f8580f4773fc660e750"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   synchronized:
     dependency: transitive
     description:

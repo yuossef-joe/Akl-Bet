@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scalify/flutter_scalify.dart';
 import 'package:foodapp/core/widget/gradient.dart';
 
-class SignUpHeaderWidget extends StatelessWidget {
-  const SignUpHeaderWidget({super.key});
+class SignInHeaderWidget extends StatelessWidget {
+  const SignInHeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: primaryGradient,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(16),
-          bottomRight: Radius.circular(16),
-        ),
+        borderRadius: 14.brb,
       ),
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: const Column(
@@ -23,23 +21,23 @@ class SignUpHeaderWidget extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontSize: 28,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
             ),
             textDirection: TextDirection.rtl,
           ),
           SizedBox(height: 8),
           Text(
-            'تسجيل جديد',
+            'تسجيل الدخول',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w300,
             ),
             textDirection: TextDirection.rtl,
           ),
           SizedBox(height: 4),
           Text(
-            'إنشاء حساب لاستخدام اكل بيت',
+            'ادخل البريد الالكتروني و كلمة السر',
             style: TextStyle(
               color: Colors.white70,
               fontSize: 14,

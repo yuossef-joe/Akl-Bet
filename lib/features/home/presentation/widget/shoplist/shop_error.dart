@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/widget/widgets.dart';
+import 'package:foodapp/features/home/presentation/viewmodel/shoplist_viewmodel.dart';
 
 class ShopError extends StatelessWidget {
-  const ShopError({
+  ShopError({
     super.key,
     this.onRetry,
-    this.message = 'فشل تحميل المتاجر',
-    this.height = 200,
     this.error,
     this.showErrorDetails = false,
-  });
+  }) : _viewModel = ShopListViewModel();
 
   final VoidCallback? onRetry;
-  final String message;
-  final double height;
   final dynamic error;
   final bool showErrorDetails;
+  final ShopListViewModel _viewModel;
 
   @override
   Widget build(BuildContext context) {
     return ErrorDisplayWidget(
       error: error,
-      message: message,
+      message: _viewModel.getErrorMessage(),
       onRetry: onRetry,
-      height: height,
+      height: _viewModel.getErrorStateHeight(),
       showErrorDetails: showErrorDetails,
     );
   }

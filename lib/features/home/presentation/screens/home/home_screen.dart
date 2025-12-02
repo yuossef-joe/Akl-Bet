@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/features/home/presentation/widget/categories.dart';
 import 'package:foodapp/features/home/presentation/widget/food_categories.dart';
 import 'package:foodapp/features/home/presentation/widget/home_header_delegate.dart';
+import 'package:foodapp/features/home/presentation/widget/place_holder_row_header.dart';
 import 'package:foodapp/features/home/presentation/widget/section_title.dart';
 import 'package:foodapp/features/home/presentation/widget/shop_list.dart';
 import 'package:foodapp/features/home/presentation/widget/wide_card.dart';
@@ -25,28 +26,24 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               HomeHeader(key: UniqueKey()),
               const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SectionTitle(title: 'الفئات'),
-              ),
-              const SizedBox(height: 12),
               const FoodCategories(),
               const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SectionTitle(title: 'العروض'),
-              ),
-              const SizedBox(height: 12),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: WideCard(),
               ),
               const SizedBox(height: 24),
-              const Categories(),
+              const PlaceholderRowHeader(),
+
               const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SectionTitle(title: 'اقتراحات'),
+              const Categories(),
+              const SizedBox(height: 12),
+              Container(
+                alignment: Alignment.centerRight,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: SectionTitle(title: 'اقتراحات'),
+                ),
               ),
               const SizedBox(height: 12),
               const Padding(

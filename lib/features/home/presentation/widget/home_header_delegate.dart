@@ -88,12 +88,6 @@ class _HomeHeaderState extends State<HomeHeader> {
                 onChanged: _handleSearchChanged,
                 onFilterTap: _handleFilterTap,
               ),
-              const SizedBox(height: 16),
-              NearbyRestaurantsHeader(
-                onMorePressed: _handleMoreTap,
-              ),
-              const SizedBox(height: 16),
-              const PlaceholderRowHeader(),
             ],
           ),
         ),

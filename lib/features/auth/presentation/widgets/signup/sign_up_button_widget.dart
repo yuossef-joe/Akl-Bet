@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scalify/flutter_scalify.dart';
+import 'package:foodapp/core/widget/gradient.dart';
 
 class SignUpButtonWidget extends StatelessWidget {
   const SignUpButtonWidget({
@@ -12,36 +14,40 @@ class SignUpButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
-      child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF9B6BA8),
-          disabledBackgroundColor: const Color(0xFF9B6BA8).withOpacity(0.6),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+      height: 40.w,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: isLoading ? null : primaryGradient,
+          borderRadius: 6.br,
         ),
-        child: isLoading
-            ? const SizedBox(
-                height: 24,
-                width: 24,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Colors.white,
+        child: ElevatedButton(
+          onPressed: isLoading ? null : onPressed,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: 6.br,
+            ),
+          ),
+          child: isLoading
+              ? SizedBox(
+                  height: 24.w,
+                  width: 24.w,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Colors.white,
+                    ),
+                    strokeWidth: 2,
                   ),
-                  strokeWidth: 2,
+                )
+              : const Text(
+                  'تسجيل',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  ),
+                  textDirection: TextDirection.rtl,
                 ),
-              )
-            : const Text(
-                'تسجيل',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-                textDirection: TextDirection.rtl,
-              ),
+        ),
       ),
     );
   }

@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
+import 'package:foodapp/features/home/presentation/viewmodel/shoplist_viewmodel.dart';
 
 class ShopShimmer extends StatelessWidget {
-  const ShopShimmer({
+  ShopShimmer({
     super.key,
-    this.itemCount = 3,
     this.margin = const EdgeInsets.only(bottom: 12),
     this.padding = const EdgeInsets.all(12),
-  });
+  }) : _viewModel = ShopListViewModel(),
+       itemCount = ShopListViewModel().getShimmerItemCount();
 
-  final int itemCount;
   final EdgeInsets margin;
   final EdgeInsets padding;
+  final ShopListViewModel _viewModel;
+  final int itemCount;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(itemCount, (_) => _ShimmerShopItem()),
+      children: List.generate(
+        itemCount,
+        (_) => _ShimmerShopItem(
+          viewModel: _viewModel,
+        ),
+      ),
     );
   }
 
-  Widget _ShimmerShopItem() {
+  Widget _ShimmerShopItem({required ShopListViewModel viewModel}) {
     return Container(
       margin: margin,
       padding: padding,

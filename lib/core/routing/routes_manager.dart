@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/core/resources/string_manager.dart';
 import 'package:foodapp/core/routing/route.dart';
 import 'package:foodapp/core/widget/main_scaffold.dart';
+import 'package:foodapp/features/auth/presentation/screen/sign_in_phone_number_screen.dart';
 import 'package:foodapp/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:foodapp/features/auth/presentation/screen/signin_screen.dart';
 import 'package:foodapp/features/home/presentation/screens/home/home_screen.dart';
@@ -16,6 +17,10 @@ class AppRouter {
       case Routes.signinRoute:
         return MaterialPageRoute(
           builder: (_) => const SignInScreen(),
+        );
+      case Routes.phoneSignInRoute:
+        return MaterialPageRoute(
+          builder: (_) => const SignInPhoneNumberScreen(),
         );
       case Routes.signupRoute:
         return MaterialPageRoute(

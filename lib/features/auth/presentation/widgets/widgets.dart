@@ -5,6 +5,7 @@ export 'signin/continue_button_widget.dart';
 export 'signin/email_field_widget.dart';
 export 'signin/google_signin_button_widget.dart';
 export 'signin/password_field_widget.dart';
+export 'signin/sign_up_link_widget.dart';
 export 'signup/sign_up_header_widget.dart';
 export 'signup/first_name_field_widget.dart';
 export 'signup/last_name_field_widget.dart';

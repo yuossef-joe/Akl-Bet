@@ -66,8 +66,8 @@ class _ShopListWidgetState extends State<ShopListWidget> {
       child: BlocBuilder<NearbyBloc, BaseState<List<NearbyResponseEntity>>>(
         builder: (context, state) {
           return state.when(
-            initial: () => const ShopShimmer(),
-            loading: () => const ShopShimmer(),
+            initial: () => ShopShimmer(),
+            loading: () => ShopShimmer(),
             empty: () => const Center(child: Text('No vendors found.')),
             failure: (_) => ShopError(
               onRetry: () {

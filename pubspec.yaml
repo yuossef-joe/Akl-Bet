@@ -46,6 +46,10 @@ dependencies:
   geocoding: ^4.0.0
   validators: ^3.0.0
   hive_flutter: ^1.1.0
+  #for mediaquery scaling
+  flutter_scalify: ^1.0.0
+  #for bottom bar
+  stylish_bottom_bar: ^1.1.1
 
 dev_dependencies:
   flutter_lints: ^6.0.0

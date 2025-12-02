@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scalify/flutter_scalify.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
 
@@ -28,10 +29,10 @@ class NearbyCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width,
-        padding: const EdgeInsets.all(10),
+        padding: 10.p,
         decoration: BoxDecoration(
           color: ColorManager.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: 16.br,
           boxShadow: const [
             BoxShadow(
               color: Color(0x15000000),
@@ -46,16 +47,15 @@ class NearbyCard extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: 100,
+                  height: 100.w,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF3F1F8),
-                    borderRadius: BorderRadius.circular(14),
+                    color: ColorManager.white,
+                    borderRadius: 14.br,
                   ),
                   alignment: Alignment.center,
                   child: (item.logo != null && item.logo!.isNotEmpty)
                       ? Image.network(
                           item.logo!,
-                          height: 64,
                           fit: BoxFit.contain,
                           errorBuilder: (_, __, ___) => const Icon(
                             Icons.image_not_supported_outlined,

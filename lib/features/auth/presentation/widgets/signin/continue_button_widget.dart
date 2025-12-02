@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scalify/flutter_scalify.dart';
+import 'package:foodapp/core/widget/gradient.dart';
 
 class ContinueButtonWidget extends StatelessWidget {
   const ContinueButtonWidget({
@@ -12,30 +14,40 @@ class ContinueButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF7C4DFF),
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: const Color(
-            0xFF7C4DFF,
-          ).withValues(alpha: 0.5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 16),
+      height: 40.w,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: isLoading ? null : primaryGradient,
+          borderRadius: 6.br,
         ),
-        child: isLoading
-            ? const SizedBox(
-                height: 20,
-                width: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+        child: ElevatedButton(
+          onPressed: isLoading ? null : onPressed,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: 6.br,
+            ),
+          ),
+          child: isLoading
+              ? SizedBox(
+                  height: 24.w,
+                  width: 24.w,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Colors.white,
+                    ),
+                    strokeWidth: 2,
+                  ),
+                )
+              : const Text(
+                  'تسجيل الدخول',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  ),
+                  textDirection: TextDirection.rtl,
                 ),
-              )
-            : const Text('Continue'),
+        ),
       ),
     );
   }
