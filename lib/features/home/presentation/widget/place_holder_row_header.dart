@@ -16,8 +16,8 @@ class PlaceholderRowHeader extends StatelessWidget {
     this.onRetryTap,
     this.requestParams = const NearbyRequestBodyEntity(
       limit: 10,
-      latitude: 40.7128,
-      longitude: -74.0060,
+      latitude: 20.7128,
+      longitude: -72.0060,
       radius: 10,
     ),
   });

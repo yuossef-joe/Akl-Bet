@@ -39,8 +39,8 @@ class _VendorCategoryScreenState extends State<VendorCategoryScreen> {
   }
 
   @override
-  Future<void> dispose() async {
-    await _bloc.close();
+  void dispose() {
+    _bloc.close();
     super.dispose();
   }
 

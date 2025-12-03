@@ -57,7 +57,8 @@ class _VendorSectionsState extends State<VendorSections> {
 
   @override
   void dispose() {
-    _viewModel.dispose();
+    // Don't dispose ViewModel here - it will be reused when navigating back
+    // Only dispose if the entire screen is being closed
     super.dispose();
   }
 

@@ -1,7 +1,9 @@
 const appName = 'Food App';
 
 class ApiConstants {
-  static const String baseUrl = 'http://localhost:8095/api/v1/';
+  // Use 10.0.2.2 for Android emulator to reach host machine (Docker)
+  // Use localhost for physical device or iOS simulator
+  static const String baseUrl = 'http://10.0.2.2:8095/api/v1/';
   static const String signUpEndPoint = 'auth/signup';
   static const String signInEndPoint = 'auth/signin';
   static const String refreshEndPoint = 'auth/refresh';

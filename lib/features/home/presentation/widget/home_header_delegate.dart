@@ -10,7 +10,7 @@ class HomeHeader extends StatefulWidget {
 }
 
 class _HomeHeaderState extends State<HomeHeader> {
-  String _addressText = 'المملكة العربية السعودية';
+  String _addressText = 'اضغط لتحديد موقعك';
   final TextEditingController _searchController = TextEditingController();
 
   @override
