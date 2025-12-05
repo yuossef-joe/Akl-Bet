@@ -14,11 +14,13 @@ class FoodItemScaffold extends StatefulWidget {
   const FoodItemScaffold({
     required this.viewModel,
     required this.foodItemId,
+    required this.address,
     super.key,
   });
 
   final FoodItemViewModel viewModel;
   final String foodItemId;
+  final String address;
 
   @override
   State<FoodItemScaffold> createState() => _FoodItemScaffoldState();
@@ -56,6 +58,7 @@ class _FoodItemScaffoldState extends State<FoodItemScaffold> {
             loadedWidget: (item) => FoodItemContent(
               item: item,
               viewModel: widget.viewModel,
+              address: widget.address,
               onAddToCartSuccess: (message) =>
                   widget.viewModel.showSnackBar(context, message),
               onAddToCartError: (message) => widget.viewModel.showSnackBar(
@@ -79,10 +82,12 @@ class _FoodItemScaffoldState extends State<FoodItemScaffold> {
 class FoodItemScreen extends StatefulWidget {
   const FoodItemScreen({
     required this.foodItemId,
+    this.address = 'اضفط هنا لتحديد موقعك',
     super.key,
   });
 
   final String foodItemId;
+  final String address;
 
   @override
   State<FoodItemScreen> createState() => _FoodItemScreenState();
@@ -110,6 +115,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
       child: FoodItemScaffold(
         viewModel: _viewModel,
         foodItemId: widget.foodItemId,
+        address: widget.address,
       ),
     );
   }

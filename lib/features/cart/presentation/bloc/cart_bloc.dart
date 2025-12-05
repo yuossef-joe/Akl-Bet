@@ -29,12 +29,21 @@ class CartBloc extends BaseBloc<List<CartEntity>, CartEntity> {
   ) async {
     await basicFetchHandler<List<CartEntity>>(
       emit,
-      _addItemAndFetchList(event.params),
+      _handleEvent(event.params),
     );
   }
 
-  Future<List<CartEntity>> _addItemAndFetchList(CartEntity item) async {
-    await _addCartUsecase.call(item);
+  Future<List<CartEntity>> _handleEvent(CartEntity params) async {
+    // If params has id = 0, just fetch without adding
+    if (params.id == 0 && params.foodItemId == 0) {
+      return _getCartUsecase.call();
+    }
+    // Otherwise, add the item and fetch
+    return _addItemAndFetchList(params);
+  }
+
+  Future<List<CartEntity>> _addItemAndFetchList(CartEntity params) async {
+    await _addCartUsecase.call(params);
     return _getCartUsecase.call();
   }
 

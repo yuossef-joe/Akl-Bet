@@ -14,6 +14,7 @@ class PlaceholderRowHeader extends StatelessWidget {
     this.onItemTap,
     this.onFavoriteTap,
     this.onRetryTap,
+    this.address = 'اضفط هنا لتحديد موقعك',
     this.requestParams = const NearbyRequestBodyEntity(
       limit: 10,
       latitude: 20.7128,
@@ -25,6 +26,7 @@ class PlaceholderRowHeader extends StatelessWidget {
   final ValueChanged<NearbyResponseEntity>? onItemTap;
   final ValueChanged<NearbyResponseEntity>? onFavoriteTap;
   final VoidCallback? onRetryTap;
+  final String address;
   final NearbyRequestBodyEntity requestParams;
 
   @override
@@ -57,6 +59,7 @@ class PlaceholderRowHeader extends StatelessWidget {
               ),
               success: (items) => NearbyList(
                 items: items,
+                address: address,
                 onItemTap: onItemTap,
                 onFavoriteTap: onFavoriteTap,
               ),

@@ -22,6 +22,7 @@ class FoodItemContent extends StatelessWidget {
     required this.viewModel,
     required this.onAddToCartSuccess,
     required this.onAddToCartError,
+    required this.address,
     super.key,
   });
 
@@ -29,6 +30,7 @@ class FoodItemContent extends StatelessWidget {
   final FoodItemViewModel viewModel;
   final void Function(String message) onAddToCartSuccess;
   final void Function(String message) onAddToCartError;
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +82,7 @@ class FoodItemContent extends StatelessWidget {
                 item,
                 context.read<VendorBloc>(),
                 context.read<CartBloc>(),
+                address,
               ),
             ),
             const SizedBox(height: AppPadding.p20),

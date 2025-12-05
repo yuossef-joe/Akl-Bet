@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/networking/failures.dart';
 import 'package:foodapp/core/widget/dismiss_dialog.dart';
-import 'package:foodapp/core/widget/show_loading_dialog.dart';
 import 'package:foodapp/core/widget/show_snackbar_error.dart';
 
 Future<T?> submitHandler<T>(

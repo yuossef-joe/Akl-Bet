@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
+import 'package:foodapp/features/cart/presentation/screen/cart_screen.dart';
 import 'package:foodapp/features/home/presentation/widget/widgets.dart';
+import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
@@ -36,18 +38,16 @@ class _HomeHeaderState extends State<HomeHeader> {
   }
 
   void _handleCartTap() {
-    // Handle cart navigation
-    print('Cart tapped');
+    Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => CartScreen(),
+      ),
+    );
   }
 
   void _handleNotificationTap() {
     // Handle notification navigation
     print('Notification tapped');
-  }
-
-  void _handleMoreTap() {
-    // Handle more restaurants navigation
-    print('More restaurants tapped');
   }
 
   @override

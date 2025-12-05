@@ -3,11 +3,11 @@ import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/core/resources/font_manager.dart';
 import 'package:foodapp/core/resources/style_manager.dart';
 import 'package:foodapp/core/resources/values_manager.dart';
-import 'package:foodapp/features/cart/presentation/screen/cart_screen.dart';
+import 'package:foodapp/features/cart/domain/entity/cart_entity.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
 
 class CartSummaryWidget extends StatelessWidget {
-  final List<CartItem> cartItems;
+  final List<CartEntity> cartItems;
   final List<int> quantities;
   final VendorResponseEntity vendor;
 
@@ -21,14 +21,12 @@ class CartSummaryWidget extends StatelessWidget {
   double _calculateItemsSubtotal() {
     double subtotal = 0;
     for (int i = 0; i < cartItems.length; i++) {
-      final basePrice = double.tryParse(cartItems[i].foodItem.price) ?? 0;
+      final basePrice = double.tryParse(cartItems[i].price) ?? 0;
 
       // Add variant price adjustment if available
       double variantAdjustment = 0;
-      if (cartItems[i].foodItem.variants.isNotEmpty) {
-        final variant =
-            cartItems[i].foodItem.variants[cartItems[i].selectedVariantIndex];
-        variantAdjustment = double.tryParse(variant.priceAdjustment) ?? 0;
+      if (cartItems[i].variantName.isNotEmpty) {
+        variantAdjustment = double.tryParse(cartItems[i].price) ?? 0;
       }
 
       final itemTotal = (basePrice + variantAdjustment) * quantities[i];

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_scalify/flutter_scalify.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/core/routing/route.dart';
 

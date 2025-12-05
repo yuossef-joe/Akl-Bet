@@ -19,11 +19,13 @@ class ShopListWidget extends StatefulWidget {
     this.onShopTap,
     this.onRetryTap,
     this.requestParams,
+    this.address = 'اضفط هنا لتحديد موقعك',
   });
 
   final ValueChanged<NearbyResponseEntity>? onShopTap;
   final VoidCallback? onRetryTap;
   final NearbyRequestBodyEntity? requestParams;
+  final String address;
 
   @override
   State<ShopListWidget> createState() => _ShopListWidgetState();
@@ -96,6 +98,7 @@ class _ShopListWidgetState extends State<ShopListWidget> {
                     MaterialPageRoute<void>(
                       builder: (_) => VendorScreen(
                         vendorId: shop.id.toString(),
+                        address: widget.address,
                       ),
                     ),
                   );

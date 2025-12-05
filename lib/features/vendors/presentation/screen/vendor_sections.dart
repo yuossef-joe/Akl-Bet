@@ -17,10 +17,12 @@ class VendorSections extends StatefulWidget {
     super.key,
     this.requestParams,
     this.vendorId,
+    this.address = 'اضفط هنا لتحديد موقعك',
   });
 
   final VendorItemsRequestEntity? requestParams;
   final String? vendorId;
+  final String address;
 
   @override
   State<VendorSections> createState() => _VendorSectionsState();
@@ -103,6 +105,7 @@ class _VendorSectionsState extends State<VendorSections> {
                     return VendorSectionsContainer(
                       sections: data.data,
                       viewModel: _viewModel,
+                      address: widget.address,
                     );
                   },
                   failure: (error) => Center(

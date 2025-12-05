@@ -9,10 +9,12 @@ import 'package:foodapp/features/vendors/domain/entity/vendor_items/vendor_items
 class GridItemCard extends StatelessWidget {
   const GridItemCard({
     required this.item,
+    this.address = 'اضفط هنا لتحديد موقعك',
     super.key,
   });
 
   final VendorItemEntity item;
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,10 @@ class GridItemCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push<void>(
           MaterialPageRoute<void>(
-            builder: (_) => FoodItemScreen(foodItemId: item.id.toString()),
+            builder: (_) => FoodItemScreen(
+              foodItemId: item.id.toString(),
+              address: address,
+            ),
           ),
         );
       },

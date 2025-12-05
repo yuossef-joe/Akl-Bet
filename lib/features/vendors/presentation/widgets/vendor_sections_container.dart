@@ -13,11 +13,13 @@ class VendorSectionsContainer extends StatefulWidget {
   const VendorSectionsContainer({
     required this.sections,
     required this.viewModel,
+    this.address = 'اضفط هنا لتحديد موقعك',
     super.key,
   });
 
   final List<VendorItemsSectionEntity> sections;
   final VendorItemsViewModel viewModel;
+  final String address;
 
   @override
   State<VendorSectionsContainer> createState() =>
@@ -180,7 +182,7 @@ class _VendorSectionsContainerState extends State<VendorSectionsContainer> {
                     const SizedBox(height: AppSize.s16),
                 itemBuilder: (context, itemIndex) {
                   final item = section.items[itemIndex];
-                  return ListItemCard(item: item);
+                  return ListItemCard(item: item, address: widget.address);
                 },
               ),
             ],
@@ -227,6 +229,7 @@ class _VendorSectionsContainerState extends State<VendorSectionsContainer> {
                   final item = section.items[itemIndex];
                   return GridItemCard(
                     item: item,
+                    address: widget.address,
                   );
                 },
               ),

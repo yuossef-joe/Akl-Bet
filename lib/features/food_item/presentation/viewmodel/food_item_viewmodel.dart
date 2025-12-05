@@ -76,11 +76,12 @@ class FoodItemViewModel extends ChangeNotifier {
     FoodItemResponseEntity item,
     VendorBloc vendorBloc,
     CartBloc cartBloc,
+    String address,
   ) {
     final vendorState = vendorBloc.state;
 
     if (vendorState is Success<VendorResponseEntity>) {
-      _createAndAddToCart(context, item, vendorState.data, cartBloc);
+      _createAndAddToCart(context, item, vendorState.data, cartBloc, address);
     } else {
       final vendorId = item.vendorId.toString();
       vendorBloc.add(
@@ -96,6 +97,7 @@ class FoodItemViewModel extends ChangeNotifier {
     FoodItemResponseEntity item,
     VendorResponseEntity vendor,
     CartBloc cartBloc,
+    String address,
   ) {
     final selectedVariant = item.variants[_selectedSizeIndex];
     final deliveryFee = vendor.deliveryFee ?? 0.0;

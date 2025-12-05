@@ -6,7 +6,7 @@ import 'package:geocoding/geocoding.dart' as geo;
 class LocationSelector extends StatefulWidget {
   const LocationSelector({
     super.key,
-    this.initialAddress = 'المملكة العربية السعودية',
+    this.initialAddress = 'اضفط هنا لتحديد موقعك',
     this.onAddressChanged,
   });
   final String initialAddress;

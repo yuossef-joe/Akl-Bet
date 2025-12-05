@@ -1,45 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodapp/core/base/base_event.dart';
+import 'package:foodapp/core/base/base_state.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/core/resources/font_manager.dart';
 import 'package:foodapp/core/resources/style_manager.dart';
 import 'package:foodapp/core/resources/values_manager.dart';
-import 'package:foodapp/features/cart/presentation/widget/cart_address_widget.dart';
+import 'package:foodapp/features/cart/domain/entity/cart_entity.dart';
+import 'package:foodapp/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:foodapp/features/cart/presentation/widget/cart_address_section.dart';
+import 'package:foodapp/features/cart/presentation/widget/cart_complete_order_button.dart';
+import 'package:foodapp/features/cart/presentation/widget/cart_empty_state.dart';
 import 'package:foodapp/features/cart/presentation/widget/cart_items_widget.dart';
+import 'package:foodapp/features/cart/presentation/widget/cart_loading_shimmer.dart';
 import 'package:foodapp/features/cart/presentation/widget/cart_summary_widget.dart';
-import 'package:foodapp/features/food_item/domain/entity/food_item_response_entity.dart';
-import 'package:foodapp/features/home/domain/entities/address/getaddress/get_address_response_entity.dart';
+import 'package:foodapp/features/cart/presentation/widget/cart_total_summary.dart';
 import 'package:foodapp/features/vendors/domain/entity/vendor/vendor_response_entity.dart';
 
-// CartItem model to hold food item with quantity and selected variant
-class CartItem {
-  final FoodItemResponseEntity foodItem;
-  final int selectedVariantIndex;
-
-  CartItem({
-    required this.foodItem,
-    this.selectedVariantIndex = 0,
-  });
-
-  CartItem copyWith({
-    FoodItemResponseEntity? foodItem,
-    int? selectedVariantIndex,
-  }) {
-    return CartItem(
-      foodItem: foodItem ?? this.foodItem,
-      selectedVariantIndex: selectedVariantIndex ?? this.selectedVariantIndex,
-    );
-  }
-}
-
 class CartScreen extends StatefulWidget {
-  final List<CartItem> cartItems;
-  final AddressItemEntity address;
-  final VendorResponseEntity vendor;
+  final VendorResponseEntity? vendor;
 
   const CartScreen({
-    required this.cartItems,
-    required this.address,
-    required this.vendor,
+    this.vendor,
     super.key,
   });
 
@@ -48,14 +30,35 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  late List<CartItem> _cartItems;
   late List<int> _quantities;
+  VendorResponseEntity? _vendor;
+  String _selectedAddress = '';
 
   @override
   void initState() {
     super.initState();
-    _cartItems = widget.cartItems;
-    _quantities = List.filled(widget.cartItems.length, 1);
+    _quantities = [];
+    _vendor = widget.vendor;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<CartBloc>().add(
+          BaseEvent<CartEntity>.fetch(
+            params: CartEntity(
+              id: 0,
+              foodItemId: 0,
+              foodItemName: '',
+              quantity: 0,
+              price: '',
+              totalPrice: '',
+              variantName: '',
+              deliveryFees: 0,
+              image: '',
+            ),
+          ),
+        );
+      }
+    });
   }
 
   void _onQuantityChanged(int index, int newQuantity) {
@@ -65,10 +68,55 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   void _onRemoveItem(int index) {
+    final cartBloc = context.read<CartBloc>();
+
+    // Get current state from BLoC
+    final currentState = cartBloc.state;
+    if (currentState is Success<List<CartEntity>>) {
+      final cartItems = currentState.data;
+      if (index < cartItems.length) {
+        final itemToRemove = cartItems[index];
+
+        // Remove from CartBloc
+        cartBloc.removeItemFromCart(itemToRemove.id);
+
+        // Refetch cart after a short delay to ensure removal is complete
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (mounted) {
+            cartBloc.add(
+              BaseEvent<CartEntity>.fetch(
+                params: CartEntity(
+                  id: 0,
+                  foodItemId: 0,
+                  foodItemName: '',
+                  quantity: 0,
+                  price: '',
+                  totalPrice: '',
+                  variantName: '',
+                  deliveryFees: 0,
+                  image: '',
+                ),
+              ),
+            );
+          }
+        });
+      }
+    }
+  }
+
+  void _onAddressChanged(String address) {
     setState(() {
-      _cartItems.removeAt(index);
-      _quantities.removeAt(index);
+      _selectedAddress = address;
     });
+  }
+
+  void _navigateToAddAddress() {
+    // TODO: Navigate to AddAddressScreen
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => const AddAddressScreen(),
+    //   ),
+    // );
   }
 
   @override
@@ -89,54 +137,72 @@ class _CartScreenState extends State<CartScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppPadding.p16),
-        child: Column(
-          spacing: AppSize.s16,
-          children: [
-            // Address Widget
-            CartAddressWidget(address: widget.address),
-
-            // Cart Items Widget
-            CartItemsWidget(
-              cartItems: _cartItems,
-              quantities: _quantities,
-              onQuantityChanged: _onQuantityChanged,
-              onRemoveItem: _onRemoveItem,
-            ),
-
-            // Cart Summary Widget
-            CartSummaryWidget(
-              cartItems: _cartItems,
-              quantities: _quantities,
-              vendor: widget.vendor,
-            ),
-
-            // Complete Order Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManager.primary,
-                  padding: const EdgeInsets.symmetric(vertical: AppPadding.p14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {
-                  // TODO: Handle order completion
-                },
-                child: Text(
-                  'اكمل الطلب',
-                  style: getSemiBoldStyle(
-                    color: ColorManager.white,
-                    fontSize: FontSize.s16,
-                  ),
+      body: BlocBuilder<CartBloc, BaseState<List<CartEntity>>>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => const CartLoadingShimmer(),
+            loading: () => const CartLoadingShimmer(),
+            empty: () => const CartEmptyState(),
+            failure: (error) => Center(
+              child: Text(
+                'حدث خطأ: ${error.message}',
+                style: getRegularStyle(
+                  color: ColorManager.darkGrey,
+                  fontSize: FontSize.s14,
                 ),
               ),
             ),
-          ],
-        ),
+            success: (cartItems) {
+              if (cartItems.isEmpty) {
+                return const CartEmptyState();
+              }
+              _quantities = List.filled(cartItems.length, 1);
+              return _buildCartContent(cartItems);
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildCartContent(List<CartEntity> cartItems) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(AppPadding.p16),
+      child: Column(
+        spacing: AppSize.s16,
+        children: [
+          // Address Section
+          CartAddressSection(
+            selectedAddress: _selectedAddress,
+            onAddressChanged: _onAddressChanged,
+            onAddNewAddress: _navigateToAddAddress,
+          ),
+
+          // Cart Items Widget
+          CartItemsWidget(
+            cartItems: cartItems,
+            quantities: _quantities,
+            onQuantityChanged: _onQuantityChanged,
+            onRemoveItem: _onRemoveItem,
+          ),
+
+          // Cart Summary Widget (with vendor info if available)
+          if (_vendor != null)
+            CartSummaryWidget(
+              cartItems: cartItems,
+              quantities: _quantities,
+              vendor: _vendor!,
+            )
+          else
+            CartTotalSummary(cartItems: cartItems),
+
+          // Complete Order Button
+          CartCompleteOrderButton(
+            onPressed: () {
+              // TODO: Handle order completion
+            },
+          ),
+        ],
       ),
     );
   }

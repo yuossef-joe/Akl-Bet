@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_scalify/flutter_scalify.dart';
 import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/features/home/domain/entities/nearby/nearby_response_entity.dart';
+import 'package:foodapp/features/vendors/presentation/screen/vendor_screen.dart';
 
 class NearbyCard extends StatelessWidget {
   const NearbyCard({
-    super.key,
     required this.item,
-    this.onTap,
+    super.key,
     this.width = 230,
     this.onFavoriteTap,
+    this.address = 'اضفط هنا لتحديد موقعك',
   });
 
   final NearbyResponseEntity item;
-  final VoidCallback? onTap;
   final double width;
   final VoidCallback? onFavoriteTap;
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,16 @@ class NearbyCard extends StatelessWidget {
         : 'غير متاح';
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.of(context).push<void>(
+          MaterialPageRoute<void>(
+            builder: (_) => VendorScreen(
+              vendorId: item.id.toString(),
+              address: address,
+            ),
+          ),
+        );
+      },
       child: Container(
         width: width,
         padding: 10.p,

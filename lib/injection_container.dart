@@ -17,7 +17,6 @@ import 'package:foodapp/features/cart/domain/repositories/cart_repositories.dart
 import 'package:foodapp/features/cart/domain/usecases/add_cart_usecase.dart';
 import 'package:foodapp/features/cart/domain/usecases/get_cart_usecase.dart';
 import 'package:foodapp/features/cart/domain/usecases/remove_from_cart_usecase.dart';
-import 'package:foodapp/features/cart/presentation/bloc/cart_bloc.dart';
 
 import 'package:foodapp/features/food/data/repo/food_repo.dart';
 import 'package:foodapp/features/food/data/sources/food_data_source.dart';
@@ -49,7 +48,6 @@ import 'package:foodapp/features/home/domain/usecase/suggestions/get_suggestions
 import 'package:foodapp/features/home/presentation/bloc/address/addaddress/add_address_bloc.dart';
 import 'package:foodapp/features/home/presentation/bloc/address/getaddress/get_address_bloc.dart';
 import 'package:foodapp/features/home/presentation/bloc/categories/category_bloc.dart';
-import 'package:foodapp/features/home/presentation/bloc/foodcategories/food_categories_bloc.dart';
 import 'package:foodapp/features/home/presentation/bloc/nearby/nearby_bloc.dart';
 import 'package:foodapp/features/home/presentation/bloc/suggestions/suggestions_bloc.dart';
 import 'package:foodapp/features/orders/data/datasources/orders_remote_data_sources.dart';
@@ -67,7 +65,6 @@ import 'package:foodapp/features/vendor_category/data/datasource/vendor_category
 import 'package:foodapp/features/vendor_category/data/repositories/vendor_category_repositories_impl.dart';
 import 'package:foodapp/features/vendor_category/domain/repositories/vendor_category_repositories.dart';
 import 'package:foodapp/features/vendor_category/domain/usecase/vendor_category_usecase.dart';
-import 'package:foodapp/features/vendor_category/presentation/bloc/vendor_category_bloc.dart';
 import 'package:foodapp/features/vendors/data/datasource/vendor/vendor_remote_data_source.dart';
 import 'package:foodapp/features/vendors/data/datasource/vendor_items/vendor_items_remote_data_source.dart';
 import 'package:foodapp/features/vendors/data/repositories/vendor/vendor_repositories_impl.dart';
@@ -99,8 +96,15 @@ Future<void> _core() async {
     Hive.registerAdapter<CartHive>(CartHiveAdapter());
   }
 
-  final cartBox = await Hive.openBox<CartHive>('cartBox');
-  sl.registerLazySingleton<Box<CartHive>>(() => cartBox);
+  Box<CartHive>? cartBox;
+  try {
+    cartBox = await Hive.openBox<CartHive>('cartBox');
+  } catch (e) {
+    // If there's an error opening the box (e.g., corrupted data), delete and recreate it
+    await Hive.deleteBoxFromDisk('cartBox');
+    cartBox = await Hive.openBox<CartHive>('cartBox');
+  }
+  sl.registerLazySingleton<Box<CartHive>>(() => cartBox!);
 }
 
 Future<void> initialaizeDependencies() async {

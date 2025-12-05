@@ -9,9 +9,14 @@ import 'package:foodapp/features/vendors/presentation/screen/vendor_sections.dar
 import 'package:foodapp/features/vendors/presentation/widgets/vendor_container.dart';
 
 class VendorScreen extends StatefulWidget {
-  const VendorScreen({required this.vendorId, super.key});
+  const VendorScreen({
+    required this.vendorId,
+    this.address = 'اضفط هنا لتحديد موقعك',
+    super.key,
+  });
 
   final String vendorId;
+  final String address;
 
   @override
   State<VendorScreen> createState() => _VendorScreenState();
@@ -72,6 +77,7 @@ class _VendorScreenState extends State<VendorScreen> {
                     VendorContainer(vendor: vendor),
                     VendorSections(
                       vendorId: widget.vendorId,
+                      address: widget.address,
                     ),
                   ],
                 ),

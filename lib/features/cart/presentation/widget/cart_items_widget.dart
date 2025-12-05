@@ -3,7 +3,7 @@ import 'package:foodapp/core/resources/color_manager.dart';
 import 'package:foodapp/core/resources/font_manager.dart';
 import 'package:foodapp/core/resources/style_manager.dart';
 import 'package:foodapp/core/resources/values_manager.dart';
-import 'package:foodapp/features/cart/presentation/screen/cart_screen.dart';
+import 'package:foodapp/features/cart/domain/entity/cart_entity.dart';
 
 class CartItemsWidget extends StatelessWidget {
   const CartItemsWidget({
@@ -13,7 +13,7 @@ class CartItemsWidget extends StatelessWidget {
     this.onRemoveItem,
     super.key,
   });
-  final List<CartItem> cartItems;
+  final List<CartEntity> cartItems;
   final List<int> quantities;
   final void Function(int, int) onQuantityChanged;
   final void Function(int)? onRemoveItem;
@@ -71,13 +71,15 @@ class CartItemsWidget extends StatelessWidget {
 
   Widget _buildCartItem(
     BuildContext context,
-    CartItem cartItem,
+    CartEntity cartItem,
     int quantity,
     int index,
   ) {
-    final foodItem = cartItem.foodItem;
-    final variant = cartItem.foodItem.variants.isNotEmpty
-        ? cartItem.foodItem.variants[cartItem.selectedVariantIndex]
+    final foodItem = cartItem.foodItemName;
+    final foodItemPrice = cartItem.price;
+    final foodItemImage = cartItem.image;
+    final variant = cartItem.variantName.isNotEmpty
+        ? cartItem.variantName
         : null;
 
     return Padding(
@@ -89,7 +91,7 @@ class CartItemsWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              foodItem.image,
+              foodItemImage,
               width: 80,
               height: 80,
               fit: BoxFit.cover,
@@ -117,7 +119,7 @@ class CartItemsWidget extends StatelessWidget {
               children: [
                 // Food Name
                 Text(
-                  foodItem.name,
+                  foodItem,
                   style: getSemiBoldStyle(
                     color: ColorManager.darkGrey,
                     fontSize: FontSize.s14,
@@ -128,7 +130,7 @@ class CartItemsWidget extends StatelessWidget {
                 const SizedBox(height: AppSize.s8),
                 // Food Price
                 Text(
-                  '${foodItem.price} SR',
+                  '${foodItemPrice} SR',
                   style: getSemiBoldStyle(
                     color: ColorManager.primary,
                     fontSize: FontSize.s14,
@@ -139,7 +141,7 @@ class CartItemsWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: AppSize.s4),
                     child: Text(
-                      '${variant.name} (+${variant.priceAdjustment} SR)',
+                      '${variant} SR',
                       style: getRegularStyle(
                         color: ColorManager.grey,
                         fontSize: FontSize.s12,

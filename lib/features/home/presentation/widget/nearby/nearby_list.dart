@@ -10,6 +10,7 @@ class NearbyList extends StatelessWidget {
     this.onFavoriteTap,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.itemSpacing = 12,
+    this.address = 'اضفط هنا لتحديد موقعك',
   });
 
   final List<NearbyResponseEntity> items;
@@ -17,6 +18,7 @@ class NearbyList extends StatelessWidget {
   final ValueChanged<NearbyResponseEntity>? onFavoriteTap;
   final EdgeInsets padding;
   final double itemSpacing;
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class NearbyList extends StatelessWidget {
       separatorBuilder: (_, __) => SizedBox(width: itemSpacing),
       itemBuilder: (_, index) => NearbyCard(
         item: items[index],
-        onTap: onItemTap != null ? () => onItemTap!(items[index]) : null,
+        address: address,
         onFavoriteTap: onFavoriteTap != null
             ? () => onFavoriteTap!(items[index])
             : null,
