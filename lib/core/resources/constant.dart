@@ -1,8 +1,9 @@
-const appName = 'Food App';
+const appName = 'Akl Bait';
 
 class ApiConstants {
-  // Use 10.0.2.2 for Android emulator to reach host machine (Docker)
+  // Use http://10.0.2.2:8095/api/v1 for Android emulator to reach host machine (Docker)
   // Use localhost for physical device or iOS simulator
+  // Use http://akl.designwayseg.com/api/v1/ for production server
   static const String baseUrl = 'http://akl.designwayseg.com/api/v1/';
   static const String signUpEndPoint = 'auth/signup';
   static const String signInEndPoint = 'auth/signin';
