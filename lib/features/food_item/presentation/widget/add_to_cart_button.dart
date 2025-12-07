@@ -11,12 +11,14 @@ class AddToCartButton extends StatelessWidget {
     required this.onPressed,
     required this.viewModel,
     required this.variants,
+    required this.itemPrice,
     super.key,
   });
 
   final VoidCallback onPressed;
   final FoodItemViewModel viewModel;
   final List<VariantEntity> variants;
+  final String itemPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +35,18 @@ class AddToCartButton extends StatelessWidget {
                   ? variants[selectedIndex]
                   : null;
 
-              final price = selectedVariant != null
+              // Get base price from the first variant's food item (or use 0)
+              // Note: You may need to pass itemPrice separately if not available
+              final basePrice = double.tryParse(itemPrice) ?? 0.0;
+
+              // Get variant price adjustment
+              final variantPrice = selectedVariant != null
                   ? (double.tryParse(selectedVariant.priceAdjustment) ?? 0.0)
                   : 0.0;
-              final totalPrice = (price * quantity).toStringAsFixed(2);
+
+              // Total price per unit = base price + variant price adjustment
+              final unitPrice = basePrice + variantPrice;
+              final totalPrice = (unitPrice * quantity).toStringAsFixed(2);
 
               return GestureDetector(
                 onTap: onPressed,
@@ -51,7 +61,7 @@ class AddToCartButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     textDirection: TextDirection.rtl,
                     children: [
-                      // Price on the right
+                      // Price on the right (base + variant)
                       Text(
                         '\$$totalPrice',
                         style: getBoldStyle(

@@ -102,8 +102,17 @@ class FoodItemViewModel extends ChangeNotifier {
     final selectedVariant = item.variants[_selectedSizeIndex];
     final deliveryFee = vendor.deliveryFee ?? 0.0;
 
+    // Get base price from item
+    final basePrice = double.tryParse(item.price) ?? 0.0;
+
+    // Get variant price adjustment
+    final variantPrice =
+        double.tryParse(selectedVariant.priceAdjustment) ?? 0.0;
+
+    // Total price per unit = base price + variant price adjustment
+    final unitPrice = basePrice + variantPrice;
+
     // Calculate total price based on quantity
-    final unitPrice = double.tryParse(selectedVariant.priceAdjustment) ?? 0.0;
     final totalPrice = (unitPrice * _quantity).toStringAsFixed(2);
 
     final cartItem = CartEntity(
@@ -111,7 +120,7 @@ class FoodItemViewModel extends ChangeNotifier {
       foodItemId: item.id,
       foodItemName: item.name,
       quantity: _quantity,
-      price: selectedVariant.priceAdjustment,
+      price: unitPrice.toStringAsFixed(2),
       totalPrice: totalPrice,
       variantName: selectedVariant.name,
       deliveryFees: deliveryFee,
@@ -127,11 +136,11 @@ class FoodItemViewModel extends ChangeNotifier {
     _selectedSizeIndex = 0;
     _selectedAddons.clear();
     _notes = '';
-    _quantity = 1;
+    _quantity = 0;
     selectedSizeIndexNotifier.value = 0;
     selectedAddonsNotifier.value = {};
     notesNotifier.value = '';
-    quantityNotifier.value = 1;
+    quantityNotifier.value = 0;
     notifyListeners();
   }
 

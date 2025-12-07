@@ -10,7 +10,7 @@ class DioFactory {
   final FlutterSecureStorage flutterSecureStorage;
 
   Future<Dio> getDio() async {
-    const timeOut = Duration(seconds: 30);
+    const timeOut = Duration(seconds: 90);
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,

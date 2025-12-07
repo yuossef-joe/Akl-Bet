@@ -77,6 +77,7 @@ class FoodItemContent extends StatelessWidget {
             AddToCartButton(
               viewModel: viewModel,
               variants: item.variants,
+              itemPrice: item.price,
               onPressed: () => viewModel.addToCartItem(
                 context,
                 item,
